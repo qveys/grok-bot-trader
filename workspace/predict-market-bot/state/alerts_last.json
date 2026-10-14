@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-13T07:23:51.657541+02:00",
+  "alerted": false,
+  "flags": {
+    "stop_breach": false,
+    "daily_loss": false,
+    "drawdown": false
+  },
+  "alerts": [],
+  "scan_at": "2026-10-08T15:50:34.645699+02:00",
+  "prices": {
+    "SOL-EUR": 100.15,
+    "ETH-EUR": 2249.26,
+    "BTC-EUR": 73289.1
+  },
+  "open_positions": 1,
+  "daily_loss_pct": 0.0,
+  "drawdown_pct": 0.001852,
+  "thresholds": {
+    "max_daily_loss_pct": 0.15,
+    "max_drawdown_pct": 0.08
+  }
+}

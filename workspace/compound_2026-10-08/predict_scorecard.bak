@@ -1,0 +1,79 @@
+# Score Predictions (mesurable)
+
+Après chaque **horizon** (ou après une vente liée), Compound note :
+- **gagné** = le prix a touché le seuil dans le sens prévu avant la fin d’horizon
+- **perdu** = le prix a touché le seuil inverse (ou l’horizon finit contre)
+- **annulé** = pas de trade / hors horizon / décision non mesurable
+
+Predict doit écrire dans chaque décision : **direction + horizon + seuil %** (ex. BTC +1,5 % / −1,5 % avant 20h).
+
+## Totaux (mis à jour par Compound)
+
+| gagné | perdu | annulé | taux de réussite (gagné / (gagné+perdu)) |
+|------:|------:|-------:|------------------------------------------:|
+| 0 | 1 | 8 | 0 % (0 / 1) |
+
+## Entrées
+
+<!--
+### YYYY-MM-DD | id (ex. D-007) | PAIRE
+- Prévision : direction / horizon / seuils
+- Prix départ :
+- Résultat : gagné / perdu / annulé
+- Prix à l’échéance (ou à la vente) :
+- Note (1 ligne) :
+-->
+
+### 2026-10-07 | D-007 | BTC-EUR
+- Prévision : UP / horizon 22h00 CEST / ±1,5 % (cible 75248,59 · inverse 73024,49)
+- Prix départ : 74136,54 €
+- Résultat : annulé
+- Prix à l’échéance (ou à la vente) : 74503,86 € à 22h00 (+0,49 %)
+- Note (1 ligne) : aucun seuil touché (bas 73988,88 · haut 74742,20) ; fini dans le bon sens mais sous la cible → ni gagné ni perdu
+
+### 2026-10-07 | D-008 | ETH-EUR
+- Prévision : DOWN / horizon 22h00 CEST / ±1,5 % (cible 2251,90 · inverse 2320,48)
+- Prix départ : 2286,19 €
+- Résultat : perdu
+- Prix à l’échéance (ou à la vente) : 2296,09 € à 22h00 (+0,43 %)
+- Note (1 ligne) : aucun seuil touché (bas 2266,60 · haut 2304,52) ; horizon fini contre la prévision (baisse prévue, prix monté)
+
+### 2026-10-07 | D-009 | SOL-EUR
+- Prévision : UP / horizon 22h00 CEST / ±1,5 % (cible 104,97 · inverse 101,87)
+- Prix départ : 103,42 €
+- Résultat : annulé
+- Prix à l’échéance (ou à la vente) : 103,46 € à 22h00 (+0,04 %)
+- Note (1 ligne) : aucun seuil touché (bas 103,27 · haut 104,72) ; quasi à plat → ni gagné ni perdu
+
+### 2026-10-07 | D-004 / D-005 / D-006 | BTC / ETH / SOL
+- Prévision : aucune (pas de direction + horizon + seuil) ; contexte « attendre la Fed »
+- Résultat : annulé (3) — soirée Fed passée, rien de mesurable
+- Note (1 ligne) : D-002 / D-003 restent ouverts (contexte ~48 h → revoir après 9 oct ~11h30)
+
+### 2026-10-07 | D-010 / D-011 / D-012 | BTC / ETH / SOL
+- Prévision : annulée par Predict (pas de prix frais à 19h48)
+- Résultat : annulé (3)
+
+> Vérif 22h40 : ticks du fichier (16h23–17h25 puis 21h06–22h00) + bougies 1 min Binance 15h48–22h00 pour combler les trous (15h48–16h23, 17h25–21h06). Aucun seuil ±1,5 % touché sur les trois paires.
+
+### 2026-10-08 | D-015 | BTC-EUR
+- Prévision : DOWN / horizon 17h00 CEST / ±0.5 % (cible 73191.54 · inverse 73927.14)
+- Prix départ : 73559.34 € (14:34)
+- Résultat : en attente
+- Prix à l’échéance (ou à la vente) :
+- Note (1 ligne) :
+
+### 2026-10-08 | D-016 | ETH-EUR
+- Prévision : DOWN / horizon 17h00 CEST / ±0.5 % (cible 2250.60 · inverse 2273.22)
+- Prix départ : 2261.91 € (14:34)
+- Résultat : en attente
+- Prix à l’échéance (ou à la vente) :
+- Note (1 ligne) :
+
+### 2026-10-08 | D-017 | SOL-EUR
+- Prévision : DOWN / horizon 17h00 CEST / ±0.5 % (cible 100.20 · inverse 101.20)
+- Prix départ : 100.70 € (14:34)
+- Résultat : en attente
+- Prix à l’échéance (ou à la vente) :
+- Note (1 ligne) :
+

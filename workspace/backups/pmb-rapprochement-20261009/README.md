@@ -1,0 +1,165 @@
+# Guardian — Revolut X risk gate / Couche risque
+
+**EN** — Independent, deterministic risk gate for Revolut X spot under `predict-market-bot`.
+Does **not** restore the deleted `/workspace/guardian` secrets or HTTP API. Old Ca$her
+files under `/workspace/bot/` are left untouched; this path is separate.
+
+- `config.json` — hard limits (whitelist, size, exposure, drawdown, daily loss).
+- `state.json` — bankroll/cash/positions/PnL + `paper_inventory` (no secrets).
+- `scripts/validate_order.py` — validate an order JSON (stdin or `--order` file).
+- `scripts/paper_fill.py` — if validate OK, simulate fill into `state.json` + `../state/trades_log.jsonl`.
+- `scripts/status.py` — print a status summary (no secrets).
+- `scripts/watch_stops.py` — while **any** open position is tracked (guardian `state.json`,
+  `state/positions.json` crypto rows, `live_orders.jsonl`, revx open orders best-effort),
+  poll every **30 s**. On stop/target breach: **paper/sim** → close via `paper_fill` + wake;
+  **live** (8 oct, décision Quentin, `config.json` `allow_live_auto_sell: true`) → **sortie
+  automatique** via `live_place.py --exit` pour les positions du pipeline (`live_orders.jsonl`) ;
+  urgent wake only if the exit fails (or for live rows not from `live_orders.jsonl`).
+  After a close it **keeps watching** if other positions remain; exit **10** only when nothing is left.
+  **Prix** : dernier tick de la paire dans `state/price_ticks/YYYY-MM-DD.jsonl` (collecteur commun,
+  lecture de la fin du fichier) s’il a ≤ 2 min ; sinon Revolut (`revx market ticker`), sinon dernier
+  scan, sinon tick périmé. Chaque cycle logue `prices[pair] = {mid, source, age_s}`.
+- **Démarrage auto** (`scripts/watcher_launch.py`) — `paper_fill.py` (après chaque ouverture : achat
+  hausse / vente baisse ; et avant une ouverture si des positions sont ouvertes sans surveillant) et
+  `live_place.py` (après un ordre live réussi) lancent `watch_stops.py` détaché (`start_new_session`,
+  log en ajout `state/watch_stops.log`) s’il ne tourne pas (pid `state/watch_stops.pid`). Sortie JSON :
+  `watcher_started` / `watcher_already_running` (+ `watcher_preopen`). Désactiver : `PAPER_FILL_NO_WATCH=1`
+  ou `WATCH_STOPS_NO_AUTOSTART=1`.
+- `scripts/check_alerts.py` — stop / daily-loss / drawdown → `state/alerts_last.json`.
+- `scripts/check_buy_wake.py` — Predict BUY awaiting Risk → `state/buy_wake.json`.
+- `scripts/start_stop_watch.sh` — foreground wrapper for `watch_stops.py --interval 30` (`WATCH_STOPS_INTERVAL`).
+- Kill switch: if `../STOP` or `guardian/HALTED` exists → reject all.
+- Mode: `../MODE` must be `paper` or `live`.
+
+## Deux types d’idée (validé Quentin, 8 oct)
+
+| Type | `idea_type` | Ouverture | Fermeture |
+|------|-------------|-----------|-----------|
+| **Idée à la hausse** | `"hausse"` (défaut si absent) | Achat (`side=buy`) | Vente plus haut |
+| **Idée à la baisse** | `"baisse"` (ou `kind=baisse`) | Vente de pièces déjà détenues (`side=sell`) | Rachat plus bas (`side=buy`) |
+
+Chaque ligne de journal a `side` `buy` / `sell` (affiché Achat / Vente). Ne plus dire « vendre d’abord ».
+
+**Idée à la baisse** — inventaire simulé dans `state.json` → `paper_inventory` (ETH/SOL Revolut + `metamask_arbitrum.ETH`). Refus si qty > inventaire. `decision_id` obligatoire. Prix d’arrêt = rachat de sécurité **au-dessus** (`stop_price` / `safety_price`) ; cible = rachat **en dessous** (`target_price`). Venue MetaMask Uniswap : frais 0,05 % / échange.
+
+## Simulation ≠ live
+
+**Simulation (`MODE=paper`)** — seulement :
+- taille ≤ `max_position_pct` × bankroll (25 € si bankroll 500 €) ;
+- prix d’arrêt obligatoire ;
+- exposition simulée totale (longs + baisses, BTC+ETH+SOL + MetaMask sim) ≤ `paper_max_exposure_pct` (**10 % = 50 € à 500 €**, choix de Quentin 9 oct) ; taille par trade toujours ≤ 25 € ;
+- paires whitelist ; ordre limité post-only.
+- **Pas** d’exigence gain ≥ 3× coûts.
+
+**Live** — inchangé (`live_place.py`, `LIVE_ONCE`, `live_day.json`) : espérance ≥ 3× coûts, taille ≤ 25 €, exposition ≤ `max_exposure_pct` (5 % = **25 €**), `max_live_per_day` (config, défaut 1). live_place appelle `validate_order.py --live` (plafond live) ; pour vérifier un ordre live à la main : `validate_order.py --live`. Ne pas modifier le chemin live depuis ces scripts paper.
+
+## Champs du journal (`state/trades_log.jsonl`)
+
+- Hausse (achat) : `id`, `ts`, `mode`, `pair`, `side`, `idea_type=hausse`, `price`, `amount_eur`, `qty`, `stop_pct` ; à la vente : `realized_pnl_eur` / `pct`, `close_reason`, `linked_position_id`.
+- Baisse (vente d’ouverture) : + `idea_type`/`kind=baisse`, `decision_id`, `fee_eur`, `venue`, `stop_price`, `target_price`, `safety_price`.
+- Baisse (rachat) : `side=buy`, `cycle_id` + `linked_position_id`, `rebuy_reason` (`target`|`safety`|`time`), `realized_pnl_eur`/`pct`, `coins_gained`, `close_reason`.
+
+## Exemple — simuler une idée à la baisse puis son rachat
+
+```bash
+# 1) Vente (ouvre le cycle) — pièces déjà en paper_inventory
+echo '{
+  "pair":"SOL-EUR","side":"sell","type":"limit","price":110,
+  "amount_eur":22,"qty":0.2,"idea_type":"baisse","kind":"baisse",
+  "decision_id":"D-018","stop_price":120,"target_price":100,"post_only":true
+}' | python3 guardian/scripts/paper_fill.py
+
+# 2) Rachat (ferme) — ou laisser watch_stops le faire au stop/cible
+echo '{
+  "pair":"SOL-EUR","side":"buy","type":"limit","price":100,
+  "amount_eur":20,"qty":0.2,"idea_type":"baisse",
+  "linked_position_id":"ID_DE_LA_VENTE","cycle_id":"ID_DE_LA_VENTE",
+  "rebuy_reason":"target","post_only":true
+}' | python3 guardian/scripts/paper_fill.py
+
+# Gardien (30 s, démarré automatiquement par paper_fill) : mid ≥ stop → rachat safety ; mid ≤ target → rachat target
+./guardian/scripts/start_stop_watch.sh
+```
+
+**Le surveillant démarre tout seul** après une ouverture (paper_fill / live_place). Manuel si besoin :
+
+```bash
+python3 guardian/scripts/watch_stops.py --once          # un cycle
+./guardian/scripts/start_stop_watch.sh                  # boucle (refuse un 2e exemplaire)
+```
+
+Exit codes (`watch_stops`): `0` idle/ok, `10` close done and nothing left to watch (or `--once` / `--exit-on-close`), `1` hard error (5 erreurs de suite).
+
+**Idée à la hausse — cible (correctif 9 oct)** — `paper_fill` enregistre sur la position longue `target_price` (refus si ≤ prix d’achat), `stop_price` **et** `stop_price_eur` ; en cas de fusion, le stop et la cible du **dernier** ordre s’appliquent. `validate_order` refuse aussi une cible longue ≤ prix (miroir de la règle baisse : cible < prix). `watch_stops` : mid ≤ stop → `stop_hit` (**prioritaire**), sinon mid ≥ cible → vente auto `close_reason: "target_hit"` (paper : vente au prix cible ; live : `live_place --exit`, mêmes garde-fous — une sortie par position, jamais les avoirs de Quentin). Frais longs = comme les baisses : 0,05 % à l’achat (`fee_eur` sur la position, déduit du cash) et 0,05 % à la vente ; `realized_pnl_eur` = **net** des deux frais, `realized_pnl_gross_eur` = brut.
+
+**Une décision = une position (9 oct)** — `paper_fill` ne fusionne un achat long qu’avec un long ouvert de la **même** `decision_id` ; autre décision (ou sans `decision_id`) → nouvelle position avec ses propres stop / cible / heure limite. `risk_level` (prudente / equilibree / risquee) de l’ordre est stocké sur la position (long et baisse). Fermeture : `linked_position_id` / `position_id` → cette position, sinon `decision_id`, sinon la seule position de la paire ; plusieurs candidates sans identifiant → **refus**. `watch_stops` ferme exactement l’`id` touché.
+
+## Sortie automatique LIVE sur stop — 8 oct (décision Quentin)
+
+`live_place.py --exit` (appelé par `watch_stops`, spec JSON sur stdin) — détail dans `references/live-playbook.md` :
+- ne vend **que** la quantité de la position du pipeline : `min(qty position, solde dispo, solde total − avoirs de Quentin)` ;
+  avoirs de Quentin = max(`config.live_exit.quentin_holdings`, `state/live_equity.json` `hors_bot`) ;
+- relit Revolut (ordre d’entrée, ordres ouverts, solde) ; annule d’abord l’ordre objectif **du bot** lié à la position
+  (jamais les ordres de Quentin) et le reste non rempli de l’ordre d’entrée ;
+- limite exécutable (pas post-only) au meilleur acheteur −0,3 % (rachat baisse : meilleur vendeur +0,3 %), attente 60 s,
+  sinon annule et replace à ∓0,5 %, 3 essais max → alerte urgente ;
+- verrou `state/live_exits.json` : une seule sortie par position, jamais de doublon ni de nouvel essai auto après échec ;
+- ne consomme **pas** `LIVE_ONCE`, n’écrit **pas** `live_day.json` ; autorisée même si `STOP` existe ;
+- journal : ligne `kind: auto_exit` dans `state/live_orders.jsonl` (`amount_eur` = coût fermé), événement
+  `auto_stop_events.jsonl`, réveil `auto_stop_wake.json` (`urgent: false` si OK, `true` si échec).
+
+## Heure limite par position — 8 oct (Predict)
+
+- Ordre d'ouverture (`paper_fill.py` / `live_place.py`) : champ optionnel `deadline` (alias `deadline_at`), ISO heure
+  locale Bruxelles (ex. `2026-10-09T18:00`). Stocké normalisé (offset +02:00) sur la position (`state.json`) ou sur
+  l'ordre journalisé (`state/live_orders.jsonl`).
+- **Rappel seulement (Quentin, 8 oct 23h)** : l'heure limite ne ferme plus un trade. Seuls le prix d'arrêt et le prix
+  visé ferment (paper et live). Réglage : `config.json` → `deadline.close_enabled: false`.
+- `validate_order.py` : heure limite déjà passée ou illisible → **avertissement** (`warnings`), ne bloque pas ;
+  absente en simulation → avertissement (pas de rappel pour cette position).
+- `watch_stops.py` : quand maintenant ≥ heure limite et la position est encore ouverte → rien n'est fermé ; le
+  surveillant écrit un rappel dans **`state/deadline_reminder.json`** (dernier rappel) et ajoute une ligne dans
+  `state/deadline_reminders.jsonl` (une seule fois par position). Predict regarde le trade, Risk décide. La position
+  reste surveillée (stop / prix visé) et le surveillant continue de tourner.
+- `deadline.close_enabled: true` remet l'ancienne fermeture (raison `heure_limite` ; paper via `paper_fill`, live via
+  `live_place.py --exit` avec les mêmes garde-fous que le stop).
+- Tests : `/workspace/tests_watcher/run_deadline_tests.py`.
+
+## Horaires live — 8 oct (validé Quentin)
+
+`config.json` → bloc `live_window` (`start` 15:00, `end` 17:00, `force_close` 22:00,
+`force_close_enabled` **false**, `post_announcement_block_min` 15, `announcement_times` 14:30 / 15:30). Heure de Bruxelles.
+- **Nouvelles entrées live** (`live_place.py` sans `--exit`) : seulement dans le créneau, et jamais dans les 15 min
+  après une annonce (config + `state/annonces_du_jour.json` `{"date":"YYYY-MM-DD","times":["20:00"]}`, pris en compte
+  seulement si la date est aujourd'hui). Donc : 15:00–15:30 et 15:45–17:00. Refus = message français, rc **12**.
+  `--dry-run` rapporte `gates.live_window` (`would_refuse`, `reason_fr`) sans rien changer d'autre.
+- **Séance en plus** (feu vert de Quentin) : `state/LIVE_EXTRA_SESSION.json` `{"date":"YYYY-MM-DD","start":"20:00","end":"21:00"}`
+  — date du jour seulement ; le blocage après annonce s'applique aussi ; aucune entrée à partir de 22:00.
+- **Fermeture 22h RETIRÉE** (décision Quentin 8 oct) : `force_close_enabled: false` (défaut). Le code reste ;
+  remettre `true` pour la réactiver (sortie live via `live_place.py --exit`, raison `fermeture_22h`).
+  Paper n'a jamais été fermé à 22h. Simulation à toute heure.
+- **Battements** (lus par la sonnette de Grok Bot pour réveiller PM-Risk — pas de notif ici) :
+  - `state/watch_stops_heartbeat.json` : réécrit **chaque tour** `{"ts": heure locale ISO, "pid", "open_live", "open_paper", "action"}`.
+  - `state/revolut_heartbeat.json` : tant qu'une position (live ou paper) est ouverte, toutes les ~5 min
+    (`REVOLUT_HB_INTERVAL_S`, défaut 300) un appel **lecture seule** Revolut (ticker, sinon balances — jamais un ordre)
+    → `{"ts","ok":true/false,"error","consecutive_failures","open_live","open_paper","pid"}`. Pas d'écriture si idle.
+- Tests : `/workspace/tests_watcher/run_horaires_tests.py` (heure simulée `PMB_FAKE_NOW`, prise en compte seulement
+  dans une copie de l'arbre en test, jamais dans le vrai dépôt).
+
+**FR** — Couche risque déterministe pour le spot Revolut X. Pas de secrets chat, pas d’API live depuis ces scripts. Ordres limit post-only ; whitelist BTC-EUR / ETH-EUR / SOL-EUR ; pas de levier.
+
+## Champs pour le tableau de Quentin — 9 oct
+
+Le tableau (`/workspace/dashboard`) affiche seulement ce que les bots écrivent. `guardian/state.json` porte :
+- par position **ouverte** : `last_mid_eur`, `mark_eur` (= qty × mid ; pour une baisse = coût du rachat), `unrealized_pnl_eur`
+  (long = qty×mid − cost_eur − fee_eur ; baisse = (avg_price − mid)×qty − fee_eur), `unrealized_pnl_pct`, `mark_ts` ;
+- en haut : `equity_eur` (cash + mark longs − mark baisses), `exposure_eur` (Σ cost_eur ouverts), `exposure_pct`
+  (exposure/bankroll), `unrealized_pnl_eur` (Σ), `total_pnl_eur` (equity − bankroll), `drawdown_pct`, `peak_equity_eur`,
+  `summary_updated_at` (heure locale).
+
+Qui écrit : `watch_stops.py` à chaque tour qui a des prix (pas en `--dry-run` ; sans position ouverte : exposition 0,
+P&L ouvert 0) et `paper_fill.py` après chaque ouverture/fermeture. Code commun : `scripts/state_summary.py`
+(verrou `guardian/state.json.lock` pris aussi par paper_fill, relecture sous verrou, écriture atomique).
+Sortie live (`live_place.py --exit`) : la ligne `kind=auto_exit` de `state/live_orders.jsonl` porte `realized_pnl_eur`
+**net de frais** (prix de sortie vs prix d'entrée × qté ; frais Revolut s'ils sont fournis, sinon 0,05 %/côté) +
+`realized_pnl_gross_eur`, `fees_eur`, `fees_detail`, `entry_price`.

@@ -1,0 +1,15 @@
+name = "pm-veilleur"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pm-veilleur"
+database_id = "ddf64285-8b63-46aa-b96f-c9f26af726fd"
+
+[observability]
+enabled = true

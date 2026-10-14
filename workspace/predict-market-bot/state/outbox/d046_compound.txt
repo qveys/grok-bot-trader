@@ -1,0 +1,14 @@
+Prévision D-046 (heure_limite D-040a, dimanche 11 oct. 14h18)
+
+Déclencheur : rappel 14h00 passé sur D-040a (BTC hausse).
+
+Verdict ouverts : D-040a GARDER (+0,44 %) ; D-043a GARDER (+0,02 %) ; nouveau rappel 22h00.
+
+Prix départ : BTC 74243.775 · ETH 2237.91 · SOL 98.0
+Place libre : 0 €.
+
+a) SOL UP +2,00 % avant −2,00 % d'ici 22h00 (entrée 98.0 · visé 99.96 · arrêt 96.04) — confiance 55 %
+b) BTC UP +2,25 % avant −1,50 % d'ici 22h00 (entrée 74243.77 · visé 75914 · arrêt 73131) — confiance 52 %
+c) SOL UP +2,00 % avant −1,00 % d'ici 22h00 (entrée 98.0 · visé 99.96 · arrêt knowledge/predict_scorecard.md) — confiance 52 %
+
+Décision : simuler si place. Statut : en attente. À noter après 22h00.

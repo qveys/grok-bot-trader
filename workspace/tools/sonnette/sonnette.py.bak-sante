@@ -1,0 +1,2063 @@
+#!/usr/bin/env python3
+"""Sonnette (doorbell) — free price watcher that wakes a Grok Bot routine by webhook.
+
+No AI, stdlib only. Reads prices ONLY from the team collector files:
+  /workspace/predict-market-bot/state/price_ticks/YYYY-MM-DD.jsonl
+
+Three bells:
+  * predict  : manual zones in state/zones_reveil.json (bot="predict"),
+               only inside a time window (default 15:00-17:00 Brussels, weekdays),
+               max 3 rings/day total, each zone at most once/day.
+  * risk     : ONLY while a REAL (live) position is open:
+               stop_hit (price <= stop, any hour, repeat >= 10 min, max 6/day/position),
+               stop_near (price within 1% above stop, once/position/day),
+               daily_loss (12% then 15%) / drawdown (6% then 8%) from live_equity.json (real capital),
+               only if a real buy is open OR one was made today,
+               stale_price (newest tick > 10 min old: once, then every 30 min),
+               manual zones with bot="risk" (once/zone/day, only while a real position is open).
+               Sim/paper positions never ring (watch_stops.py handles them).
+  * compound : « trade fermé » — wakes PM-Compound ONCE per closed trade (sim or live).
+               Sources (read-only): guardian/state.json (status=closed), trades_log.jsonl
+               (close_reason), state/live_orders.jsonl (kind=auto_exit).
+               Max 5 rings/day (Brussels); beyond → log « reporté au bilan 20h32 », no ring.
+               Dedupe state survives restarts; first start seeds already-closed trades as rung.
+
+Secrets come ONLY from env or the secrets file (never logged):
+  SONNETTE_PREDICT_URL,  SONNETTE_PREDICT_AUTH  (full header value) or SONNETTE_PREDICT_KEY
+  SONNETTE_RISK_URL,     SONNETTE_RISK_AUTH     (full header value) or SONNETTE_RISK_KEY
+  SONNETTE_COMPOUND_URL, SONNETTE_COMPOUND_AUTH (full header value) or SONNETTE_COMPOUND_KEY
+Missing URL/key => dry mode (log + state, no POST).
+
+Usage:
+  python3 sonnette.py                 # run loop (every 30 s)
+  python3 sonnette.py --once          # one cycle
+  python3 sonnette.py --status        # human status
+  python3 sonnette.py --test risk     # one test ring (test=true); dry if no secrets
+  python3 sonnette.py --test compound
+  python3 sonnette.py --simulate      # self-tests with fake ticks in /tmp (never touches real state)
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import os
+import shutil
+import signal
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from datetime import datetime, timedelta
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+import live_equity
+
+TZ = ZoneInfo("Europe/Brussels")
+HERE = Path(__file__).resolve().parent
+TEAM = Path("/workspace/predict-market-bot")
+ALLOWED_PAIRS = ("BTC-EUR", "ETH-EUR", "SOL-EUR")
+BOTS = ("predict", "risk", "compound")
+ZONE_BOTS = ("predict", "risk")  # only these may appear in zones_reveil.json
+
+DEFAULT_CFG: dict = {
+    "ticks_dir": str(TEAM / "state" / "price_ticks"),
+    "zones_file": str(TEAM / "state" / "zones_reveil.json"),
+    "live_orders": str(TEAM / "state" / "live_orders.jsonl"),
+    "live_exits": str(TEAM / "state" / "live_exits.json"),
+    "trades_log": str(TEAM / "state" / "trades_log.jsonl"),
+    "guardian_state": str(TEAM / "guardian" / "state.json"),
+    "positions_file": str(TEAM / "state" / "positions.json"),
+    "collector_pid": str(TEAM / "state" / "price_ticks" / "collector.pid"),
+    "state_dir": str(HERE / "state"),
+    "secrets_file": str(HERE / "secrets.env"),
+    "loop_seconds": 30,
+    "stale_seconds": 180,          # older than this: no price rings at all (flag + log)
+    "proxy": "http://127.0.0.1:8791",
+    "http_timeout_s": 10,
+    "http_retries": 3,             # retries after the first try
+    "http_backoff_s": [2, 5, 10],
+    "allow_http": False,           # only https webhooks (tests may set true)
+    "revx_bin": "/home/box/.local/bin/revx",
+    "revx_enabled": True,
+    "revx_every_s": 300,           # read-only `revx order open` at most every 5 min
+    "live_equity_file": str(TEAM / "state" / "live_equity.json"),
+    "equity_every_s": 300,         # refresh capital réel at most every 5 min
+    "predict": {
+        "window_start": "15:00",
+        "window_end": "17:00",     # end excluded
+        "days": [0, 1, 2, 3, 4],   # 0=Monday ... 6=Sunday
+        "max_per_day": 3,
+        "retry_after_fail_min": 5,
+        "max_attempts_per_zone_per_day": 3,
+    },
+    "risk": {
+        "stop_hit_repeat_min": 10,
+        "stop_hit_max_per_day": 6,     # per position
+        "retry_after_fail_min": 2,
+        "max_attempts_per_day": 12,    # per alert key (anti-spam incl. failures)
+        "stop_near_pct": 1.0,
+        "daily_loss_levels": [0.12, 0.15],
+        "drawdown_levels": [0.06, 0.08],
+        "stale_ring_after_s": 600,
+        "stale_repeat_min": 30,
+        "manual_zone_max_per_day": 6,
+    },
+    "compound": {
+        "max_per_day": 5,              # Europe/Brussels day
+        "bilan_note": "reporté au bilan 20h32",
+    },
+}
+
+TEST_MESSAGE = "Essai de la sonnette, rien à faire."
+
+
+# ----------------------------------------------------------------- helpers
+def deep_merge(base: dict, over: dict) -> dict:
+    out = copy.deepcopy(base)
+    for k, v in (over or {}).items():
+        if isinstance(v, dict) and isinstance(out.get(k), dict):
+            out[k] = deep_merge(out[k], v)
+        else:
+            out[k] = v
+    return out
+
+
+def load_cfg(path: str | None) -> dict:
+    p = Path(path) if path else HERE / "config.json"
+    if p.exists():
+        try:
+            return deep_merge(DEFAULT_CFG, json.loads(p.read_text()))
+        except Exception as e:  # noqa: BLE001
+            print(f"[sonnette] config.json illisible ({e}); valeurs par défaut", file=sys.stderr)
+    return copy.deepcopy(DEFAULT_CFG)
+
+
+def parse_ts(s) -> datetime | None:
+    if not isinstance(s, str) or not s.strip():
+        return None
+    try:
+        dt = datetime.fromisoformat(s.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=TZ)
+    return dt
+
+
+def to_float(x) -> float | None:
+    if isinstance(x, bool) or x is None:
+        return None
+    if isinstance(x, (int, float)):
+        return float(x)
+    if isinstance(x, str):
+        try:
+            return float(x.strip().replace(",", ".").replace(" ", "").replace("€", ""))
+        except ValueError:
+            return None
+    return None
+
+
+def load_json(path: Path, default=None):
+    try:
+        return json.loads(Path(path).read_text())
+    except Exception:  # noqa: BLE001
+        return default
+
+
+def save_json(path: Path, data) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+    os.replace(tmp, path)
+
+
+def fmt_eur(x: float, decimals: int | None = None) -> str:
+    """98 -> '98', 97.854 -> '97,85', 73243.1 -> '73 243,10' (French style)."""
+    if decimals is None:
+        decimals = 0 if abs(x - round(x)) < 1e-9 else 2
+    s = f"{x:,.{decimals}f}"
+    return s.replace(",", " ").replace(".", ",")
+
+
+def asset(pair: str) -> str:
+    return pair.split("-")[0]
+
+
+def hhmm(dt: datetime) -> str:
+    return dt.astimezone(TZ).strftime("%Hh%M")
+
+
+def pid_alive(pid: int) -> bool:
+    if pid <= 0:
+        return False
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def collector_status(cfg: dict) -> dict:
+    """Watchdog only: report whether the team price collector is running (never start it)."""
+    pid = None
+    try:
+        pid = int(Path(cfg["collector_pid"]).read_text().strip().split()[0])
+    except Exception:  # noqa: BLE001
+        pid = None
+    if pid and pid_alive(pid):
+        return {"running": True, "pid": pid, "via": "pidfile"}
+    try:
+        out = subprocess.run(["pgrep", "-f", "collect_price_ticks.py"], capture_output=True,
+                             text=True, timeout=5).stdout.split()
+        pids = [int(p) for p in out if p.strip().isdigit() and int(p) != os.getpid()]
+        if pids:
+            return {"running": True, "pid": pids[0], "via": "pgrep"}
+    except Exception:  # noqa: BLE001
+        pass
+    return {"running": False, "pid": pid, "via": "none"}
+
+
+# ----------------------------------------------------------------- secrets
+def read_secrets_file(path: Path) -> dict:
+    out: dict = {}
+    try:
+        text = Path(path).read_text()
+    except OSError:
+        return out
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        if line.startswith("export "):
+            line = line[7:].strip()
+        k, v = line.split("=", 1)
+        k, v = k.strip(), v.strip()
+        if len(v) >= 2 and v[0] == v[-1] and v[0] in "'\"":
+            v = v[1:-1]
+        if k.startswith("SONNETTE_"):
+            out[k] = v
+    return out
+
+
+class Secrets:
+    """Env first, then secrets file. Values are never printed."""
+
+    def __init__(self, cfg: dict, env: dict | None = None):
+        self.cfg = cfg
+        self.env = dict(os.environ if env is None else env)
+
+    def values(self) -> dict:
+        merged = read_secrets_file(Path(self.cfg["secrets_file"]))
+        for k, v in self.env.items():
+            if k.startswith("SONNETTE_") and v != "":
+                merged[k] = v
+        return merged
+
+    def all_secret_strings(self) -> list[str]:
+        v = self.values()
+        return [val for k, val in v.items()
+                if any(k.endswith(s) for s in ("_URL", "_KEY", "_AUTH")) and len(val) >= 4]
+
+    def channel(self, bot: str) -> dict:
+        """Return {'real': bool, 'reason': str, ...private fields...} for a bot."""
+        v = self.values()
+        B = bot.upper()
+
+        def g(name: str, default=None):
+            return v.get(f"SONNETTE_{B}_{name}") or v.get(f"SONNETTE_{name}") or default
+
+        if str(v.get("SONNETTE_DRY", "")).strip().lower() in ("1", "true", "yes", "oui"):
+            return {"real": False, "reason": "SONNETTE_DRY=1 (forcé)"}
+        url = v.get(f"SONNETTE_{B}_URL", "").strip()
+        auth = v.get(f"SONNETTE_{B}_AUTH", "").strip()
+        if auth.lower().startswith("authorization:"):
+            auth = auth.split(":", 1)[1].strip()
+        key = v.get(f"SONNETTE_{B}_KEY", "").strip()
+        mode = str(g("KEY_MODE", "header")).strip().lower()
+        if not url:
+            return {"real": False, "reason": f"SONNETTE_{B}_URL absent"}
+        if not (url.startswith("https://") or (self.cfg.get("allow_http") and url.startswith("http://"))):
+            return {"real": False, "reason": f"SONNETTE_{B}_URL doit commencer par https://"}
+        if mode not in ("header", "query", "body", "none"):
+            return {"real": False, "reason": f"KEY_MODE inconnu ({mode}); header|query|body|none"}
+        if mode != "none" and not (auth or key):
+            return {"real": False, "reason": f"SONNETTE_{B}_AUTH ou SONNETTE_{B}_KEY absent"}
+        # Header name + template. SONNETTE_KEY_HEADER may be "X-Key" or "Authorization: Bearer <key>"
+        hspec = str(g("KEY_HEADER", "Authorization")).strip()
+        template = None
+        if ":" in hspec:
+            hname, template = hspec.split(":", 1)
+            hname, template = hname.strip(), template.strip()
+            if "<key>" not in template:
+                template = (template + " <key>").strip() if template else "<key>"
+        else:
+            hname = hspec or "Authorization"
+        if auth:
+            value = auth  # full value as copied from the routine panel, sent verbatim
+        elif mode in ("query", "body"):
+            value = key  # raw key in the URL parameter / JSON field
+        else:
+            prefix_env = v.get(f"SONNETTE_{B}_KEY_PREFIX") or v.get("SONNETTE_KEY_PREFIX")
+            if template is not None:
+                value = template.replace("<key>", key)
+            elif prefix_env is not None:
+                value = ("" if prefix_env.lower() == "none" else prefix_env) + key
+            else:
+                value = ("Bearer " + key) if hname.lower() == "authorization" else key
+        return {
+            "real": True,
+            "reason": "URL + clé présentes",
+            "_url": url,
+            "_mode": mode,
+            "_hname": hname,
+            "_value": value,
+            "_param": str(g("KEY_PARAM", "key")),
+            "auth_style": ("header " + hname) if mode == "header" else mode,
+        }
+
+
+# ----------------------------------------------------------------- HTTP
+def post_json(channel: dict, payload: dict, cfg: dict, redact: list[str], log) -> dict:
+    """POST with proxy + retries. Returns {'ok', 'status', 'error', 'tries'}; never leaks URL/key."""
+    url = channel["_url"]
+    body = dict(payload)
+    headers = {"Content-Type": "application/json; charset=utf-8", "User-Agent": "sonnette/1.0"}
+    if channel["_mode"] == "header":
+        headers[channel["_hname"]] = channel["_value"]
+    elif channel["_mode"] == "query":
+        sep = "&" if "?" in url else "?"
+        url = url + sep + urllib.parse.urlencode({channel["_param"]: channel["_value"]})
+    elif channel["_mode"] == "body":
+        body[channel["_param"]] = channel["_value"]
+    data = json.dumps(body, ensure_ascii=False).encode("utf-8")
+    proxy = cfg.get("proxy") or ""
+    handler = urllib.request.ProxyHandler({"http": proxy, "https": proxy} if proxy else {})
+    opener = urllib.request.build_opener(handler)
+    secrets = [s for s in redact + [url, channel["_url"], channel["_value"]] if s]
+
+    def clean(msg: str) -> str:
+        for s in sorted(secrets, key=len, reverse=True):
+            msg = msg.replace(s, "***")
+        return msg[:300]
+
+    retries = int(cfg.get("http_retries", 3))
+    backoff = list(cfg.get("http_backoff_s") or [2, 5, 10])
+    last = {"ok": False, "status": None, "error": None, "tries": 0}
+    for attempt in range(retries + 1):
+        last["tries"] = attempt + 1
+        try:
+            req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+            with opener.open(req, timeout=float(cfg.get("http_timeout_s", 10))) as resp:
+                code = resp.getcode()
+                if 200 <= code < 300:
+                    return {"ok": True, "status": code, "error": None, "tries": attempt + 1}
+                last.update(status=code, error=f"HTTP {code}")
+        except urllib.error.HTTPError as e:
+            last.update(status=e.code, error=clean(f"HTTP {e.code} {e.reason}"))
+            if 400 <= e.code < 500 and e.code not in (408, 425, 429):
+                log("WARN", f"envoi refusé ({last['error']}) — pas de nouvel essai (vérifier la clé)")
+                return last
+        except Exception as e:  # noqa: BLE001
+            last.update(status=None, error=clean(f"{type(e).__name__}: {e}"))
+        if attempt < retries:
+            wait = backoff[min(attempt, len(backoff) - 1)]
+            log("WARN", f"envoi échoué (essai {attempt + 1}/{retries + 1}: {last['error']}); nouvel essai dans {wait}s")
+            time.sleep(wait)
+    return last
+
+
+# ----------------------------------------------------------------- ticks
+def tail_lines(path: Path, max_bytes: int = 65536) -> list[str]:
+    try:
+        with open(path, "rb") as f:
+            f.seek(0, 2)
+            size = f.tell()
+            f.seek(max(0, size - max_bytes))
+            raw = f.read().decode("utf-8", errors="replace")
+    except OSError:
+        return []
+    lines = raw.splitlines()
+    if size > max_bytes and lines:
+        lines = lines[1:]  # first line may be partial
+    return lines
+
+
+def latest_ticks(ticks_dir: Path, now: datetime) -> dict:
+    """{pair: {'mid': float, 'ts': datetime}} from today's (then yesterday's) file."""
+    out: dict = {}
+    for d in (now.date(), now.date() - timedelta(days=1)):
+        path = Path(ticks_dir) / f"{d.isoformat()}.jsonl"
+        for line in tail_lines(path):
+            try:
+                row = json.loads(line)
+            except (json.JSONDecodeError, ValueError):
+                continue
+            if not isinstance(row, dict):
+                continue
+            pair = str(row.get("pair") or "").upper()
+            mid = to_float(row.get("mid"))
+            ts = parse_ts(row.get("ts"))
+            if pair not in ALLOWED_PAIRS or mid is None or mid <= 0 or ts is None:
+                continue
+            if ts > now + timedelta(minutes=2):
+                continue  # timestamp from the future: ignore
+            prev = out.get(pair)
+            if prev is None or ts >= prev["ts"]:
+                out[pair] = {"mid": mid, "ts": ts}
+        if all(p in out for p in ALLOWED_PAIRS):
+            break
+    return out
+
+
+# ----------------------------------------------------------------- zones
+SENS_ALIASES = {"sous": "sous", "en-dessous": "sous", "en dessous": "sous",
+                "au-dessus": "au-dessus", "au dessus": "au-dessus", "dessus": "au-dessus"}
+
+
+def load_zones(path: Path, now: datetime) -> tuple[list[dict], list[str], str | None]:
+    """Return (valid_zones, problems, file_error). Never raises."""
+    p = Path(path)
+    if not p.exists():
+        return [], [], None
+    try:
+        data = json.loads(p.read_text(encoding="utf-8") or "{}")
+    except Exception as e:  # noqa: BLE001
+        return [], [], f"fichier zones illisible (JSON cassé): {e}"
+    rows = data.get("zones") if isinstance(data, dict) else data if isinstance(data, list) else None
+    if not isinstance(rows, list):
+        return [], [], "fichier zones: il faut {\"zones\": [ ... ]}"
+    valid, problems, seen = [], [], set()
+    for i, z in enumerate(rows):
+        label = f"zone n°{i + 1}"
+        if not isinstance(z, dict):
+            problems.append(f"{label}: ce n'est pas un objet {{...}}")
+            continue
+        zid = str(z.get("id") or "").strip()
+        label = f"zone {zid or 'n°' + str(i + 1)}"
+        errs = []
+        if not zid:
+            errs.append("id manquant")
+        elif zid in seen:
+            errs.append("id en double")
+        pair = str(z.get("paire") or z.get("pair") or "").strip().upper()
+        if pair not in ALLOWED_PAIRS:
+            errs.append(f"paire '{pair}' non autorisée (BTC-EUR, ETH-EUR, SOL-EUR)")
+        sens = SENS_ALIASES.get(str(z.get("sens") or "").strip().lower())
+        if not sens:
+            errs.append("sens doit être 'sous' ou 'au-dessus'")
+        prix = to_float(z.get("prix"))
+        if prix is None or prix <= 0:
+            errs.append("prix doit être un nombre > 0")
+        bot = str(z.get("bot") or "").strip().lower()
+        if bot not in ZONE_BOTS:
+            errs.append("bot doit être 'predict' ou 'risk'")
+        exp_raw = z.get("expire")
+        exp = None
+        if exp_raw not in (None, ""):
+            exp = parse_ts(str(exp_raw))
+            if exp is None:
+                errs.append("expire illisible (ex: 2026-10-09T17:00:00+02:00)")
+        actif = z.get("actif", True)
+        if not isinstance(actif, bool):
+            errs.append("actif doit être true ou false")
+        if errs:
+            problems.append(f"{label}: " + "; ".join(errs))
+            if zid:
+                seen.add(zid)
+            continue
+        seen.add(zid)
+        if actif is False:
+            continue
+        if exp is not None and now >= exp:
+            problems.append(f"{label}: expirée ({exp_raw}) — ignorée")
+            continue
+        valid.append({"id": zid, "paire": pair, "sens": sens, "prix": prix, "bot": bot,
+                      "raison": str(z.get("raison") or "")[:300], "expire": exp_raw})
+    return valid, problems, None
+
+
+# ----------------------------------------------------------------- real positions
+def derive_stop(pos: dict) -> float | None:
+    """Same as watch_stops.derive_stop: stop_price_eur, else entry * (1 - |stop_pct|/100)."""
+    s = to_float(pos.get("stop_price_eur"))
+    if s is None:
+        for k in ("stop_price", "stop", "trigger_price", "triggerPrice", "stopPrice"):
+            s = to_float(pos.get(k))
+            if s is not None:
+                break
+    if s is not None and s > 0:
+        return s
+    sp = to_float(pos.get("stop_pct"))
+    avg = to_float(pos.get("avg_price") or pos.get("entry_price") or pos.get("price"))
+    if sp is None or avg is None or avg <= 0:
+        return None
+    if sp > 0:
+        sp = -sp
+    return avg * (1.0 + sp / 100.0)
+
+
+def is_explicit_live(pos: dict) -> bool:
+    """Same tagging as watch_stops.classify_mode, but default = NOT live (sim never rings)."""
+    for key in ("mode", "execution_mode"):
+        m = str(pos.get(key) or "").strip().lower()
+        if m in ("live", "real", "reel", "réel"):
+            return True
+        if m in ("paper", "sim", "simulation"):
+            return False
+    src = str(pos.get("source") or "").lower()
+    if "live" in src and "paper" not in src:
+        return True
+    pid = str(pos.get("id") or "").lower()
+    if "paper" in pid:
+        return False
+    return pid.startswith("rx-live") or pid.startswith("live-") or "-live-" in pid
+
+
+def norm_pair(raw) -> str:
+    return str(raw or "").strip().upper().replace("/", "-")
+
+
+def live_from_orders_log(path: Path, exits_path: Path | None = None) -> list[dict]:
+    """Same idea as watch_stops.load_live_orders_open: longs + idée à la baisse shorts.
+
+    Longs = buys − plain sells (EUR). kind=auto_exit closes via exit lock / linked id.
+    Idée à la baisse = sell with idea_type/kind=baisse (no cycle_id) → short; closed by
+    a linked rebuy (cycle_id / linked_position_id) or auto_exit. Never « vendre d'abord ».
+    """
+    try:
+        lines = Path(path).read_text().splitlines()
+    except OSError:
+        return []
+    closed_by_exit: set[str] = set()
+    if exits_path:
+        ex = load_json(Path(exits_path), {}) or {}
+        if isinstance(ex, dict):
+            for k, v in ex.items():
+                if isinstance(v, dict) and str(v.get("status") or "") in (
+                        "done", "no_fill", "closed_by_target", "partial"):
+                    closed_by_exit.add(str(k))
+    buys: dict[str, dict] = {}
+    sells: dict[str, float] = {}
+    shorts: dict[str, dict] = {}
+    closed_shorts: set[str] = set()
+    for line in lines:
+        try:
+            row = json.loads(line)
+        except (json.JSONDecodeError, ValueError):
+            continue
+        if not isinstance(row, dict) or not row.get("ok") or row.get("dry_run"):
+            continue
+        if row.get("kind") == "auto_exit":
+            order = row.get("order") if isinstance(row.get("order"), dict) else row
+            linked = str(order.get("exit_for") or order.get("linked_position_id")
+                         or order.get("cycle_id") or "")
+            if linked:
+                closed_by_exit.add(linked)
+                closed_shorts.add(linked)
+            continue
+        order = row.get("order") if isinstance(row.get("order"), dict) else row
+        pair = norm_pair(order.get("pair"))
+        side = str(order.get("side") or "").lower()
+        amount = to_float(order.get("amount_eur")) or 0.0
+        idea = str(order.get("idea_type") or order.get("kind") or "").lower()
+        linked = order.get("linked_position_id") or order.get("cycle_id")
+        if not pair:
+            continue
+        if side == "sell" and idea == "baisse" and not linked:
+            oid = str(order.get("id") or row.get("client_order_id") or "")
+            if not oid:
+                oid = f"rx-live-{pair}-{row.get('at') or 'unknown'}"
+            elif not (oid.startswith("rx-live") or oid.startswith("live-")):
+                oid = f"rx-live-{oid}"
+            stop_v = order.get("stop_price_eur")
+            if stop_v is None:
+                stop_v = order.get("stop_price") if order.get("stop_price") is not None else order.get("safety_price")
+            shorts[oid] = {
+                "id": oid, "pair": pair, "side": "short", "idea_type": "baisse", "kind": "baisse",
+                "price": order.get("price"), "avg_price": order.get("price"), "cost_eur": amount,
+                "stop_price_eur": stop_v, "target_price": order.get("target_price"),
+                "decision_id": order.get("decision_id") or row.get("decision_id"),
+                "source": "live_orders", "opened_at": row.get("at"), "mode": "live",
+            }
+            continue
+        if side == "buy" and linked and (idea == "baisse" or order.get("rebuy_reason")):
+            closed_shorts.add(str(linked))
+            continue
+        if side == "buy" and amount > 0:
+            oid = str(order.get("id") or row.get("client_order_id") or "")
+            if not oid:
+                oid = f"rx-live-{pair}-{row.get('at') or 'unknown'}"
+            elif not (oid.startswith("rx-live") or oid.startswith("live-")):
+                oid = f"rx-live-{oid}"
+            buys[oid] = {"id": oid, "pair": pair, "side": "long", "idea_type": idea or "hausse",
+                         "price": order.get("price"), "avg_price": order.get("price"), "cost_eur": amount,
+                         "stop_pct": order.get("stop_pct"),
+                         "stop_price_eur": (order.get("stop_price_eur") if order.get("stop_price_eur") is not None
+                                            else order.get("stop_price") if order.get("stop_price") is not None
+                                            else order.get("safety_price")),
+                         "decision_id": order.get("decision_id") or row.get("decision_id"),
+                         "source": "live_orders", "opened_at": row.get("at"), "mode": "live"}
+        elif side == "sell" and amount > 0:
+            if order.get("target_for") or str(order.get("purpose") or "").lower() in ("target", "objectif"):
+                continue
+            sells[pair] = sells.get(pair, 0.0) + amount
+    out = []
+    for oid, b in buys.items():
+        if oid in closed_by_exit:
+            continue
+        left = sells.get(b["pair"], 0.0)
+        if left >= b["cost_eur"] - 1e-9:
+            sells[b["pair"]] = left - b["cost_eur"]
+            continue
+        if left > 0:
+            b = dict(b, cost_eur=round(b["cost_eur"] - left, 6))
+            sells[b["pair"]] = 0.0
+        out.append(b)
+    for sid, sh in shorts.items():
+        if sid not in closed_shorts and sid not in closed_by_exit:
+            out.append(sh)
+    return out
+
+
+def live_from_state_file(path: Path, source: str) -> list[dict]:
+    data = load_json(Path(path), {}) or {}
+    out = []
+    for p in (data.get("positions") or []) if isinstance(data, dict) else []:
+        if not isinstance(p, dict):
+            continue
+        if str(p.get("status") or "open").lower() != "open":
+            continue
+        if not is_explicit_live(p):
+            continue
+        pair = norm_pair(p.get("pair") or p.get("symbol"))
+        if pair not in ALLOWED_PAIRS:
+            continue
+        side = str(p.get("side") or "long").lower()
+        out.append(dict(p, pair=pair, side="long" if side in ("long", "buy") else side, source=source))
+    return out
+
+
+def live_from_revx(cfg: dict, log) -> list[dict] | None:
+    """READ-ONLY `revx order open` (never place/cancel/replace). None = could not read."""
+    binp = cfg.get("revx_bin") or "revx"
+    if not Path(binp).exists() and not shutil.which(binp):
+        return None
+    proxy = cfg.get("proxy") or "http://127.0.0.1:8791"
+    env = dict(os.environ, HTTPS_PROXY=proxy, HTTP_PROXY=proxy, ALL_PROXY=proxy,
+               PATH="/home/box/.local/bin:" + os.environ.get("PATH", ""))
+    cmd = [binp, "order", "open", "--symbols", ",".join(ALLOWED_PAIRS), "--json", "--limit", "50"]
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=30, env=env)
+    except Exception as e:  # noqa: BLE001
+        log("WARN", f"revx order open (lecture) impossible: {type(e).__name__}")
+        return None
+    if proc.returncode != 0:
+        log("WARN", f"revx order open (lecture) code {proc.returncode}")
+        return None
+    raw = (proc.stdout or "").strip()
+    try:
+        starts = [i for i in (raw.find("{"), raw.find("[")) if i >= 0]
+        data = json.loads(raw[min(starts):]) if raw and starts else []
+    except (json.JSONDecodeError, ValueError):
+        log("WARN", "revx order open: réponse illisible")
+        return None
+    if isinstance(data, dict):
+        data = next((data[k] for k in ("data", "orders", "results", "items") if isinstance(data.get(k), list)),
+                    [data] if data else [])
+    out = []
+    for o in data if isinstance(data, list) else []:
+        if not isinstance(o, dict):
+            continue
+        pair = norm_pair(o.get("symbol") or o.get("pair") or o.get("trading_pair"))
+        if pair not in ALLOWED_PAIRS:
+            continue
+        status = str(o.get("status") or o.get("state") or o.get("order_state") or "").lower()
+        if status in ("cancelled", "canceled", "rejected", "expired", "filled", "closed"):
+            continue
+        oid = str(o.get("id") or o.get("order_id") or o.get("client_order_id") or f"revx-{pair}")
+        # resting order: entry price is NOT a stop; only explicit stop/trigger fields count
+        row = {"id": f"revx-{oid}", "pair": pair, "side": "long", "source": "revx_open",
+               "order_side": str(o.get("side") or "").lower(), "order_type": o.get("type") or o.get("order_type")}
+        for k in ("stop_price", "trigger_price", "triggerPrice", "stopPrice", "stop_price_eur"):
+            if o.get(k) is not None:
+                row["stop_price_eur"] = o.get(k)
+                break
+        out.append(row)
+    return out
+
+
+
+# ----------------------------------------------------------------- compound (trade fermé)
+def _close_raison_fr(raw) -> str:
+    s = str(raw or "").strip().lower()
+    if s in ("manual", "manuel", "manual_close", "closed_manual"):
+        return "manuel"
+    if any(x in s for x in ("target", "cible", "closed_by_target")):
+        return "cible"
+    if any(x in s for x in ("stop", "arrêt", "arret", "safety")):
+        return "arrêt"
+    if s in ("cible", "arrêt", "arret", "manuel"):
+        return "cible" if s == "cible" else ("manuel" if s == "manuel" else "arrêt")
+    return "manuel" if not s else ("arrêt" if "stop" in s else s)
+
+
+def _trade_side_fr(pos_or_row: dict) -> str:
+    """Achat = idée à la hausse; Vente = idée à la baisse. Never « vendre d\'abord »."""
+    idea = str(pos_or_row.get("idea_type") or pos_or_row.get("kind") or "").lower()
+    side = str(pos_or_row.get("side") or "").lower()
+    if idea == "baisse" or side in ("short", "sell"):
+        return "Vente"
+    if idea == "hausse" or side in ("long", "buy"):
+        return "Achat"
+    # closing auto_exit: idea_type on the exit row reflects the original idea
+    return "Vente" if idea == "baisse" else "Achat"
+
+
+def _trade_mode_fr(pos_or_row: dict) -> str:
+    m = str(pos_or_row.get("mode") or pos_or_row.get("execution_mode") or "").strip().lower()
+    if m in ("live", "real", "reel", "réel"):
+        return "live"
+    if m in ("paper", "sim", "simulation"):
+        return "simulation"
+    src = str(pos_or_row.get("source") or "").lower()
+    pid = str(pos_or_row.get("id") or pos_or_row.get("position_id") or "").lower()
+    if "live" in src or pid.startswith("rx-live") or pid.startswith("live-") or "-live-" in pid:
+        return "live"
+    return "simulation"
+
+
+def discover_closed_trades(cfg: dict) -> list[dict]:
+    """Closed trades from team files (read-only). One entry per trade, stable `key`.
+
+    Sources: guardian/state.json (status=closed), trades_log.jsonl (close_reason),
+    live_orders.jsonl (kind=auto_exit). Prefer decision_id as key when present.
+    """
+    found: dict[str, dict] = {}
+
+    def add(key: str, row: dict) -> None:
+        key = str(key or "").strip()
+        if not key:
+            return
+        # Prefer richer rows (decision_id, pnl) over sparse ones
+        prev = found.get(key)
+        if prev is None:
+            found[key] = row
+            return
+        score = (1 if row.get("decision_id") else 0) + (1 if row.get("gain_perte_eur") is not None else 0)
+        pscore = (1 if prev.get("decision_id") else 0) + (1 if prev.get("gain_perte_eur") is not None else 0)
+        if score >= pscore:
+            found[key] = row
+
+    # 1) guardian closed positions
+    gs = load_json(Path(cfg["guardian_state"]), {}) or {}
+    for pos in (gs.get("positions") or []) if isinstance(gs, dict) else []:
+        if not isinstance(pos, dict):
+            continue
+        if str(pos.get("status") or "").lower() != "closed":
+            continue
+        did = str(pos.get("decision_id") or "").strip()
+        pid = str(pos.get("id") or "").strip()
+        key = did or pid
+        add(key, {
+            "key": key,
+            "decision_id": did or None,
+            "position_id": pid or None,
+            "paire": norm_pair(pos.get("pair") or pos.get("symbol")),
+            "sens": _trade_side_fr(pos),
+            "mode": _trade_mode_fr(pos),
+            "gain_perte_eur": to_float(pos.get("realized_pnl_eur")),
+            "raison_fermeture": _close_raison_fr(pos.get("close_reason")),
+            "closed_at": pos.get("closed_at") or pos.get("updated_at"),
+            "source": "guardian_state",
+        })
+
+    # 2) trades_log closing legs
+    try:
+        lines = Path(cfg["trades_log"]).read_text().splitlines()
+    except OSError:
+        lines = []
+    for line in lines:
+        try:
+            row = json.loads(line)
+        except (json.JSONDecodeError, ValueError):
+            continue
+        if not isinstance(row, dict) or not row.get("close_reason"):
+            continue
+        did = str(row.get("decision_id") or "").strip()
+        linked = str(row.get("linked_position_id") or row.get("cycle_id") or "").strip()
+        rid = str(row.get("id") or "").strip()
+        key = did or linked or rid
+        idea = {"idea_type": row.get("idea_type") or row.get("kind"),
+                "side": "short" if str(row.get("idea_type") or "").lower() == "baisse"
+                else ("long" if str(row.get("side") or "").lower() == "buy"
+                      and str(row.get("idea_type") or "").lower() != "baisse"
+                      else row.get("side")),
+                "mode": row.get("mode"), "source": row.get("source"), "id": linked or rid}
+        # For baisse close the closing leg is a buy; idea_type still baisse → Vente
+        if str(row.get("idea_type") or "").lower() == "baisse":
+            idea["side"] = "short"
+        add(key, {
+            "key": key,
+            "decision_id": did or None,
+            "position_id": linked or rid or None,
+            "paire": norm_pair(row.get("pair")),
+            "sens": _trade_side_fr(idea),
+            "mode": _trade_mode_fr(row if row.get("mode") else idea),
+            "gain_perte_eur": to_float(row.get("realized_pnl_eur")),
+            "raison_fermeture": _close_raison_fr(row.get("close_reason") or row.get("rebuy_reason")),
+            "closed_at": row.get("ts_local") or row.get("ts") or row.get("at"),
+            "source": "trades_log",
+        })
+
+    # 3) live auto exits
+    try:
+        lines = Path(cfg["live_orders"]).read_text().splitlines()
+    except OSError:
+        lines = []
+    for line in lines:
+        try:
+            row = json.loads(line)
+        except (json.JSONDecodeError, ValueError):
+            continue
+        if not isinstance(row, dict) or row.get("kind") != "auto_exit":
+            continue
+        if not row.get("ok") and str(row.get("status") or "") not in ("done", "closed_by_target", "partial"):
+            # still record successful-ish closes; skip pure failures with no fill
+            if str(row.get("status") or "") in ("failed", "error", "no_fill"):
+                continue
+        order = row.get("order") if isinstance(row.get("order"), dict) else row
+        pid = str(order.get("exit_for") or order.get("linked_position_id") or order.get("cycle_id") or "").strip()
+        did = str(order.get("decision_id") or row.get("decision_id") or "").strip()
+        key = did or pid
+        if not key:
+            continue
+        idea = {"idea_type": order.get("idea_type"), "side": "short" if str(order.get("idea_type") or "").lower() == "baisse" else "long",
+                "mode": "live", "id": pid, "source": "live_orders"}
+        add(key, {
+            "key": key,
+            "decision_id": did or None,
+            "position_id": pid or None,
+            "paire": norm_pair(order.get("pair")),
+            "sens": _trade_side_fr(idea),
+            "mode": "live",
+            "gain_perte_eur": to_float(order.get("realized_pnl_eur")),
+            "raison_fermeture": _close_raison_fr(order.get("close_reason")),
+            "closed_at": row.get("at"),
+            "source": "live_orders_auto_exit",
+        })
+
+    return list(found.values())
+
+
+# ----------------------------------------------------------------- core
+class Sonnette:
+    def __init__(self, cfg: dict, env: dict | None = None, sender=None, quiet: bool = False):
+        self.cfg = cfg
+        self.sd = Path(cfg["state_dir"])
+        self.sd.mkdir(parents=True, exist_ok=True)
+        self.secrets = Secrets(cfg, env)
+        self.sender = sender  # tests may inject; default = real post_json
+        self.quiet = quiet
+        self._log_last: dict = {}
+        self._revx_cache: list[dict] = []
+        self._revx_at: float = -1e18
+        self._revx_ok: bool | None = None
+        self._last_modes: dict = {}
+        self.f_state = self.sd / "state.json"
+        self.f_status = self.sd / "status.json"
+        self.f_rings = self.sd / "rings.jsonl"
+        self.f_log = self.sd / "sonnette.log"
+        self.f_stale = self.sd / "PRIX_PERIMES.flag"
+        self.f_urgent = self.sd / "ALERTE_RISK_URGENTE.json"
+        self.f_urgent_log = self.sd / "alertes_urgentes.jsonl"
+        self.f_compound = self.sd / "compound_rung.json"  # persistent dedupe (survives day rollover)
+        self.equity = live_equity.LiveEquity(
+            out_path=Path(cfg["live_equity_file"]),
+            live_orders_path=Path(cfg["live_orders"]),
+            revx_bin=cfg.get("revx_bin") or "/home/box/.local/bin/revx",
+            proxy=cfg.get("proxy") or "http://127.0.0.1:8791",
+            every_s=float(cfg.get("equity_every_s", 300)),
+            fetch_balances=cfg.get("_fetch_balances"),  # tests only
+            log=lambda lvl, msg: self.log(lvl, msg),
+        )
+
+    # ---- logging (secrets redacted, rate-limited helper)
+    def log(self, level: str, msg: str, now: datetime | None = None) -> None:
+        for s in sorted(self.secrets.all_secret_strings(), key=len, reverse=True):
+            msg = msg.replace(s, "***")
+        ts = (now or datetime.now(TZ)).astimezone(TZ).strftime("%Y-%m-%d %H:%M:%S")
+        line = f"{ts} [{level}] {msg}"
+        try:
+            if self.f_log.exists() and self.f_log.stat().st_size > 5_000_000:
+                os.replace(self.f_log, self.f_log.with_suffix(".log.1"))
+            with self.f_log.open("a", encoding="utf-8") as f:
+                f.write(line + "\n")
+        except OSError:
+            pass
+        if not self.quiet:
+            print(line, flush=True)
+
+    def log_every(self, key: str, every_s: float, level: str, msg: str, now: datetime) -> None:
+        last = self._log_last.get(key)
+        if last is None or (now - last).total_seconds() >= every_s or (now - last).total_seconds() < 0:
+            self._log_last[key] = now
+            self.log(level, msg, now)
+
+    # ---- state
+    def load_state(self, today: str) -> dict:
+        st = load_json(self.f_state, {}) or {}
+        if st.get("date") != today:
+            st = {"date": today, "dry": {}, "real": {}}
+        st.setdefault("dry", {})
+        st.setdefault("real", {})
+        return st
+
+    @staticmethod
+    def bucket(st: dict, delivery: str, bot: str) -> dict:
+        b = st[delivery].setdefault(bot, {"delivered": 0, "keys": {}})
+        b.setdefault("delivered", 0)
+        b.setdefault("keys", {})
+        return b
+
+    @staticmethod
+    def key_state(st: dict, delivery: str, bot: str, key: str) -> dict:
+        b = st[delivery].get(bot) or {}
+        return (b.get("keys") or {}).get(key) or {"delivered": 0, "attempts": 0, "last_try": None,
+                                                    "last_ok": None, "last_result": None}
+
+    @staticmethod
+    def minutes_since(iso: str | None, now: datetime) -> float:
+        t = parse_ts(iso) if iso else None
+        return 1e9 if t is None else (now - t).total_seconds() / 60.0
+
+    def can_retry(self, ks: dict, now: datetime, min_after_ok: float, min_after_fail: float,
+                  max_attempts: int) -> bool:
+        if ks["attempts"] >= max_attempts:
+            return False
+        if ks.get("last_result") == "failed":
+            return self.minutes_since(ks.get("last_try"), now) >= min_after_fail
+        return self.minutes_since(ks.get("last_ok"), now) >= min_after_ok
+
+    # ---- real positions (revx cached, read-only, max every 5 min)
+    def real_positions(self, now_mono: float) -> tuple[list[dict], dict]:
+        cfg = self.cfg
+        pos = []
+        pos += live_from_state_file(Path(cfg["guardian_state"]), "guardian_state")
+        pos += live_from_state_file(Path(cfg["positions_file"]), "root_positions")
+        pos += live_from_orders_log(Path(cfg["live_orders"]),
+                                    Path(cfg["live_exits"]) if cfg.get("live_exits") else None)
+        info = {"revx": "désactivé"}
+        if cfg.get("revx_enabled"):
+            if now_mono - self._revx_at >= float(cfg.get("revx_every_s", 300)):
+                self._revx_at = now_mono
+                res = live_from_revx(cfg, lambda lvl, m: self.log(lvl, m))
+                self._revx_ok = res is not None
+                if res is not None:
+                    self._revx_cache = res
+            pos += self._revx_cache
+            info = {"revx": "ok" if self._revx_ok else "lecture impossible (ignoré)",
+                    "revx_open_orders": len(self._revx_cache)}
+        merged: dict = {}
+        for p in pos:
+            merged.setdefault(str(p.get("id")), p)
+        return list(merged.values()), info
+
+
+    # ---- compound (trade fermé) dedupe — persistent across days/restarts
+    def load_compound_state(self, today: str, closed: list[dict]) -> dict:
+        st = load_json(self.f_compound, None)
+        if not isinstance(st, dict):
+            st = {"seeded": False, "rung": {}, "day": today, "day_count": 0}
+        st.setdefault("rung", {})
+        if not isinstance(st["rung"], dict):
+            st["rung"] = {}
+        if st.get("day") != today:
+            st["day"] = today
+            st["day_count"] = 0
+        if not st.get("seeded"):
+            # First start: mark every already-closed trade as rung so nothing old rings.
+            now_iso = datetime.now(TZ).isoformat()
+            for t in closed:
+                k = str(t.get("key") or "")
+                if k and k not in st["rung"]:
+                    st["rung"][k] = {"at": now_iso, "result": "seed",
+                                     "decision_id": t.get("decision_id")}
+            st["seeded"] = True
+            save_json(self.f_compound, st)
+            self.log("INFO",
+                     f"compound: amorçage — {len(st['rung'])} trade(s) déjà fermé(s) marqués "
+                     f"(pas de sonnerie rétroactive)", datetime.now(TZ))
+        return st
+
+    def save_compound_state(self, st: dict) -> None:
+        save_json(self.f_compound, st)
+
+    def compound_payload(self, trade: dict, now: datetime, test: bool = False) -> dict:
+        did = trade.get("decision_id") or trade.get("key")
+        paire = trade.get("paire")
+        sens = trade.get("sens") or "Achat"
+        mode = trade.get("mode") or "simulation"
+        pnl = trade.get("gain_perte_eur")
+        raison = trade.get("raison_fermeture") or "manuel"
+        if test:
+            msg = "Essai de la sonnette Compound (trade fermé), rien à faire."
+        else:
+            pnl_txt = ("?" if pnl is None else f"{pnl:+.2f}".replace(".", ",") + " €")
+            msg = (f"Trade fermé {did}: {paire}, {sens}, {mode}, "
+                   f"gain/perte {pnl_txt}, raison {raison}.")
+        return {
+            "bot": "compound",
+            "kind": "trade_ferme",
+            "decision_id": did,
+            "paire": paire,
+            "sens": sens,          # Achat | Vente
+            "mode": "test" if test else mode,  # simulation | live | test
+            "gain_perte_eur": pnl,
+            "raison_fermeture": raison,  # cible | arrêt | manuel
+            "message_fr": msg,
+            "heure": now.isoformat(),
+            "ts": now.isoformat(),
+            "test": bool(test),
+            "position_id": trade.get("position_id"),
+        }
+
+    # ---- one ring
+    def ring(self, bot: str, key: str, payload: dict, st: dict | None, now: datetime,
+             count_daily: bool = True, kind_for_log: str = "") -> str:
+        """Send (or dry-log) one ring. Returns 'delivered' | 'dry' | 'failed'."""
+        ch = self.secrets.channel(bot)
+        delivery = "real" if ch["real"] else "dry"
+        payload = dict(payload, envoi="reel" if ch["real"] else "dry")
+        if ch["real"]:
+            sender = self.sender or post_json
+            res = sender(ch, payload, self.cfg, self.secrets.all_secret_strings(),
+                         lambda lvl, m: self.log(lvl, m))
+            result = "delivered" if res.get("ok") else "failed"
+        else:
+            res = {"ok": None, "status": None, "error": None, "tries": 0}
+            result = "dry"
+        if st is not None and key:
+            b = self.bucket(st, delivery, bot)
+            k = b["keys"].setdefault(key, {"delivered": 0, "attempts": 0, "last_try": None,
+                                           "last_ok": None, "last_result": None})
+            k["attempts"] += 1
+            k["last_try"] = now.isoformat()
+            k["last_result"] = result
+            if result in ("delivered", "dry"):
+                k["delivered"] += 1
+                k["last_ok"] = now.isoformat()
+                if count_daily:
+                    b["delivered"] += 1
+        rec = {"at": now.isoformat(), "bot": bot, "key": key, "result": result,
+               "http_status": res.get("status"), "error": res.get("error"), "tries": res.get("tries"),
+               "payload": payload}
+        try:
+            with self.f_rings.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        except OSError:
+            pass
+        word = {"delivered": "SONNÉ (livré)", "dry": "AURAIT SONNÉ (mode dry)", "failed": "ÉCHEC d'envoi"}[result]
+        extra = f" — {res.get('error')}" if result == "failed" else ""
+        self.log("RING" if result != "failed" else "ERROR",
+                 f"{word} bot={bot} {kind_for_log} {key}: {payload.get('message_fr')}{extra}", now)
+        return result
+
+    # ---- predict window
+    def predict_window_open(self, now: datetime) -> bool:
+        pc = self.cfg["predict"]
+        if now.weekday() not in [int(d) for d in pc.get("days", [0, 1, 2, 3, 4])]:
+            return False
+        try:
+            h1, m1 = [int(x) for x in str(pc["window_start"]).split(":")]
+            h2, m2 = [int(x) for x in str(pc["window_end"]).split(":")]
+        except Exception:  # noqa: BLE001
+            h1, m1, h2, m2 = 15, 0, 17, 0
+        cur = now.hour * 60 + now.minute
+        return h1 * 60 + m1 <= cur < h2 * 60 + m2
+
+    @staticmethod
+    def risk_payload(kind: str, now: datetime, message: str, pair=None, price=None, stop=None,
+                     position_id=None, test=False, **extra) -> dict:
+        p = {"mode": "test" if test else "live", "kind": kind, "pair": pair, "price": price,
+             "stop": stop, "position_id": position_id, "message_fr": message,
+             "ts": now.isoformat(), "test": bool(test), "bot": "risk"}
+        p.update(extra)
+        return p
+
+    # ---- cycle
+    def cycle(self, now: datetime | None = None, now_mono: float | None = None) -> dict:
+        now = (now or datetime.now(TZ)).astimezone(TZ)
+        now_mono = time.monotonic() if now_mono is None else now_mono
+        cfg, rc, pc = self.cfg, self.cfg["risk"], self.cfg["predict"]
+        today = now.date().isoformat()
+        st = self.load_state(today)
+        rings: list[dict] = []
+        eq: dict = {}
+        daily_loss = dd = None
+
+        modes = {b: self.secrets.channel(b) for b in BOTS}
+        for b in BOTS:
+            m = "réel" if modes[b]["real"] else "dry"
+            if self._last_modes.get(b) != m:
+                self.log("INFO", f"bot {b}: mode {m} ({modes[b]['reason']})", now)
+                self._last_modes[b] = m
+
+        # 1) prices (collector files only)
+        ticks = latest_ticks(Path(cfg["ticks_dir"]), now)
+        newest = max((t["ts"] for t in ticks.values()), default=None)
+        age = (now - newest).total_seconds() if newest else None
+        stale = age is None or age > float(cfg["stale_seconds"])
+        prices = {}
+        for pair, t in ticks.items():
+            a = (now - t["ts"]).total_seconds()
+            if a <= float(cfg["stale_seconds"]):
+                prices[pair] = t["mid"]
+            elif not stale:
+                self.log_every(f"stale-{pair}", 600, "WARN", f"prix {pair} trop vieux ({int(a)} s) — ignoré", now)
+        if stale:
+            self.log_every("stale", 600, "WARN",
+                           f"PRIX PÉRIMÉS: dernier tick il y a {int(age) if age is not None else '?'} s "
+                           f"(> {cfg['stale_seconds']} s) — aucune sonnette sur les prix", now)
+            try:
+                self.f_stale.write_text(json.dumps({"checked_at": now.isoformat(), "last_tick_age_s": age}) + "\n")
+            except OSError:
+                pass
+        else:
+            if self.f_stale.exists():
+                self.f_stale.unlink(missing_ok=True)
+                self.log("INFO", "prix de nouveau frais", now)
+            self._log_last.pop("stale", None)
+
+        # 2) zones
+        zones, problems, ferr = load_zones(Path(cfg["zones_file"]), now)
+        if ferr:
+            self.log_every("zones-file", 1800, "WARN", ferr, now)
+        for pb in problems:
+            self.log_every("zone:" + pb, 6 * 3600, "WARN", "zone ignorée → " + pb, now)
+
+        def hit(sens: str, price: float, seuil: float) -> bool:
+            return price <= seuil if sens == "sous" else price >= seuil
+
+        # 3) predict bell
+        win = self.predict_window_open(now)
+        dlv_p = "real" if modes["predict"]["real"] else "dry"
+        if not stale and win:
+            for z in [z for z in zones if z["bot"] == "predict"]:
+                px = prices.get(z["paire"])
+                if px is None or not hit(z["sens"], px, z["prix"]):
+                    continue
+                key = "zone:" + z["id"]
+                ks = self.key_state(st, dlv_p, "predict", key)
+                if ks["delivered"] >= 1:
+                    continue
+                if self.bucket(st, dlv_p, "predict")["delivered"] >= int(pc["max_per_day"]):
+                    self.log_every("p-cap", 3600, "INFO",
+                                   f"zone {z['id']} touchée mais max {pc['max_per_day']} sonneries Predict/jour atteint", now)
+                    continue
+                if not self.can_retry(ks, now, 0, float(pc["retry_after_fail_min"]),
+                                      int(pc["max_attempts_per_zone_per_day"])):
+                    continue
+                sens_txt = "sous" if z["sens"] == "sous" else "au-dessus de"
+                msg = (f"{asset(z['paire'])} est passé {sens_txt} {fmt_eur(z['prix'])} € "
+                       f"({fmt_eur(px, 2)} €) à {hhmm(now)}. Predict, à toi de juger.")
+                payload = {"bot": "predict", "zone_id": z["id"], "paire": z["paire"], "prix": round(px, 6),
+                           "seuil": z["prix"], "sens": z["sens"], "heure": now.isoformat(),
+                           "message_fr": msg, "raison": z["raison"], "kind": "zone", "test": False}
+                r = self.ring("predict", key, payload, st, now, kind_for_log="zone")
+                rings.append({"bot": "predict", "key": key, "result": r})
+
+        # 4) risk bell — only while a REAL position is open
+        positions, pinfo = self.real_positions(now_mono)
+        dlv_r = "real" if modes["risk"]["real"] else "dry"
+        no_stop, breaches = [], []
+
+        def risk_try(key, payload, after_ok_min, after_fail_min, max_ok, kind):
+            ks = self.key_state(st, dlv_r, "risk", key)
+            if ks["delivered"] >= max_ok:
+                return None
+            if not self.can_retry(ks, now, after_ok_min, after_fail_min, int(rc["max_attempts_per_day"])):
+                return None
+            r = self.ring("risk", key, payload, st, now, kind_for_log=kind)
+            rings.append({"bot": "risk", "key": key, "result": r})
+            return r
+
+        if positions:
+            # stale_price (rings even though prices are stale — that's the point)
+            if age is None or age > float(rc["stale_ring_after_s"]):
+                mins = "?" if age is None else str(int(age // 60))
+                msg = (f"Attention : je ne reçois plus de prix depuis {mins} min alors qu'une position "
+                       f"en argent réel est ouverte. Je suis aveugle. Risk, vérifie le collecteur de prix et la position.")
+                risk_try("stale_price", self.risk_payload("stale_price", now, msg,
+                                                          last_tick_age_s=None if age is None else round(age)),
+                         float(rc["stale_repeat_min"]), float(rc["retry_after_fail_min"]), 10 ** 6, "stale_price")
+
+            if not stale:
+                for p in positions:
+                    stop = derive_stop(p)
+                    px = prices.get(p["pair"])
+                    if p.get("side") != "long":
+                        continue
+                    pid = str(p.get("id"))
+                    if stop is None:
+                        no_stop.append(pid)
+                        self.log_every("nostop-" + pid, 3600, "WARN",
+                                       f"position/ordre réel {pid} ({p['pair']}, source {p.get('source')}) "
+                                       f"SANS prix d'arrêt — pas de surveillance stop", now)
+                        continue
+                    if px is None:
+                        continue
+                    if px <= stop:
+                        breaches.append({"position_id": pid, "pair": p["pair"], "price": px, "stop": stop})
+                        n = self.key_state(st, dlv_r, "risk", "stop_hit:" + pid)["delivered"] + 1
+                        msg = (f"URGENT argent réel : {asset(p['pair'])} est passé sous ton prix d'arrêt "
+                               f"{fmt_eur(stop)} € ({fmt_eur(px, 2)} €) à {hhmm(now)}. Position {pid}. "
+                               f"Risk, vérifie et agis maintenant (aucune vente automatique)."
+                               + (f" Rappel n°{n}." if n > 1 else ""))
+                        payload = self.risk_payload("stop_hit", now, msg, p["pair"], round(px, 6), round(stop, 6), pid,
+                                                    zone_id="STOP-REEL-" + pid, paire=p["pair"], prix=round(px, 6),
+                                                    seuil=round(stop, 6), sens="sous", heure=now.isoformat(),
+                                                    rappel=n, source=p.get("source"))
+                        risk_try("stop_hit:" + pid, payload, float(rc["stop_hit_repeat_min"]),
+                                 float(rc["retry_after_fail_min"]), int(rc["stop_hit_max_per_day"]), "stop_hit")
+                    elif px <= stop * (1 + float(rc["stop_near_pct"]) / 100.0):
+                        msg = (f"{asset(p['pair'])} est tout près de ton prix d'arrêt : {fmt_eur(px, 2)} € "
+                               f"pour un arrêt à {fmt_eur(stop)} € (à {hhmm(now)}). Argent réel, position {pid}. "
+                               f"Risk, prépare-toi.")
+                        payload = self.risk_payload("stop_near", now, msg, p["pair"], round(px, 6), round(stop, 6), pid,
+                                                    source=p.get("source"))
+                        risk_try("stop_near:" + pid, payload, 0, float(rc["retry_after_fail_min"]), 1, "stop_near")
+
+            # manual risk zones (only while a real position is open)
+            if not stale:
+                for z in [z for z in zones if z["bot"] == "risk"]:
+                    px = prices.get(z["paire"])
+                    if px is None or not hit(z["sens"], px, z["prix"]):
+                        continue
+                    done = sum(1 for k, v in self.bucket(st, dlv_r, "risk")["keys"].items()
+                               if k.startswith("zone:") and v.get("delivered"))
+                    if done >= int(rc["manual_zone_max_per_day"]):
+                        continue
+                    sens_txt = "sous" if z["sens"] == "sous" else "au-dessus de"
+                    msg = (f"{asset(z['paire'])} est passé {sens_txt} {fmt_eur(z['prix'])} € "
+                           f"({fmt_eur(px, 2)} €) à {hhmm(now)}. Risk, à toi de juger.")
+                    payload = self.risk_payload("manual_zone", now, msg, z["paire"], round(px, 6), z["prix"], None,
+                                                zone_id=z["id"], paire=z["paire"], prix=round(px, 6), seuil=z["prix"],
+                                                sens=z["sens"], heure=now.isoformat(), raison=z["raison"])
+                    risk_try("zone:" + z["id"], payload, 0, float(rc["retry_after_fail_min"]), 1, "zone")
+
+        # 5) capital réel (live_equity.json) — every ~5 min; rings 12/15 & 6/8 if eligible
+        daily_loss, dd = None, None
+        try:
+            eq = self.equity.maybe_update(now, prices, now_mono=now_mono)
+        except Exception as e:  # noqa: BLE001
+            self.log("ERROR", f"live_equity: {type(e).__name__}: {e}", now)
+            eq = self.equity.read() or {}
+        if eq.get("stale"):
+            self.log_every("eq-stale", 1800, "WARN",
+                           "capital réel périmé (revx n'a pas répondu) — pas de sonnerie perte/baisse", now)
+        elif self.equity.ring_eligible(positions, today):
+            try:
+                daily_loss = float(eq.get("perte_jour_pct") or 0) / 100.0
+            except (TypeError, ValueError):
+                daily_loss = 0.0
+            raw_dd = eq.get("baisse_depuis_plus_haut_pct")
+            try:
+                dd = None if raw_dd is None else float(raw_dd) / 100.0
+            except (TypeError, ValueError):
+                dd = None
+            for kind, val, levels, label in (
+                ("daily_loss", daily_loss, rc["daily_loss_levels"], "perte du jour"),
+                ("drawdown", dd, rc["drawdown_levels"], "baisse depuis le plus haut"),
+            ):
+                if val is None:
+                    continue
+                crossed = [float(lv) for lv in levels if val >= float(lv)]
+                if not crossed:
+                    continue
+                lvl = max(crossed)
+                if any(self.key_state(st, dlv_r, "risk", f"{kind}:{float(h)}")["delivered"]
+                       for h in levels if float(h) >= lvl):
+                    continue
+                limit = max(float(lv) for lv in levels)
+                msg = (f"Alerte argent réel : {label} = {val * 100:.1f} % (seuil {lvl * 100:.0f} %"
+                       + (", c'est la LIMITE" if lvl >= limit else "")
+                       + f") à {hhmm(now)}. Capital réel {eq.get('capital_reel')} €. Risk, regarde maintenant.")
+                payload = self.risk_payload(kind, now, msg, value_pct=round(val * 100, 2),
+                                            level_pct=round(lvl * 100, 2),
+                                            capital_reel=eq.get("capital_reel"))
+                risk_try(f"{kind}:{lvl}", payload, 0, float(rc["retry_after_fail_min"]), 1, kind)
+        else:
+            # still surface metrics for status, but do not ring
+            try:
+                daily_loss = float(eq.get("perte_jour_pct") or 0) / 100.0 if eq else None
+                raw_dd = (eq or {}).get("baisse_depuis_plus_haut_pct")
+                dd = None if raw_dd is None else float(raw_dd) / 100.0
+            except (TypeError, ValueError):
+                pass
+
+        # 6) compound bell — trade fermé (sim or live), once per trade, max N/day
+        closed_trades = discover_closed_trades(cfg)
+        cst = self.load_compound_state(today, closed_trades)
+        cc = self.cfg.get("compound") or {}
+        max_c = int(cc.get("max_per_day", 5))
+        bilan = str(cc.get("bilan_note") or "reporté au bilan 20h32")
+        dlv_c = "real" if modes["compound"]["real"] else "dry"
+        for trade in closed_trades:
+            key = str(trade.get("key") or "")
+            if not key or key in cst["rung"]:
+                continue
+            if int(cst.get("day_count") or 0) >= max_c:
+                self.log("INFO",
+                         f"compound: trade {trade.get('decision_id') or key} fermé mais "
+                         f"max {max_c}/jour atteint — {bilan}", now)
+                cst["rung"][key] = {"at": now.isoformat(), "result": "deferred_bilan",
+                                    "decision_id": trade.get("decision_id")}
+                self.save_compound_state(cst)
+                continue
+            payload = self.compound_payload(trade, now)
+            r = self.ring("compound", "trade:" + key, payload, st, now, kind_for_log="trade_ferme")
+            rings.append({"bot": "compound", "key": "trade:" + key, "result": r})
+            if r in ("delivered", "dry"):
+                cst["rung"][key] = {"at": now.isoformat(), "result": r,
+                                    "decision_id": trade.get("decision_id")}
+                cst["day_count"] = int(cst.get("day_count") or 0) + 1
+                self.save_compound_state(cst)
+            # failed: leave unrung so we retry later (same as other bells)
+
+        # urgent alert file for real stop breaches
+        prev = load_json(self.f_urgent, None)
+        if breaches:
+            data = {"actif": True, "mis_a_jour": now.isoformat(), "breches": breaches,
+                    "message_fr": "Prix d'arrêt touché sur une position en ARGENT RÉEL. Risk doit agir (pas de vente auto)."}
+            if not (prev or {}).get("actif"):
+                data["depuis"] = now.isoformat()
+                try:
+                    with self.f_urgent_log.open("a", encoding="utf-8") as f:
+                        f.write(json.dumps(data, ensure_ascii=False) + "\n")
+                except OSError:
+                    pass
+            else:
+                data["depuis"] = prev.get("depuis") or now.isoformat()
+            save_json(self.f_urgent, data)
+        elif (prev or {}).get("actif") and not stale:
+            prev.update(actif=False, fin=now.isoformat(),
+                        message_fr="Le prix est repassé au-dessus du prix d'arrêt (ou la position est fermée).")
+            save_json(self.f_urgent, prev)
+
+        save_json(self.f_state, st)
+        status = {
+            "heartbeat": now.isoformat(),
+            "pid": os.getpid(),
+            "mode": {b: ("réel" if modes[b]["real"] else "dry") for b in BOTS},
+            "mode_reason": {b: modes[b]["reason"] for b in BOTS},
+            "auth_style": {b: modes[b].get("auth_style") for b in BOTS},
+            "last_tick_ts": newest.isoformat() if newest else None,
+            "last_tick_age_s": None if age is None else round(age, 1),
+            "stale": stale,
+            "prices": prices,
+            "predict_window_open": win,
+            "zones_valid": len(zones),
+            "zones_problems": problems,
+            "zones_file_error": ferr,
+            "real_positions": [{"id": p.get("id"), "pair": p.get("pair"), "stop": derive_stop(p),
+                                "source": p.get("source")} for p in positions],
+            "real_positions_without_stop": no_stop,
+            "real_sources": pinfo,
+            "risk_metrics": {"daily_loss_pct": None if daily_loss is None else round(daily_loss * 100, 2),
+                             "drawdown_pct": None if dd is None else round(dd * 100, 2)},
+            "live_equity": ({k: eq.get(k) for k in ("capital_reel", "eur_available", "eur_reserved",
+                                                    "bot_positions_value", "perte_jour_pct",
+                                                    "baisse_depuis_plus_haut_pct", "stale", "plus_haut", "ref_jour")}
+                            if eq else None),
+            "urgent_active": bool(breaches),
+            "rings_this_cycle": rings,
+            "today": {"date": today,
+                      "predict_delivered": {d: (st[d].get("predict") or {}).get("delivered", 0) for d in ("dry", "real")},
+                      "risk_delivered": {d: (st[d].get("risk") or {}).get("delivered", 0) for d in ("dry", "real")},
+                      "compound_delivered": {d: (st[d].get("compound") or {}).get("delivered", 0) for d in ("dry", "real")},
+                      "compound_day_count": int((load_json(self.f_compound, {}) or {}).get("day_count") or 0),
+                      "compound_rung_total": len((load_json(self.f_compound, {}) or {}).get("rung") or {})},
+            "collector": collector_status(cfg),
+        }
+        if not status["collector"]["running"]:
+            self.log_every("collector", 1800, "WARN",
+                           "le collecteur de prix (collect_price_ticks.py) ne tourne pas — à relancer par l'équipe "
+                           "(scripts/start_price_ticks.sh); la sonnette ne le démarre pas", now)
+        save_json(self.f_status, status)
+        return status
+
+    # ---- manual test ring (not counted, no price needed)
+    def test_ring(self, bot: str) -> str:
+        now = datetime.now(TZ)
+        if bot == "risk":
+            payload = self.risk_payload("stop_hit", now, TEST_MESSAGE, test=True, zone_id="TEST")
+        elif bot == "compound":
+            payload = self.compound_payload({
+                "key": "TEST", "decision_id": "D-ESSAI", "paire": "SOL-EUR",
+                "sens": "Achat", "mode": "simulation", "gain_perte_eur": 0.0,
+                "raison_fermeture": "manuel", "position_id": "TEST",
+            }, now, test=True)
+            # force the word « essai » into the payload (identical spirit to other --test modes)
+            payload["message_fr"] = "Essai de la sonnette Compound (trade fermé), rien à faire."
+        else:
+            payload = {"bot": "predict", "zone_id": "TEST", "paire": None, "prix": None, "seuil": None,
+                       "sens": None, "heure": now.isoformat(), "ts": now.isoformat(), "kind": "stop_hit",
+                       "mode": "test", "test": True, "message_fr": TEST_MESSAGE}
+        return self.ring(bot, "", payload, None, now, count_daily=False, kind_for_log="TEST")
+
+
+# ----------------------------------------------------------------- status
+def print_status(cfg: dict) -> int:
+    sd = Path(cfg["state_dir"])
+    pid = None
+    try:
+        pid = int((sd / "sonnette.pid").read_text().strip())
+    except Exception:  # noqa: BLE001
+        pass
+    running = bool(pid and pid_alive(pid))
+    s = load_json(sd / "status.json", {}) or {}
+    now = datetime.now(TZ)
+    print("=== Sonnette — état ===")
+    print(f"Processus       : {'EN MARCHE' if running else 'ARRÊTÉ'} (pid {pid if pid else '-'})")
+    hb = parse_ts(s.get("heartbeat"))
+    if hb:
+        ago = int((now - hb).total_seconds())
+        print(f"Dernier tour    : {hb.strftime('%H:%M:%S')} (il y a {ago} s)"
+              + ("  ⚠ pas de tour récent" if ago > 3 * int(cfg["loop_seconds"]) else ""))
+    sec = Secrets(cfg)
+    for b in BOTS:
+        ch = sec.channel(b)
+        print(f"Mode {b:<8}   : {'RÉEL (envoie vraiment)' if ch['real'] else 'DRY (rien n est envoyé)'} — {ch['reason']}")
+    lt = parse_ts(s.get("last_tick_ts"))
+    if lt:
+        age = int((now - lt).total_seconds())
+        print(f"Dernier prix    : {lt.strftime('%H:%M:%S')} (il y a {age} s)"
+              + (f"  ⚠ PÉRIMÉ (> {cfg['stale_seconds']} s)" if age > cfg["stale_seconds"] else "  OK"))
+    else:
+        print("Dernier prix    : aucun")
+    if s.get("prices"):
+        print("Prix            : " + ", ".join(f"{k} {fmt_eur(v, 2)} €" for k, v in s["prices"].items()))
+    pc = cfg["predict"]
+    print(f"Fenêtre Predict : {'OUVERTE' if s.get('predict_window_open') else 'fermée'} "
+          f"({pc['window_start']}-{pc['window_end']}, jours {pc['days']} 0=lundi)")
+    print(f"Zones valides   : {s.get('zones_valid', 0)}; ignorées: {len(s.get('zones_problems') or [])}"
+          + (f"; FICHIER: {s['zones_file_error']}" if s.get("zones_file_error") else ""))
+    for pb in (s.get("zones_problems") or [])[:5]:
+        print(f"   - {pb}")
+    rp = s.get("real_positions") or []
+    src = s.get("real_sources") or {}
+    print(f"Positions RÉELLES: {len(rp)}" + (f" → {rp}" if rp else "") + f"  (revx lecture: {src.get('revx', '?')})")
+    if s.get("real_positions_without_stop"):
+        print(f"   ⚠ sans prix d'arrêt: {s['real_positions_without_stop']}")
+    le = load_json(Path(cfg["live_equity_file"]), None)
+    if isinstance(le, dict) and le.get("ts"):
+        lt2 = parse_ts(le.get("ts"))
+        ago2 = int((now - lt2).total_seconds()) if lt2 else -1
+        hb_ = le.get("hors_bot") or {}
+        hb_txt = ", ".join(f"{a} {v.get('qty')}" for a, v in hb_.items() if isinstance(v, dict))
+        print(f"Capital réel    : {le.get('capital_reel')} € (EUR dispo {le.get('eur_available')} + réservé "
+              f"{le.get('eur_reserved')} + bot {le.get('bot_positions_value')}) — il y a {ago2} s"
+              + ("  ⚠ PÉRIMÉ" if le.get("stale") else ""))
+        print(f"   réf. jour {(le.get('ref_jour') or {}).get('valeur')} € → perte {le.get('perte_jour_pct')} %; "
+              f"plus-haut {le.get('plus_haut')} → baisse {le.get('baisse_depuis_plus_haut_pct')} %; "
+              f"ajustements {len(le.get('ajustements') or [])}")
+        print(f"   hors_bot (perso, exclu): {hb_txt}")
+    else:
+        print("Capital réel    : pas encore calculé")
+    t = s.get("today") or {}
+    cc = cfg.get("compound") or {}
+    print(f"Aujourd'hui     : {t.get('date')} — Predict: {t.get('predict_delivered')} / max {pc['max_per_day']}; "
+          f"Risk: {t.get('risk_delivered')}; "
+          f"Compound: {t.get('compound_delivered')} / max {cc.get('max_per_day', 5)} "
+          f"(jour {t.get('compound_day_count', 0)}, déjà vus {t.get('compound_rung_total', 0)})")
+    c = collector_status(cfg)
+    print(f"Collecteur prix : {'tourne (pid ' + str(c.get('pid')) + ')' if c.get('running') else '⚠ NE TOURNE PAS (à relancer par l équipe: scripts/start_price_ticks.sh)'}")
+    print(f"Alerte urgente  : {'⚠ ACTIVE — voir state/ALERTE_RISK_URGENTE.json' if s.get('urgent_active') else 'non'}")
+    if (sd / "PRIX_PERIMES.flag").exists():
+        print("Drapeau         : ⚠ PRIX_PERIMES.flag présent")
+    rings = tail_lines(sd / "rings.jsonl", 20000)[-5:]
+    print("Dernières sonneries:" if rings else "Dernières sonneries: aucune")
+    for line in rings:
+        try:
+            r = json.loads(line)
+            print(f"   {r['at'][:19]} {r['bot']:<7} {r['result']:<9} {r['payload'].get('message_fr')}")
+        except Exception:  # noqa: BLE001
+            pass
+    return 0
+
+
+# ----------------------------------------------------------------- main
+_STOP = False
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="Sonnette — price-zone doorbell (no AI)")
+    ap.add_argument("--config", default=None)
+    ap.add_argument("--once", action="store_true", help="one cycle then exit")
+    ap.add_argument("--status", action="store_true", help="print human status")
+    ap.add_argument("--simulate", action="store_true", help="run self-tests with fake ticks in /tmp")
+    ap.add_argument("--test", choices=BOTS, help="send one test ring (test=true)")
+    args = ap.parse_args()
+
+    if args.simulate:
+        return simulate()
+    cfg = load_cfg(args.config)
+    if args.status:
+        return print_status(cfg)
+    s = Sonnette(cfg, quiet=bool(args.test))
+    if args.test:
+        r = s.test_ring(args.test)
+        print({"delivered": f"Test {args.test} livré (HTTP OK).",
+               "dry": f"Mode dry ({s.secrets.channel(args.test)['reason']}): rien envoyé — voir state/rings.jsonl.",
+               "failed": "Échec d'envoi — voir state/sonnette.log."}[r])
+        return 0 if r != "failed" else 1
+    if args.once:
+        st = s.cycle()
+        print(json.dumps({k: st[k] for k in ("mode", "last_tick_age_s", "stale", "rings_this_cycle")}, ensure_ascii=False))
+        return 0
+
+    def stop(_sig, _frm):
+        global _STOP
+        _STOP = True
+
+    signal.signal(signal.SIGTERM, stop)
+    signal.signal(signal.SIGINT, stop)
+    sf = Path(cfg["secrets_file"])
+    if sf.exists() and (sf.stat().st_mode & 0o077):
+        s.log("WARN", f"{sf.name} lisible par d'autres — faire: chmod 600 {sf}")
+    s.log("INFO", f"démarrage sonnette pid={os.getpid()} (boucle {cfg['loop_seconds']} s)")
+    while not _STOP:
+        t0 = time.monotonic()
+        try:
+            s.cycle()
+        except Exception as e:  # noqa: BLE001 — never crash the loop
+            s.log("ERROR", f"tour en erreur: {type(e).__name__}: {e}")
+        while not _STOP and time.monotonic() - t0 < float(cfg["loop_seconds"]):
+            time.sleep(0.5)
+    s.log("INFO", "arrêt sonnette")
+    return 0
+
+
+# ----------------------------------------------------------------- simulate (self-tests)
+def simulate() -> int:
+    """Self-tests in /tmp/sonnette_sim with fake ticks/positions. Never touches the real state."""
+    import http.server
+    import threading
+
+    base = Path("/tmp/sonnette_sim")
+    if base.exists():
+        shutil.rmtree(base)
+    base.mkdir(parents=True)
+    results: list[tuple[str, bool]] = []
+
+    def check(name: str, cond, detail: str = "") -> None:
+        results.append((name, bool(cond)))
+        print(f"  [{'OK ' if cond else 'FAIL'}] {name}" + (f" — {detail}" if detail and not cond else ""))
+
+    def make(sub: str, extra_cfg: dict | None = None, env: dict | None = None,
+             balances: dict | None = None) -> Sonnette:
+        d = base / sub
+        d.mkdir(parents=True)
+        (d / "ticks").mkdir()
+        # Default fake balances: EUR only (no hors_bot crypto) — never call real revx in tests.
+        bal_box = {"b": balances if balances is not None else {
+            "EUR": {"available": 100.0, "reserved": 0.0, "staked": 0.0, "total": 100.0}}}
+        def _fb():
+            if isinstance(bal_box["b"], Exception):
+                raise bal_box["b"]
+            return bal_box["b"]
+        cfg = deep_merge(DEFAULT_CFG, {
+            "ticks_dir": str(d / "ticks"), "zones_file": str(d / "zones.json"),
+            "live_orders": str(d / "live_orders.jsonl"), "guardian_state": str(d / "gstate.json"),
+            "positions_file": str(d / "positions.json"), "collector_pid": str(d / "none.pid"),
+            "state_dir": str(d / "state"), "secrets_file": str(d / "secrets.env"),
+            "live_equity_file": str(d / "live_equity.json"),
+            "equity_every_s": 0,  # refresh every cycle in tests
+            "revx_enabled": False, "http_backoff_s": [0, 0, 0], "proxy": "", "allow_http": True,
+            "_fetch_balances": _fb,
+        })
+        s = Sonnette(deep_merge(cfg, extra_cfg or {}), env=env or {}, quiet=True)
+        s._bal_box = bal_box  # tests mutate balances via s._bal_box["b"] = ...
+        return s
+
+    def tick(s: Sonnette, ts: datetime, prices: dict) -> None:
+        p = Path(s.cfg["ticks_dir"]) / f"{ts.date().isoformat()}.jsonl"
+        with p.open("a") as f:
+            for pair, mid in prices.items():
+                f.write(json.dumps({"ts": ts.isoformat(), "pair": pair, "mid": mid, "source": "fake"}) + "\n")
+
+    def zones(s: Sonnette, zs: list) -> None:
+        Path(s.cfg["zones_file"]).write_text(json.dumps({"zones": zs}, ensure_ascii=False))
+
+    def Z(zid, pair="SOL-EUR", sens="sous", prix=98.0, bot="predict", **kw):
+        return dict({"id": zid, "paire": pair, "sens": sens, "prix": prix, "bot": bot, "raison": "test",
+                     "expire": "2030-01-01T00:00:00+01:00", "actif": True}, **kw)
+
+    def n(st: dict, bot: str | None = None, result: str | None = None) -> int:
+        return sum(1 for r in st["rings_this_cycle"] if (bot is None or r["bot"] == bot)
+                   and (result is None or r["result"] == result))
+
+    def keys(st: dict) -> list:
+        return sorted(r["key"] for r in st["rings_this_cycle"])
+
+    def last_payload(s: Sonnette) -> dict:
+        return json.loads(tail_lines(s.f_rings)[-1])["payload"]
+
+    ALL = {"SOL-EUR": 97.85, "BTC-EUR": 70000, "ETH-EUR": 2200}
+    THU = datetime(2026, 10, 8, 14, 30, tzinfo=TZ)  # Thursday
+    print("== Predict ==")
+    s = make("predict")
+    zones(s, [Z("Z-SOL-98")])
+    tick(s, THU, ALL)
+    check("predict: zone touchée à 14:30 (hors fenêtre) → pas de sonnerie", n(s.cycle(THU, 0)) == 0)
+    t = THU.replace(hour=15, minute=41)
+    tick(s, t, {"SOL-EUR": 97.85})
+    st = s.cycle(t, 1)
+    check("predict: 15:41 dans la fenêtre → 1 sonnerie (dry)", n(st, "predict", "dry") == 1)
+    p = last_payload(s)
+    check("predict: message FR exact", p["message_fr"] == "SOL est passé sous 98 € (97,85 €) à 15h41. Predict, à toi de juger.",
+          p["message_fr"])
+    check("predict: champs payload bot/zone_id/paire/prix/seuil/sens/heure/message_fr",
+          all(k in p for k in ("bot", "zone_id", "paire", "prix", "seuil", "sens", "heure", "message_fr")))
+    t2 = t + timedelta(minutes=5)
+    tick(s, t2, {"SOL-EUR": 97.0})
+    check("predict: même zone 5 min plus tard → pas de 2e sonnerie (1 fois/zone/jour)", n(s.cycle(t2, 2)) == 0)
+    zones(s, [Z("Z-SOL-98"), Z("Z-BTC", "BTC-EUR", "au-dessus", 69000), Z("Z-ETH", "ETH-EUR", "sous", 2300),
+              Z("Z-SOL-99", prix=99)])
+    t3 = t + timedelta(minutes=10)
+    tick(s, t3, ALL)
+    st = s.cycle(t3, 3)
+    check("predict: 3 nouvelles zones touchées → seulement 2 sonnent (max 3/jour au total)", n(st, "predict") == 2, keys(st))
+    t4 = t + timedelta(minutes=20)
+    tick(s, t4, ALL)
+    st = s.cycle(t4, 4)
+    check("predict: après 3 sonneries → plus rien ce jour", n(st) == 0 and st["today"]["predict_delivered"]["dry"] == 3)
+    fri = t + timedelta(days=1)
+    tick(s, fri, ALL)
+    check("predict: lendemain (vendredi 15:41) → compteurs remis à zéro, 3 sonneries", n(s.cycle(fri, 5), "predict") == 3)
+    btc = [json.loads(x)["payload"]["message_fr"] for x in tail_lines(s.f_rings) if "Z-BTC" in x][-1]
+    check("predict: message 'au-dessus de' + format 70 000,00 €", "BTC est passé au-dessus de 69 000 € (70 000,00 €)" in btc, btc)
+    sat = t + timedelta(days=2)
+    s2 = make("predict_sat")
+    zones(s2, [Z("Z-SOL-98")])
+    tick(s2, sat, ALL)
+    check("predict: samedi 15:41 → pas de sonnerie (jours de semaine)", n(s2.cycle(sat, 0)) == 0)
+    s3 = make("predict_sat_cfg", {"predict": {"days": [0, 1, 2, 3, 4, 5, 6]}})
+    zones(s3, [Z("Z-SOL-98")])
+    tick(s3, sat, ALL)
+    check("predict: samedi autorisé par config → sonne", n(s3.cycle(sat, 0), "predict") == 1)
+    t5 = THU.replace(hour=17, minute=0)
+    s4 = make("predict_17h")
+    zones(s4, [Z("Z-SOL-98")])
+    tick(s4, t5, ALL)
+    check("predict: 17:00 pile → fenêtre fermée", n(s4.cycle(t5, 0)) == 0)
+
+    print("== Prix périmés ==")
+    s = make("stale")
+    zones(s, [Z("Z-SOL-98")])
+    tick(s, t - timedelta(minutes=4), ALL)
+    st = s.cycle(t, 0)
+    check("stale: dernier tick il y a 4 min → pas de sonnerie", n(st) == 0)
+    check("stale: status.stale=true + fichier PRIX_PERIMES.flag", st["stale"] and s.f_stale.exists())
+    check("stale: ligne de log 'PRIX PÉRIMÉS'", "PRIX PÉRIMÉS" in s.f_log.read_text())
+    tick(s, t + timedelta(seconds=30), ALL)
+    st = s.cycle(t + timedelta(seconds=30), 1)
+    check("stale: tick frais revient → drapeau retiré + sonne", (not s.f_stale.exists()) and n(st) == 1)
+    s = make("noticks")
+    st = s.cycle(t, 0)
+    check("stale: aucun fichier de prix → pas de crash, stale", st["stale"] and n(st) == 0)
+
+    print("== Validation des zones ==")
+    s = make("validation")
+    zones(s, [Z("OK-1"), Z(""), Z("BAD-PAIR", "DOGE-EUR"), Z("BAD-SENS", sens="dessous-ish"),
+              Z("BAD-PRIX", prix=-5), Z("BAD-BOT", bot="scan"), Z("OK-1"), "pas un objet",
+              Z("EXPIRED", expire="2020-01-01T00:00:00+01:00"), Z("OFF", actif=False),
+              Z("BAD-EXP", expire="demain"), Z("COMMA", prix="98,5")])
+    tick(s, t, ALL)
+    st = s.cycle(t, 0)
+    check("validation: seules OK-1 et COMMA ('98,5') valides", st["zones_valid"] == 2, str(st["zones_problems"]))
+    check("validation: 9 entrées ignorées avec raison", len(st["zones_problems"]) == 9, str(st["zones_problems"]))
+    check("validation: lignes 'zone ignorée' dans le log", s.f_log.read_text().count("zone ignorée") == 9)
+    Path(s.cfg["zones_file"]).write_text("{ ceci n'est pas du json")
+    st = s.cycle(t + timedelta(seconds=30), 1)
+    check("validation: JSON cassé → pas de crash, 0 zone, erreur notée", st["zones_valid"] == 0 and st["zones_file_error"])
+
+    print("== Risk (argent réel) ==")
+    SUN = datetime(2026, 10, 11, 3, 0, tzinfo=TZ)  # Sunday 03:00
+    s = make("risk")
+    Path(s.cfg["live_orders"]).write_text("\n".join(json.dumps(r) for r in [
+        {"ok": True, "at": "2026-10-10T10:00:00+02:00",
+         "order": {"pair": "SOL-EUR", "side": "buy", "price": 100.0, "amount_eur": 10, "stop_price_eur": 95.0}},
+        {"ok": True, "dry_run": True, "order": {"pair": "BTC-EUR", "side": "buy", "price": 70000, "amount_eur": 10, "stop_pct": -1}},
+        {"ok": False, "order": {"pair": "ETH-EUR", "side": "buy", "price": 2300, "amount_eur": 10, "stop_pct": -1}},
+    ]) + "\n")
+    save_json(Path(s.cfg["guardian_state"]), {"bankroll_eur": 500, "daily_pnl_eur": 0, "positions": [
+        {"id": "rx-paper-1", "pair": "ETH-EUR", "side": "long", "avg_price": 2500, "stop_price_eur": 2400, "status": "open"}]})
+    tick(s, SUN, {"SOL-EUR": 96.5, "BTC-EUR": 60000, "ETH-EUR": 2000})
+    st = s.cycle(SUN, 0)
+    check("risk: 1 position réelle (lignes dry_run / ok=false / paper ignorées)",
+          [p["pair"] for p in st["real_positions"]] == ["SOL-EUR"], str(st["real_positions"]))
+    check("risk: SOL 96,5 (1,6 % au-dessus du stop) + ETH SIM sous son stop → aucune sonnerie", n(st) == 0)
+    tt = SUN + timedelta(minutes=1)
+    tick(s, tt, {"SOL-EUR": 95.5})
+    st = s.cycle(tt, 1)
+    check("risk: SOL 95,5 (0,5 % au-dessus du stop 95) → stop_near",
+          len(st["rings_this_cycle"]) == 1 and keys(st)[0].startswith("stop_near:"), keys(st))
+    tt = SUN + timedelta(minutes=2)
+    tick(s, tt, {"SOL-EUR": 95.4})
+    check("risk: stop_near pas répété", n(s.cycle(tt, 2)) == 0)
+    tt = SUN + timedelta(minutes=3)
+    tick(s, tt, {"SOL-EUR": 94.8})
+    st = s.cycle(tt, 3)
+    check("risk: dimanche 03:03 SOL 94,8 ≤ stop 95 → sonne tout de suite", n(st, "risk") == 1 and keys(st)[0].startswith("stop_hit:"))
+    p = last_payload(s)
+    check("risk: payload Risk (mode, pair, price, stop, position_id, kind, message_fr, ts, test)",
+          all(k in p for k in ("mode", "pair", "price", "stop", "position_id", "kind", "message_fr", "ts", "test"))
+          and p["kind"] == "stop_hit" and p["mode"] == "live" and p["test"] is False and p["stop"] == 95.0, str(p))
+    check("risk: fichier ALERTE_RISK_URGENTE.json actif", (load_json(s.f_urgent, {}) or {}).get("actif") is True)
+    sent = 1
+    for i, mins in enumerate([5, 9, 13, 14, 23, 33, 43, 53, 63, 73, 83]):
+        tt = SUN + timedelta(minutes=3 + mins)
+        tick(s, tt, {"SOL-EUR": 94.0})
+        sent += n(s.cycle(tt, 10 + i), "risk")
+        if mins == 9:
+            check("risk: pas de rappel avant 10 min", sent == 1)
+        if mins == 13:
+            check("risk: rappel après 10 min", sent == 2)
+    check("risk: max 6 sonneries stop_hit/jour", sent == 6, f"sent={sent}")
+    tt = SUN + timedelta(minutes=100)
+    tick(s, tt, {"SOL-EUR": 99.0})
+    s.cycle(tt, 100)
+    check("risk: prix remonte → alerte urgente passée à actif=false", (load_json(s.f_urgent, {}) or {}).get("actif") is False)
+
+    s = make("risk_closed")
+    Path(s.cfg["live_orders"]).write_text("\n".join(json.dumps(r) for r in [
+        {"ok": True, "order": {"pair": "SOL-EUR", "side": "buy", "price": 100, "amount_eur": 10, "stop_pct": -5}},
+        {"ok": True, "order": {"pair": "SOL-EUR", "side": "sell", "price": 101, "amount_eur": 10}}]) + "\n")
+    tick(s, SUN, {"SOL-EUR": 90.0})
+    st = s.cycle(SUN, 0)
+    check("risk: achat puis vente (position fermée) → aucune sonnerie", n(st) == 0 and not st["real_positions"])
+
+    s = make("risk_sim_only")
+    save_json(Path(s.cfg["guardian_state"]), {"bankroll_eur": 100, "daily_pnl_eur": -20, "positions": [
+        {"id": "x1", "pair": "SOL-EUR", "side": "long", "stop_price_eur": 95, "status": "open", "mode": "sim"}]})
+    zones(s, [Z("R-1", bot="risk")])
+    tick(s, SUN, {"SOL-EUR": 90.0})
+    check("risk: seulement position SIM (sous stop, perte 20 %, zone risk) → aucune sonnerie", n(s.cycle(SUN, 0)) == 0)
+
+    s = make("risk_levels", balances={
+        "EUR": {"available": 90.0, "reserved": 0.0, "staked": 0.0, "total": 90.0},
+        "BTC": {"available": 0.001, "reserved": 0.0, "staked": 0.0, "total": 0.001},
+        "ETH": {"available": 0.0, "reserved": 0.0, "staked": 0.0, "total": 0.0},
+        "SOL": {"available": 0.0, "reserved": 0.0, "staked": 0.0, "total": 0.0},
+    })
+    Path(s.cfg["live_orders"]).write_text(json.dumps({
+        "ok": True, "at": SUN.isoformat(),
+        "order": {"id": "abc", "pair": "BTC-EUR", "side": "buy", "price": 10000,
+                  "amount_eur": 10, "qty": 0.001, "stop_price_eur": 2000}}) + "\n")
+    save_json(Path(s.cfg["live_equity_file"]), {
+        "hors_bot": {"BTC": {"qty": 0.0}, "ETH": {"qty": 0.0}, "SOL": {"qty": 0.0}},
+        "_track": {"hors_bot_locked": True, "first_real_buy_at": SUN.isoformat(),
+                   "eur_prev": 90.0, "bot_orders_sig": "bootstrap",
+                   "bot_qty": {"BTC": 0.001, "ETH": 0.0, "SOL": 0.0}},
+        "ref_jour": {"date": SUN.date().isoformat(), "valeur": 100.0},
+        "plus_haut": 100.0, "ajustements": [], "stale": False,
+    })
+    zones(s, [Z("R-ETH", "ETH-EUR", "sous", 2100, bot="risk")])
+    # EUR 90→80 (with bot sig change → no deposit adj); BTC @ 7500 → capital 87.5 = −12.5%
+    s._bal_box["b"]["EUR"]["available"] = s._bal_box["b"]["EUR"]["total"] = 80.0
+    tick(s, SUN, {"BTC-EUR": 7500.0, "ETH-EUR": 2000.0})
+    st = s.cycle(SUN, 0)
+    check("risk: perte 12,5 % + drawdown (saut direct au seuil 8 %) + zone manuelle → 3 sonneries",
+          keys(st) == ["daily_loss:0.12", "drawdown:0.08", "zone:R-ETH"], keys(st))
+    tt = SUN + timedelta(minutes=1)
+    tick(s, tt, {"BTC-EUR": 7500.0, "ETH-EUR": 2000.0})
+    check("risk: niveaux pas répétés", n(s.cycle(tt, 1)) == 0)
+    # BTC @ 5000 → capital 85 = −15% / −15% dd
+    tt = SUN + timedelta(minutes=2)
+    tick(s, tt, {"BTC-EUR": 5000.0, "ETH-EUR": 2000.0})
+    st = s.cycle(tt, 2)
+    check("risk: perte 15 % → re-sonne daily_loss 15 (drawdown 8 % déjà sonné)",
+          keys(st) == ["daily_loss:0.15"], keys(st))
+    tt = SUN + timedelta(minutes=3)
+    tick(s, tt, {"BTC-EUR": 1500.0, "ETH-EUR": 2000.0})
+    st = s.cycle(tt, 3)
+    check("risk: prix ≤ stop_price_eur 2000 → stop_hit",
+          any(k.startswith("stop_hit:") for k in keys(st)), keys(st))
+
+    s = make("risk_stale")
+    save_json(Path(s.cfg["guardian_state"]), {"positions": [
+        {"id": "rx-live-1", "pair": "SOL-EUR", "side": "long", "stop_price_eur": 95, "status": "open"}]})
+    tick(s, SUN, {"SOL-EUR": 90.0})
+    check("risk: tick vieux de 5 min, prix sous stop → rien (périmé, et < 10 min)", n(s.cycle(SUN + timedelta(minutes=5), 0)) == 0)
+    check("risk: tick vieux de 11 min → stale_price", keys(s.cycle(SUN + timedelta(minutes=11), 1)) == ["stale_price"])
+    check("risk: stale_price pas répété avant 30 min", n(s.cycle(SUN + timedelta(minutes=30), 2)) == 0)
+    check("risk: stale_price répété après 30 min", n(s.cycle(SUN + timedelta(minutes=42), 3)) == 1)
+    s = make("risk_stale_nopos")
+    tick(s, SUN, {"SOL-EUR": 90.0})
+    check("risk: prix périmés sans position réelle → aucune sonnerie", n(s.cycle(SUN + timedelta(hours=1), 0)) == 0)
+
+    print("== Capital réel (live_equity) ==")
+    def B(eur, btc=0.0, eth=0.0, sol=0.0, reserved=0.0):
+        return {"EUR": {"available": eur, "reserved": reserved, "staked": 0.0, "total": eur + reserved},
+                "BTC": {"available": btc, "reserved": 0.0, "staked": 0.0, "total": btc},
+                "ETH": {"available": eth, "reserved": 0.0, "staked": 0.0, "total": eth},
+                "SOL": {"available": sol, "reserved": 0.0, "staked": 0.0, "total": sol}}
+    PX = {"BTC-EUR": 70000.0, "ETH-EUR": 2200.0, "SOL-EUR": 100.0}
+    MON = datetime(2026, 10, 12, 10, 0, tzinfo=TZ)
+
+    # baseline hors_bot + no real buy → no drawdown/peak, no ring even on big loss
+    s = make("eq_baseline", balances=B(165.71, btc=0.0000066, eth=0.0309, sol=0.342))
+    tick(s, MON, PX)
+    s.cycle(MON, 0)
+    eq = load_json(Path(s.cfg["live_equity_file"]), {})
+    check("equity: hors_bot = crypto déjà détenu (ETH 0,0309 / SOL 0,342 / BTC 0,0000066)",
+          abs(eq["hors_bot"]["ETH"]["qty"] - 0.0309) < 1e-9 and abs(eq["hors_bot"]["SOL"]["qty"] - 0.342) < 1e-9
+          and abs(eq["hors_bot"]["BTC"]["qty"] - 0.0000066) < 1e-12, str(eq.get("hors_bot")))
+    check("equity: capital_reel = EUR seulement (crypto perso exclu), plus_haut=null sans achat bot",
+          abs(eq["capital_reel"] - 165.71) < 1e-6 and eq["bot_positions_value"] == 0 and eq["plus_haut"] is None,
+          str({k: eq.get(k) for k in ("capital_reel", "bot_positions_value", "plus_haut")}))
+    check("equity: champs requis présents",
+          all(k in eq for k in ("ts", "eur_available", "eur_reserved", "bot_positions_value", "capital_reel",
+                                "hors_bot", "ref_jour", "plus_haut", "perte_jour_pct",
+                                "baisse_depuis_plus_haut_pct", "ajustements", "stale", "notes_fr")))
+    # personal crypto price crash doesn't change capital
+    t1 = MON + timedelta(minutes=5)
+    tick(s, t1, {"BTC-EUR": 35000.0, "ETH-EUR": 1100.0, "SOL-EUR": 50.0})
+    s.cycle(t1, 1)
+    eq = load_json(Path(s.cfg["live_equity_file"]), {})
+    check("equity: chute du crypto perso → capital inchangé, perte 0 %", eq["perte_jour_pct"] == 0.0, str(eq["perte_jour_pct"]))
+
+    # deposit shift: EUR +50 without bot order → ref & peak shifted, logged, no gain/loss
+    s = make("eq_deposit", balances=B(100.0))
+    Path(s.cfg["live_orders"]).write_text(json.dumps({"ok": True, "at": (MON - timedelta(days=2)).isoformat(),
+        "order": {"pair": "SOL-EUR", "side": "buy", "price": 100, "amount_eur": 10, "stop_price_eur": 50}}) + "\n")
+    tick(s, MON, PX)
+    s.cycle(MON, 0)
+    eq0 = load_json(Path(s.cfg["live_equity_file"]), {})
+    s._bal_box["b"] = B(150.0)
+    t1 = MON + timedelta(minutes=5)
+    tick(s, t1, PX)
+    s.cycle(t1, 1)
+    eq = load_json(Path(s.cfg["live_equity_file"]), {})
+    check("equity: dépôt +50 € → ref_jour et plus_haut décalés de +50",
+          abs(eq["ref_jour"]["valeur"] - (eq0["ref_jour"]["valeur"] + 50)) < 1e-6
+          and abs(eq["plus_haut"] - (eq0["plus_haut"] + 50)) < 1e-6, f"{eq0['ref_jour']} → {eq['ref_jour']}, {eq0['plus_haut']}→{eq['plus_haut']}")
+    check("equity: dépôt pas compté comme gain/perte (perte 0, baisse 0)",
+          eq["perte_jour_pct"] == 0.0 and eq["baisse_depuis_plus_haut_pct"] == 0.0)
+    check("equity: ajustement journalisé (fichier + log)",
+          len(eq["ajustements"]) == 1 and abs(eq["ajustements"][0]["delta_eur"] - 50) < 1e-6
+          and "ajustement +50.00" in s.f_log.read_text())
+    # withdrawal −30 → shift down, still no loss
+    s._bal_box["b"] = B(120.0)
+    t2 = MON + timedelta(minutes=10)
+    tick(s, t2, PX)
+    s.cycle(t2, 2)
+    eq = load_json(Path(s.cfg["live_equity_file"]), {})
+    check("equity: retrait −30 € → pas de perte comptée", eq["perte_jour_pct"] == 0.0 and len(eq["ajustements"]) == 2)
+    # bot buy fill: EUR −10, SOL +0.1 (bot) → no adjustment
+    Path(s.cfg["live_orders"]).write_text(Path(s.cfg["live_orders"]).read_text() + json.dumps({"ok": True,
+        "at": t2.isoformat(), "order": {"pair": "SOL-EUR", "side": "buy", "price": 100, "amount_eur": 10}}) + "\n")
+    s._bal_box["b"] = B(110.0, sol=0.1)
+    t3 = MON + timedelta(minutes=15)
+    tick(s, t3, PX)
+    s.cycle(t3, 3)
+    eq = load_json(Path(s.cfg["live_equity_file"]), {})
+    check("equity: achat bot (EUR −10, SOL +0,1) → pas d'ajustement, capital stable",
+          len(eq["ajustements"]) == 2 and abs(eq["capital_reel"] - 120.0) < 1e-6, str(eq["capital_reel"]))
+
+    # midnight reset
+    s = make("eq_midnight", balances=B(100.0))
+    tn = MON.replace(hour=23, minute=30)
+    tick(s, tn, PX)
+    s.cycle(tn, 0)  # lock hors_bot = 0 crypto, capital=100
+    Path(s.cfg["live_orders"]).write_text(json.dumps({"ok": True, "at": tn.isoformat(),
+        "order": {"pair": "BTC-EUR", "side": "buy", "price": 70000, "amount_eur": 10, "stop_price_eur": 1}}) + "\n")
+    s._bal_box["b"] = B(90.0, btc=10 / 70000)
+    tick(s, tn + timedelta(minutes=5), PX)
+    s.cycle(tn + timedelta(minutes=5), 1)  # capital still ~100
+    tick(s, tn + timedelta(minutes=10), {"BTC-EUR": 35000.0, "ETH-EUR": 2200.0, "SOL-EUR": 100.0})
+    s.cycle(tn + timedelta(minutes=10), 2)  # capital ~95, perte 5%
+    eq_before = load_json(Path(s.cfg["live_equity_file"]), {})
+    tm = MON.replace(hour=0, minute=1) + timedelta(days=1)
+    tick(s, tm, {"BTC-EUR": 35000.0, "ETH-EUR": 2200.0, "SOL-EUR": 100.0})
+    s.cycle(tm, 3)
+    eq = load_json(Path(s.cfg["live_equity_file"]), {})
+    check("equity: avant minuit perte > 0", eq_before["perte_jour_pct"] > 0, str(eq_before["perte_jour_pct"]))
+    check("equity: après minuit nouvelle ref_jour (date du jour, perte 0 %)",
+          eq["ref_jour"]["date"] == tm.date().isoformat() and eq["perte_jour_pct"] == 0.0, str(eq["ref_jour"]))
+    check("equity: plus_haut conservé à travers minuit (baisse > 0)", (eq["baisse_depuis_plus_haut_pct"] or 0) > 0)
+
+    # no ring when no real buy open/today, even with a big loss; ring 12 then 15 when buy today (closed)
+    s = make("eq_noring", balances=B(100.0))
+    Path(s.cfg["live_orders"]).write_text("\n".join(json.dumps(r) for r in [
+        {"ok": True, "at": (MON - timedelta(days=3)).isoformat(), "order": {"pair": "SOL-EUR", "side": "buy", "price": 100, "amount_eur": 10}},
+        {"ok": True, "at": (MON - timedelta(days=2)).isoformat(), "order": {"pair": "SOL-EUR", "side": "sell", "price": 100, "amount_eur": 10}},
+    ]) + "\n")
+    tick(s, MON, PX)
+    s.cycle(MON, 0)
+    # simulate a loss not explained as deposit: change sig so it's "bot activity" (e.g. an old sell recorded late)
+    eqf = Path(s.cfg["live_equity_file"])
+    d = load_json(eqf, {}); d["_track"]["bot_orders_sig"] = "x"; save_json(eqf, d)
+    s._bal_box["b"] = B(85.0)
+    t1 = MON + timedelta(minutes=5)
+    tick(s, t1, PX)
+    st = s.cycle(t1, 1)
+    eq = load_json(eqf, {})
+    check("equity: perte 15 % mais aucun achat réel ouvert ni aujourd'hui → aucune sonnerie",
+          eq["perte_jour_pct"] >= 15 - 1e-6 and not any(k.startswith(("daily_loss", "drawdown")) for k in keys(st)),
+          f"{eq['perte_jour_pct']} {keys(st)}")
+    s = make("eq_ring_today", balances=B(100.0))
+    lo = Path(s.cfg["live_orders"])
+    lo.write_text("\n".join(json.dumps(r) for r in [
+        {"ok": True, "at": (MON - timedelta(hours=1)).isoformat(), "order": {"pair": "SOL-EUR", "side": "buy", "price": 100, "amount_eur": 10}},
+        {"ok": True, "at": (MON - timedelta(minutes=30)).isoformat(), "order": {"pair": "SOL-EUR", "side": "sell", "price": 100, "amount_eur": 10}},
+    ]) + "\n")
+    tick(s, MON, PX)
+    s.cycle(MON, 0)
+    eqf = Path(s.cfg["live_equity_file"])
+    def lose(new_eur, tt, mono):
+        d = load_json(eqf, {}); d["_track"]["bot_orders_sig"] = "x" + str(mono); save_json(eqf, d)
+        s._bal_box["b"] = B(new_eur)
+        tick(s, tt, PX)
+        return s.cycle(tt, mono)
+    st = lose(88.0, MON + timedelta(minutes=5), 1)
+    check("equity: achat réel fait aujourd'hui (fermé) + perte 12 % → sonne daily_loss 12",
+          "daily_loss:0.12" in keys(st), keys(st))
+    st = lose(87.0, MON + timedelta(minutes=10), 2)
+    check("equity: perte 13 % → pas de re-sonnerie", not any(k.startswith("daily_loss") for k in keys(st)), keys(st))
+    st = lose(85.0, MON + timedelta(minutes=15), 3)
+    check("equity: perte 15 % → re-sonne daily_loss 15 (limite)", "daily_loss:0.15" in keys(st), keys(st))
+    p_ = last_payload(s)
+    check("equity: payload Risk kind=daily_loss avec capital_reel", p_.get("kind") in ("daily_loss", "drawdown")
+          and "capital_reel" in p_, str(p_))
+
+    # revx failure → keep last values, stale, no equity ring, log
+    s = make("eq_revx_fail", balances=B(100.0))
+    Path(s.cfg["live_orders"]).write_text(json.dumps({"ok": True, "at": MON.isoformat(),
+        "order": {"pair": "SOL-EUR", "side": "buy", "price": 100, "amount_eur": 10, "stop_price_eur": 1}}) + "\n")
+    tick(s, MON, PX)
+    s.cycle(MON, 0)
+    eqf = Path(s.cfg["live_equity_file"])
+    good = load_json(eqf, {})
+    s._bal_box["b"] = RuntimeError("revx down")
+    d = load_json(eqf, {}); d["perte_jour_pct"] = 20.0; d["baisse_depuis_plus_haut_pct"] = 20.0; save_json(eqf, d)
+    t1 = MON + timedelta(minutes=5)
+    tick(s, t1, PX)
+    st = s.cycle(t1, 1)
+    eq = load_json(eqf, {})
+    check("equity: revx en panne → stale=true, dernières valeurs gardées",
+          eq["stale"] is True and eq["capital_reel"] == good["capital_reel"])
+    check("equity: revx en panne → aucune sonnerie perte/baisse (même si 20 % dans le fichier)",
+          not any(k.startswith(("daily_loss", "drawdown")) for k in keys(st)), keys(st))
+    check("equity: revx en panne → loggé", "lecture revx échouée" in s.f_log.read_text())
+    s._bal_box["b"] = B(100.0)
+    t2 = MON + timedelta(minutes=10)
+    tick(s, t2, PX)
+    s.cycle(t2, 2)
+    check("equity: revx revient → stale=false", load_json(eqf, {})["stale"] is False)
+    s = make("eq_first_fail", balances=RuntimeError("down"))
+    tick(s, MON, PX)
+    st = s.cycle(MON, 0)
+    eq = load_json(Path(s.cfg["live_equity_file"]), {})
+    check("equity: revx en panne dès le départ → fichier stale sans valeurs, pas de crash",
+          eq.get("stale") is True and eq.get("capital_reel") is None)
+
+    print("== Dry / réel / test ==")
+    s = make("dry")
+    check("dry: sans secrets → mode dry pour les 2 bots",
+          not s.secrets.channel("predict")["real"] and not s.secrets.channel("risk")["real"])
+    check("dry: --test risk → 'dry' (rien envoyé)", s.test_ring("risk") == "dry")
+    p = last_payload(s)
+    check("dry: payload test (test=true, kind=stop_hit, mode=test, message d'essai)",
+          p["test"] is True and p["kind"] == "stop_hit" and p["mode"] == "test" and p["message_fr"] == TEST_MESSAGE)
+    check("dry: --test predict → 'dry'", s.test_ring("predict") == "dry")
+    check("dry: test non compté dans les compteurs du jour", not (load_json(s.f_state, None) or {}).get("dry"))
+
+    received: list = []
+    behaviour = {"fail": 0}
+
+    class H(http.server.BaseHTTPRequestHandler):
+        def do_POST(self):  # noqa: N802
+            body = self.rfile.read(int(self.headers.get("Content-Length", 0)))
+            received.append({"path": self.path, "headers": dict(self.headers), "body": json.loads(body)})
+            code = 500 if behaviour["fail"] > 0 else 200
+            behaviour["fail"] = max(0, behaviour["fail"] - 1)
+            self.send_response(code)
+            self.end_headers()
+            self.wfile.write(b"{}")
+
+        def log_message(self, *a):
+            pass
+
+    srv = http.server.HTTPServer(("127.0.0.1", 0), H)
+    port = srv.server_address[1]
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    url = f"http://127.0.0.1:{port}/hook/SECRETPATH123"
+    s = make("real", env={"SONNETTE_RISK_URL": url, "SONNETTE_RISK_AUTH": "Bearer sk-TESTSECRET-999",
+                          "SONNETTE_PREDICT_URL": url, "SONNETTE_PREDICT_KEY": "pk-RAWKEY-777"})
+    check("réel: URL + AUTH/KEY → mode réel", s.secrets.channel("risk")["real"] and s.secrets.channel("predict")["real"])
+    check("réel: test risk livré (HTTP 200, test=true)", s.test_ring("risk") == "delivered" and received[-1]["body"]["test"] is True)
+    check("réel: SONNETTE_RISK_AUTH envoyé tel quel dans Authorization",
+          received[-1]["headers"].get("Authorization") == "Bearer sk-TESTSECRET-999")
+    s.test_ring("predict")
+    check("réel: KEY seule → 'Authorization: Bearer <key>' par défaut",
+          received[-1]["headers"].get("Authorization") == "Bearer pk-RAWKEY-777")
+    s5 = make("real_hdr", env={"SONNETTE_PREDICT_URL": url, "SONNETTE_PREDICT_KEY": "pk-RAWKEY-777",
+                               "SONNETTE_KEY_HEADER": "X-Routine-Key"})
+    s5.test_ring("predict")
+    check("réel: SONNETTE_KEY_HEADER=X-Routine-Key → clé brute dans X-Routine-Key",
+          received[-1]["headers"].get("X-Routine-Key") == "pk-RAWKEY-777")
+    s6 = make("real_query", env={"SONNETTE_PREDICT_URL": url, "SONNETTE_PREDICT_KEY": "pk-RAWKEY-777",
+                                 "SONNETTE_KEY_MODE": "query", "SONNETTE_KEY_PARAM": "token"})
+    s6.test_ring("predict")
+    check("réel: KEY_MODE=query → ?token=<key>", received[-1]["path"].endswith("token=pk-RAWKEY-777"))
+    zones(s, [Z("Z-SOL-98")])
+    t = THU.replace(hour=15, minute=10)
+    tick(s, t, ALL)
+    before = len(received)
+    behaviour["fail"] = 10
+    st = s.cycle(t, 0)
+    check("réel: webhook en panne (HTTP 500) → 4 essais (1 + 3 retries), résultat failed",
+          n(st, "predict", "failed") == 1 and len(received) - before == 4, str(len(received) - before))
+    check("réel: échec non compté comme livré", st["today"]["predict_delivered"]["real"] == 0)
+    behaviour["fail"] = 0
+    tick(s, t + timedelta(minutes=2), ALL)
+    check("réel: pas de ré-essai avant 5 min (anti-spam)", n(s.cycle(t + timedelta(minutes=2), 1)) == 0)
+    tick(s, t + timedelta(minutes=6), ALL)
+    st = s.cycle(t + timedelta(minutes=6), 2)
+    check("réel: après 5 min → ré-essai livré et compté",
+          n(st, "predict", "delivered") == 1 and st["today"]["predict_delivered"]["real"] == 1)
+    srv.shutdown()
+    leaks = []
+    for sub in ("real", "real_hdr", "real_query"):
+        for f in (base / sub / "state").glob("*"):
+            txt = f.read_text(errors="ignore")
+            if any(x in txt for x in ("SECRETPATH123", "sk-TESTSECRET-999", "pk-RAWKEY-777", f":{port}")):
+                leaks.append(str(f))
+    check("réel: aucun URL ni clé dans logs / état / status", not leaks, str(leaks))
+    s7 = make("http_refused", env={"SONNETTE_RISK_URL": "http://example.com/x", "SONNETTE_RISK_KEY": "k123"},
+              extra_cfg={"allow_http": False})
+    check("réel: URL non-https refusée → dry", not s7.secrets.channel("risk")["real"])
+    s8 = make("forced_dry", env={"SONNETTE_RISK_URL": url, "SONNETTE_RISK_KEY": "k123", "SONNETTE_DRY": "1"})
+    check("réel: SONNETTE_DRY=1 force le mode dry", not s8.secrets.channel("risk")["real"])
+    sf = base / "secfile"
+    sf.mkdir()
+    (sf / "secrets.env").write_text("# test\nexport SONNETTE_RISK_URL='https://x.example/hook'\nSONNETTE_RISK_AUTH=\"Bearer abc\"\n")
+    sec = Secrets(deep_merge(DEFAULT_CFG, {"secrets_file": str(sf / "secrets.env")}), env={})
+    check("secrets: lus depuis secrets.env (risk réel, predict dry)", sec.channel("risk")["real"] and not sec.channel("predict")["real"])
+
+    ok = sum(1 for _, c in results if c)
+    print(f"\nRésultat: {ok}/{len(results)} tests OK")
+    return 0 if ok == len(results) else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

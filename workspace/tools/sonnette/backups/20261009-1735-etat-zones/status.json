@@ -1,0 +1,322 @@
+{
+  "heartbeat": "2026-10-09T17:33:42.382928+02:00",
+  "pid": 1527236,
+  "mode": {
+    "predict": "réel",
+    "risk": "réel",
+    "compound": "réel"
+  },
+  "mode_reason": {
+    "predict": "URL + clé présentes",
+    "risk": "URL + clé présentes",
+    "compound": "URL + clé présentes"
+  },
+  "auth_style": {
+    "predict": "header Authorization",
+    "risk": "header Authorization",
+    "compound": "header Authorization"
+  },
+  "last_tick_ts": "2026-10-09T17:33:29.603149+02:00",
+  "last_tick_age_s": 12.8,
+  "stale": false,
+  "prices": {
+    "SOL-EUR": 97.9,
+    "BTC-EUR": 74108.09,
+    "ETH-EUR": 2224.745
+  },
+  "predict_window_open": true,
+  "zones_valid": 1,
+  "zones_problems": [
+    "zone Z-BTC-74166: id en double",
+    "zone Z-ETH-2208: id en double",
+    "zone Z-ETH-2232: id en double",
+    "zone Z-SOL-97.22: id en double",
+    "zone Z-SOL-99.01: id en double"
+  ],
+  "zones_file_error": null,
+  "zones_distance": {
+    "max_pct": 1.0,
+    "paires": {
+      "BTC-EUR": {
+        "prix": 74108.09,
+        "dessous": {
+          "id": "Z-BTC-73490",
+          "prix": 73490.0,
+          "ecart_pct": 0.834
+        },
+        "dessus": null,
+        "ok": false,
+        "probleme": "aucune zone au-dessus"
+      },
+      "ETH-EUR": {
+        "prix": 2224.745,
+        "dessous": null,
+        "dessus": null,
+        "ok": false,
+        "probleme": "aucune zone en dessous · aucune zone au-dessus"
+      },
+      "SOL-EUR": {
+        "prix": 97.9,
+        "dessous": null,
+        "dessus": null,
+        "ok": false,
+        "probleme": "aucune zone en dessous · aucune zone au-dessus"
+      }
+    },
+    "ok": false,
+    "a_signaler": [
+      "BTC-EUR",
+      "ETH-EUR",
+      "SOL-EUR"
+    ]
+  },
+  "night_sans_decision": false,
+  "night_sans_decision_detail": {
+    "nuit": "2026-10-08",
+    "debut": "2026-10-08T22:00:00+02:00",
+    "fin": "2026-10-09T09:00:00+02:00",
+    "sans_decision": false,
+    "decisions": [
+      "D-021"
+    ],
+    "source": "knowledge/decision_log.md (titres D-xxx)"
+  },
+  "predict_sans_decision": {
+    "actif": true,
+    "derniere_decision": "D-031",
+    "derniere_decision_a": "2026-10-09T17:10:00+02:00",
+    "heures_sans_decision": 0.4,
+    "dernier_reveil": null,
+    "nuit_en_cours": null,
+    "plafond": {
+      "ok": true,
+      "expose_eur": 50.0,
+      "plafond_eur": 50.0,
+      "place_eur": 0.0,
+      "paper_max_exposure_pct": 0.1,
+      "bankroll_eur": 500.0,
+      "source_bankroll": "guardian/state.json bankroll_eur"
+    },
+    "sonne": false,
+    "raison": "décision récente (D-031)"
+  },
+  "predict_heure_limite": {
+    "actif": true,
+    "en_attente": [
+      "rx-paper-2026-10-09T130833Z-8d63c1ab"
+    ]
+  },
+  "predict_mouvement": {
+    "actif": true,
+    "seuil_pct": 0.5,
+    "aujourd_hui": 3,
+    "intervalle_min_min": 30.0,
+    "attente_decision_min": 20.0,
+    "reference": {
+      "source": "décision",
+      "pose_a": "2026-10-09T17:10:40.849647+02:00",
+      "decision_id": "D-031",
+      "decision_ts": "2026-10-09T17:10:00+02:00",
+      "prix": {
+        "BTC-EUR": 73981.11,
+        "ETH-EUR": 2220.5,
+        "SOL-EUR": 97.93
+      },
+      "prix_ts": {
+        "BTC-EUR": "2026-10-09T17:10:29.597154+02:00",
+        "ETH-EUR": "2026-10-09T17:10:29.597154+02:00",
+        "SOL-EUR": "2026-10-09T17:10:29.597154+02:00"
+      },
+      "origine": {
+        "BTC-EUR": "prix à l'heure de la décision",
+        "ETH-EUR": "prix à l'heure de la décision",
+        "SOL-EUR": "prix à l'heure de la décision"
+      }
+    },
+    "attente_decision": null,
+    "echec": null,
+    "dernier_reveil": "2026-10-09T17:05:09.546461+02:00",
+    "sonne": false,
+    "prochain_reveil_possible": "2026-10-09T17:40:00+02:00",
+    "prochain_reveil_possible_fr": "17h40",
+    "mouvement_pct": {
+      "BTC-EUR": 0.172,
+      "ETH-EUR": 0.191,
+      "SOL-EUR": -0.031
+    }
+  },
+  "real_positions": [],
+  "real_positions_without_stop": [],
+  "real_sources": {
+    "revx": "ok",
+    "revx_open_orders": 0
+  },
+  "risk_metrics": {
+    "daily_loss_pct": 0.0,
+    "drawdown_pct": null
+  },
+  "live_equity": {
+    "capital_reel": 165.71,
+    "eur_available": 165.71,
+    "eur_reserved": 0.0,
+    "bot_positions_value": 0.0,
+    "perte_jour_pct": 0.0,
+    "baisse_depuis_plus_haut_pct": null,
+    "stale": false,
+    "plus_haut": null,
+    "ref_jour": {
+      "date": "2026-10-09",
+      "valeur": 165.71
+    }
+  },
+  "urgent_active": false,
+  "sante": {
+    "positions_ouvertes": 4,
+    "open_live": 0,
+    "open_paper": 4,
+    "watcher": "ok",
+    "watcher_age_s": 29,
+    "watcher_pid_vivant": true,
+    "revolut": "ok",
+    "revolut_age_s": 122,
+    "revolut_ok": true
+  },
+  "rings_this_cycle": [],
+  "today": {
+    "date": "2026-10-09",
+    "predict_delivered": {
+      "dry": 0,
+      "real": 6
+    },
+    "risk_delivered": {
+      "dry": 0,
+      "real": 1
+    },
+    "compound_delivered": {
+      "dry": 0,
+      "real": 4
+    },
+    "compound_day_count": 4,
+    "compound_rung_total": 7
+  },
+  "collector": {
+    "running": true,
+    "pid": 413312,
+    "via": "pidfile"
+  },
+  "departs": {
+    "actif": true,
+    "mode": "observe",
+    "derniere_verif": "2026-10-09T17:29:11+02:00",
+    "prochaine_dans_s": 330
+  },
+  "totals": {
+    "predict": {
+      "vrais": 9,
+      "essais": 12,
+      "vrais_par_resultat": {
+        "delivered": 9,
+        "dry": 0,
+        "failed": 0
+      },
+      "essais_par_resultat": {
+        "delivered": 6,
+        "dry": 1,
+        "failed": 5
+      },
+      "dernier_vrai": {
+        "at": "2026-10-09T17:05:09.546461+02:00",
+        "result": "delivered",
+        "kind": "mouvement",
+        "envoi": "reel",
+        "zone_id": null,
+        "decision_id": "D-029",
+        "paire": null,
+        "message_fr": "mouvement > 0,5 % : SOL 98,84 € → 98,07 € (-0,8 %) depuis D-029. Refais tes 3 propositions (risquée, prudente, équilibrée) dans une nouvelle D-xxx ; si rien à proposer, écris une D-xxx « pas de proposition » avec tes raisons."
+      },
+      "dernier_essai": {
+        "at": "2026-10-08T22:16:29.240613+02:00",
+        "result": "delivered",
+        "kind": "stop_hit",
+        "envoi": "reel",
+        "zone_id": "TEST",
+        "decision_id": null,
+        "paire": null,
+        "message_fr": "Essai de la sonnette, rien à faire."
+      }
+    },
+    "risk": {
+      "vrais": 1,
+      "essais": 4,
+      "vrais_par_resultat": {
+        "delivered": 1,
+        "dry": 0,
+        "failed": 0
+      },
+      "essais_par_resultat": {
+        "delivered": 1,
+        "dry": 1,
+        "failed": 2
+      },
+      "dernier_vrai": {
+        "at": "2026-10-09T13:59:59.289871+02:00",
+        "result": "delivered",
+        "kind": "revolut_down",
+        "envoi": "reel",
+        "zone_id": null,
+        "decision_id": null,
+        "paire": null,
+        "message_fr": "Pas de nouvelle du test Revolut depuis 44 min, 1 trade simulé ouvert."
+      },
+      "dernier_essai": {
+        "at": "2026-10-08T15:57:43.019400+02:00",
+        "result": "delivered",
+        "kind": "stop_hit",
+        "envoi": "reel",
+        "zone_id": "TEST",
+        "decision_id": null,
+        "paire": null,
+        "message_fr": "Essai de la sonnette, rien à faire."
+      }
+    },
+    "compound": {
+      "vrais": 4,
+      "essais": 2,
+      "vrais_par_resultat": {
+        "delivered": 4,
+        "dry": 0,
+        "failed": 0
+      },
+      "essais_par_resultat": {
+        "delivered": 1,
+        "dry": 1,
+        "failed": 0
+      },
+      "dernier_vrai": {
+        "at": "2026-10-09T17:09:40.365790+02:00",
+        "result": "delivered",
+        "kind": "trade_ferme",
+        "envoi": "reel",
+        "zone_id": null,
+        "decision_id": "D-023",
+        "paire": "BTC-EUR",
+        "message_fr": "Trade fermé D-023: BTC-EUR, Vente, simulation, gain/perte -0,08 €, raison idee_morte."
+      },
+      "dernier_essai": {
+        "at": "2026-10-08T21:22:54.318144+02:00",
+        "result": "delivered",
+        "kind": "trade_ferme",
+        "envoi": "reel",
+        "zone_id": null,
+        "decision_id": "D-ESSAI",
+        "paire": "SOL-EUR",
+        "message_fr": "Essai de la sonnette Compound (trade fermé), rien à faire."
+      }
+    },
+    "depuis": "2026-10-08T15:51:38.305579+02:00",
+    "lignes": 32,
+    "source": "state/rings.jsonl",
+    "regle_essai": "payload.test, mode=test, zone_id=TEST ou decision_id D-ESSAI…"
+  },
+  "totals_at": "2026-10-09T17:33:42.382928+02:00"
+}

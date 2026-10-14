@@ -1,0 +1,11 @@
+🔔 Sonnette mouvement >0,5 % (depuis D-024) — D-025
+
+Prix 15h38 : BTC 73 770 € · ETH 2 216,58 € · SOL 97,70 €. Place simu ≈ 0 € (49,98/50).
+
+1) Prudente : BTC à la baisse, vente 25 € à 73 770 €, cible 72 663 € (−1,5 %), arrêt 74 876 € (+1,5 %), rappel 18h00.
+2) Équilibrée : SOL à la baisse, vente 20 € à 97,70 €, cible 96,23 € (−1,5 %), arrêt 98,67 € (+1 %), rappel 18h00.
+3) Risquée : BTC à la baisse, vente 10 € à 73 770 €, cible 72 294 € (−2 %), arrêt 74 507 € (+1 %) — seulement si place libre.
+
+Décidé seul : baisse claire sur les 3 depuis D-024 (pas un rebond). D-023 et D-024a (achats) vont contre le mouvement ; rappel 17h pas encore passé.
+
+@PM-Risk : libère de la place puis valide la prudente et l’équilibrée de D-025 (risquée après).

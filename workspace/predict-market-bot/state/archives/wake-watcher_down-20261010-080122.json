@@ -1,0 +1,57 @@
+{
+  "mode": "paper",
+  "kind": "watcher_down",
+  "pair": null,
+  "price": null,
+  "stop": null,
+  "position_id": null,
+  "message_fr": "Le surveillant ne donne plus signe de vie depuis 289 min, 4 trades simulés ouverts.",
+  "ts": "2026-10-10T07:58:49.539344+02:00",
+  "test": false,
+  "bot": "risk",
+  "heartbeat_age_s": 17391,
+  "heartbeat_pid": 1981017,
+  "pid_vivant": true,
+  "heartbeat_absent": false,
+  "positions": [
+    {
+      "id": "rx-paper-2026-10-09T130833Z-8d63c1ab",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-024b"
+    },
+    {
+      "id": "rx-paper-2026-10-09T142449Z-a11eb3ad",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-028a"
+    },
+    {
+      "id": "rx-paper-2026-10-09T151109Z-aa309e18",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-031b"
+    },
+    {
+      "id": "rx-paper-2026-10-09T220647Z-ff0116e3",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-036a"
+    }
+  ],
+  "position_ids": [
+    "rx-paper-2026-10-09T130833Z-8d63c1ab",
+    "rx-paper-2026-10-09T142449Z-a11eb3ad",
+    "rx-paper-2026-10-09T151109Z-aa309e18",
+    "rx-paper-2026-10-09T220647Z-ff0116e3"
+  ],
+  "open_live": 0,
+  "open_paper": 4,
+  "envoi": "reel",
+  "handled_at": "2026-10-10T08:01:22.554561+02:00",
+  "result": "watcher_restarted",
+  "old_pid": 1981017,
+  "new_pid": 2098506,
+  "notified_quentin": false,
+  "equipe_trading": false
+}

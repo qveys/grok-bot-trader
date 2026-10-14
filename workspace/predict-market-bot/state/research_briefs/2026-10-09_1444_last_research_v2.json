@@ -1,0 +1,93 @@
+{
+  "briefed_at": "2026-10-09T14:44:00+02:00",
+  "cycle": "Point du jour 14h44 (avant fenêtre 15h–17h) — exécuté ~15h05 (routine en retard)",
+  "jour_annonce": {
+    "special": false,
+    "detail": "Pas de chiffres US importants à 14h30 aujourd'hui (calendrier BLS vide le 9 oct). Soft : confiance Michigan vers 16h CEST. Prochaine grosse date : inflation US (CPI) le 14 oct. Pas de séance extra proposée.",
+    "seance_extra_proposee": false
+  },
+  "live": "INTERDIT pour toutes les sortes (tests du passé négatifs). Toutes les idées = simulation seulement.",
+  "simus_ouvertes": {
+    "D-023": "BTC idée à la hausse, ~24,98 €, entrée 74 120 €, visé 75 232 €, arrêt 73 379 €, rappel 17h00 — couvre déjà l'idée BTC",
+    "plafond": "24,98 / 50 € engagés ; place pour ~25 € (ETH ou SOL)"
+  },
+  "prix": {
+    "source": "ticks Coinbase 30s (state/price_ticks/2026-10-09.jsonl) via read_price_tick.py",
+    "releve_at": "2026-10-09T15:04:59+02:00",
+    "age_approx": "~10 s au moment du brief",
+    "BTC-EUR": {
+      "prix": 74121,
+      "jour_min": 72709,
+      "jour_max": 74389,
+      "vs_ouverture_jour_pct": 1.8
+    },
+    "ETH-EUR": {
+      "prix": 2230,
+      "jour_min": 2201,
+      "jour_max": 2239,
+      "vs_ouverture_jour_pct": 0.8
+    },
+    "SOL-EUR": {
+      "prix": 98.61,
+      "jour_min": 96.93,
+      "jour_max": 99.31,
+      "vs_ouverture_jour_pct": -0.2
+    }
+  },
+  "ambiance": {
+    "fear_greed": 59,
+    "fear_greed_label": "Greed",
+    "fear_greed_avg_30j": 67.1,
+    "resume": "Rebond fragile ce matin après le calme sur l'Iran ; l'argent sort encore des fonds BTC et ETH (~1 Md$ en octobre). Humeur 59/100, en baisse depuis une semaine."
+  },
+  "resume": {
+    "actu": "Pas d'effet chiffres US 14h30 (rien de prévu). BTC a remonté grâce au message Trump (pas de frappe Iran avant midterms) et à des rachats forcés ; semaine encore en baisse (~−4 %). Les fonds BTC/ETH ont perdu presque 1 milliard de dollars en octobre (sorties confirmées CoinTelegraph + CoinDesk). ETH a le plus souffert (−9 % / semaine, liquidations plus fortes). SOL : mise à jour technique prévue ~17h CEST (blocs plus rapides, 200 ms) — bonne nouvelle propre, confirmée CoinDesk + Anza/TradingView.",
+    "raisons_de_vendre": [
+      "Sorties d'argent des fonds BTC/ETH qui continuent",
+      "BTC qui reperd clairement 74 000 €",
+      "Nouvelle tension Iran / pétrole",
+      "Humeur qui retombe sous 50"
+    ],
+    "pour_equipe": "Live interdit. Simulation seulement. D-023 BTC déjà ouvert (~25 €). Place pour une simu ETH ou SOL (~25 €). Predict décide."
+  },
+  "idees": {
+    "BTC-EUR": {
+      "idee": "à la hausse",
+      "prix_actuel": 74121,
+      "prix_vise": 75232,
+      "prix_arret": 73379,
+      "heure_limite": "2026-10-09T17:00:00+02:00",
+      "confiance": "faible",
+      "raison": "rebond Iran fragile ; sorties des fonds ; D-023 déjà ouvert — pas de 2e achat BTC",
+      "mode": "simulation"
+    },
+    "ETH-EUR": {
+      "idee": "à la baisse",
+      "prix_actuel": 2230,
+      "prix_vise": 2197,
+      "prix_arret": 2263,
+      "heure_limite": "2026-10-09T17:00:00+02:00",
+      "confiance": "faible",
+      "raison": "ETH le plus faible de la semaine ; sorties fonds 8 jours d'affilée",
+      "mode": "simulation",
+      "note": "idée à la baisse = vendre des pièces déjà détenues puis racheter ; Predict/Risk vérifient les pièces libres"
+    },
+    "SOL-EUR": {
+      "idee": "à la hausse",
+      "prix_actuel": 98.61,
+      "prix_vise": 100.09,
+      "prix_arret": 97.13,
+      "heure_limite": "2026-10-09T17:00:00+02:00",
+      "confiance": "faible",
+      "raison": "mise à jour technique 200 ms vers 17h CEST ; D-021 (baisse) fermée en petite perte ce matin",
+      "mode": "simulation"
+    }
+  },
+  "lignes_chiffrees": [
+    "BTC : idée à la hausse — prix actuel 74 121 € — prix visé 75 232 € — prix d'arrêt 73 379 € — mouvement attendu avant 17h00 — confiance faible (rebond Iran fragile ; D-023 déjà ouvert)",
+    "ETH : idée à la baisse — prix actuel 2 230 € — prix visé 2 197 € — prix d'arrêt 2 263 € — mouvement attendu avant 17h00 — confiance faible (le plus faible de la semaine ; sorties fonds)",
+    "SOL : idée à la hausse — prix actuel 98,61 € — prix visé 100,09 € — prix d'arrêt 97,13 € — mouvement attendu avant 17h00 — confiance faible (mise à jour technique vers 17h)"
+  ],
+  "certitude": "Élevée sur les faits (prix frais + sorties fonds + Iran + upgrade SOL recoupés). Faible sur la direction des prochaines heures.",
+  "sources_note": "prix ticks Coinbase ; news.json CoinDesk/CoinTelegraph/Decrypt ; ETF outflows CoinTelegraph + CoinDesk ; Iran CoinDesk ; SOL 200ms CoinDesk + Anza/TradingView + solana.com ; Fear&Greed alternative.me ; calendrier BLS oct 2026 (pas de release 14h30 le 9) ; aucun post X seul pris pour vrai"
+}

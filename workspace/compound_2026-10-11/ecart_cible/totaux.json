@@ -1,0 +1,209 @@
+{
+ "n": 10,
+ "moy_ecart_cible_pct": 1.676,
+ "moy_ecart_arret_pct": 1.345,
+ "moy_meilleur_mouvement_pct": 0.473,
+ "moy_part_cible_pct": 29.3,
+ "n_50pct": 3,
+ "n_75pct": 0,
+ "mediane_heures": 10.68,
+ "moy_cible_sur_plage_jour_pct": 65.3,
+ "plages_jour": {
+  "BTC-EUR 8/10": {
+   "hi": 74552.07,
+   "lo": 71705.41500000001,
+   "pct": 3.97,
+   "partiel": false,
+   "part_bougie": 5.3
+  },
+  "BTC-EUR 9/10": {
+   "hi": 74460.84,
+   "lo": 72708.565,
+   "pct": 2.41,
+   "partiel": false,
+   "part_bougie": 0.3
+  },
+  "BTC-EUR 10/10": {
+   "hi": 74234.44,
+   "lo": 73568.41,
+   "pct": 0.905,
+   "partiel": false,
+   "part_bougie": 27.4
+  },
+  "BTC-EUR 11/10": {
+   "hi": 74195.31,
+   "lo": 73879.93,
+   "pct": 0.427,
+   "partiel": true,
+   "part_bougie": 76.3
+  },
+  "ETH-EUR 8/10": {
+   "hi": 2309.56,
+   "lo": 2147.545,
+   "pct": 7.544,
+   "partiel": false,
+   "part_bougie": 5.3
+  },
+  "ETH-EUR 9/10": {
+   "hi": 2246.87,
+   "lo": 2201.245,
+   "pct": 2.073,
+   "partiel": false,
+   "part_bougie": 0.3
+  },
+  "ETH-EUR 10/10": {
+   "hi": 2248.75,
+   "lo": 2213.005,
+   "pct": 1.615,
+   "partiel": false,
+   "part_bougie": 27.4
+  },
+  "ETH-EUR 11/10": {
+   "hi": 2242.63,
+   "lo": 2229.78,
+   "pct": 0.576,
+   "partiel": true,
+   "part_bougie": 76.1
+  },
+  "SOL-EUR 8/10": {
+   "hi": 104.27,
+   "lo": 94.245,
+   "pct": 10.637,
+   "partiel": false,
+   "part_bougie": 5.3
+  },
+  "SOL-EUR 9/10": {
+   "hi": 99.86,
+   "lo": 96.80000000000001,
+   "pct": 3.161,
+   "partiel": false,
+   "part_bougie": 0.3
+  },
+  "SOL-EUR 10/10": {
+   "hi": 98.86,
+   "lo": 96.905,
+   "pct": 2.017,
+   "partiel": false,
+   "part_bougie": 27.4
+  },
+  "SOL-EUR 11/10": {
+   "hi": 98.69,
+   "lo": 97.27,
+   "pct": 1.46,
+   "partiel": true,
+   "part_bougie": 75.9
+  }
+ },
+ "briefs": [
+  {
+   "brief": "2026-10-08_1433_last_research.json",
+   "pair": "—",
+   "note": "aucune ligne chiffrée (pas de prix visé)"
+  },
+  {
+   "brief": "2026-10-09_1444_last_research.json",
+   "pair": "BTC-EUR",
+   "side": "hausse",
+   "entry": 74121.0,
+   "target": 75232.0,
+   "stop": 73379.0,
+   "target_pct": 1.499,
+   "stop_pct": 1.001,
+   "start": "09/10 15h04",
+   "deadline": "09/10 17h00",
+   "best_price": 74348.76,
+   "best_move_pct": 0.307,
+   "best_at": "09/10 16h34",
+   "best_src": "tick",
+   "share_of_target_pct": 20.5,
+   "target_reached": "non",
+   "stop_touched": "non",
+   "target_share_of_day_range_pct": 62.2
+  },
+  {
+   "brief": "2026-10-09_1444_last_research.json",
+   "pair": "ETH-EUR",
+   "side": "baisse",
+   "entry": 2230.0,
+   "target": 2197.0,
+   "stop": 2263.0,
+   "target_pct": 1.48,
+   "stop_pct": 1.48,
+   "start": "09/10 15h04",
+   "deadline": "09/10 17h00",
+   "best_price": 2212.34,
+   "best_move_pct": 0.792,
+   "best_at": "09/10 15h36",
+   "best_src": "tick",
+   "share_of_target_pct": 53.5,
+   "target_reached": "non",
+   "stop_touched": "non",
+   "target_share_of_day_range_pct": 71.4
+  },
+  {
+   "brief": "2026-10-09_1444_last_research.json",
+   "pair": "SOL-EUR",
+   "side": "hausse",
+   "entry": 98.61,
+   "target": 100.09,
+   "stop": 97.13,
+   "target_pct": 1.501,
+   "stop_pct": 1.501,
+   "start": "09/10 15h04",
+   "deadline": "09/10 17h00",
+   "best_price": 98.81,
+   "best_move_pct": 0.203,
+   "best_at": "09/10 16h34",
+   "best_src": "tick",
+   "share_of_target_pct": 13.5,
+   "target_reached": "non",
+   "stop_touched": "non",
+   "target_share_of_day_range_pct": 47.5
+  }
+ ],
+ "contexte": {
+  "BTC-EUR": {
+   "n_barres": 955,
+   "part_bougies_pct": 44.7,
+   "6h": {
+    "n_entrees": 885,
+    "mediane_hausse_pct": 0.323,
+    "mediane_baisse_pct": 0.216
+   },
+   "24h": {
+    "n_entrees": 669,
+    "mediane_hausse_pct": 0.795,
+    "mediane_baisse_pct": 0.343
+   }
+  },
+  "ETH-EUR": {
+   "n_barres": 954,
+   "part_bougies_pct": 44.7,
+   "6h": {
+    "n_entrees": 885,
+    "mediane_hausse_pct": 0.458,
+    "mediane_baisse_pct": 0.325
+   },
+   "24h": {
+    "n_entrees": 669,
+    "mediane_hausse_pct": 1.035,
+    "mediane_baisse_pct": 0.622
+   }
+  },
+  "SOL-EUR": {
+   "n_barres": 953,
+   "part_bougies_pct": 44.6,
+   "6h": {
+    "n_entrees": 885,
+    "mediane_hausse_pct": 0.52,
+    "mediane_baisse_pct": 0.737
+   },
+   "24h": {
+    "n_entrees": 669,
+    "mediane_hausse_pct": 1.068,
+    "mediane_baisse_pct": 1.551
+   }
+  }
+ },
+ "calcul": "11/10 07h46"
+}

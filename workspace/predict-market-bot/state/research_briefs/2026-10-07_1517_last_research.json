@@ -1,0 +1,16 @@
+{
+  "briefed_at": "2026-10-07T15:17:00+02:00",
+  "cycle": "scan 15h16-15h17",
+  "fenetre_15_17": "simulation seulement",
+  "live": "possible seulement si barre haute (pas cet après-midi sauf décision équipe claire); Fed ~20h = vrai catalyseur",
+  "ambiance": "baisse risque avant Fed; pétrole cher; beaucoup de ventes forcées; sorties ETF BTC",
+  "prices_eur": {"BTC-EUR": 74592, "ETH-EUR": 2293, "SOL-EUR": 104.03},
+  "change_24h_pct": {"BTC-EUR": -2.4, "ETH-EUR": -4.8, "SOL-EUR": -2.6},
+  "resume": {
+    "btc": "en baisse ~2,4 %; marché attend la Fed; pas de signal d'achat clair pour l'instant",
+    "eth": "plus faible ~-4,8 %; prix ~2293 € SOUS le stop simulé 2300 € — Risk doit gérer la position / alerte stop; pas d'acheter ici",
+    "sol": "baisse douce ~-2,6 %, suit le marché",
+    "pour_predict": "priorité: pas acheter ETH sous stop; BTC/SOL = attendre ou simu rebond seulement si doute clairement écrit; live non pour 15h-17h"
+  },
+  "confidence": "élevée sur la baisse et le stop ETH (prix scan + plusieurs sources indépendantes); moyenne sur le timing Fed"
+}

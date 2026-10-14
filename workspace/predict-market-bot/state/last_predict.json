@@ -1,0 +1,114 @@
+{
+  "id": "D-053",
+  "ts": "2026-10-13T09:15:00+02:00",
+  "trigger": "nuit",
+  "detail": "Passage du matin 9h — nuit depuis hier 20h58 : BTC +1,34 % · ETH +0,50 % · SOL +0,43 % ; ce matin depuis 07h23 léger repli BTC −0,29 % · ETH −0,20 % · SOL −0,47 %",
+  "prix": {
+    "BTC-EUR": 74782.635,
+    "ETH-EUR": 2261.125,
+    "SOL-EUR": 96.74
+  },
+  "haut_bas_jour": {
+    "BTC-EUR": {
+      "haut": 75000.0,
+      "bas": 72555.0
+    },
+    "ETH-EUR": {
+      "haut": 2269.07,
+      "bas": 2157.33
+    },
+    "SOL-EUR": {
+      "haut": 97.195,
+      "bas": 91.09
+    }
+  },
+  "place_libre_eur": 0,
+  "ouverts": [
+    "D-040a",
+    "D-052a",
+    "D-052c"
+  ],
+  "ouverts_revus": [
+    {
+      "id": "D-040a",
+      "verdict": "vivante",
+      "texte": "achat BTC 25 € ; entrée 73918, visé 75426, arrêt 72468, rappel 09h00 passé ; prix 74783 (+1,17 %) — idée pas morte ; nouveau rappel 15h00"
+    },
+    {
+      "id": "D-052a",
+      "verdict": "vivante",
+      "texte": "achat ETH 20 € ; entrée 2260, visé 2294, arrêt 2226,2, rappel 15h00 ; prix 2261.12 (+0,05 %) — idée pas morte ; on laisse le rappel 15h00"
+    },
+    {
+      "id": "D-052c",
+      "verdict": "vivante",
+      "texte": "achat SOL 5 € ; entrée 96,80, visé 98,72, arrêt 95,84, rappel 15h00 ; prix 96.74 (−0,06 %) — idée pas morte (écart négligeable) ; on laisse le rappel 15h00"
+    }
+  ],
+  "propositions": [
+    {
+      "lettre": "a",
+      "niveau": "prudente",
+      "paire": "SOL-EUR",
+      "idee": "à la hausse",
+      "sens": "achat",
+      "montant_eur": 25,
+      "quantite": 0.259067,
+      "prix_entree": 96.5,
+      "prix_vise": 97.95,
+      "prix_arret": 95.06,
+      "heure_limite": "2026-10-13T17:00:00+02:00",
+      "prevision": "SOL touche 97.95 € (+1.50 %) avant 95.06 € (−1.49 %), d'ici 2026-10-13 17h00",
+      "confiance": {
+        "mot": "faible",
+        "pct": 53
+      },
+      "decision": "simuler_si_place",
+      "statut": "en_attente_de_place",
+      "note": "prioritaire dès ~25 € libres (ex. D-040a au visé) ; SOL −0,47 % depuis 07h23 ; visé 0,78 % au-dessus du haut du jour 97,195 ; gain ≈ perte ; D-052c déjà 5 € SOL hausse ; gain espéré ≈ +0,37 € | perte max ≈ 0,37 € | coût ≈ 0,02 €"
+    },
+    {
+      "lettre": "b",
+      "niveau": "équilibrée",
+      "paire": "BTC-EUR",
+      "idee": "à la hausse",
+      "sens": "achat",
+      "montant_eur": 20,
+      "quantite": 0.000268,
+      "prix_entree": 74650.0,
+      "prix_vise": 76330.0,
+      "prix_arret": 73531.0,
+      "heure_limite": "2026-10-13T17:00:00+02:00",
+      "prevision": "BTC touche 76330.0 € (+2.25 %) avant 73531.0 € (−1.50 %), d'ici 2026-10-13 17h00",
+      "confiance": {
+        "mot": "faible",
+        "pct": 52
+      },
+      "decision": "simuler_si_place",
+      "statut": "en_attente_de_place",
+      "note": "D-040a déjà ouvert 25 € BTC ; seulement si place ; nuit BTC +1,34 % depuis hier 20h58 ; gain 1,50 × la perte ; gain espéré ≈ +0,45 € | perte max ≈ 0,30 € | coût ≈ 0,02 €"
+    },
+    {
+      "lettre": "c",
+      "niveau": "risquée",
+      "paire": "SOL-EUR",
+      "idee": "à la hausse",
+      "sens": "achat",
+      "montant_eur": 10,
+      "quantite": 0.103627,
+      "prix_entree": 96.5,
+      "prix_vise": 98.43,
+      "prix_arret": 95.54,
+      "heure_limite": "2026-10-13T17:00:00+02:00",
+      "prevision": "SOL touche 98.43 € (+2.00 %) avant 95.54 € (−0.99 %), d'ici 2026-10-13 17h00",
+      "confiance": {
+        "mot": "faible",
+        "pct": 52
+      },
+      "decision": "simuler_si_place",
+      "statut": "en_attente_de_place",
+      "note": "une risquée déjà ouverte (D-052c) → seulement après sa fermeture ; arrêt ≤1 %, gain ≈ 2× ; gain espéré ≈ +0,20 € | perte max ≈ 0,10 € | coût ≈ 0,01 €"
+    }
+  ],
+  "valable_jusqua": "09:45"
+}

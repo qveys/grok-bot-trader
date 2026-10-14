@@ -1,0 +1,260 @@
+# Carnet des décisions (avant achat)
+
+Une entrée **avant** chaque achat possible — y compris les **non**.
+Ça n’est **pas** le journal des trades (qui ne contient que achat→vente).
+
+## Modèle
+
+### YYYY-MM-DD HH:MM | PAIRE | id-décision (ex. D-001)
+- Type d’idée : **idée à la hausse** / **idée à la baisse** (plus de « vendre d’abord »)
+- Relevé / contexte (1 ligne) :
+- Gain espéré (€ et %) :
+- Perte max (€ et %) :
+- Coût aller-retour estimé (€ et %) :
+- Gain ≥ 3× coût ? oui / non *(obligatoire en **live** ; en simulation un petit avantage + stop suffit)*
+- Décision : **ACHETER** / **PAS ACHETER** / **VENDRE** (baisse) / **PAS VENDRE**
+- Pourquoi (1–2 lignes) :
+- Si ouverture → taille € / % capital / stop / (baisse : target + safety) :
+- Lien trade plus tard : (vide jusqu’à clôture)
+
+---
+
+## Entrées
+
+### 2026-10-07 11:27 | ETH-EUR | D-002
+- Relevé / contexte (1 ligne) : prix ~2337 € (−3,3 % / 24 h), ventes des gros fonds, Fed ce soir ; scan 11h08 raté → on garde 10h34
+- Gain espéré (€ et %) : 0 € (0 %) — pas d’avantage clair vs prix
+- Perte max (€ et %) : n/a (pas d’achat)
+- Coût aller-retour estimé (€ et %) : ~0,2–0,5 % typique (frais + écart)
+- Gain ≥ 3× coût ? non
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : pas assez d’écart avec le prix actuel ; attendre les annonces ; simulé test déjà ouvert à 2500 €
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+
+### 2026-10-07 11:27 | SOL-EUR | D-003
+- Relevé / contexte (1 ligne) : prix ~105,88 € (−1,4 % / 24 h), petite baisse sans info nouvelle
+- Gain espéré (€ et %) : 0 € (0 %)
+- Perte max (€ et %) : n/a
+- Coût aller-retour estimé (€ et %) : ~0,2–0,5 %
+- Gain ≥ 3× coût ? non
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : pas d’avantage clair vs prix ; même logique court terme ~48 h
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+
+### 2026-10-07 15:17 | BTC-EUR | D-004
+- Relevé / contexte (1 ligne) : ~74 592 € (−2,4 % / 24 h), ambiance peur avant Fed ~20h
+- Gain espéré (€ et %) : faible / flou — marché d’attente, pas d’avantage clair
+- Perte max (€ et %) : si essai ~5 % du capital (~8–14 € selon taille) → stop type −8 %
+- Coût aller-retour estimé (€ et %) : ~0,2–0,5 %
+- Gain ≥ 3× coût ? non (gain espéré pas assez clair)
+- Décision : **PAS ACHETER** (même en simulation)
+- Pourquoi (1–2 lignes) : baisse déjà faite + on attend la Fed ; forcer un achat = doute trop grand sans mouvement clair à la hausse
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+
+### 2026-10-07 15:17 | ETH-EUR | D-005
+- Relevé / contexte (1 ligne) : ~2 293 € (−4,8 %), **sous stop 2300 €** — simulé test déjà fermé en perte
+- Gain espéré (€ et %) : 0 (pas d’achat)
+- Perte max (€ et %) : n/a
+- Coût aller-retour estimé (€ et %) : ~0,2–0,5 %
+- Gain ≥ 3× coût ? non
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : ne pas racheter après une baisse forte juste avant la Fed ; leçon du stop à venir via Compound
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+
+### 2026-10-07 15:17 | SOL-EUR | D-006
+- Relevé / contexte (1 ligne) : ~104 € (−2,6 %), suit le marché
+- Gain espéré (€ et %) : 0 / flou
+- Perte max (€ et %) : n/a
+- Coût aller-retour estimé (€ et %) : ~0,2–0,5 %
+- Gain ≥ 3× coût ? non
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : rien de spécial pour SOL ; priorité BTC de toute façon et BTC = non
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+
+### 2026-10-07 15:48 | BTC-EUR | D-007
+- Relevé / contexte (1 ligne) : mid 74136.54 € (-3.42 %/24h) ; catalyseur = minutes FOMC ~20h (pas décision de taux) ; fenêtre 15h–17h = simu seulement
+- **Prévision mesurable** : **UP** / horizon **22h00 CEST** / seuil **±1.5 %** → cible 75248.59 € · inverse 73024.49 €
+- Probas modèle : P(seuil sens)=42% · P(inverse)=33% · P(ni l’un ni l’autre)=25%
+- Gain espéré si seuil touché (€ et %) : 0.375 € (1.5 % sur taille 25 €)
+- Perte max au seuil inverse (€ et %) : 0.375 € (1.5 %) ; stop hard −8 % pos. = 2.00 €
+- Coût aller-retour estimé (€ et %) : 0.1 € (0.4 %)
+- EV brut : 0.0338 € · EV net (après coût) : -0.0663 € · EV/coût = 0.338× (seuil règle ≥ 3×)
+- Gain ≥ 3× coût ? non (Kelly ¼ = 0.0 €)
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : Prévision mesurable avant minutes Fed ~20h : biais rebond (déjà −3.4 %/24h + odds hausse de taux octobre déjà baissées). EV brut 0.0338 € < 3× coût (0.30 €) → pas d’achat ; forecast scoreable.
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+- Score Compound (22h40) : annulé — aucun seuil touché, 22h00 à 74503,86 € (+0,49 %)
+
+### 2026-10-07 15:48 | ETH-EUR | D-008
+- Relevé / contexte (1 ligne) : mid 2286.19 € (-5.32 %/24h) ; catalyseur = minutes FOMC ~20h (pas décision de taux) ; fenêtre 15h–17h = simu seulement
+- **Prévision mesurable** : **DOWN** / horizon **22h00 CEST** / seuil **±1.5 %** → cible 2251.90 € · inverse 2320.48 €
+- Probas modèle : P(seuil sens)=40% · P(inverse)=28% · P(ni l’un ni l’autre)=32%
+- Gain espéré si seuil touché (€ et %) : 0.375 € (1.5 % sur taille 25 €)
+- Perte max au seuil inverse (€ et %) : 0.375 € (1.5 %) ; stop hard −8 % pos. = 2.00 €
+- Coût aller-retour estimé (€ et %) : 0.1 € (0.4 %)
+- EV brut : 0.045 € · EV net (après coût) : -0.055 € · EV/coût = 0.45× (seuil règle ≥ 3×)
+- Gain ≥ 3× coût ? non (Kelly ¼ = 0.0 €)
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : Plus faible (−5.3 %/24h), déjà stoppé en simu — pas de rachat. Prévision : touche −1.5 % avant +1.5 % d’ici 22h. Spot long only → PAS ACHETER ; forecast DOWN pour score.
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+- Score Compound (22h40) : perdu — aucun seuil touché, 22h00 à 2296,09 € (+0,43 %, contre la prévision)
+
+### 2026-10-07 15:48 | SOL-EUR | D-009
+- Relevé / contexte (1 ligne) : mid 103.42 € (-3.80 %/24h) ; catalyseur = minutes FOMC ~20h (pas décision de taux) ; fenêtre 15h–17h = simu seulement
+- **Prévision mesurable** : **UP** / horizon **22h00 CEST** / seuil **±1.5 %** → cible 104.97 € · inverse 101.87 €
+- Probas modèle : P(seuil sens)=38% · P(inverse)=34% · P(ni l’un ni l’autre)=28%
+- Gain espéré si seuil touché (€ et %) : 0.375 € (1.5 % sur taille 25 €)
+- Perte max au seuil inverse (€ et %) : 0.375 € (1.5 %) ; stop hard −8 % pos. = 2.00 €
+- Coût aller-retour estimé (€ et %) : 0.1 € (0.4 %)
+- EV brut : 0.015 € · EV net (après coût) : -0.085 € · EV/coût = 0.15× (seuil règle ≥ 3×)
+- Gain ≥ 3× coût ? non (Kelly ¼ = 0.0 €)
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : Suit BTC (−3.8 %/24h). Même direction UP, confiance plus basse. EV 0.015 € insuffisant vs 3× coût → PAS ACHETER.
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+- Score Compound (22h40) : annulé — aucun seuil touché, 22h00 à 103,46 € (+0,04 %)
+
+### 2026-10-07 19:48 | BTC-EUR | D-010
+- Relevé / contexte (1 ligne) : session Fed minutes ~20h ; **pas de prix frais** (ticks arrêtés depuis 2026-10-07T17:25:19+02:00, dernier mid ~74162.58 €)
+- **Prévision mesurable** : **annulée** — horizon/seuil non fixés sans mid frais
+- Gain espéré (€ et %) : 0 (pas d’achat)
+- Perte max (€ et %) : n/a
+- Coût aller-retour estimé (€ et %) : n/a
+- Gain ≥ 3× coût ? non
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : sans prix à jour on ne peut ni calculer un seuil ni un EV fiable ; D-007 (UP ±1,5 % / 22h) reste le seul forecast BTC du soir, à scorer sur ticks quand le réseau revient
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+- Score Compound : D-010 = annulé (pas mesurable) ; D-007 en attente horizon 22h
+
+### 2026-10-07 19:48 | ETH-EUR | D-011
+- Relevé / contexte (1 ligne) : dernier mid ~2288.30 € (sous 2300) ; réseau coupé ; déjà stoppé en simu cet après-midi
+- **Prévision mesurable** : **annulée** (pas de mid frais)
+- Gain espéré (€ et %) : 0
+- Perte max (€ et %) : n/a
+- Coût aller-retour estimé (€ et %) : n/a
+- Gain ≥ 3× coût ? non
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : pas de rachat impulsif + pas de prix frais ; D-008 (DOWN ±1,5 % / 22h) reste le forecast à scorer
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+- Score Compound : D-011 = annulé ; D-008 en attente
+
+### 2026-10-07 19:48 | SOL-EUR | D-012
+- Relevé / contexte (1 ligne) : dernier mid ~103.68 € ; réseau coupé
+- **Prévision mesurable** : **annulée** (pas de mid frais)
+- Gain espéré (€ et %) : 0
+- Perte max (€ et %) : n/a
+- Coût aller-retour estimé (€ et %) : n/a
+- Gain ≥ 3× coût ? non
+- Décision : **PAS ACHETER**
+- Pourquoi (1–2 lignes) : même règle — pas de trade sans prix frais ; D-009 (UP ±1,5 % / 22h) reste le forecast à scorer
+- Si ACHETER → taille € / % capital : —
+- Lien trade plus tard : —
+- Score Compound : D-012 = annulé ; D-009 en attente
+
+### 2026-10-08 13:16 | ETH-EUR + SOL-EUR | D-013 — IDÉE À TESTER « rebond dans la tendance »
+- Quand on achète : entre 15h et 17h (Bruxelles), lundi–vendredi, si le prix a baissé d’au moins 3 % en 24 h, puis une bougie d’1 h remonte, **et seulement si le prix est au-dessus de sa moyenne des 200 dernières heures**.
+- Comment : ordre à cours limité qui attend dans le carnet (pas d’achat immédiat).
+- Quand on revend : −1,5 % (stop) ou +3 % (objectif), sinon à 22h le même jour.
+- Test du passé (1 an, Predict, 8 oct ~13h15) : ordres qui attendent (0 frais) → ETH +5,6 % (19 trades), SOL +5,4 % (23 trades), pire baisse ~5,5 %. Avec frais d’achat immédiat → ETH +0,8 %, SOL −4,9 %.
+- Garder la crypto sur la même année : ETH −42 %, SOL −48 %.
+- Prudence : réglages choisis après avoir vu les résultats → test de solidité + 2 moitiés d’année à faire (Compound 22h32). Un ordre qui attend peut ne pas être rempli quand ça bouge vite.
+- Commande exacte : `backtest.sh run --pair ETH-EUR --strategy team_rebound --trend 200 --sl 1.5 --tp 3 --costs revolutx-maker` (idem SOL-EUR)
+- Décision : **PAS ACHETER** — idée en attente du test Compound + avis Risk.
+
+### 2026-10-08 13:16 | ETH-EUR | D-014 — IDÉE À TESTER « cassure dans la tendance »
+- Quand on achète : entre 15h et 17h, lundi–vendredi, si le prix passe au-dessus du plus haut des 8 dernières heures **et** au-dessus de sa moyenne des 200 heures.
+- Comment : ordre à cours limité qui attend.
+- Quand on revend : −1,5 % ou +3 %, sinon à 22h.
+- Test du passé (1 an) : ordres qui attendent → ETH +4,1 % (34 trades), pire baisse 6,4 %. Avec frais immédiats → −4,4 %. (SOL : +1,6 % seulement → pas proposé.)
+- Prudence : mêmes réserves que D-013.
+- Commande exacte : `backtest.sh run --pair ETH-EUR --strategy team_breakout --trend 200 --sl 1.5 --tp 3 --costs revolutx-maker`
+- Décision : **PAS ACHETER** — idée en attente du test Compound + avis Risk.
+
+### 2026-10-08 14:34 | BTC-EUR | D-015
+- Relevé / contexte : mid 73559.34 € (-1.55 %/24h) ; **sous sa moyenne 200 h** (75347 €) ; actus : grosses sorties des fonds BTC (les plus fortes depuis des mois), l’État US a déplacé 770 M$ de BTC saisis vers une plateforme, ventes d’emprunts US + pétrole > 100 $ ; Fed : hausse probable d’ici fin d’année
+- **Prévision mesurable** : **DOWN** / horizon **17h00 CEST** / seuil **±0.5 %** → cible 73191.54 € · inverse 73927.14 €
+- Méthode : seuil calé sur la volatilité des 7 derniers jours (mouvement typique ~0,5–0,7 % d’ici 17h) ; 20 000 simulations avec léger biais baissier (tendance + actus)
+- Probas : P(−0.5 % d’abord)=37% · P(+0.5 % d’abord)=18% · P(aucun)=45%
+- Achat hypothétique 25 € (stop −0.5 %, objectif +0.5 %) : gain si objectif 0.125 € · perte si stop 0.125 € · coût A/R 0.070 € → EV -0.094 €
+- Gain ≥ 3× coût ? non
+- Idées D-013/D-014 actives ? non (prix sous la moyenne 200 h)
+- Décision : **PAS ACHETER**
+- Pourquoi : on prévoit une baisse et on ne peut qu’acheter ; EV négative
+- Lien trade plus tard : —
+
+### 2026-10-08 14:34 | ETH-EUR | D-016
+- Relevé / contexte : mid 2261.91 € (-1.77 %/24h) ; **sous sa moyenne 200 h** (2381 €) ; actus : grosses sorties des fonds BTC (les plus fortes depuis des mois), l’État US a déplacé 770 M$ de BTC saisis vers une plateforme, ventes d’emprunts US + pétrole > 100 $ ; Fed : hausse probable d’ici fin d’année
+- **Prévision mesurable** : **DOWN** / horizon **17h00 CEST** / seuil **±0.5 %** → cible 2250.60 € · inverse 2273.22 €
+- Méthode : seuil calé sur la volatilité des 7 derniers jours (mouvement typique ~0,5–0,7 % d’ici 17h) ; 20 000 simulations avec léger biais baissier (tendance + actus)
+- Probas : P(−0.5 % d’abord)=40% · P(+0.5 % d’abord)=22% · P(aucun)=38%
+- Achat hypothétique 25 € (stop −0.5 %, objectif +0.5 %) : gain si objectif 0.125 € · perte si stop 0.125 € · coût A/R 0.070 € → EV -0.092 €
+- Gain ≥ 3× coût ? non
+- Idées D-013/D-014 actives ? non (prix sous la moyenne 200 h)
+- Décision : **PAS ACHETER**
+- Pourquoi : on prévoit une baisse et on ne peut qu’acheter ; EV négative
+- Lien trade plus tard : —
+
+### 2026-10-08 14:34 | SOL-EUR | D-017
+- Relevé / contexte : mid 100.70 € (-3.43 %/24h) ; **sous sa moyenne 200 h** (106.05 €) ; actus : grosses sorties des fonds BTC (les plus fortes depuis des mois), l’État US a déplacé 770 M$ de BTC saisis vers une plateforme, ventes d’emprunts US + pétrole > 100 $ ; Fed : hausse probable d’ici fin d’année
+- **Prévision mesurable** : **DOWN** / horizon **17h00 CEST** / seuil **±0.5 %** → cible 100.20 € · inverse 101.20 €
+- Méthode : seuil calé sur la volatilité des 7 derniers jours (mouvement typique ~0,5–0,7 % d’ici 17h) ; 20 000 simulations avec léger biais baissier (tendance + actus)
+- Probas : P(−0.5 % d’abord)=48% · P(+0.5 % d’abord)=28% · P(aucun)=24%
+- Achat hypothétique 25 € (stop −0.5 %, objectif +0.5 %) : gain si objectif 0.125 € · perte si stop 0.125 € · coût A/R 0.070 € → EV -0.095 €
+- Gain ≥ 3× coût ? non
+- Idées D-013/D-014 actives ? non (prix sous la moyenne 200 h)
+- Décision : **PAS ACHETER**
+- Pourquoi : on prévoit une baisse et on ne peut qu’acheter ; EV négative
+- Lien trade plus tard : —
+
+### 2026-10-08 15:59 | ETH-EUR / SOL-EUR | D-018
+- Idée : **idée à la baisse** — Vente de pièces qu’on a déjà, puis Achat (rachat) plus bas (simulation OK ; pas de live avant test du passé)
+- Règle claire (3 prix) :
+  1. **Prix de vente** : on vend une partie de ce qu’on a déjà (ETH ou SOL) quand le prix monte fort sans vraie raison (ex. +3 % en 24 h alors que les actus ne le justifient pas), et seulement si on est **sous** la moyenne 200 h (tendance qui baisse : les remontées retombent souvent) — tester aussi la version « au-dessus »
+  2. **Prix de rachat** : on rachète plus bas, objectif −3 % sous le prix de vente (on garde la différence)
+  3. **Prix de rachat forcé** : si le prix continue de monter de +1,5 % après la vente, on rachète quand même pour ne pas perdre nos pièces
+- Sortie aussi à 22h si aucun des deux rachats n’est touché
+- Taille : max 5 % du capital ; ordres qui attendent dans le livre ; MetaMask inclus pour D-018 : ~0,0387 ETH vendable (Arbitrum), échange via Uniswap (~0,1–0,2 % aller-retour), pas le bouton MetaMask (~1,8 %, refusé)
+- Stock vendable (Risk, 15h59) : ~0,0209 ETH (≈47 €) et ~0,241 SOL (≈24 €), hors pièces bloquées → max par vente ≈25 € : ~0,011 ETH ou tout le SOL dispo
+- Contexte aujourd’hui : prix déjà en baisse (ETH ~2 249 €, SOL ~100 €) → **PAS VENDRE** (ce serait vendre bas)
+- Test demandé à Compound (22h32) : sur ETH-EUR et SOL-EUR, un an de données, ordres qui attendent, frais Revolut X ; gain après frais, mieux que garder sans rien faire, ~20 trades, les deux moitiés de l’année, baisse max sous 8 %
+- Décision : **PAS VENDRE** aujourd’hui ; idée en attente du test + du stock vraiment vendable (Risk)
+- Lien trade plus tard : —
+
+### 2026-10-08 17:27 | ETH-EUR | D-019 — SIMULATION RÉTRO (exception paramétrage, accord Quentin)
+- Idée : **idée à la baisse** (vendre des pièces qu’on a, puis racheter plus bas)
+- Sens : **Vendre en premier**, puis Acheter (rachat)
+- Origine : idée à la baisse, tirée de la prévision D-016 écrite à 14h34 avant le mouvement
+- Vente simulée : 0.0055 ETH (taille réduite de moitié, total 25 € partagé ; avant : 0.011) à 2261.905 € (≈ 12.44 €) à 14h34
+- Rachat (objectif −0,5 %) : 2250.6 € — touché à 15:39 (ticks 30 s) · prix d’arrêt +0,5 % : 2273.22 € (pas touché avant)
+- Résultat : +0.0000276 ETH (≈ +0.06 € avant frais) ; Risk compte +0,05 € après frais
+- Décision : **VENDRE** (simulation rétro, comptée dans le capital simulé — accord Quentin)
+- Pourquoi : prévision de baisse écrite à 14h34, avant le mouvement ; rachat touché avant le prix d’arrêt
+
+### 2026-10-08 17:27 | SOL-EUR | D-020 — SIMULATION RÉTRO (exception paramétrage, accord Quentin)
+- Idée : **idée à la baisse** (vendre des pièces qu’on a, puis racheter plus bas)
+- Sens : **Vendre en premier**, puis Acheter (rachat)
+- Origine : idée à la baisse, tirée de la prévision D-017 écrite à 14h34 avant le mouvement
+- Vente simulée : 0.124 SOL (taille réduite de moitié, total 25 € partagé ; avant : 0.241) à 100.695 € (≈ 12.49 €) à 14h34
+- Rachat (objectif −0,5 %) : 100.2 € — touché à 15:02 (ticks 30 s) · prix d’arrêt +0,5 % : 101.2 € (pas touché avant)
+- Résultat : +0.000613 SOL (≈ +0.06 € avant frais) ; Risk compte +0,05 € après frais
+- Décision : **VENDRE** (simulation rétro, comptée dans le capital simulé — accord Quentin)
+- Pourquoi : prévision de baisse écrite à 14h34, avant le mouvement ; rachat touché avant le prix d’arrêt
+- Note : pas de simulation rétro pour D-015 BTC — on n’a pas de BTC à vendre.
+
+- Risk 17:30 : D-019 et D-020 vérifiés sur les prix 30 s (rachat touché avant l'arrêt ; ETH est monté à 2271,3 €, à 2 € de l'arrêt). Enregistrés à part (étiquette « rétro », state/retro_sims.jsonl), hors capital simulé officiel. Réserve : ouverts en même temps = ~49 € > plafond 5 % (25 €). Avec les règles de demain, une seule des deux passerait (ou deux de ~12 €).
+
+
+- Réserve Risk (17h27) : D-019 + D-020 ouvertes ensemble ≈ 49 € > 25 € max au total → avec les règles de demain, une seule ou deux de ~12 €. Leçon : les simulations ouvertes en même temps partagent les 25 €.
+
+- **Choix de taille D-019/D-020 (Predict, 17h31, chiffres de 14h34 seulement)** : écarts presque égaux (SOL +20 pts, ETH +18 pts) → **séparer en deux** : ETH 0,0055 (≈12,44 €) et SOL 0,124 (≈12,49 €), total ≈24,9 € ≤ 25 €. Risk doit réduire les tailles enregistrées (étaient ~24,9 € + ~24,3 €).
+- Risk 17:31 : D-019 et D-020 réduits à ~12,5 € chacun (demande Predict, plafond 25 € partagé). D-019 +0.0510 €, D-020 +0.0501 €. Gain gardé en euros, mêmes pièces rachetées. Capital simulé 499.27 €.
+

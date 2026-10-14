@@ -1,0 +1,96 @@
+{
+  "heartbeat": "2026-10-09T02:18:24.660490+02:00",
+  "pid": 1027043,
+  "mode": {
+    "predict": "réel",
+    "risk": "réel",
+    "compound": "réel"
+  },
+  "mode_reason": {
+    "predict": "URL + clé présentes",
+    "risk": "URL + clé présentes",
+    "compound": "URL + clé présentes"
+  },
+  "auth_style": {
+    "predict": "header Authorization",
+    "risk": "header Authorization",
+    "compound": "header Authorization"
+  },
+  "last_tick_ts": "2026-10-09T02:18:10.314628+02:00",
+  "last_tick_age_s": 14.3,
+  "stale": false,
+  "prices": {
+    "BTC-EUR": 72877.155,
+    "ETH-EUR": 2208.065,
+    "SOL-EUR": 97.345
+  },
+  "predict_window_open": true,
+  "zones_valid": 6,
+  "zones_problems": [],
+  "zones_file_error": null,
+  "real_positions": [],
+  "real_positions_without_stop": [],
+  "real_sources": {
+    "revx": "ok",
+    "revx_open_orders": 0
+  },
+  "risk_metrics": {
+    "daily_loss_pct": 0.0,
+    "drawdown_pct": null
+  },
+  "live_equity": {
+    "capital_reel": 165.71,
+    "eur_available": 165.71,
+    "eur_reserved": 0.0,
+    "bot_positions_value": 0.0,
+    "perte_jour_pct": 0.0,
+    "baisse_depuis_plus_haut_pct": null,
+    "stale": false,
+    "plus_haut": null,
+    "ref_jour": {
+      "date": "2026-10-09",
+      "valeur": 165.71
+    }
+  },
+  "urgent_active": false,
+  "sante": {
+    "positions_ouvertes": 1,
+    "open_live": 0,
+    "open_paper": 1,
+    "watcher": "ok",
+    "watcher_age_s": 13,
+    "watcher_pid_vivant": true,
+    "revolut": "ok",
+    "revolut_age_s": 76,
+    "revolut_ok": true
+  },
+  "rings_this_cycle": [],
+  "today": {
+    "date": "2026-10-09",
+    "predict_delivered": {
+      "dry": 0,
+      "real": 0
+    },
+    "risk_delivered": {
+      "dry": 0,
+      "real": 0
+    },
+    "compound_delivered": {
+      "dry": 0,
+      "real": 0
+    },
+    "compound_day_count": 0,
+    "compound_rung_total": 3
+  },
+  "collector": {
+    "running": true,
+    "pid": 413312,
+    "via": "pidfile"
+  },
+  "departs": {
+    "actif": true,
+    "mode": "observe",
+    "derniere_verif": "2026-10-09T02:09:23+02:00",
+    "prochaine_dans_s": 59
+  }
+}

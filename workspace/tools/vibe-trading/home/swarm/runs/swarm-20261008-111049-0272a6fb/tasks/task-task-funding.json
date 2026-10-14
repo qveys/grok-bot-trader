@@ -1,0 +1,15 @@
+{
+  "id": "task-funding",
+  "agent_id": "funding_basis_analyst",
+  "prompt_template": "Analyze funding rates, basis structure, and carry opportunities for {target}. Timeframe: {timeframe}.",
+  "depends_on": [],
+  "blocked_by": [],
+  "input_from": {},
+  "status": "failed",
+  "summary": null,
+  "artifacts": [],
+  "error": "LANGCHAIN_MODEL_NAME is not set",
+  "started_at": "2026-10-08T11:10:49.610940+00:00",
+  "completed_at": "2026-10-08T11:10:49.622920+00:00",
+  "worker_iterations": 0
+}

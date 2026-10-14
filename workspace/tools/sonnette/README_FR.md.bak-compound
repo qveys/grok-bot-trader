@@ -1,0 +1,140 @@
+# Sonnette — surveillant de prix gratuit (sans IA)
+
+Regarde les prix toutes les 30 s et **réveille une routine Grok Bot** (PM-Predict ou PM-Risk)
+par un webhook (HTTP POST JSON) quand une zone de prix est touchée.
+Python standard uniquement, aucun coût, aucune IA. Ne passe **jamais** d'ordre.
+
+## Fichiers
+
+| Fichier | Rôle |
+|---------|------|
+| `sonnette.py` | Le programme (boucle, tests, statut, envoi test). |
+| `live_equity.py` | Calcul du capital réel (lecture seule revx) → `state/live_equity.json` de l'équipe. |
+| `start.sh` / `stop.sh` / `status.sh` | Démarrer (nohup + pidfile), arrêter, voir l'état. `start.sh` ignore les `SONNETTE_*` du shell : seul `secrets.env` compte (sauf `SONNETTE_USE_ENV=1`). |
+| `config.json` | Réglages (fenêtre Predict, maximums, seuils Risk). |
+| `secrets.env.example` | Modèle pour les URL/clés des webhooks (à copier en `secrets.env`, chmod 600). |
+| `state/` | Mémoire de la sonnette : `status.json`, `state.json` (compteurs du jour), `rings.jsonl` (toutes les sonneries), `sonnette.log`, `sonnette.out`, `PRIX_PERIMES.flag`, `ALERTE_RISK_URGENTE.json`, `alertes_urgentes.jsonl`. |
+
+Côté équipe (lecture seule, sauf le fichier des zones) :
+- prix : `/workspace/predict-market-bot/state/price_ticks/AAAA-MM-JJ.jsonl` (collecteur 30 s)
+- zones : `/workspace/predict-market-bot/state/zones_reveil.json` (écrit par Predict/Risk)
+- mode d'emploi pour les bots : `/workspace/predict-market-bot/references/sonnette.md`
+- positions réelles : `guardian/state.json`, `state/positions.json`, `state/live_orders.jsonl`,
+  plus `revx order open` **en lecture seule** (au plus toutes les 5 min).
+
+## Commandes
+
+```bash
+cd /workspace/tools/sonnette
+./start.sh                        # démarre en arrière-plan
+./status.sh                       # état : marche/arrêt, âge du dernier prix, sonneries, compteurs, dry/réel
+./stop.sh                         # arrête
+python3 sonnette.py --simulate    # auto-tests (faux prix dans /tmp, ne touche à rien de réel)
+python3 sonnette.py --test risk   # envoie UNE sonnerie d'essai à Risk (test=true)
+python3 sonnette.py --test predict
+python3 sonnette.py --once        # un seul tour
+```
+
+## Règles
+
+**Predict** (zones `"bot": "predict"`) : seulement 15h00–17h00 heure de Bruxelles, du lundi au vendredi
+(réglable dans `config.json` → `predict.days`, 0 = lundi), 3 sonneries max par jour au total,
+chaque zone 1 fois par jour.
+
+**Risk** — seulement si une position **en argent réel** est ouverte (les positions simulées ne sonnent jamais) :
+- `stop_hit` : prix ≤ prix d'arrêt → tout de suite, à toute heure ; rappel au plus toutes les 10 min ; 6 max/jour/position.
+- `stop_near` : prix à moins de 1 % au-dessus du prix d'arrêt → 1 fois/position/jour.
+- `daily_loss` ≥ 12 % → 1 fois/jour ; encore 1 fois à 15 %. `drawdown` ≥ 6 % → 1 fois/jour ; encore à 8 %.
+  Calculés sur le **capital réel** (`state/live_equity.json`, voir plus bas), et seulement si un achat réel
+  est ouvert **ou** a été fait aujourd'hui (Bruxelles). Si le capital est périmé → pas de sonnerie.
+  Si on saute directement au-delà des deux seuils, une seule sonnerie (au seuil le plus haut).
+- `stale_price` : dernier prix > 10 min → 1 fois, puis au plus toutes les 30 min.
+- `manual_zone` : zone `"bot": "risk"` touchée → 1 fois/zone/jour.
+- En cas de `stop_hit` : fichier `state/ALERTE_RISK_URGENTE.json` (`actif: true`), repasse à `false` quand le prix remonte.
+
+Prix d'arrêt d'une position réelle : `stop_price_eur`, sinon `stop_pct` appliqué au prix d'achat
+(même logique que `watch_stops.py`). Une position réelle sans prix d'arrêt est signalée dans le log et le statut.
+
+**Prix périmés** : si le dernier prix a plus de 3 min → aucune sonnerie sur les prix, ligne de log,
+`status.json → "stale": true` et fichier `state/PRIX_PERIMES.flag`.
+
+**Collecteur** : si `collect_price_ticks.py` ne tourne pas, c'est noté dans le statut et le log.
+La sonnette **ne le démarre pas** (c'est à l'équipe : `scripts/start_price_ticks.sh`).
+
+## Capital réel (`/workspace/predict-market-bot/state/live_equity.json`)
+
+Calculé au plus toutes les 5 min (module `live_equity.py`), en **lecture seule** :
+- `revx account balances` → EUR disponible + réservé (`eur_available`, `eur_reserved`).
+- `bot_positions_value` = valeur, au prix du collecteur, du crypto **acheté par le bot** seulement.
+- `capital_reel` = EUR dispo + EUR réservé + `bot_positions_value`.
+
+**Crypto perso exclu (`hors_bot`)** : au premier calcul réussi, on prend une photo des soldes BTC/ETH/SOL
+(disponible + réservé + staké) = crypto déjà détenu par Quentin. Ensuite, pour une paire où le bot a un achat
+ouvert (d'après `live_orders.jsonl`, un ordre placé non rempli compte), crypto bot = solde − photo.
+Pour une paire **sans** achat bot ouvert, tout changement de solde (récompense de staking, achat/vente perso)
+est considéré perso : la photo suit le solde (journalisé si ≥ 0,50 €). USDC et autres devises ne sont pas comptés.
+Limite : si Quentin achète du crypto perso sur une paire où le bot a une position ouverte, ce sera compté comme bot.
+
+**Référence du jour** (`ref_jour`) : première valeur après minuit (Bruxelles) → la perte du jour repart de 0 chaque jour.
+**Plus-haut** (`plus_haut`) : maximum depuis le premier achat réel du bot ; `null` tant qu'il n'y en a pas.
+**Dépôts / retraits** : si le cash EUR change de ≥ 0,05 € **sans activité bot** (pas de nouvelle ligne dans
+`live_orders.jsonl`, pas de changement de crypto bot), `ref_jour` et `plus_haut` sont décalés du même montant
+→ pas compté comme gain/perte. Chaque décalage est noté dans `ajustements[]` et dans le log.
+**Panne revx** : on garde les dernières valeurs, `stale: true`, pas de sonnerie perte/baisse, ligne de log.
+Idem si une position bot n'a pas de prix frais.
+
+## Message envoyé (JSON)
+
+Predict :
+```json
+{"bot":"predict","zone_id":"Z-SOL-98","paire":"SOL-EUR","prix":97.85,"seuil":98.0,"sens":"sous",
+ "heure":"2026-10-08T15:41:00+02:00","kind":"zone","test":false,"raison":"...","envoi":"reel",
+ "message_fr":"SOL est passé sous 98 € (97,85 €) à 15h41. Predict, à toi de juger."}
+```
+
+Risk (noms de champs demandés par PM-Risk, + quelques extras) :
+```json
+{"mode":"live","kind":"stop_hit","pair":"SOL-EUR","price":94.8,"stop":95.0,"position_id":"rx-live-...",
+ "ts":"2026-10-11T03:03:00+02:00","test":false,"bot":"risk","rappel":1,"envoi":"reel",
+ "message_fr":"URGENT argent réel : SOL est passé sous ton prix d'arrêt 95 € (94,80 €) à 03h03. ..."}
+```
+Essai (`--test`) : `"test": true`, `"mode": "test"`, `"kind": "stop_hit"`,
+`"message_fr": "Essai de la sonnette, rien à faire."` — non compté dans les compteurs.
+
+## URL et clé des webhooks (secrets)
+
+Uniquement par variables d'environnement ou par le fichier `secrets.env` (chmod 600) :
+
+| Variable | Contenu |
+|----------|---------|
+| `SONNETTE_PREDICT_URL`, `SONNETTE_RISK_URL` | URL du webhook de la routine (doit commencer par `https://`). |
+| `SONNETTE_PREDICT_AUTH`, `SONNETTE_RISK_AUTH` | **Valeur complète** de l'en-tête `Authorization`, telle que montrée dans le panneau de la routine (`Bearer xxx` ou `xxx`) — envoyée telle quelle. |
+| `SONNETTE_PREDICT_KEY`, `SONNETTE_RISK_KEY` | Alternative : seulement la clé → envoyée comme `Authorization: Bearer <clé>`. |
+
+Autres façons d'envoyer la clé (si le panneau demande autre chose) :
+- `SONNETTE_KEY_HEADER=X-Api-Key` → la clé brute dans l'en-tête `X-Api-Key`.
+- `SONNETTE_KEY_HEADER="Authorization: Token <key>"` → modèle libre.
+- `SONNETTE_KEY_PREFIX=none` → `Authorization: <clé>` sans `Bearer`.
+- `SONNETTE_KEY_MODE=query` (+ `SONNETTE_KEY_PARAM=token`) → `?token=<clé>` dans l'URL.
+- `SONNETTE_KEY_MODE=body` (+ `SONNETTE_KEY_PARAM`) → la clé dans le JSON.
+- `SONNETTE_KEY_MODE=none` → pas de clé (si l'URL contient déjà le secret).
+- Version par bot possible : `SONNETTE_RISK_KEY_HEADER`, `SONNETTE_PREDICT_KEY_MODE`, etc.
+
+Sans URL **et** clé pour un bot → ce bot est en **mode dry** : la sonnerie est écrite dans le log et
+`state/rings.jsonl`, mais rien n'est envoyé. `SONNETTE_DRY=1` force le mode dry.
+Le fichier `secrets.env` est relu à chaque tour : le passage dry → réel se fait en 30 s, sans redémarrer.
+L'URL et la clé ne sont **jamais** affichées ni écrites dans les logs, l'état ou le statut.
+
+## Réseau
+
+Envoi via le proxy HTTPS de la box `http://127.0.0.1:8791`. 4 essais au total (1 + 3 nouveaux essais,
+pauses 2 s / 5 s / 10 s). Pas de nouvel essai sur une erreur 4xx (clé refusée → vérifier la clé).
+Un envoi raté **ne compte pas** comme livré ; nouvelle tentative après 5 min (Predict) ou 2 min (Risk),
+avec un nombre d'essais limité par jour (anti-spam).
+
+## Mettre en service pour de vrai
+
+1. Créer (ou ouvrir) la routine webhook sur PM-Predict et sur PM-Risk, copier l'URL et la valeur `Authorization`.
+2. Les mettre dans `secrets.env` (copie de `secrets.env.example`), puis `chmod 600 secrets.env`.
+3. `./status.sh` → les deux bots doivent afficher **RÉEL**.
+4. `python3 sonnette.py --test risk` puis `--test predict` → la routine doit se réveiller avec « Essai de la sonnette, rien à faire. »

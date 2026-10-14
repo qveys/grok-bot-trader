@@ -1,0 +1,108 @@
+{
+  "ts": "2026-10-14T18:37:28.925807+02:00",
+  "eur_available": 165.71,
+  "eur_reserved": 0.0,
+  "bot_positions": {},
+  "bot_positions_value": 0.0,
+  "capital_reel": 165.71,
+  "hors_bot": {
+    "BTC": {
+      "qty": 3.131e-05,
+      "eur": 2.3,
+      "solde_total": 3.131e-05
+    },
+    "ETH": {
+      "qty": 0.03089338,
+      "eur": 67.66,
+      "solde_total": 0.03089338
+    },
+    "SOL": {
+      "qty": 0.341944,
+      "eur": 32.04,
+      "solde_total": 0.341944
+    }
+  },
+  "ref_jour": {
+    "date": "2026-10-14",
+    "valeur": 165.71
+  },
+  "plus_haut": null,
+  "perte_jour_pct": 0.0,
+  "baisse_depuis_plus_haut_pct": null,
+  "ajustements": [],
+  "stale": false,
+  "soldes_revolut_x": {
+    "BTC": {
+      "disponible": 3.131e-05,
+      "reserve": 0.0,
+      "stake": 0.0,
+      "total": 3.131e-05,
+      "prix_eur": 73531.305,
+      "eur": 2.3023
+    },
+    "ETH": {
+      "disponible": 0.02085589,
+      "reserve": 0.0,
+      "stake": 0.01003749,
+      "total": 0.03089338,
+      "prix_eur": 2190.175,
+      "eur": 67.6619
+    },
+    "EUR": {
+      "disponible": 165.71,
+      "reserve": 0.0,
+      "stake": 0.0,
+      "total": 165.71,
+      "prix_eur": null,
+      "eur": 165.71
+    },
+    "SOL": {
+      "disponible": 0.241308,
+      "reserve": 0.0,
+      "stake": 0.100636,
+      "total": 0.341944,
+      "prix_eur": 93.705,
+      "eur": 32.0419
+    },
+    "USDC": {
+      "disponible": 0.029953,
+      "reserve": 0.0,
+      "stake": 0.0,
+      "total": 0.029953,
+      "prix_eur": null,
+      "eur": null
+    }
+  },
+  "metamask": {
+    "adresse": "0xb88D4A78e960F04E8c9a5da2B91Bf74c49c271e8",
+    "reseau": "Arbitrum One",
+    "eth": 0.039679317433,
+    "prix_eur": 2190.175,
+    "eur": 86.9046,
+    "lu_a": "2026-10-14T18:37:28.925807+02:00",
+    "stale": false,
+    "source": "eth_getBalance (RPC public Arbitrum, lecture seule)"
+  },
+  "total_revolut_x_eur": 267.7161,
+  "total_reel_eur": 354.6207,
+  "total_reel_complet": false,
+  "total_reel_manque": [
+    "USDC"
+  ],
+  "total_reel_note_fr": "Tout l'argent réel : Revolut X (euros + toutes les pièces, du bot et hors bot) + MetaMask. Valeurs au prix du collecteur au moment de la lecture.",
+  "source": "revx account balances (lecture seule) + live_orders.jsonl + prix du collecteur + MetaMask eth_getBalance (lecture seule)",
+  "notes_fr": "Capital réel = EUR (dispo+réservé) + valeur du crypto acheté par le bot. Le crypto déjà détenu (hors_bot) est une photo prise au premier lancement ; les achats bot = solde actuel − hors_bot. Les dépôts/retraits EUR hors bot décalent la référence du jour et le plus-haut.",
+  "_track": {
+    "hors_bot_locked": true,
+    "hors_bot_depuis": "2026-10-08T16:01:48.815835+02:00",
+    "eur_prev": 165.71,
+    "last_ok_ts": "2026-10-14T18:37:28.925807+02:00",
+    "bot_orders_sig": "0:",
+    "bot_qty": {
+      "BTC": 0.0,
+      "ETH": 0.0,
+      "SOL": 0.0
+    },
+    "capital_prev": 165.71
+  }
+}

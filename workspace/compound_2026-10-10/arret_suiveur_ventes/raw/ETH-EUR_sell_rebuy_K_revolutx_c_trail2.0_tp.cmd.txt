@@ -1,0 +1,1 @@
+backtest.sh run --pair ETH-EUR --tf 1H --days 365 --end 2026-10-07 --strategy sell_rebuy --json --coins 0.011 --costs revolutx --trail 2.0

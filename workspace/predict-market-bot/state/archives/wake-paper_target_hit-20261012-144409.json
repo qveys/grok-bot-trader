@@ -1,0 +1,34 @@
+{
+  "closed_at": "2026-10-12T12:42:32Z",
+  "closed_count": 1,
+  "live_pending_count": 0,
+  "source": "watch_stops",
+  "mode": "paper",
+  "pair": "SOL-EUR",
+  "stop": 101.4,
+  "price": 98.39,
+  "pnl_eur": 0.194204,
+  "position_id": "rx-paper-2026-10-12T053552Z-0dfa6c69",
+  "message_fr": "Trou de prix 2026-10-12T11:39:09+02:00 → 2026-10-12T14:42:31+02:00 (plus haut 100.03, plus bas 98.35) : niveau franchi pendant la pause, fermé au niveau. Rachat auto (idée à la baisse, target) sur SOL-EUR: prix 98.3900, seuil 101.4000, PnL +0.1942 EUR — position clôturée.",
+  "rattrapage_trou": {
+    "debut": "2026-10-12T11:39:09+02:00",
+    "fin": "2026-10-12T14:42:31+02:00",
+    "source": "coinbase 60s",
+    "granularite_s": 60,
+    "plus_haut": 100.03,
+    "plus_bas": 98.35,
+    "statut": "complet",
+    "depuis": "last_checked_at",
+    "bougie": "2026-10-12T14:41:00+02:00",
+    "bougie_plus_haut": 98.45,
+    "bougie_plus_bas": 98.35,
+    "stop_et_objectif_meme_bougie": false
+  },
+  "price_sources": [
+    {
+      "pair": "SOL-EUR",
+      "price_source": "revolut",
+      "price_age_s": 0.0
+    }
+  ]
+}

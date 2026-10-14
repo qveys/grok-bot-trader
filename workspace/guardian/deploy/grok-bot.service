@@ -1,0 +1,24 @@
+[Unit]
+Description=Grok trading bot guardian
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=grok-bot
+Group=grok-bot
+EnvironmentFile=/etc/grok-bot/env
+WorkingDirectory=/opt/grok-guardian
+ExecStart=/opt/grok-guardian/.venv/bin/python -m guardian
+Restart=always
+RestartSec=30
+# Si le gardien sort en code 1 (halt/mort), ne pas relancer en boucle
+RestartPreventExitStatus=42 43
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/grok-bot
+
+[Install]
+WantedBy=multi-user.target

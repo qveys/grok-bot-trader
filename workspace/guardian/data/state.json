@@ -1,0 +1,47 @@
+{
+  "started_at": "2026-10-06T00:00:00Z",
+  "alive": true,
+  "victory": false,
+  "capital_score": "225.18",
+  "metabolism_cumulative": "8.8319",
+  "metabolism_rate": "0.005",
+  "last_metabolism_date": "2026-10-14",
+  "day_start_score": "225.02",
+  "milestones": {
+    "100": "2026-10-08T06:23:38Z",
+    "250": null,
+    "500": null,
+    "1000": null
+  },
+  "missed_milestones": 0,
+  "positions": [
+    {
+      "pair": "ETH-EUR",
+      "qty": "0.02085589",
+      "entry": "2393.88",
+      "stop": "2202.36960000",
+      "opened_at": "2026-10-06T20:34:30Z"
+    },
+    {
+      "pair": "SOL-EUR",
+      "qty": "0.241308",
+      "entry": "107.477",
+      "stop": "98.87884000",
+      "opened_at": "2026-10-06T20:34:30Z"
+    }
+  ],
+  "open_orders": [],
+  "purchases_frozen_until": null,
+  "active_dilemma": null,
+  "last_dilemma_week": "2026-42",
+  "wakes": [
+    "2026-10-14T16:28:22Z"
+  ],
+  "last_scheduled_wake": "2026-10-12T06",
+  "last_milestone_wake": "2026-10-07T19:07:16Z",
+  "last_decision_prices": {},
+  "in_danger": false,
+  "last_activity_date": "2026-10-06",
+  "last_stop_hit_pending": true,
+  "refused_orders": []
+}

@@ -1,0 +1,17 @@
+# Non-secret paths only. Secret values live under secrets/ (chmod 600) or process.env.
+export KALSHI_PRIVATE_KEY_PATH=/workspace/predict-market-bot/secrets/kalshi_private.pem
+# This key pair authenticates to PRODUCTION Kalshi (not demo).
+export KALSHI_BASE_URL=https://api.elections.kalshi.com/trade-api/v2
+export KALSHI_ENV=production
+
+# Revolut X — paper first; trading=false until explicit live OK
+export REVOLUT_X_API_KEY_PATH=/workspace/predict-market-bot/secrets/revolut_x_api_key
+export REVOLUT_X_ED25519_PRIVATE_KEY_PATH=/workspace/predict-market-bot/secrets/revolut_x_ed25519_private.pem
+# Optional: load into process.env for tools that expect env vars
+#   export REVOLUT_X_API_KEY="$(cat "$REVOLUT_X_API_KEY_PATH")"
+#   export REVOLUT_X_ED25519_PRIVATE_KEY="$(cat "$REVOLUT_X_ED25519_PRIVATE_KEY_PATH")"
+
+# Revolut X CLI (revx)
+export PATH="$HOME/.local/bin:$PATH"
+# CLI config (private.pem + config.json) lives in ~/.config/revolut-x/
+# Canonical copies also under /workspace/predict-market-bot/secrets/

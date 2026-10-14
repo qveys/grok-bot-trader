@@ -1,0 +1,30 @@
+{
+  "kind": "watcher_down",
+  "mode": "paper",
+  "ts": "2026-10-13T07:23:32.600275+02:00",
+  "message_fr": "Le surveillant ne donne plus signe de vie depuis 624 min, 3 trades simulés ouverts.",
+  "heartbeat_age_s": 37487,
+  "heartbeat_pid": 2421281,
+  "pid_vivant": true,
+  "open_live": 0,
+  "open_paper": 3,
+  "positions": [
+    {
+      "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+      "pair": "BTC-EUR",
+      "decision_id": "D-040a"
+    },
+    {
+      "id": "rx-paper-2026-10-12T184805Z-72bcb36d",
+      "pair": "SOL-EUR",
+      "decision_id": "D-051a"
+    },
+    {
+      "id": "rx-paper-2026-10-12T184805Z-35368452",
+      "pair": "ETH-EUR",
+      "decision_id": "D-051c"
+    }
+  ],
+  "handled_at": "2026-10-13T07:25:10.910698+02:00",
+  "outcome": "gardien_reparti_seul_rattrapage_2_closes_target"
+}

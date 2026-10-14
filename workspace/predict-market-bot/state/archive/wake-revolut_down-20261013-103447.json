@@ -1,0 +1,28 @@
+{
+ "mode": "paper",
+ "kind": "revolut_down",
+ "pair": null,
+ "price": null,
+ "stop": null,
+ "position_id": null,
+ "message_fr": "Pas de nouvelle du test Revolut depuis 13 min, 3 trades simulés ouverts.",
+ "ts": "2026-10-13T10:34:47.357953+02:00",
+ "test": false,
+ "bot": "risk",
+ "heartbeat_age_s": 794,
+ "consecutive_failures": 0,
+ "error": null,
+ "heartbeat_absent": false,
+ "open_live": 0,
+ "open_paper": 3,
+ "position_ids": [
+  "rx-paper-2026-10-10T060455Z-b93c34c9",
+  "rx-paper-2026-10-13T052909Z-7311633d",
+  "rx-paper-2026-10-13T052909Z-a03d58a6"
+ ],
+ "handled": {
+  "at": "2026-10-13T10:36:00+02:00",
+  "by": "pm-risk",
+  "result": "Revolut relu OK (lecture seule), heartbeat mis à jour 10h35; gardien vivant; trou 10h24–10h34 rattrapé sans arrêt ni prix visé touché; pas d'alerte (papier seulement)"
+ }
+}

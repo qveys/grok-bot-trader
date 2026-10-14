@@ -1,0 +1,34 @@
+id,pair,dir,decision,start,entree_t,reglage,trou_max_s,actuel,actuel_t,actuel_bidask,1/1,1/1_t,1/1_bidask,fin_ticks
+D-015,BTC,down,10-08 14:34,73559.34,08 14:34,0.5/0.5,2431,cible,08 15:42,cible,cible,08 17:23,cible,09 20:59
+D-016,ETH,down,10-08 14:34,2261.91,08 14:34,0.5/0.5,2431,cible,08 15:39,cible,cible,08 15:45,cible,09 20:59
+D-017,SOL,down,10-08 14:34,100.7,08 14:34,0.5/0.5,2431,cible,08 15:02,cible,cible,08 15:39,cible,09 20:59
+D-021,SOL,down,10-08 22:57,98.0,08 22:57,1.5/1.5,2431,aucun,,aucun,cible,09 02:26,cible,09 20:59
+D-022,BTC,down,10-09 14:02,74200.0,09 14:02,1/1,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-023,BTC,up,10-09 14:29,74120.0,09 14:29,1.5/1,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-024a,SOL,up,10-09 15:07,98.69,09 15:07,1.42/1.41,30,aucun,,aucun,arret,09 15:36,arret,09 20:59
+D-024b,ETH,down,10-09 15:07,2232.7,09 15:07,1.6/1,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-024c,SOL,up,10-09 15:07,98.69,09 15:07,2.04/1,30,arret,09 15:36,arret,arret,09 15:36,arret,09 20:59
+D-026a,SOL,down,10-09 15:36,97.7,09 15:36,1.5/1.5,30,aucun,,aucun,arret,09 16:30,arret,09 20:59
+D-026b,SOL,down,10-09 15:36,97.7,09 15:36,1.5/1,30,arret,09 16:30,arret,arret,09 16:30,arret,09 20:59
+D-026c,SOL,down,10-09 15:36,97.7,09 15:36,2/1,30,arret,09 16:30,arret,arret,09 16:30,arret,09 20:59
+D-025a,SOL,up,10-09 15:39,97.22,09 15:39,2/2,30,aucun,,aucun,cible,09 16:15,cible,09 20:59
+D-025b,ETH,down,10-09 15:39,2217.97,09 15:39,2.25/1.5,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-025c,BTC,up,10-09 15:39,73050.0,09 15:39,2/1,30,aucun,,aucun,cible,09 15:39,cible,09 20:59
+D-028a,ETH,down,10-09 16:23,2225.1,09 16:23,2/2,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-028b,SOL,up,10-09 16:23,98.38,09 16:23,2.25/1.5,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-028c,BTC,up,10-09 16:23,74390.0,09 16:23,2/1,30,arret,09 20:32,arret,arret,09 20:32,arret,09 20:59
+D-029a,SOL,up,10-09 16:35,98.63,09 16:35,2/2,30,aucun,,aucun,arret,09 20:35,arret,09 20:59
+D-029b,ETH,down,10-09 16:35,2230.08,09 16:35,2.25/1.5,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-029c,SOL,up,10-09 16:35,98.63,09 16:35,2/1,30,arret,09 20:35,arret,arret,09 20:35,arret,09 20:59
+D-030a,SOL,down,10-09 17:07,98.055,09 17:07,1.59/1.59,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-030b,ETH,down,10-09 17:07,2223.35,09 17:07,2.25/1.5,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-030c,SOL,down,10-09 17:07,98.055,09 17:07,2/1,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-031a,BTC,up,10-09 17:09,73956.0,09 17:09,1.2/1.2,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-031b,SOL,down,10-09 17:09,97.89,09 17:09,1.6/1,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-031c,BTC,up,10-09 17:09,73956.0,09 17:09,2/1,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-033a,BTC,up,10-09 18:21,74093.67,09 18:21,1.5/1.5,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-033b,ETH,down,10-09 18:21,2231.07,09 18:21,2.25/1.5,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-033c,BTC,up,10-09 18:21,74093.67,09 18:21,2/1,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-034a,ETH,down,10-09 19:25,2216.7,09 19:25,1.8/1.8,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-034b,SOL,down,10-09 19:25,97.71,09 19:25,2.25/1.5,30,aucun,,aucun,aucun,,aucun,09 20:59
+D-034c,ETH,down,10-09 19:25,2216.7,09 19:25,2/1,30,aucun,,aucun,aucun,,aucun,09 20:59

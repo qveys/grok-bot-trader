@@ -1,0 +1,16 @@
+# PROTOTYPE — mode observation : n'envoie AUCUNE sonnerie ni Telegram, journalise seulement.
+name = "pm-sonnette-cf"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[triggers]
+crons = ["* * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pm-veilleur"
+database_id = "ddf64285-8b63-46aa-b96f-c9f26af726fd"
+
+[observability]
+enabled = true

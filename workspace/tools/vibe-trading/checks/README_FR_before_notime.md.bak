@@ -1,0 +1,179 @@
+# Vibe-Trading : rejouer une idée sur les prix du passé
+
+## Ce que c'est
+- Un outil qui rejoue une règle d'achat et de vente sur les prix d'avant, pour voir ce qu'elle aurait donné.
+- Il lit seulement des prix publics (Binance par défaut, ou OKX). Aucun compte, aucun portefeuille, aucune clé.
+- Il ne passe JAMAIS d'ordre. Pas d'argent réel. Pas besoin d'IA ni de clé d'IA.
+- Achat simple seulement : pas d'emprunt, pas de vente à découvert. (Exception `sell_rebuy` : on vend d'abord des pièces qu'on possède déjà, puis on les rachète ; toujours sans emprunt.)
+- Frais comptés par défaut comme chez Revolut X : 0,09 % à l'achat et 0,09 % à la vente, plus 0,05 % d'écart de prix à chaque fois (environ 0,28 % pour un aller-retour).
+  `--costs revolutx-maker` = 0 % de frais (cas le plus favorable). `--costs flat01` = 0,1 %.
+  Avec `revolutx-maker`, tous les ordres sont supposés remplis : voir `--fill touch` et `--fill-rate` (section 2b).
+- Attention : un bon résultat sur le passé ne garantit rien pour demain. Ce n'est pas un conseil.
+- Les heures sont celles de Bruxelles pour la fenêtre 15h-17h. Dans les tableaux de détail, les heures sont en UTC (Bruxelles moins 1 ou 2 heures).
+- Tout passe par un seul fichier : `/workspace/tools/vibe-trading/backtest.sh`. Ajouter `--json` donne un résultat lisible par un bot.
+
+## Les commandes, et pour quel bot
+
+### 1. `run` : tester une idée → PM-Predict
+Rejoue une règle et donne : gain ou perte en %, nombre d'achats, part des achats gagnants, pire baisse, frais payés, et la comparaison avec « acheter au début et garder ».
+Il dit aussi si la règle de l'équipe est respectée : le gain visé fait au moins 3 fois les frais, la pire baisse reste sous 8 %.
+```
+backtest.sh run --pair BTC-EUR --tf 1D --days 365 --strategy sma_cross --fast 20 --slow 50 --json
+```
+Règles simples : `sma_cross`, `ema_cross` (deux moyennes qui se croisent), `rsi_revert` (acheter après une forte baisse), `buy_hold` (acheter et garder).
+
+### 2. Les règles « comme l'équipe » : rejouer un type de trade → PM-Compound
+Au lieu d'attendre environ 20 vrais essais, on rejoue le même type de trade sur un an de prix.
+Par défaut : bougies d'une heure, achat seulement entre 15h et 17h (heure de Bruxelles), du lundi au vendredi,
+vente si le prix baisse de 1,5 % (stop) ou monte de 1,5 % (objectif), sinon vente à 22h le même jour.
+- `team_rebound` : le prix a baissé d'au moins 3 % en 24 heures, puis une bougie remonte (plus haut que la précédente) → achat.
+- `team_breakout` : le prix passe au-dessus du plus haut des 8 dernières heures et au-dessus de sa moyenne de 50 heures → achat.
+```
+backtest.sh run --pair ETH-EUR --strategy team_rebound --sl 8 --tp 3 --json
+backtest.sh run --pair BTC-EUR --strategy team_breakout --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --tp 1.5
+```
+Ce sont des approximations : la vraie décision de l'équipe est faite à la main (lecture du marché, confirmation sur une bougie fermée). L'outil ne la copie pas parfaitement.
+Réglages : `--sl` stop en %, `--tp` objectif en %, `--exit-hour` heure de sortie forcée, `--drop-pct`, `--drop-hours`, `--lookback`, `--trend`.
+
+### 2b. Vendre d'abord (D-018) : `sell_rebuy` → PM-Compound
+Idée « vendre haut, racheter plus bas ». On part avec des pièces (ETH ou SOL) déjà achetées.
+On vend seulement les pièces qu'on a (pas d'emprunt). Le but : finir avec PLUS de pièces qu'en les gardant simplement.
+- Vente : le prix a monté d'au moins 3 % en 24 heures (`--rise 3`, `--rise-hours 24`) ET il reste sous sa moyenne des 200 dernières heures (`--trend-ma 200`, `0` = sans cette condition). Décision sur une bougie fermée, vente au prix d'ouverture de l'heure suivante (`--sell-fill close` = plus prudent : vente au prix de fin de l'heure du signal, seulement si le prix y revient).
+- Achat au prix visé : 3 % sous le prix de vente (`--dip 3`).
+- Achat de sécurité : si le prix monte de 1,5 % au-dessus du prix de vente, on rachète quand même (`--stop 1.5`).
+- Option : rachat après N heures quoi qu'il arrive (`--max-hours 24`). Option : vendre seulement une partie (`--chunk 50` = la moitié).
+- Une seule vente à la fois. Si le prix visé et le prix de sécurité sont touchés dans la même heure, on compte le cas le pire (sécurité).
+- Au départ : `--coins 0.011` (nombre de pièces) ou `--eur 25` (converti au premier prix). Fenêtre possible : `--session 15-17 --tz Europe/Brussels --weekdays`.
+- Frais Revolut X (par défaut) : vente et achat au prix visé = 0 % (ordre à prix fixé) ; achat de sécurité ou après délai = 0,09 % + 0,05 % d'écart de prix.
+- Résultat : en pièces ET en euros, comparé à « garder » ; nombre de ventes, part gagnante, gain moyen et perte moyenne, pire série de pertes, frais payés, règle de l'équipe (gain moyen au moins 3 fois les frais).
+- Un rapport en français simple est rangé dans le dossier du test (`rapport_fr.md`, plus `summary.json` et `artifacts/cycles.csv` avec chaque vente et chaque achat). PDF : `backtest.sh report <dossier>`.
+- Ce mode n'utilise pas le moteur Vibe-Trading (il n'achète que d'abord) : c'est un petit calcul heure par heure dans `vt_sellrebuy.py`. Tests : `.venv/bin/python checks/test_sell_rebuy.py` ; recalcul indépendant d'un test : `.venv/bin/python checks/indep_sell_rebuy.py <dossier>`.
+
+**Commandes pour ce soir (PM-Compound), Revolut X :**
+```
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy sell_rebuy --coins 0.011 --json
+/workspace/tools/vibe-trading/backtest.sh run --pair SOL-EUR --tf 1H --days 365 --strategy sell_rebuy --coins 0.241 --json
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy sell_rebuy --coins 0.011 --session 15-17 --tz Europe/Brussels --weekdays --json
+/workspace/tools/vibe-trading/backtest.sh run --pair SOL-EUR --tf 1H --days 365 --strategy sell_rebuy --coins 0.241 --session 15-17 --tz Europe/Brussels --weekdays --json
+```
+Vérifier que ce n'est pas de la chance (environ 30 secondes chacune) :
+```
+/workspace/tools/vibe-trading/backtest.sh robust --pair ETH-EUR --tf 1H --days 365 --strategy sell_rebuy --coins 0.011 --json
+/workspace/tools/vibe-trading/backtest.sh robust --pair SOL-EUR --tf 1H --days 365 --strategy sell_rebuy --coins 0.241 --json
+```
+`robust` fait : ventes à des moments pris au hasard (même nombre de ventes), re-tirage au hasard des ventes, ordre des ventes mélangé, période coupée en 5 morceaux, réglage choisi sur le passé puis testé sur la suite, 27 réglages voisins (`--rise`, `--dip`, `--stop`), et le risque que le meilleur réglage soit de la chance (PBO). Il donne un verdict : SOLIDE, FRAGILE ou NON.
+
+**MetaMask (ETH sur Arbitrum, échange dans le portefeuille)** : chaque vente et chaque achat est un échange au prix du marché, avec le même frais à chaque fois (pas de 0 %). Coûts mesurés par PM-Risk le 8 oct. :
+`--costs uniswap` = 0,05 % par échange + 0,03 € de frais de réseau ; `--costs metamask-swap` = 0,875 % par échange + 0,03 € de frais de réseau. Le prix sur Uniswap est à peu près celui du marché : les mêmes règles de vente et d'achat s'appliquent (les prix utilisés restent ceux de Binance).
+```
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy sell_rebuy --coins 0.011 --costs uniswap --json
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy sell_rebuy --coins 0.011 --costs metamask-swap --json
+```
+Si Risk mesure d'autres coûts : `--fee-pct 0.3 --fixed-fee-eur 0.05` (valeurs d'exemple, à remplacer par le coût mesuré par Risk ; frais en % par échange et frais de réseau en € par échange, à la vente ET à l'achat ; `--slippage 0.001` ajoute un écart de prix). Les frais fixes pèsent lourd sur une petite somme : 0,03 € sur 25 € = 0,12 % à chaque échange.
+Attention MetaMask : il n'y a pas d'ordre « à prix fixé » qui attend tout seul ; il faut que quelqu'un (ou un bot) fasse l'échange au bon moment, sinon le prix peut avoir bougé.
+
+**Ordres à prix fixé qui ne se remplissent pas (D-013 rebond ETH+SOL, D-014 cassure ETH) — ajouté le 8 oct.**
+Avec `--costs revolutx-maker`, l'outil suppose que TOUS les ordres à prix fixé (qui attendent dans le carnet) sont remplis. En vrai, certains ne le sont jamais.
+Option `--fill` (pour `team_rebound` et `team_breakout`) :
+- sans option (`--fill all`) : comme avant, tout est rempli. Rien ne change.
+- `--fill touch` (réaliste) : achat à prix fixé = le prix de fin de l'heure du signal. Rempli seulement si, ensuite, le prix descend STRICTEMENT EN DESSOUS (juste toucher = pas rempli). Vente objectif (+1,5 %) : seulement si le prix monte strictement AU-DESSUS. L'ordre d'achat reste valable 2 heures (`--order-bars 2`), jamais après 22h. Pas rempli = annulé : pas de trade, pas de frais.
+  Plus sévère : `--fill-ticks 10` (le prix doit passer 0,10 % au-delà), `--limit-offset 20` (achat placé 0,20 % sous le prix).
+- `--fill-rate 50 --seed 1` : seulement 50 % des ordres à prix fixé (achat et vente objectif) sont remplis, au hasard. `--seed` = même tirage à chaque fois. L'outil rejoue aussi 20 tirages (`--fill-seeds 20`) et donne le pire, le milieu et le meilleur.
+- Dans ces deux modes, la sortie par stop, la sortie de 22h et la fin des données sont des ordres au prix du marché : 0,09 % de frais + 0,05 % d'écart de prix (pas 0 %).
+- Le résultat montre : ordres d'achat placés, remplis, non remplis (%), gain ou perte après frais, et le résultat « tout rempli » d'avant pour comparer. Fichiers : `fill_touch_summary.json` (ou `fill_rate_...`) et `artifacts/fill_*_trades.csv`, `fill_*_orders.csv` dans le dossier du test.
+```
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy team_rebound --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy team_rebound --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays --fill touch
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy team_rebound --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays --fill-rate 50 --seed 1
+/workspace/tools/vibe-trading/backtest.sh run --pair SOL-EUR --tf 1H --days 365 --strategy team_rebound --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays
+/workspace/tools/vibe-trading/backtest.sh run --pair SOL-EUR --tf 1H --days 365 --strategy team_rebound --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays --fill touch
+/workspace/tools/vibe-trading/backtest.sh run --pair SOL-EUR --tf 1H --days 365 --strategy team_rebound --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays --fill-rate 50 --seed 1
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy team_breakout --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy team_breakout --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays --fill touch
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy team_breakout --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays --fill-rate 50 --seed 1
+```
+Ajouter `--json` pour un bot. Chaque commande prend environ 10 secondes.
+À savoir :
+- Avec `--fill touch`, presque tous les achats sont remplis (le prix repasse sous le dernier prix dans l'heure). Ce qui coûte, c'est surtout la vente objectif plus stricte et les frais des sorties au marché.
+- « Mieux que garder » est facile cette année : ETH et SOL ont baissé de plus de 40 %. Regarder d'abord si le résultat après frais reste au-dessus de 0.
+- `--fill-rate` avec peu de trades (10 à 40) varie beaucoup d'un tirage à l'autre : regarder le pire et le milieu des 20 tirages, pas un seul.
+- `robust` n'utilise pas encore `--fill` pour ces règles. `sell_rebuy` accepte `--fill touch` (achat au prix visé seulement si le prix passe en dessous).
+- Tests : `.venv/bin/python checks/test_fill.py`.
+
+**Stop suiveur (`--trail`) — ajouté le 8 oct. (PM-Compound)**
+Sans option : stop fixe, rien ne change. `--trail 1.5` = stop qui monte avec le gain et ne redescend jamais :
+stop = le plus haut entre « achat − 1,5 % (`--sl`) » et « plus haut prix depuis l'achat − 1,5 % ». Seules les heures déjà finies comptent pour le plus haut (prudent).
+Pour `sell_rebuy` (idée à la baisse) c'est l'inverse : le prix de l'achat de sécurité descend avec le plus bas depuis la vente (`--trail 1.5`), il ne remonte jamais.
+Marche avec `--fill touch` et `--fill-rate`. Raison de sortie : `trailing_stop` (ou `trailing` pour `sell_rebuy`). Tests : `.venv/bin/python checks/test_trail.py`.
+Attention : avec l'objectif +1,5 % (`--tp 1.5`), un stop suiveur de 1,5 % ne peut monter qu'au prix d'achat environ ; `--tp 0` = pas d'objectif (sortie au stop ou à 22h).
+```
+/workspace/tools/vibe-trading/backtest.sh run --pair ETH-EUR --tf 1H --days 365 --strategy team_breakout --costs revolutx-maker --session 15-17 --tz Europe/Brussels --weekdays --trail 1.5
+```
+Résultats du 8 oct. : `/workspace/compound_2026-10-08/trailing_stop/summary.md`.
+
+**Verdict de l'équipe dans chaque test (automatique) — ajouté le 9 oct. (PM-Compound)**
+Chaque `run` et chaque `robust` (y compris `sell_rebuy`) écrit maintenant dans le dossier du test (`run_card.json` pour le moteur,
+`summary.json` pour `sell_rebuy`) et dans la sortie `--json` :
+- `moitie_1_pct`, `moitie_2_pct` : gain de chaque moitié de la période (coupure au milieu exact ; trades classés par heure d'entrée, gains nets composés ; en % de pièces pour `sell_rebuy`) ;
+- `pire_baisse_outil_pct` (l'outil met tout le capital dans chaque trade) et `pire_baisse_capital_pct` = outil × 5 % (nos vraies mises) ;
+- `verdict_equipe` : `test_du_passe_reussi` « oui » / « non », `raisons` (critères ratés, en français), `date_verdict`, `par`, `criteres`, `achat_immediat`, `prudence`.
+Règle : gain après frais > 0 ; au moins 20 trades ; les deux moitiés gagnantes (il faut ~1 an de prix) ; pire baisse sur notre capital < 8 % ;
+encore gagnant en achat immédiat + frais (`--costs revolutx`, même réglage) si ce test existe — sinon ce critère n'est pas compté.
+Avec `--fill touch` / `--fill-rate`, c'est le résultat du modèle d'ordres qui est jugé. `prudence` signale les cas « 0 % de frais partout ».
+Le texte (sans `--json`) ajoute une ligne `équipe : …`. Rien d'autre ne change. Les variantes de grille de `robust` (`*_grid`) n'ont pas de verdict.
+Recalculer tous les tests déjà faits (idempotent, la date ne change que si le verdict change) :
+```
+.venv/bin/python vt_verdict.py --all            # ou : .venv/bin/python vt_verdict.py <dossier du test | checks/xxx.json>
+```
+Un résultat `robust --json` rangé dans `checks/` contient déjà `verdict_equipe` ; sinon `vt_verdict.py checks/xxx.json` l'ajoute.
+Le site lit `verdict_equipe.test_du_passe_reussi` tel quel (pastille « Test du passé réussi »).
+
+### 3. `robust` : vérifier qu'une idée n'est pas de la chance → PM-Predict et PM-Compound
+Rejoue la règle avec beaucoup de réglages différents, sur des morceaux de période différents, et en mélangeant l'ordre des trades.
+Il dit : si le résultat aurait pu venir du hasard, et si « le meilleur réglage choisi sur le passé » tient encore sur la période d'après.
+Si la « probabilité de sur-ajustement » (PBO) dépasse 0,5, le bon résultat vient sans doute de la chance.
+```
+backtest.sh robust --pair BTC-EUR --strategy team_rebound --json
+```
+Lent : quelques minutes.
+
+### 4. `risk` : la pire chute du passé face à la limite de 8 % → PM-Risk
+Donne : la plus grosse chute depuis un sommet (et sa date), la chute actuelle, combien de temps le prix est resté plus de 8 % sous son sommet,
+la pire journée, et la chance que le prix tombe de 8 % en 2 jours.
+```
+backtest.sh risk --pair BTC-EUR --days 1095 --limit 8 --hold-days 2 --json
+```
+
+### 5. `sentiment` : l'humeur du marché → PM-Scan / Research
+Indice « peur et avidité » des cryptos (0 = grande peur, 100 = grande avidité), aujourd'hui et sur 30 jours. Il vaut pour toutes les cryptos, pas pour une seule.
+```
+backtest.sh sentiment --history 30 --json
+```
+
+### 6. `corr` : est-ce que BTC, ETH et SOL bougent ensemble ? → PM-Scan / Research et PM-Risk
+Si elles bougent ensemble, acheter les trois revient presque à acheter trois fois la même chose.
+```
+backtest.sh corr --pairs BTC-EUR,ETH-EUR,SOL-EUR --tf 1D --days 365 --json
+```
+
+### 7. `journal` : relire les trades de test de l'équipe → PM-Compound
+Lit une COPIE de `predict-market-bot/state/trades_log.jsonl` (l'original n'est jamais modifié) et cherche des mauvaises habitudes.
+Il faut beaucoup de trades pour que ce soit utile.
+```
+backtest.sh journal --json
+```
+
+### 8. `report` : une page PDF d'un test → pour un humain
+```
+backtest.sh report /workspace/tools/vibe-trading/home/runs/<dossier du test>
+```
+
+## Où sont les résultats
+Chaque test garde ses détails dans `/workspace/tools/vibe-trading/home/runs/`. Aide complète : `backtest.sh --help` ou `backtest.sh <commande> --help`.
+
+## IA (compte ChatGPT de Quentin) — ajouté le 8 oct.
+- Question libre : `/workspace/tools/vibe-trading/ai.sh ask "ta question"`
+- Équipe d'analystes : `/workspace/tools/vibe-trading/ai.sh swarm ...`
+- RÈGLE (Quentin, 8 oct.) : l'IA ne s'utilise QUE s'il y a une vraie preuve de besoin (une question précise que les autres commandes gratuites ne peuvent pas trancher). Jamais par routine, jamais en boucle, jamais « pour voir ». Note la raison dans ton journal à chaque usage.
+- Ça consomme le quota ChatGPT de Quentin.
+- Analyse seulement : aucun ordre, aucun compte branché. La décision reste à l'équipe et aux règles.

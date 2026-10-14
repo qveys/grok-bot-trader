@@ -1,0 +1,363 @@
+--- checks/vt_tools_before_notime.py.bak	2026-10-10 18:25:06.167833143 +0200
++++ vt_tools.py	2026-10-10 18:25:57.399282304 +0200
+@@ -168,6 +168,27 @@
+             out[code] = pd.Series(vals, index=df.index)
+         return out
+ '''
++# --no-time-exit (team_*): the signal only says WHEN a new entry is allowed (pulse on the trigger candle, inside
++# the session / weekdays). The engine (vt_runner, config spot_hold_until_exit) then holds the position until the
++# stop, the take-profit or the end of the data; signal 0 does not close it; at most one entry per local day.
++FOOTER_HOLD = '''            raw = raw.fillna(0.0).clip(lower=0.0, upper=1.0)
++            sess_start = {sess_start}
++            sess_end = {sess_end}
++            weekdays_only = {weekdays}
++            idx = pd.DatetimeIndex(df.index)
++            if idx.tz is None:
++                idx = idx.tz_localize("UTC")
++            fill = (idx + pd.Timedelta(minutes={bar_minutes})).tz_convert("{tz}")
++            hours = np.asarray(fill.hour + fill.minute / 60.0, dtype=float)
++            wd = np.asarray(fill.weekday)
++            ok = raw.to_numpy() > 0
++            if sess_start >= 0:
++                ok &= (hours >= sess_start) & (hours < sess_end)
++            if weekdays_only:
++                ok &= wd < 5
++            out[code] = pd.Series(ok.astype(float), index=df.index)
++        return out
++'''
+ USED_PARAMS = {
+     "sma_cross": ("fast", "slow"), "ema_cross": ("fast", "slow"),
+     "rsi_revert": ("rsi_period", "rsi_low", "rsi_high"), "buy_hold": (),
+@@ -233,6 +254,14 @@
+                    help="TRAILING stop distance in %% (0 = off = fixed stop, default). team_*: stop = max(entry*(1-sl), "
+                         "highest high since entry*(1-trail)), never goes down. sell_rebuy: safety rebuy level = "
+                         "min(sell*(1+stop), lowest low since the sell*(1+trail)), never goes up. Completed candles only")
++    e.add_argument("--trail-start", type=float, default=0.0,
++                   help="with --trail: the trailing stop only starts once the best price since entry is >= N %% in "
++                        "profit; from then the stop is never below the entry price (breakeven-then-trail). "
++                        "sell_rebuy mirror: lowest low <= sell*(1-N%%), safety level never above the sell price. 0 = off")
++    e.add_argument("--no-time-exit", action="store_true",
++                   help="team_*: no 22h / end-of-day / time exit; a trade ends only at the stop, the take-profit "
++                        "(--tp 0 = none) or the end of the data. At most one entry per local day. "
++                        "sell_rebuy: already no time exit unless --max-hours")
+     c = p.add_argument_group("costs")
+     c.add_argument("--costs", default="revolutx", choices=sorted([*COSTS, *SWAP_COSTS]),
+                    help="revolutx = 0.09%%/side taker + 0.05%% slippage (default); "
+@@ -269,8 +298,10 @@
+         a.exit_hour = -1.0 if a.exit_hour is None else a.exit_hour
+         if a.exit_hour >= 0 or a.max_bars or a.sl or a.tp:
+             p.error("sell_rebuy uses --stop / --dip / --max-hours (not --sl/--tp/--exit-hour/--max-bars)")
+-        if not (0 < a.rise < 100 and 0 < a.dip < 50 and 0 < a.stop < 50 and 0 < a.chunk <= 100):
+-            p.error("sell_rebuy: --rise, --dip, --stop are percentages > 0 (e.g. 3, 3, 1.5); --chunk in (0, 100]")
++        if not (0 < a.rise < 100 and 0 <= a.dip < 50 and 0 < a.stop < 50 and 0 < a.chunk <= 100):
++            p.error("sell_rebuy: --rise, --stop are percentages > 0 (e.g. 3, 1.5), --dip >= 0 (0 = no target); --chunk in (0, 100]")
++        if getattr(a, "no_time_exit", False) and a.max_hours:
++            p.error("sell_rebuy: --no-time-exit and --max-hours contradict each other")
+         if a.rise_hours <= 0 or a.trend_ma < 0 or a.max_hours < 0:
+             p.error("sell_rebuy: --rise-hours > 0, --trend-ma >= 0, --max-hours >= 0")
+         if (a.coins is not None and a.coins <= 0) or (a.eur is not None and a.eur <= 0):
+@@ -306,6 +337,12 @@
+         a.session = "15-17"
+     if a.weekdays is None:
+         a.weekdays = bool(team)
++    if getattr(a, "no_time_exit", False):
++        if not team and a.strategy != SELL_FIRST:
++            p.error("--no-time-exit is for team_rebound, team_breakout (and sell_rebuy, where it is the default)")
++        if team and ((a.exit_hour is not None and a.exit_hour >= 0) or a.max_bars):
++            p.error("--no-time-exit and --exit-hour / --max-bars contradict each other")
++        a.exit_hour = -1.0
+     if a.exit_hour is None:
+         a.exit_hour = 22.0 if team else -1.0
+     if a.sl is None:
+@@ -330,6 +367,12 @@
+         p.error("--trail is a percentage, e.g. --trail 1.5 (0 = off)")
+     if a.trail and not (team or a.strategy == SELL_FIRST):
+         p.error("--trail is for team_rebound, team_breakout and sell_rebuy")
++    if not 0 <= getattr(a, "trail_start", 0.0) < 50:
++        p.error("--trail-start is a percentage, e.g. 0.5 (0 = off)")
++    if getattr(a, "trail_start", 0.0) and not a.trail:
++        p.error("--trail-start needs --trail")
++    if getattr(a, "no_time_exit", False) and team and not (a.sl or a.tp):
++        p.error("--no-time-exit needs a stop or a take-profit (otherwise a trade never ends)")
+     if a.trail and team and not a.sl:
+         p.error("--trail needs a stop (--sl > 0): the trailing level starts at the fixed stop")
+     a.sess = (-1.0, -1.0)
+@@ -342,7 +385,8 @@
+             p.error("--session needs 1H, 30m or 15m candles (4H/1D bars do not open inside a 2h window)")
+     if (a.exit_hour >= 0) and TF_HOURS[a.tf] > 1:
+         p.error("--exit-hour needs 1H, 30m or 15m candles")
+-    if a.strategy in BODIES and BODIES[a.strategy][0] == "pulse" and a.exit_hour < 0 and a.max_bars <= 0:
++    if a.strategy in BODIES and BODIES[a.strategy][0] == "pulse" and a.exit_hour < 0 and a.max_bars <= 0 \
++            and not getattr(a, "no_time_exit", False):
+         p.error("team_* strategies need --exit-hour or --max-bars (otherwise a trade never ends)")
+     return a
+ 
+@@ -368,6 +412,10 @@
+     fmt = dict(fast=a.fast, slow=a.slow, rsi_period=a.rsi_period, rsi_low=a.rsi_low, rsi_high=a.rsi_high,
+                trend=a.trend, lookback=a.lookback, drop_frac=a.drop_pct / 100.0,
+                drop_bars=max(1, int(round(a.drop_hours / TF_HOURS[a.tf]))))
++    if getattr(a, "no_time_exit", False) and mode == "pulse":
++        foot = FOOTER_HOLD.format(sess_start=a.sess[0], sess_end=a.sess[1], weekdays=bool(a.weekdays),
++                                  bar_minutes=int(TF_HOURS[a.tf] * 60), tz=a.tz)
++        return HEADER.format(desc=f"{a.strategy} {params_of(a)} no-time-exit") + body.format(**fmt) + foot
+     foot = FOOTER.format(mode=mode, sess_start=a.sess[0], sess_end=a.sess[1], weekdays=bool(a.weekdays),
+                          exit_hour=float(a.exit_hour), max_bars=int(a.max_bars),
+                          bar_minutes=int(TF_HOURS[a.tf] * 60), tz=a.tz)
+@@ -416,6 +464,11 @@
+     }
+     if a.trail:
+         config["spot_trailing_stop"] = a.trail / 100.0
++    if getattr(a, "trail_start", 0.0):
++        config["spot_trail_start"] = a.trail_start / 100.0
++    if getattr(a, "no_time_exit", False):
++        config["spot_hold_until_exit"] = True
++        config["spot_tz"] = a.tz
+     if validation:
+         config["validation"] = validation
+     (run_dir / "config.json").write_text(json.dumps(config, indent=1), encoding="utf-8")
+@@ -455,7 +508,9 @@
+         "entries": {"session": a.session, "tz": a.tz if a.session else None, "weekdays_only": bool(a.weekdays),
+                     "exit_hour": a.exit_hour if a.exit_hour >= 0 else None, "max_bars": a.max_bars or None,
+                     "stop_loss_pct": a.sl or None, "take_profit_pct": a.tp or None,
+-                    **({"trailing_stop_pct": a.trail} if a.trail else {})},
++                    **({"trailing_stop_pct": a.trail} if a.trail else {}),
++                    **({"trail_start_pct": a.trail_start} if getattr(a, "trail_start", 0.0) else {}),
++                    **({"no_time_exit": True} if getattr(a, "no_time_exit", False) else {})},
+         "period": [str(eq.timestamp.iloc[0]), str(eq.timestamp.iloc[-1])], "bars": int(len(eq)),
+         "costs": {"profile": a.costs, "fee_per_side": a.fee, "slippage": a.slippage,
+                   "round_trip_pct": round(rt_cost * 100, 3)},
+@@ -520,8 +575,11 @@
+         rules.append(f"entries {e['session']}h {e['tz']}{' weekdays' if e['weekdays_only'] else ''}")
+     if e["exit_hour"] is not None:
+         rules.append(f"exit at {e['exit_hour']:g}h")
++    if e.get("no_time_exit"):
++        rules.append("no time exit (stop / target / end of data only)")
+     if e["stop_loss_pct"]:
+-        rules.append(f"stop -{e['stop_loss_pct']}%" + (f" trailing {e['trailing_stop_pct']}%" if e.get("trailing_stop_pct") else ""))
++        rules.append(f"stop -{e['stop_loss_pct']}%" + (f" trailing {e['trailing_stop_pct']}%" if e.get("trailing_stop_pct") else "")
++                     + (f" from +{e['trail_start_pct']}% (then >= entry)" if e.get("trail_start_pct") else ""))
+     if e["take_profit_pct"]:
+         rules.append(f"take-profit +{e['take_profit_pct']}%")
+     if rules:
+--- checks/vt_runner_before_notime.py.bak	2026-10-10 18:25:06.171833101 +0200
++++ vt_runner.py	2026-10-10 18:26:21.807016812 +0200
+@@ -13,6 +13,13 @@
+     only counts COMPLETED candles (the current candle's high is added after its low was checked, because
+     we cannot know which came first) - conservative. Exit reason "trailing_stop" when the raised level
+     (above the fixed stop) is hit, else "stop_loss".
++  - optional trail START (config "spot_trail_start", fraction, default 0 = off): the trailing level is only
++    used once the highest high of completed candles since entry is >= entry*(1+start); from then the stop is
++    never below the entry price (breakeven-then-trail).
++  - optional HOLD-UNTIL-EXIT (config "spot_hold_until_exit", vt_tools --no-time-exit): the strategy target
++    only opens positions (pulse on the trigger candle); a target of 0 does NOT close a position; a trade ends
++    only at the stop, the take-profit or the end of the data. At most one entry per local day (config
++    "spot_tz"), no re-entry lock (the pulse already needs a fresh signal).
+   Fills: at the stop/TP level, or at the bar open if the bar gapped through it;
+   slippage is applied on top (conservative). If one bar touches both, the stop
+   is assumed first (conservative). After a stop/TP exit the symbol is locked: no
+@@ -37,12 +44,20 @@
+         self._peak: dict[str, tuple] = {}  # symbol -> (entry_time, highest high of completed candles)
+         self._locked: set[str] = set()
+         self._tgt = None
++        self.trail_start = float(config.get("spot_trail_start") or 0.0)
++        self.hold = bool(config.get("spot_hold_until_exit"))
++        self.tz = str(config.get("spot_tz") or "Europe/Brussels")
++        self._day = None
++        self._entry_day: dict[str, str] = {}
+ 
+     def _execute_bars(self, dates, data_map, close_df, target_pos, codes, close_val_df=None):
+         self._tgt = target_pos
+         return super()._execute_bars(dates, data_map, close_df, target_pos, codes, close_val_df=close_val_df)
+ 
+     def before_rebalance_bar(self, timestamp, data_map, codes):
++        if self.hold:
++            t = timestamp if timestamp.tzinfo is not None else timestamp.tz_localize("UTC")
++            self._day = t.tz_convert(self.tz).strftime("%Y-%m-%d")
+         if self._locked and self._tgt is not None and timestamp in self._tgt.index:
+             for sym in list(self._locked):
+                 if sym in self._tgt.columns:
+@@ -52,6 +67,12 @@
+         return super().before_rebalance_bar(timestamp, data_map, codes)
+ 
+     def can_execute(self, symbol, direction, bar):
++        if self.hold:
++            pos = self.positions.get(symbol)
++            if direction == 0 and pos is not None:
++                return False  # target 0 does not close: only stop / take-profit / end of data
++            if direction > 0 and self._entry_day.get(symbol) == self._day:
++                return False  # one entry per local day
+         if direction > 0 and symbol in self._locked:
+             return False
+         return super().can_execute(symbol, direction, bar)
+@@ -59,6 +80,8 @@
+     def on_bar(self, symbol, bar, timestamp):
+         super().on_bar(symbol, bar, timestamp)
+         pos = self.positions.get(symbol)
++        if self.hold and pos is not None and pos.entry_time == timestamp:
++            self._entry_day[symbol] = self._day
+         if pos is None or pos.direction <= 0 or (self.sl <= 0 and self.tp <= 0):
+             return
+         o, h, l = float(bar["open"]), float(bar["high"]), float(bar["low"])
+@@ -70,20 +93,24 @@
+                 pk = self._peak.get(symbol)
+                 peak = pos.entry_price if (pk is None or pk[0] != pos.entry_time) else pk[1]
+                 tstop = peak * (1.0 - self.trail)
++                if self.trail_start > 0:
++                    tstop = max(tstop, pos.entry_price) if peak >= pos.entry_price * (1.0 + self.trail_start) else -1.0
+                 if tstop > stop:
+                     stop, reason = tstop, "trailing_stop"
+                 self._peak[symbol] = (pos.entry_time, max(peak, h))  # current high counts from the next candle
+             if l <= stop:
+                 px = stop if entry_bar else min(o, stop)
+                 self._close_position(symbol, self.apply_slippage(px, -1), timestamp, reason)
+-                self._locked.add(symbol)
++                if not self.hold:
++                    self._locked.add(symbol)
+                 return
+         if self.tp > 0:
+             tp = pos.entry_price * (1.0 + self.tp)
+             if h >= tp:
+                 px = tp if entry_bar else max(o, tp)
+                 self._close_position(symbol, self.apply_slippage(px, -1), timestamp, "take_profit")
+-                self._locked.add(symbol)
++                if not self.hold:
++                    self._locked.add(symbol)
+ 
+ 
+ _orig_create = R._create_market_engine
+--- checks/vt_fill_before_notime.py.bak	2026-10-10 18:25:06.171833101 +0200
++++ vt_fill.py	2026-10-10 18:26:21.807016812 +0200
+@@ -20,6 +20,9 @@
+   Optional trailing stop (P["trail"] %, 0 = off, vt_tools --trail): stop = max(entry*(1-sl),
+   highest high of COMPLETED candles since entry*(1-trail)), never goes down; the current candle's high
+   only counts from the next candle (order of high/low inside a candle unknown) - conservative.
++  Optional trail start (P["trail_start"] %, vt_tools --trail-start): the trailing level only counts once that
++  peak is >= entry*(1+start); from then the stop is never below the entry price (breakeven-then-trail).
++  exit_hour < 0 (vt_tools --no-time-exit): no time exit, a trade can last several days (stop / tp / end only).
+   In both modes: stop-loss, exit-hour (time) exit and end-of-data exit are MARKET orders (taker fee +
+   slippage), resting orders pay the maker fee. Stop is checked before tp in the same candle (worst case).
+ No LLM, no broker, no order. Pure arithmetic on public candles.
+@@ -56,6 +59,7 @@
+     s0, s1 = P["sess"]
+     exit_h, sl, tp = P["exit_hour"], P["sl"] / 100.0, P["tp"] / 100.0
+     trail = float(P.get("trail") or 0.0) / 100.0
++    tstart = float(P.get("trail_start") or 0.0) / 100.0
+     mf, ms, tf_, ts = P["maker_fee"], P["maker_slip"], P["taker_fee"], P["taker_slip"]
+     thr = ticks / 10000.0
+     rng = np.random.default_rng(seed)
+@@ -125,8 +129,12 @@
+             first = pos["j"] == j
+             st, tk = pos["e"] * (1 - sl), pos["e"] * (1 + tp)
+             why = "stop_loss"
+-            if trail > 0 and pos["peak"] * (1 - trail) > st:
+-                st, why = pos["peak"] * (1 - trail), "trailing_stop"
++            if trail > 0:
++                tst = pos["peak"] * (1 - trail)
++                if tstart > 0:
++                    tst = max(tst, pos["e"]) if pos["peak"] >= pos["e"] * (1 + tstart) else -1.0
++                if tst > st:
++                    st, why = tst, "trailing_stop"
+             if trail > 0 and not fill_bar:  # (touch fill candle: its high may come before the fill)
+                 pos["peak"] = max(pos["peak"], h[j])  # counts from the next candle
+             if sl > 0 and l[j] <= st:
+@@ -180,7 +188,8 @@
+     ev0 = int(np.searchsorted(px.index, pd.Timestamp(cfg["evaluation_start_date"])))
+     sig = raw_signals(code_text, px, a.pair)
+     P = {"tz": a.tz, "sess": a.sess, "weekdays": bool(a.weekdays), "exit_hour": float(a.exit_hour),
+-         "sl": a.sl, "tp": a.tp, "trail": float(getattr(a, "trail", 0.0) or 0.0), "cash": a.cash, "maker_fee": a.fee, "maker_slip": a.slippage,
++         "sl": a.sl, "tp": a.tp, "trail": float(getattr(a, "trail", 0.0) or 0.0),
++         "trail_start": float(getattr(a, "trail_start", 0.0) or 0.0), "cash": a.cash, "maker_fee": a.fee, "maker_slip": a.slippage,
+          "taker_fee": taker[0], "taker_slip": taker[1], "offset": a.limit_offset / 10000.0}
+     # replica of the old model (all filled, every leg at the engine's costs) = check vs the engine
+     P_all = {**P, "taker_fee": a.fee, "taker_slip": a.slippage}
+--- checks/vt_sellrebuy_before_notime.py.bak	2026-10-10 18:25:06.171833101 +0200
++++ vt_sellrebuy.py	2026-10-10 18:26:28.778940684 +0200
+@@ -18,6 +18,9 @@
+     min(sell * (1 + stop), lowest low since the sell * (1 + trail)) and never goes up; the lowest low only
+     counts COMPLETED candles (the current candle's low is added after its high was checked) - conservative.
+     Rebuy reason "trailing" when the lowered level (below the fixed safety level) is hit.
++  - optional --trail-start N (with --trail): the lowered level only counts once the lowest low reaches
++    sell * (1 - N%); from then the safety level is never above the sell price (breakeven-then-trail mirror)
++  - --dip 0 = no target rebuy: the cycle ends only at the safety / trailing level (or --max-hours, end of data)
+   - optional --max-hours: market rebuy at the open of the first candle >= N hours after the sell (taker)
+   - same candle touches target AND safety -> safety assumed (worse case). In --sell-fill close mode the
+     target is never credited on the fill candle itself (order of events unknown).
+@@ -85,6 +88,7 @@
+     path = np.empty(n - start) if keep_path else None
+     dip, stp, mh, tfh = P["dip"] / 100.0, P["stop"] / 100.0, float(P["max_hours"] or 0), P["tf_hours"]
+     trail = float(P.get("trail") or 0.0) / 100.0
++    tstart = float(P.get("trail_start") or 0.0) / 100.0
+     mf, ms, tf_, ts = P["maker_fee"], P["maker_slip"], P["taker_fee"], P["taker_slip"]
+     fx = float(P.get("fixed_fee_eur") or 0.0)  # fixed network fee per swap (EUR), on every leg
+     chunk, close_mode = P["chunk"] / 100.0, P["sell_fill"] == "close"
+@@ -137,13 +141,16 @@
+             else:
+                 stop_lvl, why = cyc["stop"], "safety"
+                 if trail > 0:
+-                    if cyc["trough"] * (1 + trail) < stop_lvl:
+-                        stop_lvl, why = cyc["trough"] * (1 + trail), "trailing"
++                    tl = cyc["trough"] * (1 + trail)
++                    if tstart > 0:
++                        tl = min(tl, cyc["sell_px"]) if cyc["trough"] <= cyc["sell_px"] * (1 - tstart) else float("inf")
++                    if tl < stop_lvl:
++                        stop_lvl, why = tl, "trailing"
+                     if not (first and close_mode):  # close mode: the fill candle's low may come before the sell
+                         cyc["trough"] = min(cyc["trough"], l[j])  # counts from the next candle
+                 hit_stop = h[j] >= stop_lvl
+                 hit_tgt = (l[j] < cyc["target"] * (1 - thr) if touch else l[j] <= cyc["target"]) \
+-                    and not (first and close_mode)
++                    and not (first and close_mode) and dip > 0
+                 if hit_stop:  # also when both are touched in the same candle: worse case first
+                     rebuy(j, max(o[j], stop_lvl), True, why)
+                 elif hit_tgt:
+@@ -171,6 +178,7 @@
+         ms = ts = a.slippage if getattr(a, "slippage_given", False) else 0.0
+     return {"rise": float(a.rise), "rise_hours": float(a.rise_hours), "trend_ma": float(a.trend_ma),
+             "dip": float(a.dip), "stop": float(a.stop), "trail": float(getattr(a, "trail", 0.0) or 0.0),
++            "trail_start": float(getattr(a, "trail_start", 0.0) or 0.0),
+             "max_hours": float(a.max_hours or 0),
+             "chunk": float(a.chunk), "sell_fill": a.sell_fill, "sess": tuple(a.sess), "weekdays": bool(a.weekdays),
+             "tz": a.tz, "tf_hours": TF_HOURS[a.tf], "maker_fee": float(mf), "maker_slip": float(ms),
+@@ -328,7 +336,7 @@
+         "pair": a.pair, "coin": a.pair.split("-")[0], "timeframe": a.tf, "source": a.source, "strategy": "sell_rebuy",
+         "idea": "D-018 vendre haut, racheter plus bas",
+         "params": {k: P[k] for k in ("rise", "rise_hours", "trend_ma", "dip", "stop", "max_hours", "chunk", "sell_fill",
+-                                     "fill", "fill_ticks") + (("trail",) if P.get("trail") else ())},
++                                     "fill", "fill_ticks") + (("trail",) if P.get("trail") else ()) + (("trail_start",) if P.get("trail_start") else ())},
+         "entries": {"session": a.session, "tz": a.tz if a.session else None, "weekdays_only": bool(a.weekdays)},
+         "period": [str(df.index[start]), str(df.index[-1])], "times": "UTC", "bars": int(len(df) - start),
+         "costs": {"profile": a.costs + ("+custom" if (getattr(a, "fee_pct", None) is not None
+@@ -597,7 +605,10 @@
+     elif e["weekdays_only"]:
+         L.append("- Vente seulement du lundi au vendredi.")
+     L.append(f"- Prix de vente : {'le prix d’ouverture de l’heure suivante' if p['sell_fill'] == 'open' else 'le prix de fin de l’heure du signal (vente seulement si le prix y revient)'}.")
+-    L.append(f"- Ensuite, achat quand le prix est {fr(p['dip'], 1)} % plus bas que le prix de vente.")
++    L.append(f"- Ensuite, achat quand le prix est {fr(p['dip'], 1)} % plus bas que le prix de vente." if p["dip"] > 0
++             else "- Pas de prix visé (`--dip 0`) : le rachat se fait seulement au seuil de sécurité (fixe ou suiveur) ou en fin de données.")
++    if p.get("trail_start"):
++        L.append(f"- Le seuil suiveur ne démarre qu'une fois le prix {fr(p['trail_start'], 1)} % sous le prix de vente ; ensuite il ne remonte jamais au-dessus du prix de vente.")
+     L.append(f"- Si le prix monte de {fr(p['stop'], 1)} % au-dessus du prix de vente, achat quand même pour limiter la perte.")
+     if p["max_hours"]:
+         L.append(f"- Si rien ne s'est passé après {p['max_hours']:g} heures, achat au prix du moment.")
+--- checks/vt_verdict_before_notime.py.bak	2026-10-10 18:25:06.175833057 +0200
++++ vt_verdict.py	2026-10-10 18:26:28.778940684 +0200
+@@ -115,7 +115,9 @@
+         return None
+     return json.dumps([cfg.get("codes"), cfg.get("interval"), cfg.get("source"), code, cfg.get("spot_stop_loss"),
+                        cfg.get("spot_take_profit"), cfg.get("spot_trailing_stop"), cfg.get("evaluation_start_date"),
+-                       cfg.get("end_date"), cfg.get("initial_cash")])
++                       cfg.get("end_date"), cfg.get("initial_cash")]
++                      + ([cfg.get("spot_trail_start"), cfg.get("spot_hold_until_exit")]
++                         if cfg.get("spot_trail_start") or cfg.get("spot_hold_until_exit") else []))
+ 
+ 
+ def _is_taker(cfg):
+@@ -199,7 +201,7 @@
+                 imm.update({"moitie_1_pct": tv["moitie_1_pct"], "moitie_2_pct": tv["moitie_2_pct"], "son_verdict": tv["test_du_passe_reussi"]})
+     prud = []
+     if not fb and not taker_self and float(cfg.get("maker_rate") or 0) == 0 and float(cfg.get("slippage") or 0) == 0:
+-        prud.append("frais 0 % partout, sorties au stop et à 22h comprises : cas le plus favorable")
++        prud.append("frais 0 % partout, sorties au stop" + ("" if cfg.get("spot_hold_until_exit") else " et à 22h") + " comprises : cas le plus favorable")
+     return _judge(total, n, dd, trades, start, end, imm, juge, extra, unit="%", prudence=prud)
+ 
+ 

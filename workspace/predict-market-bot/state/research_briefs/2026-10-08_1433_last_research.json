@@ -1,0 +1,38 @@
+{
+  "briefed_at": "2026-10-08T14:33:13+02:00",
+  "cycle": "Point du jour 14h26 (avant fenêtre 15h–17h)",
+  "prix": {
+    "source": "Coinbase + Kraken (prix publics, concordants) vers 14h33",
+    "BTC-EUR": {
+      "prix": 73588,
+      "vs_ouverture_jour_pct": -1.0
+    },
+    "ETH-EUR": {
+      "prix": 2263,
+      "vs_ouverture_jour_pct": -1.5
+    },
+    "SOL-EUR": {
+      "prix": 100.7,
+      "vs_ouverture_jour_pct": -3.0
+    }
+  },
+  "resume": {
+    "ambiance": "Prudente, plutôt négative. Les trois cryptos baissent pour le 2e jour de suite.",
+    "pourquoi": "Le pétrole monte (au-dessus de 100 dollars, rumeurs de frappes US sur l'Iran), les taux des emprunts d'État américains sont au plus haut depuis ~20 ans, le dollar se renforce. Beaucoup de paris à la hausse ont été forcés de vendre hier (~550 M$).",
+    "fed": "Compte-rendu Fed d'hier soir : la plupart des membres pensent qu'une nouvelle hausse des taux est probable d'ici fin d'année. Pas une bonne nouvelle pour la crypto.",
+    "ce_qui_peut_bouger": [
+      "Si le pétrole repasse sous 100 dollars, la pression peut se relâcher (rebond possible).",
+      "Si BTC continue à glisser, prochain palier cité par les analystes vers 80 000 dollars (~71 500 €).",
+      "Ce soir ~19h : grosse vente d'emprunts US à 30 ans, peut faire bouger les taux.",
+      "Plus loin : inflation US le 14 oct, décision Fed le 28 oct."
+    ],
+    "par_paire": {
+      "BTC-EUR": "Baisse modérée, suit le marché. Les fonds BTC restaient acheteurs la semaine passée.",
+      "ETH-EUR": "Sous 2300 € (notre ancien stop d'hier). Petite inquiétude du jour : débat sur la sécurité future des portefeuilles face à l'IA, sans danger immédiat selon Vitalik Buterin.",
+      "SOL-EUR": "La plus forte baisse (−3 %). Réseau très actif mais petites sorties d'argent des fonds SOL ces derniers jours."
+    },
+    "pour_equipe": "Pas de signal d'achat clair. Marché qui baisse avec la macro : simulation possible seulement si un vrai rebond se confirme pendant 15h–17h (ex. idées D-013 rebond / D-014 cassure, encore en attente du test Compound). Live : non aujourd'hui sauf rebond net + gain attendu ≥ 3× les coûts. Max 1 live par jour."
+  },
+  "certitude": "Élevée sur les faits (prix + pétrole + taux + Fed confirmés par plusieurs sources). Faible sur la direction des prochaines heures.",
+  "sources_note": "croisé CoinDesk (2 articles) + Proactive Investors + prix Coinbase/Kraken + fil X ; aucun post seul pris pour vrai"
+}

@@ -1,0 +1,232 @@
+# Score Predictions (mesurable)
+
+Après chaque **horizon** (ou après une vente liée), Compound note :
+- **gagné** = le prix a touché le seuil dans le sens prévu avant la fin d’horizon
+- **perdu** = le prix a touché le seuil inverse (ou l’horizon finit contre)
+- **annulé** = pas de trade / hors horizon / décision non mesurable
+
+Predict doit écrire dans chaque décision : **direction + horizon + seuil %** (ex. BTC +1,5 % / −1,5 % avant 20h).
+
+## Totaux (mis à jour par Compound)
+
+| gagné | perdu | annulé | taux de réussite (gagné / (gagné+perdu)) |
+|------:|------:|-------:|------------------------------------------:|
+| 3 | 2 | 8 | 60 % (3 / 5) |
+
+## Entrées
+
+<!--
+### YYYY-MM-DD | id (ex. D-007) | PAIRE
+- Prévision : direction / horizon / seuils
+- Prix départ :
+- Résultat : gagné / perdu / annulé
+- Prix à l’échéance (ou à la vente) :
+- Note (1 ligne) :
+-->
+
+### 2026-10-09 | D-030a | SOL-EUR
+- Prévision : DOWN / horizon 22h00 CEST / ±1.59 % (cible 96.50 · inverse 99.61)
+- Prix départ (entrée prévue) : 98.055 €
+- Résultat : en attente
+- Note (1 ligne) : proposition en attente de place (plafond 50 € plein) ; pas encore ouverte
+
+### 2026-10-09 | D-030b | ETH-EUR
+- Prévision : DOWN / horizon 22h00 CEST / cible 2,173.32 (−2,25 %) · inverse 2,256.70 (+1,5 %)
+- Prix départ (entrée prévue) : 2,223.35 €
+- Résultat : en attente
+- Note (1 ligne) : proposition en attente de place ; pas encore ouverte
+
+### 2026-10-09 | D-030c | SOL-EUR
+- Prévision : DOWN / horizon 22h00 CEST / −2 % / +1 % (cible 96.09 · inverse 99.04)
+- Prix départ (entrée prévue) : 98.055 €
+- Résultat : en attente
+- Note (1 ligne) : proposition en attente de place ; aucune risquée ouverte
+
+### 2026-10-09 | D-025a | SOL-EUR
+- Prévision : UP / horizon 22h00 CEST / ±2 % (cible 99.16 · inverse 95.28)
+- Prix départ (entrée prévue) : 97.22 €
+- Résultat : en attente
+- Note (1 ligne) : proposition en attente de place (plafond 50 € plein) ; pas encore ouverte
+
+### 2026-10-09 | D-025b | ETH-EUR
+- Prévision : DOWN / horizon 22h00 CEST / cible 2,168 (−2,25 %) · inverse 2,251 (+1,5 %)
+- Prix départ (entrée prévue) : 2,217.97 €
+- Résultat : en attente
+- Note (1 ligne) : proposition en attente de place ; pas encore ouverte
+
+### 2026-10-09 | D-025c | BTC-EUR
+- Prévision : UP / horizon 22h00 CEST / +2 % / −1 % (cible 74,511 · inverse 72,320)
+- Prix départ (entrée prévue) : 73,050 €
+- Résultat : en attente
+- Note (1 ligne) : risquée conditionnelle (après fermeture D-023) ; pas encore ouverte
+
+
+
+### 2026-10-09 | D-025a | SOL-EUR
+- Prévision : UP / horizon 20h00 CEST / ±2 % (cible 99.80 · inverse 95.88)
+- Prix départ : 97.84 €
+- Résultat : en attente (pas de trade — plafond plein)
+- Prix à l’échéance (ou à la vente) :
+- Note (1 ligne) : proposition prudente en attente de place sous 50 €
+
+### 2026-10-09 | D-025b | ETH-EUR
+- Prévision : DOWN / horizon 20h00 CEST / cible 2165.7 (−2,25 %) · arrêt 2248.7 (+1,5 %)
+- Prix départ : 2215.51 €
+- Résultat : en attente (pas de trade — plafond plein)
+- Prix à l’échéance (ou à la vente) :
+- Note (1 ligne) : proposition équilibrée en attente de place
+
+### 2026-10-09 | D-025c | SOL-EUR
+- Prévision : UP / horizon 20h00 CEST / +2 % (cible 99.80) · arrêt −1 % (96.86)
+- Prix départ : 97.84 €
+- Résultat : en attente (pas de trade — plafond plein)
+- Prix à l’échéance (ou à la vente) :
+- Note (1 ligne) : proposition risquée en attente de place ; aucune risquée ouverte
+
+### 2026-10-07 | D-007 | BTC-EUR
+- Prévision : UP / horizon 22h00 CEST / ±1,5 % (cible 75248,59 · inverse 73024,49)
+- Prix départ : 74136,54 €
+- Résultat : annulé
+- Prix à l’échéance (ou à la vente) : 74503,86 € à 22h00 (+0,49 %)
+- Note (1 ligne) : aucun seuil touché (bas 73988,88 · haut 74742,20) ; fini dans le bon sens mais sous la cible → ni gagné ni perdu
+
+### 2026-10-07 | D-008 | ETH-EUR
+- Prévision : DOWN / horizon 22h00 CEST / ±1,5 % (cible 2251,90 · inverse 2320,48)
+- Prix départ : 2286,19 €
+- Résultat : perdu
+- Prix à l’échéance (ou à la vente) : 2296,09 € à 22h00 (+0,43 %)
+- Note (1 ligne) : aucun seuil touché (bas 2266,60 · haut 2304,52) ; horizon fini contre la prévision (baisse prévue, prix monté)
+
+### 2026-10-07 | D-009 | SOL-EUR
+- Prévision : UP / horizon 22h00 CEST / ±1,5 % (cible 104,97 · inverse 101,87)
+- Prix départ : 103,42 €
+- Résultat : annulé
+- Prix à l’échéance (ou à la vente) : 103,46 € à 22h00 (+0,04 %)
+- Note (1 ligne) : aucun seuil touché (bas 103,27 · haut 104,72) ; quasi à plat → ni gagné ni perdu
+
+### 2026-10-07 | D-004 / D-005 / D-006 | BTC / ETH / SOL
+- Prévision : aucune (pas de direction + horizon + seuil) ; contexte « attendre la Fed »
+- Résultat : annulé (3) — soirée Fed passée, rien de mesurable
+- Note (1 ligne) : D-002 / D-003 restent ouverts (contexte ~48 h → revoir après 9 oct ~11h30)
+
+### 2026-10-07 | D-010 / D-011 / D-012 | BTC / ETH / SOL
+- Prévision : annulée par Predict (pas de prix frais à 19h48)
+- Résultat : annulé (3)
+
+> Vérif 22h40 : ticks du fichier (16h23–17h25 puis 21h06–22h00) + bougies 1 min Binance 15h48–22h00 pour combler les trous (15h48–16h23, 17h25–21h06). Aucun seuil ±1,5 % touché sur les trois paires.
+
+### 2026-10-08 | D-015 | BTC-EUR
+- Prévision : DOWN / horizon 17h00 CEST / ±0.5 % (cible 73191.54 · inverse 73927.14)
+- Prix départ : 73559.34 € (14:34)
+- Résultat : **gagné**
+- Prix à l’échéance (ou à la vente) : 73726,81 € à 17h00 (relevé 30 s) · bas 73058,41 à 15h43 · haut 73821,94 à 15h22 (arrêt 73927,14 jamais touché)
+- Note (1 ligne) : cible 73191,54 touchée à **15h42** (73183,22, relevé 30 s ; bougie 1 min Binance aussi 15h42) — Predict notait « pas encore » à 15h41, c’était juste une minute trop tôt
+
+### 2026-10-08 | D-016 | ETH-EUR
+- Prévision : DOWN / horizon 17h00 CEST / ±0.5 % (cible 2250.60 · inverse 2273.22)
+- Prix départ : 2261.91 € (14:34)
+- Résultat : **gagné**
+- Prix à l’échéance (ou à la vente) : 2257,19 € à 17h00 (relevé 30 s) · bas 2239,15 à 15h46 · haut 2271,33 à 15h21 (arrêt 2273,22 jamais touché, à 1,9 € près)
+- Note (1 ligne) : cible 2250,60 touchée à **15h39** (2249,94, relevé 30 s) ; la bougie 1 min Binance montre déjà une mèche à 2250,00 à 14h50 (un instant, peu de volume) → gagné dans les deux cas ; haut avant la cible 2271,3 < 2273,22 confirmé
+
+### 2026-10-08 | D-017 | SOL-EUR
+- Prévision : DOWN / horizon 17h00 CEST / ±0.5 % (cible 100.20 · inverse 101.20)
+- Prix départ : 100.70 € (14:34)
+- Résultat : **gagné**
+- Prix à l’échéance (ou à la vente) : 100,29 € à 17h00 (relevé 30 s) · bas 99,42 à 15h43 · haut 100,86 à 14h43 (arrêt 101,20 jamais touché)
+- Note (1 ligne) : cible 100,20 touchée à **15h02** (100,02, relevé 30 s ; bougie 1 min Binance dès 15h01)
+
+> Vérif 2026-10-08 ~21h30 (Compound) : relevé 30 s complet 14h34–17h00 (aucun trou > 90 s, 294 points par paire) + bougies 1 min Binance (EUR) 14h34–17h00. Premier seuil touché = cible baissière pour les trois ; aucun prix d’arrêt touché. D-002 / D-003 : pas de direction ni de seuil → seront « annulé » à leur échéance (9 oct ~11h30), pas encore comptés.
+
+
+### D-021 — SOL-EUR (simulation de nuit)
+- Prévision : DOWN / horizon 2026-10-09 10:00 CEST / −1,5 % avant +1,5 % (cible 96,53 · inverse 99,47)
+- Prix départ : 98,00 € (22:57)
+- Résultat : **perdu**
+- Prix à l’échéance : 98,36 € à 10h00 (au-dessus du prix de départ, donc contre nous) ; ni cible 96,53 ni arrêt 99,47 touchés avant 10h00
+- Note (1 ligne) : à l’heure limite le prix allait contre la prévision → perdu (demande de Quentin, notée le 9 oct à 14h26)
+
+### D-023 — BTC-EUR (simulation)
+- Prévision : UP / horizon 2026-10-09 17:00 CEST / +1,5 % avant −1 % (cible 75 232 · inverse 73 379)
+- Prix départ : 74 120 € (14:29)
+- Résultat : en attente
+
+### D-024a — SOL-EUR (prudente, simulation)
+- Prévision : UP / horizon 2026-10-09 17:00 CEST / +1,42 % avant −1,41 % (cible 100,09 · inverse 97,30)
+- Prix départ : 98,69 € (15:07)
+- Résultat : en attente
+
+### D-024b — ETH-EUR (équilibrée, simulation)
+- Prévision : DOWN / horizon 2026-10-09 17:00 CEST / −1,60 % avant +1,00 % (cible 2 197 · inverse 2 255)
+- Prix départ : 2 232,70 € (15:07)
+- Résultat : en attente
+
+### D-024c — SOL-EUR (risquée, pas simulée)
+- Prévision : UP / horizon 2026-10-09 17:00 CEST / +2,04 % avant −1,00 % (cible 100,70 · inverse 97,70)
+- Prix départ : 98,69 € (15:07)
+- Résultat : en attente
+
+### D-026a — SOL-EUR (prudente, simulation)
+- Prévision : DOWN / horizon 2026-10-09 22:00 CEST / −1.5 % avant +1.5 % (cible 96.23 · inverse 99.17)
+- Prix départ : 97.70 € (15:36)
+- Résultat : en attente
+
+### D-026b — SOL-EUR (équilibrée, simulation)
+- Prévision : DOWN / horizon 2026-10-09 22:00 CEST / −1.5 % avant +1.0 % (cible 96.23 · inverse 98.68)
+- Prix départ : 97.70 € (15:36)
+- Résultat : en attente
+
+### D-026c — SOL-EUR (risquée, simulation)
+- Prévision : DOWN / horizon 2026-10-09 22:00 CEST / −2.0 % avant +1.0 % (cible 95.75 · inverse 98.68)
+- Prix départ : 97.70 € (15:36)
+- Résultat : en attente
+
+### D-026a — BTC-EUR (prudente, simulation)
+- Prévision : DOWN / horizon 2026-10-09 18:00 CEST / −1,5 % avant +1,5 % (cible 72663.14 · inverse 74876.24)
+- Prix départ : 73769.69 € (15:38)
+- Résultat : en attente
+
+### D-026b — SOL-EUR (équilibrée, simulation)
+- Prévision : DOWN / horizon 2026-10-09 18:00 CEST / −1,5 % avant +1,0 % (cible 96.23 · inverse 98.672)
+- Prix départ : 97.695 € (15:38)
+- Résultat : en attente
+
+### D-026c — BTC-EUR (risquée, pas simulée)
+- Prévision : DOWN / horizon 2026-10-09 18:00 CEST / −2,0 % avant +1,0 % (cible 72294.3 · inverse 74507.39)
+- Prix départ : 73769.69 € (15:38)
+- Résultat : en attente
+
+### D-028a — ETH-EUR (prudente, pas simulée — place)
+- Prévision : DOWN / horizon 2026-10-09 22:00 CEST / −2,0 % avant +2,0 % (cible 2,180.60 · inverse 2,269.60)
+- Prix départ : 2,225.10 € (16:23)
+- Résultat : en attente
+
+### D-028b — SOL-EUR (équilibrée, pas simulée — après D-026)
+- Prévision : UP / horizon 2026-10-09 22:00 CEST / +2,25 % avant −1,5 % (cible 100.59 · inverse 96.90)
+- Prix départ : 98.38 € (16:23)
+- Résultat : en attente
+
+### D-028c — BTC-EUR (risquée, pas simulée — risquée D-026 ouverte)
+- Prévision : UP / horizon 2026-10-09 22:00 CEST / +2,0 % avant −1,0 % (cible 75,877.80 · inverse 73,646.10)
+- Prix départ : 74,390.00 € (16:23)
+- Résultat : en attente
+
+
+### D-029a — SOL-EUR (prudente, pas simulée — place)
+- Prévision : UP / horizon 2026-10-09 22:00 CEST / +2,0 % avant −2,0 % (cible 100,60 · inverse 96,66)
+- Prix départ : 98,63 € (16:35)
+- Résultat : en attente
+
+### D-029b — ETH-EUR (équilibrée, pas simulée — place)
+- Prévision : DOWN / horizon 2026-10-09 22:00 CEST / −2,25 % avant +1,5 % (cible 2 179,90 · inverse 2 263,53)
+- Prix départ : 2 230,08 € (16:35)
+- Résultat : en attente
+
+### D-029c — SOL-EUR (risquée, pas simulée — place)
+- Prévision : UP / horizon 2026-10-09 22:00 CEST / +2,0 % avant −1,0 % (cible 100,60 · inverse 97,64)
+- Prix départ : 98,63 € (16:35)
+- Résultat : en attente
+
+### D-031a — BTC-EUR (prudente) — UP d'ici 22:00 / 74 843 avant 73 069 / départ 73 956 (17:09) — en attente
+### D-031b — SOL-EUR (équilibrée) — DOWN d'ici 22:00 / 96,32 avant 98,87 / départ 97,89 (17:09) — en attente
+### D-031c — BTC-EUR (risquée) — UP d'ici 22:00 / 75 435 avant 73 217 / départ 73 956 (17:09) — en attente

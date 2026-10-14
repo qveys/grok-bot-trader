@@ -1,0 +1,283 @@
+{"ts": "2026-10-08T18:47:53+02:00", "bot": "pm-research", "routine": "Bilan séance 17h42", "etape": "arret", "note": "échec plateforme, refait main"}
+{"ts": "2026-10-08T21:21:20+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-08T21:21:24+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "essai reçu, rien"}
+{"ts": "2026-10-08T21:23:07+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-08T21:23:11+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "essai reçu"}
+{"ts": "2026-10-08T21:23:33+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-08T21:23:37+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "essai reçu OK"}
+{"ts": "2026-10-08T21:23:48+02:00", "bot": "PM-Compound", "routine": "Score prévisions Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-08T21:27:37+02:00", "bot": "PM-Compound", "routine": "Score prévisions Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-08T21:31:34+02:00", "bot": "PM-Compound", "routine": "Score prévisions Predict", "etape": "fini", "note": "3/3, tests négatifs"}
+{"ts": "2026-10-08T21:38:29+02:00", "bot": "PM-Compound", "routine": "Score prévisions Predict", "etape": "fini", "note": "bilan soir posté"}
+{"ts": "2026-10-08T22:03:53+02:00", "bot": "PM-Compound", "routine": "test stop suiveur", "etape": "demarre", "note": ""}
+{"ts": "2026-10-08T22:10:09+02:00", "bot": "PM-Compound", "routine": "test stop suiveur", "etape": "fini", "note": "fixe garde plus"}
+{"ts": "2026-10-08T22:13:39+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-08T22:13:39+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "essai reçu"}
+{"ts": "2026-10-08T22:16:39+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-08T22:16:41+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "essai reçu"}
+{"ts": "2026-10-09T14:00:36+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T14:00:48+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T14:01:32+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut ok relance"}
+{"ts": "2026-10-09T14:03:22+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "pas de trade"}
+{"ts": "2026-10-09T14:04:28+02:00", "bot": "PM-Compound", "routine": "perf et verdicts", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T14:12:42+02:00", "bot": "PM-Compound", "routine": "perf et verdicts", "etape": "fini", "note": "perf verdicts écrits"}
+{"ts": "2026-10-09T14:27:18+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T14:28:12+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-021 perte notée"}
+{"ts": "2026-10-09T14:46:41+02:00", "bot": "pm-risk", "routine": "Risk dry-run + alertes", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T14:48:57+02:00", "bot": "pm-risk", "routine": "Risk dry-run + alertes", "etape": "fini", "note": "tout ok silence"}
+{"ts": "2026-10-09T15:03:23+02:00", "bot": "pm-research", "routine": "Point du jour 14h44", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T15:06:31+02:00", "bot": "pm-research", "routine": "Point du jour 14h44", "etape": "fini", "note": "brief poste equipe"}
+{"ts": "2026-10-09T15:07:54+02:00", "bot": "pm-predict", "routine": "Prédiction avant session", "etape": "fini", "note": "D-024 fait à la main après le brief de 15h05"}
+{"ts": "2026-10-09T15:17:48+02:00", "bot": "pm-predict", "routine": "Prédiction avant session", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T15:17:59+02:00", "bot": "pm-predict", "routine": "Prédiction avant session", "etape": "fini", "note": "déjà fait"}
+{"ts": "2026-10-09T15:37:24+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-SOL-97.9 SOL sous 97,90 (97,87)"}
+{"ts": "2026-10-09T15:37:54+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T15:37:58+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-BTC-73700: BTC sous 73700 (73696.22) — revoir D-023"}
+{"ts": "2026-10-09T15:38:00+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "Zone Z-BTC-73700: BTC sous 73700 (73696,22 €) — revoir D-023"}
+{"ts": "2026-10-09T15:38:44+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement >0.5% depuis D-024 BTC/ETH/SOL baisses"}
+{"ts": "2026-10-09T15:39:32+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "alerte arrêts ouverts"}
+{"ts": "2026-10-09T15:40:08+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-025 3 ventes SOL zone 97.9"}
+{"ts": "2026-10-09T15:40:34+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-025: D-023 vivante, 3 props en attente (plafond plein)"}
+{"ts": "2026-10-09T15:40:45+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-025: D-023 vivante, plafond plein, 3 props en attente"}
+{"ts": "2026-10-09T15:41:21+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-025 3 props baisse BTC/SOL place 0"}
+{"ts": "2026-10-09T15:41:35+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-026 SOL vente 3 props postées après renum (collision D-025); place 0,02€"}
+{"ts": "2026-10-09T15:41:53+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-026 3 props baisse BTC/SOL place 0"}
+{"ts": "2026-10-09T15:43:58+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T15:44:01+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T15:45:39+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-024a perte notée"}
+{"ts": "2026-10-09T15:45:51+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-024a perte notée"}
+{"ts": "2026-10-09T16:13:59+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T16:15:02+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "rien de nouveau"}
+{"ts": "2026-10-09T16:20:01+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "Z-BTC-74166 BTC au-dessus 74166 (74173)"}
+{"ts": "2026-10-09T16:21:20+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement SOL +0,5% depuis D-025"}
+{"ts": "2026-10-09T16:21:32+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "déjà traité — verrou tenu par Z-BTC-74166 (décision en cours)"}
+{"ts": "2026-10-09T16:22:50+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T16:23:24+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-028 baisse BTC morte, 3 props en attente"}
+{"ts": "2026-10-09T16:32:25+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-SOL-98.60 SOL-EUR 98.615 au-dessus 98.60"}
+{"ts": "2026-10-09T16:34:43+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-026 perte notée"}
+{"ts": "2026-10-09T16:34:57+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-029 3 propositions SOL/ETH, place pleine, messages en handoff"}
+{"ts": "2026-10-09T16:35:58+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "Z-ETH-2232 ETH au-dessus 2232 (déjà traité D-029)"}
+{"ts": "2026-10-09T16:36:39+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "Z-ETH-2232 déjà traité dans D-029 ; zone 2235 posée"}
+{"ts": "2026-10-09T16:57:57+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T16:59:39+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "rien de nouveau"}
+{"ts": "2026-10-09T17:05:26+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement > 0,5 % SOL 98,84 → 98,07 (-0,8 %) depuis D-029"}
+{"ts": "2026-10-09T17:08:03+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-030 3 props SOL/ETH baisse, D-023 morte"}
+{"ts": "2026-10-09T17:09:54+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T17:10:57+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-023 perte notée"}
+{"ts": "2026-10-09T17:42:49+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T17:43:57+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "rien de nouveau"}
+{"ts": "2026-10-09T18:04:10+02:00", "bot": "pm-research", "routine": "Bilan séance 17h42", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T18:06:15+02:00", "bot": "pm-research", "routine": "Bilan séance 17h42", "etape": "fini", "note": "bilan draft prêt"}
+{"ts": "2026-10-09T18:06:31+02:00", "bot": "pm-research", "routine": "Bilan séance 17h42", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T18:06:54+02:00", "bot": "pm-research", "routine": "Bilan séance 17h42", "etape": "fini", "note": "bilan poste OK"}
+{"ts": "2026-10-09T18:15:24+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T18:16:32+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "ETH +3pct 24h"}
+{"ts": "2026-10-09T18:18:16+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement ETH >0,5% depuis D-031"}
+{"ts": "2026-10-09T18:21:10+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-033 3 propositions ETH mouvement"}
+{"ts": "2026-10-09T19:23:41+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement ETH D-033 (-0,5 %)"}
+{"ts": "2026-10-09T19:26:49+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-034 3 props ETH/SOL baisse"}
+{"ts": "2026-10-09T20:41:43+02:00", "bot": "PM-Compound", "routine": "Score prévisions Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T20:53:09+02:00", "bot": "PM-Compound", "routine": "Score prévisions Predict", "etape": "fini", "note": "bilan soir pret"}
+{"ts": "2026-10-09T20:55:03+02:00", "bot": "PM-Compound", "routine": "test cible 1 pct", "etape": "demarre", "note": ""}
+{"ts": "2026-10-09T21:06:18+02:00", "bot": "PM-Compound", "routine": "test cible 1 pct", "etape": "fini", "note": "1/1 ne bat"}
+{"ts": "2026-10-09T21:37:19+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement SOL D-034 -0.5%"}
+{"ts": "2026-10-09T21:39:57+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-035 3 prop plafond plein"}
+{"ts": "2026-10-10T00:01:19+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "heure_limite D-024b ETH"}
+{"ts": "2026-10-10T00:04:21+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-036 garder D-024b"}
+{"ts": "2026-10-10T00:05:05+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "déjà traité dans D-036 — ligne ajoutée, zone Z-SOL-96.95 désactivée, pas de nouveau message"}
+{"ts": "2026-10-10T00:07:04+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T00:08:20+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-031a perte notée"}
+{"ts": "2026-10-10T00:33:39+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement SOL +0,6 %"}
+{"ts": "2026-10-10T00:36:10+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-037 3 props SOL/ETH baisse plafond plein"}
+{"ts": "2026-10-10T02:04:54+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-ETH-2219.6 ETH sous 2219.6"}
+{"ts": "2026-10-10T02:07:49+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-038 3 ventes ETH en attente"}
+{"ts": "2026-10-10T02:53:31+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement SOL >0.5% D-038"}
+{"ts": "2026-10-10T02:56:02+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-039 3 ventes ETH attente place"}
+{"ts": "2026-10-10T07:58:59+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T07:59:00+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T07:59:43+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-SOL-98.03 SOL-EUR 98.32"}
+{"ts": "2026-10-10T08:00:25+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut ok paper"}
+{"ts": "2026-10-10T08:01:22+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien relancé ok"}
+{"ts": "2026-10-10T08:03:02+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-040 rebond SOL 3 achats"}
+{"ts": "2026-10-10T08:04:59+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "arret", "note": "déjà traité D-040 (occupe 08:04)"}
+{"ts": "2026-10-10T08:05:38+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T08:05:43+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T08:06:40+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-036a revue postée"}
+{"ts": "2026-10-10T08:07:45+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-031b revue"}
+{"ts": "2026-10-10T09:04:56+02:00", "bot": "pm-predict", "routine": "Passage du matin 9h", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T09:05:16+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T09:06:11+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu OK"}
+{"ts": "2026-10-10T09:10:16+02:00", "bot": "pm-predict", "routine": "Passage du matin 9h", "etape": "fini", "note": "D-041 3 achats rebond nuit plafond plein"}
+{"ts": "2026-10-10T11:41:15+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T11:41:18+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T11:42:09+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut ok papier"}
+{"ts": "2026-10-10T11:43:40+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien relance ok"}
+{"ts": "2026-10-10T15:08:57+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T15:10:04+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut ok papier"}
+{"ts": "2026-10-10T18:10:23+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T18:10:43+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "mouvement ETH D-041"}
+{"ts": "2026-10-10T18:11:09+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut OK reparé"}
+{"ts": "2026-10-10T18:13:09+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-042 ETH+0,7% 3 achats"}
+{"ts": "2026-10-10T18:14:48+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T18:14:51+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T18:16:51+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-028a revue postée"}
+{"ts": "2026-10-10T18:17:47+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-024b revue postée"}
+{"ts": "2026-10-10T18:22:49+02:00", "bot": "PM-Compound", "routine": "test arret suiveur 2", "etape": "demarre", "note": ""}
+{"ts": "2026-10-10T18:38:39+02:00", "bot": "PM-Compound", "routine": "test arret suiveur 2", "etape": "fini", "note": "suiveur pas mieux"}
+{"ts": "2026-10-11T07:32:39+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T07:32:40+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T07:33:12+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-SOL-98.17 SOL sous 98.17"}
+{"ts": "2026-10-11T07:34:13+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut ok papier"}
+{"ts": "2026-10-11T07:34:31+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien relance OK"}
+{"ts": "2026-10-11T07:35:50+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-043 SOL zone 3 props"}
+{"ts": "2026-10-11T07:36:45+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "déjà traité dans D-043 (occupe heure_limite/mouvement)"}
+{"ts": "2026-10-11T07:37:40+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T07:40:01+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-042a revue postée"}
+{"ts": "2026-10-11T08:12:16+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T08:14:17+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien relancé OK"}
+{"ts": "2026-10-11T08:24:11+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T08:26:20+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down reparé"}
+{"ts": "2026-10-11T09:02:11+02:00", "bot": "pm-predict", "routine": "Passage du matin 9h", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T09:02:19+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T09:02:20+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T09:03:44+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu OK"}
+{"ts": "2026-10-11T09:04:26+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher relance OK"}
+{"ts": "2026-10-11T09:06:08+02:00", "bot": "pm-predict", "routine": "Passage du matin 9h", "etape": "fini", "note": "D-044 3 achats si place"}
+{"ts": "2026-10-11T11:01:21+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T11:01:23+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T11:02:24+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu OK"}
+{"ts": "2026-10-11T11:02:33+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-SOL-97.79 sous 97,79 €"}
+{"ts": "2026-10-11T11:03:53+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher relance ok"}
+{"ts": "2026-10-11T11:05:39+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-045 SOL sous 97,79 — achat plus bas"}
+{"ts": "2026-10-11T11:44:08+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T11:44:10+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T11:45:51+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien relance OK"}
+{"ts": "2026-10-11T11:46:04+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut_down reparé"}
+{"ts": "2026-10-11T14:15:45+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T14:15:50+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T14:16:56+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "heure_limite D-040a BTC"}
+{"ts": "2026-10-11T14:17:35+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down réparé"}
+{"ts": "2026-10-11T14:18:11+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu OK"}
+{"ts": "2026-10-11T14:19:38+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-046 garder D-040a + 3 props"}
+{"ts": "2026-10-11T14:20:07+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "arret", "note": "déjà traité dans D-046"}
+{"ts": "2026-10-11T16:43:46+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T16:44:43+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu ok"}
+{"ts": "2026-10-11T17:31:05+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T17:31:12+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T17:32:51+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu OK"}
+{"ts": "2026-10-11T17:33:07+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T17:33:37+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down réparé"}
+{"ts": "2026-10-11T17:35:05+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher relance OK"}
+{"ts": "2026-10-11T19:45:38+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T19:45:38+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-11T19:46:59+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu OK"}
+{"ts": "2026-10-11T19:47:43+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher deja ok"}
+{"ts": "2026-10-12T07:30:42+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T07:30:56+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T07:31:07+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "heure_limite D-040a"}
+{"ts": "2026-10-12T07:31:10+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T07:31:59+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut reparé papier"}
+{"ts": "2026-10-12T07:31:59+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-043a gain cible"}
+{"ts": "2026-10-12T07:33:12+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T07:33:44+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-047 : BTC gardé, achat ETH 15 € et vente SOL 10 € proposés"}
+{"ts": "2026-10-12T07:33:56+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien relancé OK"}
+{"ts": "2026-10-12T07:34:09+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "sans_decision 07h31"}
+{"ts": "2026-10-12T07:34:14+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien relancé OK"}
+{"ts": "2026-10-12T07:34:17+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "Sonnette sans décision de 07h31 déjà traitée dans D-047, rien de plus."}
+{"ts": "2026-10-12T07:35:14+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher relance + D-043a fermee"}
+{"ts": "2026-10-12T07:54:47+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T07:54:52+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T07:55:25+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "Revolut relu OK"}
+{"ts": "2026-10-12T07:56:45+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down réparé"}
+{"ts": "2026-10-12T09:08:09+02:00", "bot": "pm-predict", "routine": "Passage du matin 9h", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T09:08:14+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T09:08:21+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T09:09:35+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut ok reparé"}
+{"ts": "2026-10-12T09:09:36+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down 64 min (gel ordinateur 8h04-9h08) ; gardien 2421281 reparti seul, signal frais, rattrapage sans stop/objectif ; papier seulement, pas d'alerte"}
+{"ts": "2026-10-12T09:14:27+02:00", "bot": "pm-predict", "routine": "Passage du matin 9h", "etape": "fini", "note": "D-048 plafond plein 3 props"}
+{"ts": "2026-10-12T09:56:02+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T09:56:03+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T09:57:04+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut ok papier"}
+{"ts": "2026-10-12T09:57:35+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down reparé"}
+{"ts": "2026-10-12T11:29:20+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T11:29:21+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T11:30:10+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut_down reparé papier"}
+{"ts": "2026-10-12T11:30:33+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien OK seul"}
+{"ts": "2026-10-12T14:42:31+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T14:42:33+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T14:43:06+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T14:43:12+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-ETH-2273.9 ETH sous 2273.9"}
+{"ts": "2026-10-12T14:43:35+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut_down reparé papier"}
+{"ts": "2026-10-12T14:43:52+02:00", "bot": "pm-risk", "routine": "Risk dry-run + alertes", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T14:44:09+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien OK seul, D-047c SOL visé +0,19"}
+{"ts": "2026-10-12T14:44:25+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-047c +0,19€"}
+{"ts": "2026-10-12T14:45:06+02:00", "bot": "pm-risk", "routine": "Risk dry-run + alertes", "etape": "fini", "note": "tout OK, silence"}
+{"ts": "2026-10-12T14:46:15+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-049 zone ETH creux 3 achats"}
+{"ts": "2026-10-12T14:47:01+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "déjà traité dans D-049 (occupe mouvement+sans_decision)"}
+{"ts": "2026-10-12T14:47:33+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T14:48:24+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-047a revu posté"}
+{"ts": "2026-10-12T15:02:26+02:00", "bot": "pm-research", "routine": "Point du jour 14h44", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T15:06:25+02:00", "bot": "pm-research", "routine": "Point du jour 14h44", "etape": "fini", "note": "brief research sauvé"}
+{"ts": "2026-10-12T15:22:38+02:00", "bot": "pm-predict", "routine": "Prédiction avant session", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T15:26:27+02:00", "bot": "pm-predict", "routine": "Prédiction avant session", "etape": "fini", "note": "D-050 baisse prévue"}
+{"ts": "2026-10-12T15:35:52+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T15:37:28+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "trous Risk prévenu"}
+{"ts": "2026-10-12T16:03:59+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T16:04:11+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T16:04:22+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T16:04:54+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien reparti seul"}
+{"ts": "2026-10-12T16:05:05+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut_down relu ok"}
+{"ts": "2026-10-12T16:05:09+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "trou signalé Risk"}
+{"ts": "2026-10-12T16:38:45+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T16:39:43+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "baisse SOL signalée"}
+{"ts": "2026-10-12T17:05:46+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T17:06:05+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T17:06:35+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "trou signalé, calme"}
+{"ts": "2026-10-12T17:06:36+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down 6 min: gardien reparti seul 17h05, rattrapage sans arret/objectif, pas de relance, silence"}
+{"ts": "2026-10-12T17:29:20+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T17:29:52+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "calme, rien envoyé"}
+{"ts": "2026-10-12T17:53:02+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T17:53:10+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T17:53:19+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T17:53:46+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down 13 min: gardien reparti seul 17h53, rattrapage trou sans arret ni prix vise, 0 live, pas d'alerte"}
+{"ts": "2026-10-12T17:54:02+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "Revolut relu OK"}
+{"ts": "2026-10-12T17:54:55+02:00", "bot": "pm-scan", "routine": "PM Scan paper", "etape": "fini", "note": "trou 13min signalé"}
+{"ts": "2026-10-12T18:05:33+02:00", "bot": "pm-research", "routine": "Bilan séance 17h42", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T18:07:11+02:00", "bot": "pm-research", "routine": "Bilan séance 17h42", "etape": "arret", "note": "SendToAgent indispo — handoff Evaluation pret (parent doit poster)"}
+{"ts": "2026-10-12T18:07:26+02:00", "bot": "pm-research", "routine": "Bilan séance 17h42", "etape": "fini", "note": "bilan poste Evaluation"}
+{"ts": "2026-10-12T20:43:49+02:00", "bot": "PM-Compound", "routine": "Score prévisions Predict", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T20:44:07+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T20:44:10+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "heure_limite D-040a D-049a"}
+{"ts": "2026-10-12T20:45:29+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu ok"}
+{"ts": "2026-10-12T20:47:13+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-051 : ETH morte, BTC gardée, ventes proposées"}
+{"ts": "2026-10-12T20:48:37+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-12T20:49:18+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-049a bilan posté"}
+{"ts": "2026-10-12T20:51:06+02:00", "bot": "PM-Compound", "routine": "Score prévisions Predict", "etape": "fini", "note": "revue soir ok"}
+{"ts": "2026-10-13T07:23:51+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T07:24:03+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T07:24:09+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T07:24:16+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T07:24:17+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "zone Z-BTC-74120 au-dessus 07h24"}
+{"ts": "2026-10-13T07:24:57+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-051c gain noté"}
+{"ts": "2026-10-13T07:25:19+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher reparé 2 closes"}
+{"ts": "2026-10-13T07:25:26+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut relu ok"}
+{"ts": "2026-10-13T07:26:03+02:00", "bot": "PM-Compound", "routine": "Sonnette Compound (trade fermé)", "etape": "fini", "note": "D-051a +0,28€"}
+{"ts": "2026-10-13T07:27:03+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "D-052 : achats ETH/SOL proposés"}
+{"ts": "2026-10-13T07:27:47+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "demarre", "note": "occupe: zones ETH/SOL, mouvement, sans_decision"}
+{"ts": "2026-10-13T07:27:56+02:00", "bot": "pm-predict", "routine": "Sonnette Predict", "etape": "fini", "note": "Déjà traité dans D-052 : une ligne ajoutée au carnet, zones déjà désactivées, pas de message."}
+{"ts": "2026-10-13T07:50:24+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T07:50:35+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T07:51:41+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut_down reparé papier"}
+{"ts": "2026-10-13T07:51:45+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "watcher_down reparé"}
+{"ts": "2026-10-13T09:10:59+02:00", "bot": "pm-predict", "routine": "Passage du matin 9h", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T09:11:33+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T09:13:02+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "revolut_down reparé"}
+{"ts": "2026-10-13T09:14:07+02:00", "bot": "pm-predict", "routine": "Passage du matin 9h", "etape": "fini", "note": "D-053 3 achats si place"}
+{"ts": "2026-10-13T10:08:17+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T10:08:23+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T10:09:02+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien reparti seul"}
+{"ts": "2026-10-13T10:09:28+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "Revolut relu OK"}
+{"ts": "2026-10-13T10:35:04+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T10:35:07+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "demarre", "note": ""}
+{"ts": "2026-10-13T10:35:59+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "gardien reparti seul"}
+{"ts": "2026-10-13T10:36:12+02:00", "bot": "pm-risk", "routine": "Sonnette stop (Risk)", "etape": "fini", "note": "Revolut OK, papier"}

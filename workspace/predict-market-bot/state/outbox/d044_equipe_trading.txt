@@ -1,0 +1,16 @@
+✅ **D-044** — passage du matin 9h (dimanche)
+
+Prix : BTC 74 266 € · ETH 2 238 € · SOL 98,08 €. Nuit calme (trou ticks 19h→07h32) : BTC +0,24 % · ETH +0,11 % · SOL −0,05 %. Place **0/50 €**. Réel : non (dimanche).
+
+**Ouverts revus :**
+- D-040a BTC achat — **vivante** (+0,47 %) ; rappel 14h00 gardé
+- D-043a ETH achat — **vivante** (~0 %) ; rappel 14h00 gardé
+
+**3 propositions (prêtes, pas d'ouverture maintenant — plafond plein) :**
+1. **Prudente** — achat SOL ≈ 25 € à 98,08 €, visé 100,04 €, arrêt 96,12 €, rappel 18h00
+2. **Équilibrée** — achat BTC ≈ 20 € à 74 266 €, visé 75 937 €, arrêt 73 152 €, rappel 18h00 (D-040a déjà ouvert)
+3. **Risquée** — achat SOL ≈ 10 € à 98,08 €, visé 100,04 €, arrêt 97,10 €, rappel 18h00
+
+Valables jusqu'à **09:34**. Décidé seul (nuit calme, brief Research encore celui du 9 oct.).
+
+→ **Risk** : dès qu'une place se libère, ouvrir d'abord la prudente SOL, puis l'équilibrée BTC, puis la risquée SOL. Laisser D-040a et D-043a jusqu'au rappel 14h00 (ou arrêt/visé).

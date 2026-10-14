@@ -1,0 +1,11 @@
+{"type":"run_started","agent_id":null,"task_id":null,"data":{},"timestamp":"2026-10-08T11:10:49.609523+00:00"}
+{"type":"layer_started","agent_id":null,"task_id":null,"data":{"layer":0,"tasks":["task-funding","task-liquidation","task-flow"]},"timestamp":"2026-10-08T11:10:49.610444+00:00"}
+{"type":"task_started","agent_id":"funding_basis_analyst","task_id":"task-funding","data":{},"timestamp":"2026-10-08T11:10:49.611226+00:00"}
+{"type":"task_started","agent_id":"liquidation_analyst","task_id":"task-liquidation","data":{},"timestamp":"2026-10-08T11:10:49.612627+00:00"}
+{"type":"task_started","agent_id":"flow_analyst","task_id":"task-flow","data":{},"timestamp":"2026-10-08T11:10:49.613447+00:00"}
+{"type":"task_failed","agent_id":null,"task_id":"task-funding","data":{"error":"LANGCHAIN_MODEL_NAME is not set","input_tokens":0,"output_tokens":0},"timestamp":"2026-10-08T11:10:49.623312+00:00"}
+{"type":"task_failed","agent_id":null,"task_id":"task-liquidation","data":{"error":"LANGCHAIN_MODEL_NAME is not set","input_tokens":0,"output_tokens":0},"timestamp":"2026-10-08T11:10:49.623660+00:00"}
+{"type":"task_failed","agent_id":null,"task_id":"task-flow","data":{"error":"LANGCHAIN_MODEL_NAME is not set","input_tokens":0,"output_tokens":0},"timestamp":"2026-10-08T11:10:49.623996+00:00"}
+{"type":"layer_started","agent_id":null,"task_id":null,"data":{"layer":1,"tasks":["task-risk-decision"]},"timestamp":"2026-10-08T11:10:49.624835+00:00"}
+{"type":"task_blocked","agent_id":"desk_risk_manager","task_id":"task-risk-decision","data":{"blocked_by":["task-funding","task-liquidation","task-flow"],"reason":"task-funding=failed, task-liquidation=failed, task-flow=failed"},"timestamp":"2026-10-08T11:10:49.625383+00:00"}
+{"type":"run_completed","agent_id":null,"task_id":null,"data":{"status":"failed"},"timestamp":"2026-10-08T11:10:49.626343+00:00"}

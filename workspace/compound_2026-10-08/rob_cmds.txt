@@ -1,0 +1,6 @@
+/workspace/tools/vibe-trading/backtest.sh robust --pair ETH-EUR --tf 1H --days 365 --strategy team_rebound --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --tp 3 --costs revolutx-maker --json > rob/reb_eth_maker.json 2>&1
+/workspace/tools/vibe-trading/backtest.sh robust --pair SOL-EUR --tf 1H --days 365 --strategy team_rebound --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --tp 3 --costs revolutx-maker --json > rob/reb_sol_maker.json 2>&1
+/workspace/tools/vibe-trading/backtest.sh robust --pair ETH-EUR --tf 1H --days 365 --strategy team_breakout --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --tp 3 --trend 200 --costs revolutx-maker --json > rob/brk_eth_maker.json 2>&1
+/workspace/tools/vibe-trading/backtest.sh robust --pair ETH-EUR --tf 1H --days 365 --strategy team_rebound --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --tp 3 --json > rob/reb_eth_taker.json 2>&1
+/workspace/tools/vibe-trading/backtest.sh robust --pair SOL-EUR --tf 1H --days 365 --strategy team_rebound --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --tp 3 --json > rob/reb_sol_taker.json 2>&1
+/workspace/tools/vibe-trading/backtest.sh robust --pair ETH-EUR --tf 1H --days 365 --strategy team_breakout --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --tp 3 --trend 200 --json > rob/brk_eth_taker.json 2>&1

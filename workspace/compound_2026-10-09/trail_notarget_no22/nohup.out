@@ -1,0 +1,6 @@
+=== eth_rebound 20:50:15 ===
+FAIL_touch_eth_rebound
+FAIL_imm_eth_rebound
+FAIL_robust_eth_rebound
+=== sol_rebound 20:50:47 ===
+FAIL_touch_sol_rebound

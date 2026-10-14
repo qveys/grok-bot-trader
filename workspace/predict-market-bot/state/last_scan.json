@@ -1,0 +1,124 @@
+{
+  "scanned_at": "2026-10-08T15:50:34.645699+02:00",
+  "venue": "revolut_x_paper",
+  "primary_venue": "revolut_x",
+  "mode": "paper",
+  "trading": false,
+  "note": "Public spot prices only; Revolut order/trading APIs not called.",
+  "pairs_whitelist": [
+    "BTC-EUR",
+    "ETH-EUR",
+    "SOL-EUR"
+  ],
+  "filters": {
+    "anomaly_price_move_pct": 10.0,
+    "anomaly_spread_pct": 0.5
+  },
+  "sources_used": [
+    "binance"
+  ],
+  "fetch_errors": null,
+  "count": 3,
+  "anomalous_count": 0,
+  "markets": [
+    {
+      "id": "revolut_x_paper:SOL-EUR",
+      "platform": "revolut_x_paper",
+      "pair": "SOL-EUR",
+      "price_eur": 100.15,
+      "change_24h_pct": -3.423,
+      "volume_24h": 1818205.09775,
+      "spread_pct": 0.009982,
+      "bid": 100.18,
+      "ask": 100.19,
+      "price_source": "binance",
+      "anomaly_flags": [],
+      "rank_score": 35.9983,
+      "rank_reason": "rank#1; pair=SOL-EUR; src=binance; 24h=-3.42%; vol24h=1818205; no_anomaly_flags; handoff=directional_spot_edge_research",
+      "scanned_at": "2026-10-08T15:50:34.645699+02:00"
+    },
+    {
+      "id": "revolut_x_paper:ETH-EUR",
+      "platform": "revolut_x_paper",
+      "pair": "ETH-EUR",
+      "price_eur": 2249.26,
+      "change_24h_pct": -1.824,
+      "volume_24h": 4579353.05957,
+      "spread_pct": 0.024447,
+      "bid": 2249.51,
+      "ask": 2250.06,
+      "price_source": "binance",
+      "anomaly_flags": [],
+      "rank_score": 22.6971,
+      "rank_reason": "rank#2; pair=ETH-EUR; src=binance; 24h=-1.82%; vol24h=4579353; no_anomaly_flags; handoff=directional_spot_edge_research",
+      "scanned_at": "2026-10-08T15:50:34.645699+02:00"
+    },
+    {
+      "id": "revolut_x_paper:BTC-EUR",
+      "platform": "revolut_x_paper",
+      "pair": "BTC-EUR",
+      "price_eur": 73289.1,
+      "change_24h_pct": -1.278,
+      "volume_24h": 6980297.2945191,
+      "spread_pct": 1.4e-05,
+      "bid": 73288.82,
+      "ask": 73288.83,
+      "price_source": "binance",
+      "anomaly_flags": [],
+      "rank_score": 19.7602,
+      "rank_reason": "rank#3; pair=BTC-EUR; src=binance; 24h=-1.28%; vol24h=6980297; no_anomaly_flags; handoff=directional_spot_edge_research",
+      "scanned_at": "2026-10-08T15:50:34.645699+02:00"
+    }
+  ],
+  "pairs": [
+    {
+      "id": "revolut_x_paper:SOL-EUR",
+      "platform": "revolut_x_paper",
+      "pair": "SOL-EUR",
+      "price_eur": 100.15,
+      "change_24h_pct": -3.423,
+      "volume_24h": 1818205.09775,
+      "spread_pct": 0.009982,
+      "bid": 100.18,
+      "ask": 100.19,
+      "price_source": "binance",
+      "anomaly_flags": [],
+      "rank_score": 35.9983,
+      "rank_reason": "rank#1; pair=SOL-EUR; src=binance; 24h=-3.42%; vol24h=1818205; no_anomaly_flags; handoff=directional_spot_edge_research",
+      "scanned_at": "2026-10-08T15:50:34.645699+02:00"
+    },
+    {
+      "id": "revolut_x_paper:ETH-EUR",
+      "platform": "revolut_x_paper",
+      "pair": "ETH-EUR",
+      "price_eur": 2249.26,
+      "change_24h_pct": -1.824,
+      "volume_24h": 4579353.05957,
+      "spread_pct": 0.024447,
+      "bid": 2249.51,
+      "ask": 2250.06,
+      "price_source": "binance",
+      "anomaly_flags": [],
+      "rank_score": 22.6971,
+      "rank_reason": "rank#2; pair=ETH-EUR; src=binance; 24h=-1.82%; vol24h=4579353; no_anomaly_flags; handoff=directional_spot_edge_research",
+      "scanned_at": "2026-10-08T15:50:34.645699+02:00"
+    },
+    {
+      "id": "revolut_x_paper:BTC-EUR",
+      "platform": "revolut_x_paper",
+      "pair": "BTC-EUR",
+      "price_eur": 73289.1,
+      "change_24h_pct": -1.278,
+      "volume_24h": 6980297.2945191,
+      "spread_pct": 1.4e-05,
+      "bid": 73288.82,
+      "ask": 73288.83,
+      "price_source": "binance",
+      "anomaly_flags": [],
+      "rank_score": 19.7602,
+      "rank_reason": "rank#3; pair=BTC-EUR; src=binance; 24h=-1.28%; vol24h=6980297; no_anomaly_flags; handoff=directional_spot_edge_research",
+      "scanned_at": "2026-10-08T15:50:34.645699+02:00"
+    }
+  ],
+  "error": null
+}

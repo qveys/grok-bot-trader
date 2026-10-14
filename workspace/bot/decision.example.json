@@ -1,0 +1,13 @@
+{
+  "decision_id": "<recopie exactement le decision_id fourni dans le contexte de reveil>",
+  "situation": "ton etat en 3 lignes",
+  "threats": ["ce qui peut te faire maigrir ou mourir dans les 24 h"],
+  "options": [
+    {"label": "hold", "expected_gain_pct": 0, "max_loss_pct": 0, "rationale": "pourquoi ne rien faire"},
+    {"label": "buy_eth", "expected_gain_pct": 2.1, "max_loss_pct": 4.0, "rationale": "..."},
+    {"label": "sell_sol", "expected_gain_pct": 0.5, "max_loss_pct": 1.0, "rationale": "..."}
+  ],
+  "decision": "hold",
+  "why_better": "en quoi ta vie est meilleure apres qu'avant, 5 lignes max",
+  "orders": []
+}

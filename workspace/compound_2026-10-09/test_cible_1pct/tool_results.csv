@@ -1,0 +1,241 @@
+pair,rule,dir,set,cost,net,n,win,h1,h2,dd_cap,verdict,run
+BTC,sell_rebuy_ma0,baisse,1.5/1.5,immediat0.14,-11.569,29,44.8,-7.04,-4.872,-0.686,non,20261009_205817_530366_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,1.5/1.5,mixte(cible 0%),-6.212,29,44.8,-3.998,-2.306,-0.481,non,20261009_205817_166815_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,1.5/1,immediat0.14,-15.608,31,29.0,-6.422,-9.816,-0.883,non,20261009_205815_864087_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,1.5/1,mixte(cible 0%),-10.745,31,29.0,-3.359,-7.643,-0.719,non,20261009_205815_541914_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,1/1.5,immediat0.14,-13.245,32,53.1,-7.342,-6.37,-0.725,non,20261009_205814_173945_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,1/1.5,mixte(cible 0%),-7.083,32,53.1,-3.907,-3.306,-0.447,non,20261009_205813_952390_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,1/1,immediat0.14,-15.929,34,38.2,-8.562,-8.057,-0.857,non,20261009_205812_703893_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,1/1,mixte(cible 0%),-10.21,34,38.2,-5.304,-5.181,-0.6,non,20261009_205812_307543_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,2.25/1.5,immediat0.14,-6.043,28,42.9,-0.181,-5.872,-0.595,non,20261009_205823_813726_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,2.25/1.5,mixte(cible 0%),-0.907,28,42.9,2.942,-3.739,-0.466,non,20261009_205823_634977_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,2.25/1,immediat0.14,-11.765,30,26.7,-3.967,-8.121,-0.768,non,20261009_205822_297955_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,2.25/1,mixte(cible 0%),-7.072,30,26.7,-1.1,-6.038,-0.611,non,20261009_205822_100139_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,2/1.5,immediat0.14,-8.412,28,42.9,-1.95,-6.591,-0.651,non,20261009_205820_773890_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,2/1.5,mixte(cible 0%),-3.406,28,42.9,1.118,-4.474,-0.49,non,20261009_205820_511919_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,2/1,immediat0.14,-13.329,30,26.7,-5.185,-8.589,-0.815,non,20261009_205819_141939_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma0,baisse,2/1,mixte(cible 0%),-8.719,30,26.7,-2.355,-6.517,-0.644,non,20261009_205818_813020_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,1.5/1.5,immediat0.14,-1.069,4,50.0,-1.069,0.0,-0.118,non,20261009_205815_896992_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,1.5/1.5,mixte(cible 0%),-0.235,4,50.0,-0.235,0.0,-0.087,non,20261009_205815_894826_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,1.5/1,immediat0.14,-0.087,4,50.0,-0.087,0.0,-0.069,non,20261009_205814_235691_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,1.5/1,mixte(cible 0%),0.756,4,50.0,0.756,0.0,-0.056,non,20261009_205814_140109_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,1/1.5,immediat0.14,-2.066,4,50.0,-2.066,0.0,-0.143,non,20261009_205812_611611_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,1/1.5,mixte(cible 0%),-1.24,4,50.0,-1.24,0.0,-0.111,non,20261009_205812_567330_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,1/1,immediat0.14,-1.094,4,50.0,-1.094,0.0,-0.094,non,20261009_205811_020686_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,1/1,mixte(cible 0%),-0.26,4,50.0,-0.26,0.0,-0.063,non,20261009_205810_945989_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,2.25/1.5,immediat0.14,0.455,4,50.0,0.455,0.0,-0.092,non,20261009_205822_532983_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,2.25/1.5,mixte(cible 0%),1.302,4,50.0,1.302,0.0,-0.081,non,20261009_205822_309857_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,2.25/1,immediat0.14,1.452,4,50.0,1.452,0.0,-0.079,non,20261009_205820_901726_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,2.25/1,mixte(cible 0%),2.308,4,50.0,2.308,0.0,-0.079,non,20261009_205820_702763_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,2/1.5,immediat0.14,-0.057,4,50.0,-0.057,0.0,-0.093,non,20261009_205819_178551_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,2/1.5,mixte(cible 0%),0.786,4,50.0,0.786,0.0,-0.081,non,20261009_205819_182285_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,2/1,immediat0.14,0.935,4,50.0,0.935,0.0,-0.079,non,20261009_205817_585994_BTC-EUR_1H_sell_rebuy
+BTC,sell_rebuy_ma200,baisse,2/1,mixte(cible 0%),1.786,4,50.0,1.786,0.0,-0.079,non,20261009_205817_557574_BTC-EUR_1H_sell_rebuy
+BTC,team_breakout,hausse,1.5/1.5,maker0,-6.18,34,44.1,-5.993,-0.202,-0.612,non,20261009_205749_948437_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1.5/1.5,maker+touch,-6.19,40,47.5,-7.602,1.526,-0.568,non,20261009_205751_200286_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1.5/1.5,immediat0.14,-13.24,34,44.1,-9.398,-4.254,-0.861,non,20261009_205751_153722_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1.5/1,maker0,0.75,34,41.2,-3.547,4.451,-0.384,non,20261009_205745_692471_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1.5/1,maker+touch,0.46,41,43.9,-4.366,5.05,-0.338,non,20261009_205749_637970_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1.5/1,immediat0.14,-9.13,34,38.2,-7.038,-2.256,-0.604,non,20261009_205745_759529_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1/1.5,maker0,-3.69,34,55.9,-6.422,2.914,-0.427,non,20261009_205740_616131_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1/1.5,maker+touch,-5.06,40,57.5,-8.799,4.104,-0.516,non,20261009_205744_334587_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1/1.5,immediat0.14,-13.14,34,52.9,-9.811,-3.707,-0.741,non,20261009_205744_158640_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1/1,maker0,1.85,34,52.9,-3.998,6.088,-0.284,non,20261009_205739_047915_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1/1,maker+touch,0.13,41,53.7,-5.617,6.093,-0.335,non,20261009_205740_341535_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,1/1,immediat0.14,-9.51,34,47.1,-7.473,-2.208,-0.517,non,20261009_205739_321865_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2.25/1.5,maker0,-1.11,34,41.2,-4.896,3.985,-0.526,non,20261009_205805_367807_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2.25/1.5,maker+touch,-0.16,40,42.5,-5.723,5.904,-0.641,non,20261009_205806_581539_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2.25/1.5,immediat0.14,-8.68,34,41.2,-8.385,-0.332,-0.744,non,20261009_205806_583204_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2.25/1,maker0,5.45,34,38.2,-3.111,8.834,-0.363,non,20261009_205801_327751_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2.25/1,maker+touch,7.22,41,39.0,-2.645,10.136,-0.391,non,20261009_205805_152644_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2.25/1,immediat0.14,-5.68,34,35.3,-6.618,1.0,-0.561,non,20261009_205801_461525_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2/1.5,maker0,-2.4,34,41.2,-6.053,3.883,-0.591,non,20261009_205756_238666_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2/1.5,maker+touch,-4.23,40,42.5,-7.324,3.343,-0.662,non,20261009_205800_024117_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2/1.5,immediat0.14,-9.84,34,41.2,-9.501,-0.381,-0.806,non,20261009_205759_973483_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2/1,maker0,4.32,34,38.2,-4.055,8.726,-0.408,non,20261009_205754_884978_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2/1,maker+touch,3.1,41,39.0,-4.065,7.473,-0.413,non,20261009_205755_997161_BTC-EUR_1H_team_breakout
+BTC,team_breakout,hausse,2/1,immediat0.14,-6.41,34,35.3,-7.528,1.199,-0.605,non,20261009_205755_052997_BTC-EUR_1H_team_breakout
+BTC,team_rebound,hausse,1.5/1.5,maker0,1.39,11,54.5,1.409,-0.023,-0.184,non,20261009_205717_175624_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1.5/1.5,maker+touch,-2.43,11,45.5,-2.275,-0.162,-0.277,non,20261009_205717_564806_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1.5/1.5,immediat0.14,-1.15,11,54.5,-0.67,-0.482,-0.213,non,20261009_205717_404468_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1.5/1,maker0,-3.51,11,27.3,-1.551,-1.99,-0.227,non,20261009_205712_021381_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1.5/1,maker+touch,-7.07,11,18.2,-4.913,-2.264,-0.39,non,20261009_205716_813461_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1.5/1,immediat0.14,-5.92,11,27.3,-3.572,-2.442,-0.319,non,20261009_205712_297206_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1/1.5,maker0,0.92,11,63.6,-1.065,2.01,-0.136,non,20261009_205706_359344_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1/1.5,maker+touch,0.36,11,63.6,-1.617,2.01,-0.16,non,20261009_205711_997467_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1/1.5,immediat0.14,-1.6,11,63.6,-3.094,1.543,-0.195,non,20261009_205711_649428_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1/1,maker0,-4.93,11,27.3,-2.999,-1.99,-0.274,non,20261009_205706_324831_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1/1,maker+touch,-7.98,11,18.2,-5.848,-2.264,-0.413,non,20261009_205706_365496_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,1/1,immediat0.14,-7.3,11,27.3,-4.991,-2.442,-0.365,non,20261009_205706_321121_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2.25/1.5,maker0,-3.69,11,36.4,-2.365,-1.359,-0.321,non,20261009_205734_176679_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2.25/1.5,maker+touch,-6.33,11,27.3,-3.182,-3.249,-0.364,non,20261009_205735_250168_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2.25/1.5,immediat0.14,-6.14,11,27.3,-4.369,-1.863,-0.375,non,20261009_205735_052165_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2.25/1,maker0,-4.49,11,18.2,-2.552,-1.99,-0.31,non,20261009_205730_180475_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2.25/1,maker+touch,-5.69,11,18.2,-3.503,-2.264,-0.356,non,20261009_205733_602256_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2.25/1,immediat0.14,-6.88,11,18.2,-4.553,-2.442,-0.4,non,20261009_205730_194751_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2/1.5,maker0,-1.0,11,45.5,0.365,-1.359,-0.257,non,20261009_205724_567783_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2/1.5,maker+touch,-3.57,11,36.4,-0.335,-3.249,-0.277,non,20261009_205728_949791_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2/1.5,immediat0.14,-3.52,11,36.4,-1.693,-1.863,-0.289,non,20261009_205728_496413_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2/1,maker0,-4.96,11,18.2,-3.028,-1.99,-0.322,non,20261009_205722_571732_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2/1,maker+touch,-6.15,11,18.2,-3.974,-2.264,-0.367,non,20261009_205724_233383_BTC-EUR_1H_team_rebound
+BTC,team_rebound,hausse,2/1,immediat0.14,-7.33,11,18.2,-5.019,-2.442,-0.411,non,20261009_205722_920432_BTC-EUR_1H_team_rebound
+ETH,sell_rebuy_ma0,baisse,1.5/1.5,immediat0.14,-13.51,54,50.0,-3.24,-10.613,-0.861,non,20261009_205933_627716_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,1.5/1.5,mixte(cible 0%),-3.121,54,50.0,3.053,-5.991,-0.503,non,20261009_205932_290587_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,1.5/1,immediat0.14,-18.163,57,36.8,-5.511,-13.39,-1.103,non,20261009_205932_058441_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,1.5/1,mixte(cible 0%),-8.717,57,36.8,0.354,-9.039,-0.72,non,20261009_205930_789589_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,1/1.5,immediat0.14,-18.959,57,56.1,-7.18,-12.69,-1.022,non,20261009_205930_408825_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,1/1.5,mixte(cible 0%),-8.203,57,56.1,-0.449,-7.789,-0.563,non,20261009_205929_166461_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,1/1,immediat0.14,-20.15,60,45.0,-8.425,-12.804,-1.1,non,20261009_205928_791023_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,1/1,mixte(cible 0%),-9.804,60,45.0,-2.058,-7.909,-0.662,non,20261009_205927_588549_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,2.25/1.5,immediat0.14,-12.644,52,40.4,-7.798,-5.256,-0.768,non,20261009_205939_938396_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,2.25/1.5,mixte(cible 0%),-3.376,52,40.4,-2.622,-0.774,-0.606,non,20261009_205938_975956_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,2.25/1,immediat0.14,-15.119,56,30.4,-5.394,-10.28,-0.928,non,20261009_205938_328536_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,2.25/1,mixte(cible 0%),-6.114,56,30.4,0.057,-6.167,-0.552,non,20261009_205937_299295_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,2/1.5,immediat0.14,-13.741,52,42.3,-7.151,-7.098,-0.788,non,20261009_205936_754013_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,2/1.5,mixte(cible 0%),-4.322,52,42.3,-1.801,-2.567,-0.489,non,20261009_205935_581003_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,2/1,immediat0.14,-18.244,56,30.4,-7.78,-11.347,-1.048,non,20261009_205935_143142_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma0,baisse,2/1,mixte(cible 0%),-9.443,56,30.4,-2.466,-7.154,-0.677,non,20261009_205933_964555_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,1.5/1.5,immediat0.14,5.78,7,85.7,4.486,1.239,-0.088,non,20261009_205932_245073_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,1.5/1.5,mixte(cible 0%),7.723,7,85.7,6.107,1.523,-0.081,non,20261009_205932_247753_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,1.5/1,immediat0.14,1.106,7,57.1,2.404,-1.267,-0.126,non,20261009_205930_628677_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,1.5/1,mixte(cible 0%),2.676,7,57.1,3.848,-1.129,-0.112,non,20261009_205930_563444_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,1/1.5,immediat0.14,0.816,8,75.0,1.874,-1.038,-0.088,non,20261009_205928_995449_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,1/1.5,mixte(cible 0%),2.811,8,75.0,3.455,-0.622,-0.081,non,20261009_205928_939696_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,1/1,immediat0.14,-0.2,8,62.5,0.351,-0.549,-0.09,non,20261009_205927_478022_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,1/1,mixte(cible 0%),1.633,8,62.5,1.766,-0.13,-0.063,non,20261009_205927_347044_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,2.25/1.5,immediat0.14,2.712,7,57.1,0.683,2.016,-0.174,non,20261009_205938_793263_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,2.25/1.5,mixte(cible 0%),4.307,7,57.1,1.96,2.302,-0.16,non,20261009_205938_526032_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,2.25/1,immediat0.14,-2.356,7,28.6,-1.103,-1.267,-0.126,non,20261009_205937_159695_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,2.25/1,mixte(cible 0%),-1.117,7,28.6,0.011,-1.129,-0.126,non,20261009_205936_887086_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,2/1.5,immediat0.14,1.668,7,57.1,-0.086,1.756,-0.175,non,20261009_205935_388518_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,2/1.5,mixte(cible 0%),3.246,7,57.1,1.181,2.041,-0.16,non,20261009_205935_302194_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,2/1,immediat0.14,-2.853,7,28.6,-1.607,-1.267,-0.143,non,20261009_205933_877269_ETH-EUR_1H_sell_rebuy
+ETH,sell_rebuy_ma200,baisse,2/1,mixte(cible 0%),-1.621,7,28.6,-0.498,-1.129,-0.126,non,20261009_205933_813298_ETH-EUR_1H_sell_rebuy
+ETH,team_breakout,hausse,1.5/1.5,maker0,0.51,30,50.0,-3.108,3.734,-0.359,non,20261009_205905_958973_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1.5/1.5,maker+touch,-9.09,40,45.0,-7.451,-1.772,-0.583,non,20261009_205907_072119_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1.5/1.5,immediat0.14,-6.24,30,50.0,-6.184,-0.064,-0.527,non,20261009_205906_654477_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1.5/1,maker0,2.3,30,43.3,0.897,1.386,-0.229,non,20261009_205901_384867_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1.5/1,maker+touch,-6.1,40,37.5,-2.15,-4.037,-0.345,non,20261009_205905_766518_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1.5/1,immediat0.14,-4.53,30,43.3,-2.303,-2.279,-0.295,non,20261009_205901_784276_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1/1.5,maker0,0.62,30,60.0,-3.55,4.326,-0.268,non,20261009_205856_436515_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1/1.5,maker+touch,-9.95,40,52.5,-8.198,-1.909,-0.616,non,20261009_205900_460484_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1/1.5,immediat0.14,-6.13,30,60.0,-6.612,0.506,-0.517,non,20261009_205900_510605_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1/1,maker0,-0.15,30,50.0,-0.07,-0.08,-0.179,non,20261009_205855_343990_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1/1,maker+touch,-10.92,40,40.0,-5.475,-5.758,-0.556,non,20261009_205856_039728_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,1/1,immediat0.14,-6.81,30,50.0,-3.24,-3.694,-0.376,non,20261009_205855_515740_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2.25/1.5,maker0,7.17,30,46.7,-2.447,9.859,-0.328,non,20261009_205921_665043_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2.25/1.5,maker+touch,-0.16,40,42.5,-6.262,6.513,-0.495,non,20261009_205922_761192_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2.25/1.5,immediat0.14,-0.82,30,46.7,-5.543,5.0,-0.497,non,20261009_205921_856612_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2.25/1,maker0,8.03,30,40.0,2.102,5.802,-0.229,oui,20261009_205916_810691_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2.25/1,maker+touch,-1.97,40,32.5,-3.691,1.785,-0.362,non,20261009_205921_447137_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2.25/1,immediat0.14,0.77,30,40.0,-1.135,1.93,-0.273,non,20261009_205917_685375_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2/1.5,maker0,4.49,30,46.7,-3.633,8.425,-0.385,non,20261009_205912_445046_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2/1.5,maker+touch,-4.23,40,42.5,-7.629,3.684,-0.555,non,20261009_205916_437951_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2/1.5,immediat0.14,-2.53,30,46.7,-6.693,4.459,-0.551,non,20261009_205916_365103_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2/1,maker0,5.84,30,40.0,0.86,4.934,-0.229,non,20261009_205911_251092_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2/1,maker+touch,-5.04,40,32.5,-4.863,-0.189,-0.386,non,20261009_205911_613938_ETH-EUR_1H_team_breakout
+ETH,team_breakout,hausse,2/1,immediat0.14,-1.22,30,40.0,-2.339,1.144,-0.297,non,20261009_205911_453387_ETH-EUR_1H_team_breakout
+ETH,team_rebound,hausse,1.5/1.5,maker0,4.4,17,58.8,7.656,-3.021,-0.171,non,20261009_205834_670734_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1.5/1.5,maker+touch,0.03,19,52.6,3.721,-3.563,-0.292,non,20261009_205834_731895_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1.5/1.5,immediat0.14,0.4,17,58.8,4.971,-4.354,-0.241,non,20261009_205834_607296_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1.5/1,maker0,2.91,17,47.1,3.985,-1.037,-0.121,non,20261009_205829_590380_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1.5/1,maker+touch,-3.26,19,36.8,-1.702,-1.59,-0.316,non,20261009_205833_528425_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1.5/1,immediat0.14,-1.04,17,47.1,1.389,-2.396,-0.15,non,20261009_205829_683738_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1/1.5,maker0,-0.63,17,58.8,3.486,-3.974,-0.223,non,20261009_205824_619949_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1/1.5,maker+touch,-4.79,19,52.6,-0.296,-4.511,-0.373,non,20261009_205829_116957_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1/1.5,immediat0.14,-4.44,17,58.8,0.901,-5.295,-0.311,non,20261009_205828_327812_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1/1,maker0,-1.08,17,47.1,0.95,-2.01,-0.121,non,20261009_205823_165809_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1/1,maker+touch,-6.55,19,36.8,-4.099,-2.557,-0.341,non,20261009_205824_462084_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,1/1,immediat0.14,-4.87,17,47.1,-1.574,-3.356,-0.244,non,20261009_205823_445618_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2.25/1.5,maker0,2.84,17,47.1,4.492,-1.583,-0.274,non,20261009_205850_311208_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2.25/1.5,maker+touch,3.57,19,47.4,5.831,-2.132,-0.292,non,20261009_205851_203446_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2.25/1.5,immediat0.14,-1.15,17,47.1,1.832,-2.934,-0.303,non,20261009_205850_969368_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2.25/1,maker0,4.21,17,41.2,3.765,0.431,-0.197,non,20261009_205844_948027_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2.25/1,maker+touch,1.85,19,36.8,1.984,-0.13,-0.282,non,20261009_205849_834721_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2.25/1,immediat0.14,0.17,17,41.2,1.123,-0.946,-0.241,non,20261009_205845_288698_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2/1.5,maker0,1.09,17,47.1,3.221,-2.063,-0.274,non,20261009_205839_922187_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2/1.5,maker+touch,1.32,19,47.4,4.033,-2.61,-0.292,non,20261009_205844_613682_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2/1.5,immediat0.14,-2.83,17,47.1,0.592,-3.409,-0.303,non,20261009_205844_262275_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2/1,maker0,2.69,17,41.2,2.754,-0.06,-0.197,non,20261009_205838_997928_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2/1,maker+touch,0.12,19,36.8,0.743,-0.618,-0.293,non,20261009_205839_801630_ETH-EUR_1H_team_rebound
+ETH,team_rebound,hausse,2/1,immediat0.14,-1.3,17,41.2,0.136,-1.431,-0.241,non,20261009_205839_594790_ETH-EUR_1H_team_rebound
+SOL,sell_rebuy_ma0,baisse,1.5/1.5,immediat0.14,-18.857,61,47.5,-4.275,-15.233,-1.144,non,20261009_210050_563772_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,1.5/1.5,mixte(cible 0%),-7.958,61,47.5,2.811,-10.475,-0.84,non,20261009_210049_964606_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,1.5/1,immediat0.14,-18.27,63,38.1,-7.93,-11.231,-1.107,non,20261009_210048_929152_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,1.5/1,mixte(cible 0%),-7.681,63,38.1,-1.529,-6.247,-0.704,non,20261009_210048_238615_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,1/1.5,immediat0.14,-19.146,67,58.2,-1.323,-18.062,-1.055,non,20261009_210047_271134_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,1/1.5,mixte(cible 0%),-6.209,67,58.2,7.475,-12.733,-0.798,non,20261009_210046_509720_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,1/1,immediat0.14,-15.381,68,51.5,-5.73,-10.238,-0.862,non,20261009_210045_703256_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,1/1,mixte(cible 0%),-2.252,68,51.5,1.96,-4.131,-0.474,non,20261009_210044_744273_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,2.25/1.5,immediat0.14,-16.289,59,39.0,-3.825,-12.959,-1.079,non,20261009_210057_261225_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,2.25/1.5,mixte(cible 0%),-6.102,59,39.0,2.574,-8.458,-0.968,non,20261009_210057_042674_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,2.25/1,immediat0.14,-15.558,62,30.6,-7.109,-9.095,-0.968,non,20261009_210055_582646_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,2.25/1,mixte(cible 0%),-5.414,62,30.6,-1.066,-4.395,-0.755,non,20261009_210055_411690_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,2/1.5,immediat0.14,-19.679,60,40.0,-5.575,-14.937,-1.099,non,20261009_210053_857758_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,2/1.5,mixte(cible 0%),-9.652,60,40.0,0.99,-10.538,-0.988,non,20261009_210053_494804_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,2/1,immediat0.14,-19.558,62,30.6,-9.682,-10.934,-1.119,non,20261009_210052_302607_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma0,baisse,2/1,mixte(cible 0%),-9.895,62,30.6,-3.807,-6.328,-0.777,non,20261009_210051_757866_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,1.5/1.5,immediat0.14,-1.446,11,54.5,-0.915,-0.536,-0.175,non,20261009_210048_948026_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,1.5/1.5,mixte(cible 0%),0.928,11,54.5,1.047,-0.117,-0.16,non,20261009_210048_937833_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,1.5/1,immediat0.14,-1.483,11,45.5,1.062,-2.518,-0.192,non,20261009_210047_418795_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,1.5/1,mixte(cible 0%),0.75,11,45.5,3.063,-2.244,-0.167,non,20261009_210047_305932_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,1/1.5,immediat0.14,-3.699,12,58.3,-0.952,-2.774,-0.205,non,20261009_210045_822792_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,1/1.5,mixte(cible 0%),-1.103,12,58.3,1.15,-2.227,-0.16,non,20261009_210045_724736_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,1/1,immediat0.14,-1.292,12,58.3,0.526,-1.809,-0.126,non,20261009_210044_231592_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,1/1,mixte(cible 0%),1.37,12,58.3,2.66,-1.257,-0.112,non,20261009_210044_137607_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,2.25/1.5,immediat0.14,-0.633,11,45.5,-0.858,0.227,-0.174,non,20261009_210055_590295_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,2.25/1.5,mixte(cible 0%),1.619,11,45.5,0.963,0.649,-0.16,non,20261009_210055_772031_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,2.25/1,immediat0.14,-0.938,11,36.4,1.62,-2.518,-0.188,non,20261009_210053_826983_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,2.25/1,mixte(cible 0%),1.165,11,36.4,3.487,-2.244,-0.167,non,20261009_210053_842241_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,2/1.5,immediat0.14,-1.894,11,45.5,-1.866,-0.029,-0.177,non,20261009_210052_282583_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,2/1.5,mixte(cible 0%),0.329,11,45.5,-0.063,0.392,-0.16,non,20261009_210052_333836_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,2/1,immediat0.14,-1.945,11,36.4,0.587,-2.518,-0.188,non,20261009_210050_624784_SOL-EUR_1H_sell_rebuy
+SOL,sell_rebuy_ma200,baisse,2/1,mixte(cible 0%),0.136,11,36.4,2.435,-2.244,-0.167,non,20261009_210050_589468_SOL-EUR_1H_sell_rebuy
+SOL,team_breakout,hausse,1.5/1.5,maker0,3.92,36,52.8,-0.157,4.081,-0.317,non,20261009_210022_167589_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1.5/1.5,maker+touch,1.39,41,53.7,-1.292,2.715,-0.346,non,20261009_210023_309372_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1.5/1.5,immediat0.14,-4.39,36,52.8,-3.324,-1.106,-0.546,non,20261009_210022_781935_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1.5/1,maker0,1.23,36,41.7,-1.588,2.869,-0.27,non,20261009_210017_044194_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1.5/1,maker+touch,-4.69,41,39.0,-5.021,0.347,-0.507,non,20261009_210022_090406_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1.5/1,immediat0.14,-6.81,36,41.7,-4.711,-2.209,-0.463,non,20261009_210018_021216_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1/1.5,maker0,4.59,36,63.9,3.982,0.582,-0.295,non,20261009_210012_817244_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1/1.5,maker+touch,-4.11,41,58.5,-2.571,-1.576,-0.437,non,20261009_210016_828098_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1/1.5,immediat0.14,-3.77,36,63.9,0.688,-4.433,-0.426,non,20261009_210016_600743_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1/1,maker0,-2.16,36,47.2,-0.07,-2.088,-0.306,non,20261009_210011_520671_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1/1,maker+touch,-10.03,41,41.5,-5.333,-4.959,-0.593,non,20261009_210011_719130_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,1/1,immediat0.14,-9.93,36,47.2,-3.24,-6.925,-0.502,non,20261009_210011_541861_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2.25/1.5,maker0,9.38,36,47.2,1.267,8.008,-0.364,oui,20261009_210038_047308_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2.25/1.5,maker+touch,6.13,41,46.3,-3.114,9.537,-0.472,non,20261009_210038_960993_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2.25/1.5,immediat0.14,0.58,36,47.2,-1.944,2.578,-0.417,non,20261009_210038_563030_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2.25/1,maker0,7.95,36,38.9,-1.144,9.195,-0.282,non,20261009_210033_275275_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2.25/1,maker+touch,0.23,41,34.1,-4.725,5.205,-0.414,non,20261009_210037_701358_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2.25/1,immediat0.14,-0.68,36,38.9,-4.28,3.758,-0.379,non,20261009_210033_860163_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2/1.5,maker0,8.91,36,50.0,3.337,5.396,-0.293,oui,20261009_210028_658155_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2/1.5,maker+touch,5.05,41,48.8,-0.996,6.106,-0.373,non,20261009_210032_648498_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2/1.5,immediat0.14,0.16,36,50.0,0.062,0.096,-0.371,oui,20261009_210032_565558_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2/1,maker0,7.73,36,41.7,0.86,6.815,-0.246,non,20261009_210027_397110_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2/1,maker+touch,-3.14,41,34.1,-5.654,2.661,-0.47,non,20261009_210028_036680_SOL-EUR_1H_team_breakout
+SOL,team_breakout,hausse,2/1,immediat0.14,-0.88,36,41.7,-2.339,1.495,-0.333,non,20261009_210027_428826_SOL-EUR_1H_team_breakout
+SOL,team_rebound,hausse,1.5/1.5,maker0,10.81,21,66.7,6.065,4.474,-0.181,oui,20261009_205949_868120_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1.5/1.5,maker+touch,6.16,23,60.9,2.189,3.89,-0.201,oui,20261009_205950_920312_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1.5/1.5,immediat0.14,2.46,21,61.9,0.59,1.865,-0.225,oui,20261009_205950_152662_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1.5/1,maker0,1.35,21,42.9,-2.536,3.985,-0.247,non,20261009_205945_057491_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1.5/1,maker+touch,-2.6,23,39.1,-5.672,3.26,-0.34,non,20261009_205949_507437_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1.5/1,immediat0.14,-5.81,21,38.1,-4.756,-1.111,-0.369,non,20261009_205945_763844_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1/1.5,maker0,6.03,21,71.4,2.461,3.486,-0.141,non,20261009_205940_688265_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1/1.5,maker+touch,1.73,23,65.2,-1.284,3.052,-0.171,non,20261009_205944_591945_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1/1.5,immediat0.14,-1.47,21,66.7,-2.35,0.901,-0.154,non,20261009_205944_529859_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1/1,maker0,-3.06,21,42.9,-3.969,0.95,-0.247,non,20261009_205939_425128_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1/1,maker+touch,-6.83,23,39.1,-7.059,0.245,-0.413,non,20261009_205939_830987_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,1/1,immediat0.14,-9.46,21,38.1,-6.158,-3.525,-0.524,non,20261009_205939_722762_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2.25/1.5,maker0,14.0,21,57.1,3.633,9.999,-0.299,oui,20261009_210006_356912_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2.25/1.5,maker+touch,8.91,23,52.2,-0.434,9.384,-0.326,non,20261009_210007_132813_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2.25/1.5,immediat0.14,3.71,21,52.4,-2.44,6.304,-0.332,non,20261009_210006_246338_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2.25/1,maker0,8.29,21,42.9,-0.359,8.682,-0.273,non,20261009_210000_694311_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2.25/1,maker+touch,4.08,23,39.1,-3.565,7.923,-0.365,non,20261009_210005_715300_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2.25/1,immediat0.14,-0.1,21,38.1,-2.628,2.6,-0.334,non,20261009_210001_692529_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2/1.5,maker0,14.63,21,61.9,6.01,8.13,-0.217,oui,20261009_205956_349066_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2/1.5,maker+touch,9.67,23,56.5,1.993,7.526,-0.251,oui,20261009_210000_595717_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2/1.5,immediat0.14,5.48,21,57.1,0.044,5.433,-0.239,oui,20261009_205959_973355_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2/1,maker0,5.93,21,42.9,-1.088,7.097,-0.273,non,20261009_205954_840586_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2/1,maker+touch,1.81,23,39.1,-4.271,6.35,-0.365,non,20261009_205955_210045_SOL-EUR_1H_team_rebound
+SOL,team_rebound,hausse,2/1,immediat0.14,-2.03,21,38.1,-3.341,1.351,-0.334,non,20261009_205954_988628_SOL-EUR_1H_team_rebound

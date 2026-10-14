@@ -1,0 +1,47 @@
+{
+  "mode": "paper",
+  "kind": "watcher_down",
+  "pair": null,
+  "price": null,
+  "stop": null,
+  "position_id": null,
+  "message_fr": "Le surveillant est arrêté (processus 2370603 absent), 2 trades simulés ouverts.",
+  "ts": "2026-10-11T17:32:53.729841+02:00",
+  "test": false,
+  "bot": "risk",
+  "heartbeat_age_s": 24,
+  "heartbeat_pid": 2370603,
+  "pid_vivant": false,
+  "heartbeat_absent": false,
+  "positions": [
+    {
+      "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-040a",
+      "cycle_id": null
+    },
+    {
+      "id": "rx-paper-2026-10-11T053723Z-e33a1866",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-043a",
+      "cycle_id": null
+    }
+  ],
+  "position_ids": [
+    "rx-paper-2026-10-10T060455Z-b93c34c9",
+    "rx-paper-2026-10-11T053723Z-e33a1866"
+  ],
+  "cycle_ids": [],
+  "open_live": 0,
+  "open_paper": 2,
+  "envoi": "reel",
+  "handled": {
+    "at": "2026-10-11T17:35:05.095754+02:00",
+    "action": "already_restarted",
+    "old_pid": 2370603,
+    "new_pid": 2392360,
+    "note": "Sonnette suivante après force-restart 17h30 ; surveillant déjà actif, signal de vie OK, 0 live"
+  }
+}

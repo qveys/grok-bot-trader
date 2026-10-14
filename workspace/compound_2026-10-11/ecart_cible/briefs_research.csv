@@ -1,0 +1,5 @@
+brief,pair,note,side,entry,target,stop,target_pct,stop_pct,start,deadline,best_price,best_move_pct,best_at,best_src,share_of_target_pct,target_reached,stop_touched,target_share_of_day_range_pct
+2026-10-08_1433_last_research.json,—,aucune ligne chiffrée (pas de prix visé),,,,,,,,,,,,,,,,
+2026-10-09_1444_last_research.json,BTC-EUR,,hausse,74121.0,75232.0,73379.0,1.499,1.001,09/10 15h04,09/10 17h00,74348.76,0.307,09/10 16h34,tick,20.5,non,non,62.2
+2026-10-09_1444_last_research.json,ETH-EUR,,baisse,2230.0,2197.0,2263.0,1.48,1.48,09/10 15h04,09/10 17h00,2212.34,0.792,09/10 15h36,tick,53.5,non,non,71.4
+2026-10-09_1444_last_research.json,SOL-EUR,,hausse,98.61,100.09,97.13,1.501,1.501,09/10 15h04,09/10 17h00,98.81,0.203,09/10 16h34,tick,13.5,non,non,47.5

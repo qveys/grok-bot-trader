@@ -1,0 +1,59 @@
+{
+  "mode": "paper",
+  "kind": "revolut_down",
+  "pair": null,
+  "price": null,
+  "stop": null,
+  "position_id": null,
+  "message_fr": "Pas de nouvelle du test Revolut depuis 67 min, 3 trades simulés ouverts.",
+  "ts": "2026-10-12T09:08:05.153292+02:00",
+  "test": false,
+  "bot": "risk",
+  "heartbeat_age_s": 4027,
+  "consecutive_failures": 0,
+  "error": null,
+  "heartbeat_absent": false,
+  "positions": [
+    {
+      "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-040a",
+      "cycle_id": null
+    },
+    {
+      "id": "rx-paper-2026-10-12T053552Z-16722c7d",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-047a",
+      "cycle_id": null
+    },
+    {
+      "id": "rx-paper-2026-10-12T053552Z-0dfa6c69",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-047c",
+      "cycle_id": "rx-paper-2026-10-12T053552Z-0dfa6c69"
+    }
+  ],
+  "position_ids": [
+    "rx-paper-2026-10-10T060455Z-b93c34c9",
+    "rx-paper-2026-10-12T053552Z-16722c7d",
+    "rx-paper-2026-10-12T053552Z-0dfa6c69"
+  ],
+  "cycle_ids": [
+    "rx-paper-2026-10-12T053552Z-0dfa6c69"
+  ],
+  "open_live": 0,
+  "open_paper": 3,
+  "envoi": "reel",
+  "handled_at": "2026-10-12T09:09:24.455416+02:00",
+  "result": "revolut_ok_heartbeat_refreshed",
+  "eth_mid": 2295.63,
+  "watcher_pid": 2421281,
+  "gap_rattrapage": {
+    "debut": "2026-10-12T08:03:52+02:00",
+    "fin": "2026-10-12T09:08:11+02:00",
+    "franchi": 0
+  }
+}

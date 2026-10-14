@@ -1,0 +1,7 @@
+store.db
+conversation-blobs.db
+*.env
+.env
+secrets.env
+.dev.vars
+PASSPHRASE*

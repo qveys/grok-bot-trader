@@ -1,0 +1,1 @@
+backtest.sh run --pair SOL-EUR --tf 1H --days 365 --end 2026-10-07 --strategy sell_rebuy --json --coins 0.241 --costs revolutx --fee-pct 0.05 --trail 2.0

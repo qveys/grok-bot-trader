@@ -1,0 +1,1586 @@
+{
+  "_aide": "Liste des zones de prix qui font sonner Predict ou Risk. Mode d'emploi: references/sonnette.md. Seule la liste 'zones' est lue; '_exemple' est ignoré.",
+  "_exemple": {
+    "id": "Z-SOL-98",
+    "paire": "SOL-EUR",
+    "sens": "sous",
+    "prix": 98.0,
+    "bot": "predict",
+    "raison": "Support du jour — revoir si SOL casse 98 €",
+    "expire": "2026-10-09T17:00:00+02:00",
+    "actif": true
+  },
+  "zones": [
+    {
+      "id": "Z-BTC-72000",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 72000.0,
+      "bot": "predict",
+      "raison": "Bas du jour — revoir idée à la baisse ou rebond ; remplacée par Z-BTC-72930 (règle 0,3 % avant le bas du jour)",
+      "expire": "2026-10-09T22:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74000",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74000.0,
+      "bot": "predict",
+      "raison": "Haut du jour — touchée 14h00 ; désactivée (D-022 pas de trade)",
+      "expire": "2026-10-09T22:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2150",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2150.0,
+      "bot": "predict",
+      "raison": "Trop loin — remplacée par Z-ETH-2208 (D-025)",
+      "expire": "2026-10-09T22:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2250",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2250.0,
+      "bot": "predict",
+      "raison": "Trop loin — remplacée par Z-ETH-2232 (D-025)",
+      "expire": "2026-10-09T22:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-95",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 95.0,
+      "bot": "predict",
+      "raison": "Trop loin — remplacée par Z-SOL-97.22 (D-025)",
+      "expire": "2026-10-09T22:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-100",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 100.0,
+      "bot": "predict",
+      "raison": "Retrouver 100 € — revoir idée à la hausse ; remplacée par Z-SOL-99.6 (règle : moins de 1 % du prix)",
+      "expire": "2026-10-09T22:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-75000",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 75000.0,
+      "bot": "predict",
+      "raison": "Trop loin (>1 %) — remplacée par Z-BTC-74166 (D-025)",
+      "expire": "2026-10-10T22:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74050",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 74050.0,
+      "bot": "predict",
+      "raison": "Prix d'entrée idée à la hausse : achat sur petit recul vers 74 050 €, visé 75 160 € (+1,5 %), arrêt 73 310 € (−1 %) ; utilisée pour D-023 (achat à 74 120 €)",
+      "expire": "2026-10-10T14:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-72930",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 72930.0,
+      "bot": "predict",
+      "raison": "Remplacée par Z-BTC-73450 (veille D-023) et plan bas via entrée 73050 (D-025)",
+      "expire": "2026-10-10T14:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74600",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74600.0,
+      "bot": "predict",
+      "raison": "Trop loin (>1 %) — remplacée par Z-BTC-74166 (D-025)",
+      "expire": "2026-10-10T14:30:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2212",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2212.0,
+      "bot": "predict",
+      "raison": "Remplacée par Z-ETH-2208 (0,3 % avant le bas du jour, D-025)",
+      "expire": "2026-10-10T14:30:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.9",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.9,
+      "bot": "predict",
+      "raison": "Remplacée par Z-SOL-97.22 (plan prudente D-025a)",
+      "expire": "2026-10-10T14:30:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-99.6",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 99.6,
+      "bot": "predict",
+      "raison": "Remplacée par Z-SOL-99.01 (0,3 % avant le haut du jour, D-025)",
+      "expire": "2026-10-10T14:30:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73700",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73700.0,
+      "bot": "predict",
+      "raison": "Touchée 15h37 — D-023 encore vivante (D-025) ; désactivée",
+      "expire": "2026-10-10T14:30:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73050",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73050.0,
+      "bot": "predict",
+      "raison": "Plan risquée D-025c : achat 10 € de BTC à 73 050 € seulement si D-023 est déjà fermée, visé 74 511 € (+2 %), arrêt 72 320 € (−1 %)",
+      "expire": "2026-10-10T15:40:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74166",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74166.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (74 389 €) ; plan : si BTC remonte là → revoir si la baisse D-025 est morte — touchée 16h23 — D-028 baisse BTC morte",
+      "expire": "2026-10-10T15:41:15+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2208",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2208.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour (2 201 €) ; plan : si ETH casse 2 208 € → D-024b / D-028a / D-029b proches de la cible — remplacée D-030",
+      "expire": "2026-10-10T16:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2232",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2232.0,
+      "bot": "predict",
+      "raison": "Touchée 16h35 (ETH 2 233,44 €) — déjà traité dans D-029 (revoir D-024b / D-028a / D-029b près des arrêts ; place pleine)",
+      "expire": "2026-10-10T16:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.22",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.22,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour (96,93 €) ; plan : si SOL casse 97,22 € → lancer / renforcer idée à la baisse D-026 (cible 96,23 €), place sous 50 € d’abord — hors fenêtre <1 % du prix (D-028) — remplacée par Z-SOL-97.50",
+      "expire": "2026-10-10T15:41:15+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.58",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.58,
+      "bot": "predict",
+      "raison": "Moins de 1 % au-dessus — près du visé D-024a ; revoir idée à la hausse / prise de gain — désactivée (D-025 : une seule zone <1 % par côté)",
+      "expire": "2026-10-10T15:40:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73450",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73450.0,
+      "bot": "predict",
+      "raison": "Veille D-023 : si BTC passe sous 73 450 €, idée presque à l’arrêt 73 379 € — revoir si encore vivante ; sinon plan risquée D-025c achat 10 € à 73 050 €, visé 74 511 €, arrêt 72 320 € — désactivée (D-025 : une seule zone <1 % par côté)",
+      "expire": "2026-10-10T15:40:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-99.01",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 99.01,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (99,31 €) ; plan D-029a/c : si SOL casse 99,01 € → renforcer idée à la hausse (visé 100,60 €, arrêt selon niveau) — remplacée D-030",
+      "expire": "2026-10-10T16:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73163",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73163.0,
+      "bot": "predict",
+      "raison": "Plan : BTC sous 73163 € (~0,8 % sous le prix) — revoir D-023 près de l'arrêt 73 379 € ; si encore au-dessus de l'arrêt, laisser courir, sinon idée morte pour Risk",
+      "expire": "2026-10-10T15:40:25+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2207.9",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2207.9,
+      "bot": "predict",
+      "raison": "Plan : ETH sous 2207.9 € (0,3 % avant le bas du jour) — revoir D-024b (idée à la baisse) ; si place libre, renforcer vente prudente",
+      "expire": "2026-10-10T15:40:25+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2231.9",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2231.9,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (2 239 €). Si ETH remonte à 2231,9 € → revoir ventes ETH (arrêts). Expire ~24 h. — remplacée D-035 21h39",
+      "expire": "2026-10-10T19:25:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.62",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.62,
+      "bot": "predict",
+      "raison": "Plan : SOL au-dessus de 98.62 € → idée à la hausse, achat 25 € si place libre (D-025a), visé 99.8 €, arrêt 95.88 €",
+      "expire": "2026-10-10T15:40:25+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73030",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73030.0,
+      "bot": "predict",
+      "raison": "Plan D-025 : si BTC casse ~73 030 € (<1 %) → revoir continuation baisse / rebond ; entrée vente prudente proposée à 73 770 € — hors fenêtre <1 % du prix (D-028)",
+      "expire": "2026-10-10T15:41:15+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.60",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.6,
+      "bot": "predict",
+      "raison": "Touchée 16h30 — D-029 : rebond SOL confirmé ; D-024a déjà fermée ; nouvelles propositions SOL hausse / ETH baisse",
+      "expire": "2026-10-10T16:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74366",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74366.0,
+      "bot": "predict",
+      "raison": "≈ juste sous le haut du jour (74 389 €) ; plan : si BTC casse 74 366 € → idée à la hausse (D-028c / suite) après place libre — remplacée D-030",
+      "expire": "2026-10-10T16:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73612",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73612.0,
+      "bot": "predict",
+      "raison": "≈ 0,8 % sous le prix (<1 %) ; plan : si BTC casse 73 612 € → revoir D-023 (arrêt 73 379 €) ; si encore au-dessus de l’arrêt laisser courir, sinon idée morte pour Risk — remplacée D-030",
+      "expire": "2026-10-10T16:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.50",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.5,
+      "bot": "predict",
+      "raison": "Moins de 1 % sous le prix (bas du jour trop loin pour 0,3 %) ; plan : si SOL casse 97,50 € → D-026 proche de la cible 95,54 € / renforcer baisse si place — hors fenêtre <1 % du prix (D-029) — remplacée par Z-SOL-97.65",
+      "expire": "2026-10-10T16:23:10+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.65",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.65,
+      "bot": "predict",
+      "raison": "Moins de 1 % sous le prix (bas du jour trop loin pour 0,3 %) ; plan : si SOL casse 97,65 € → idée à la hausse D-029a/c morte près de l’arrêt risquée 97,64 € ; sinon revoir baisse — remplacée D-030",
+      "expire": "2026-10-10T16:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2235",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2235.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (2 239 €) ; plan : si ETH repasse 2 235 € → revoir D-024b / D-028a près des arrêts (2 255 / 2 270) ; suite D-029 — remplacée D-030",
+      "expire": "2026-10-10T16:36:39+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73490",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73490.0,
+      "bot": "predict",
+      "raison": "Moins de 1 % sous le prix ; plan : si BTC casse 73490 € → confirmer D-023 fermée / ouvrir suite baisse ; sinon laisser | remplacée D-033 (18:21)",
+      "expire": "2026-10-10T17:07:49+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74166",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74166.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (74,389 €) ; plan : si BTC casse 74166 € → idée à la hausse possible après place libre | remplacée D-033 (18:21)",
+      "expire": "2026-10-10T17:07:49+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2208",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2208.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour (2,201 €) ; plan : si ETH casse 2208 € → D-024b / D-028a / D-030b proches de la cible | remplacée D-033 (18:21)",
+      "expire": "2026-10-10T17:07:49+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2232",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2232.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (2,239 €) ; plan : si ETH repasse 2232 € → revoir D-024b / D-028a / D-030b près des arrêts | désactivée D-033 (mouvement ETH +0,5 %, prix ~2231 € près de 2232)",
+      "expire": "2026-10-10T17:07:49+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.22",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.22,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour (96,93 €). Si SOL casse 97,22 € → D-031b/D-034b vers le visé. Expire ~24 h. — remplacée D-035 21h39",
+      "expire": "2026-10-10T19:25:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-99.01",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 99.01,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (99.31 €) ; plan : si SOL remonte à 99.01 € → baisse D-030a/c sous pression, revoir | remplacée D-033 (18:21)",
+      "expire": "2026-10-10T17:07:49+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2210",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2210.0,
+      "bot": "predict",
+      "raison": "Moins de 1 % sous le prix ; ≈ plan bas. Si ETH casse 2210 € → ventes D-024b/D-028a/D-033b vers le bas du jour ; entrée renfort vente possible. Expire ~24 h. | remplacée D-034 (19:25)",
+      "expire": "2026-10-10T18:21:06+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2237.8",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2237.8,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus / près du haut du jour (2239 €). Si ETH casse 2237.8 € → ventes ETH sous pression (arrêts) ; revoir D-024b/D-028a. Expire ~24 h. | remplacée D-034 (19:25)",
+      "expire": "2026-10-10T18:21:06+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73490",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73490.0,
+      "bot": "predict",
+      "raison": "Moins de 1 % sous le prix. Si BTC casse 73490 € → revoir D-031a / entrée prudente D-033a sur petit recul. Expire ~24 h. | remplacée D-034 (19:25)",
+      "expire": "2026-10-10T18:21:06+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74166",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74166.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (74 389 €). Si BTC casse 74 166 € → rebond possible, revoir biais. Expire ~24 h. — remplacée D-035 21h39",
+      "expire": "2026-10-10T19:25:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.47",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.47,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas / <1 % sous le prix. Si SOL casse 97.47 € → D-031b vers le visé 96,32 €. Expire ~24 h. | remplacée D-034 (19:25)",
+      "expire": "2026-10-10T18:21:06+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-99.01",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 99.01,
+      "bot": "predict",
+      "raison": "Près de l’arrêt D-031b (98,87 €) / <1 % au-dessus. Si SOL casse 99.01 € → vente SOL sous pression. Expire ~24 h. | remplacée D-034 (19:25)",
+      "expire": "2026-10-10T18:21:06+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2207.8",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2207.8,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour (2,201 €). Si ETH casse 2207.8 € → D-024b/D-028a/D-036b vers le visé. Expire ~24 h. — remplacée D-037 00:33",
+      "expire": "2026-10-11T00:03:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-72975",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 72975.0,
+      "bot": "predict",
+      "raison": "Moins de 1 % sous le prix (cap 1 %). Si BTC casse 72 975 € → revoir D-031a (contre nous). Expire ~24 h. — remplacée D-035 21h39",
+      "expire": "2026-10-10T19:25:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.68",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.68,
+      "bot": "predict",
+      "raison": "Moins de 1 % au-dessus du prix (cap 1 % ; haut jour trop loin). Si SOL casse 98,68 € → vente SOL sous pression (arrêt D-031b 98,87 €). Expire ~24 h. — remplacée D-035 21h39",
+      "expire": "2026-10-10T19:25:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73462",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73462.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour (73,242 €) ou <1 % sous le prix. Si BTC casse 73,462 € → revoir D-031a (contre). Plan : vente prudente BTC si place. Expire ~24 h. — remplacée D-036 00h03",
+      "expire": "2026-10-10T21:39:53+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74166",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74166.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (74,389 €). Si BTC casse 74166 € → rebond possible, revoir biais baisse. Expire ~24 h. — remplacée D-037 00:33",
+      "expire": "2026-10-11T00:03:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2207.3",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2207.3,
+      "bot": "predict",
+      "raison": "<1 % sous le prix (près du bas 2,212 €). Si ETH casse 2207.3 € → D-024b/D-028a/D-035b vers visé. Expire ~24 h. — remplacée D-036 00h03",
+      "expire": "2026-10-10T21:39:53+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2231.9",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2231.9,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le haut du jour (2,239 €). Si ETH remonte à 2231.9 € → revoir ventes ETH (D-024b garder tant que sous arrêt). Expire ~24 h. — remplacée D-037 00:33",
+      "expire": "2026-10-11T00:03:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-96.95",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 96.95,
+      "bot": "predict",
+      "raison": "<1 % sous le prix (au bas du jour 97.24 €). Si SOL casse 96.95 € → D-031b/D-035a vers visé 95.3. Plan vente prudente. Expire ~24 h. — remplacée D-036 00h03",
+      "expire": "2026-10-10T21:39:53+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.21",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.21,
+      "bot": "predict",
+      "raison": "<1 % au-dessus du prix (cap 1 % ; haut jour trop loin). Si SOL casse 98.21 € → revoir D-031b / D-035. Expire ~24 h. — remplacée D-036 00h03",
+      "expire": "2026-10-10T21:39:53+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73382",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73382.0,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix. Si BTC casse 73382 € → D-031a idée morte confirmée ; plan entrée vente BTC si place (D-036 suite). Expire ~24 h. — remplacée D-037 00:33",
+      "expire": "2026-10-11T00:03:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-96.75",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 96.75,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix / près du bas (96.80 €). Si SOL casse 96.75 € → D-031b/D-036a vers visé 95.1. Plan vente prudente. Expire ~24 h. — remplacée D-037 00:33",
+      "expire": "2026-10-11T00:03:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.01",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.01,
+      "bot": "predict",
+      "raison": "<1 % au-dessus du prix (cap 1 % ; haut jour trop loin). Si SOL casse 98.01 € → revoir D-031b / D-036. Expire ~24 h. — remplacée D-037 00:33",
+      "expire": "2026-10-11T00:03:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.20",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.2,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % avant le bas hier (D-043). Si SOL casse 97,20 € → vente D-043b / stop D-042a proche. Expire ~24 h. ; remplacée par D-044",
+      "expire": "2026-10-12T07:35:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.88",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 97.88,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (haut jour = prix). Si SOL casse 97,88 € → revoir D-031b/D-036a/D-037. Expire ~24 h. — remplacée D-038",
+      "expire": "2026-10-11T00:33:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2219.6",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2219.6,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix / près du bas de nuit. Si ETH casse 2219,6 € → D-024b/D-028a/D-037b vers le visé. Expire ~24 h. — touchée 02h04, traitée dans D-038",
+      "expire": "2026-10-11T00:33:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2228.9",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2228.9,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix. Si ETH casse 2228,9 € → revoir ventes ETH. Expire ~24 h. — remplacée D-038",
+      "expire": "2026-10-11T00:33:00+02:00"
+    },
+    {
+      "id": "Z-BTC-73500",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73500.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix. Si BTC casse 73500 € → pression baisse, plan entrée vente si place. Expire ~24 h. — remplacée D-038",
+      "expire": "2026-10-11T00:33:00+02:00"
+    },
+    {
+      "id": "Z-BTC-73942",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 73942.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix. Si BTC casse 73942 € → rebond, revoir biais. Expire ~24 h. — remplacée D-038",
+      "expire": "2026-10-11T00:33:00+02:00"
+    },
+    {
+      "id": "Z-BTC-73489",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73489.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix. Si BTC casse 73489.0 € → pression baisse ; plan entrée vente ETH/BTC si place. Expire ~24 h. ; remplacée par nouvelles zones D-039",
+      "expire": "2026-10-11T02:06:48+02:00"
+    },
+    {
+      "id": "Z-BTC-73931",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 73931.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix. Si BTC casse 73931.0 € → rebond, revoir biais baisse. Expire ~24 h. ; remplacée par nouvelles zones D-039",
+      "expire": "2026-10-11T02:06:48+02:00"
+    },
+    {
+      "id": "Z-ETH-2212.5",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2212.5,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix / près du bas du jour (2213.005 €). Si ETH casse 2212.5 € → D-024b/D-028a/D-038 vers le visé. Expire ~24 h. ; remplacée par nouvelles zones D-039",
+      "expire": "2026-10-11T02:06:48+02:00"
+    },
+    {
+      "id": "Z-ETH-2225.8",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2225.8,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-045). Si ETH casse → revoir D-043a. Expire ~24 h. — remplacée D-046",
+      "expire": "2026-10-12T11:03:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.2",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.2,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % avant le bas du jour (96,905 €). Si SOL casse 97,2 € → D-036a vers le visé / revoir achat D-040b. Exp ~24 h (D-040). — trop loin (>1 % du prix 98,34) ; remplacée Z-SOL-98.04 (D-040)",
+      "expire": "2026-10-11T08:00:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.35",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 97.35,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix. Si SOL casse 97.35 € → revoir D-031b/D-036a. Expire ~24 h.",
+      "expire": "2026-10-11T02:06:48+02:00"
+    },
+    {
+      "id": "Z-BTC-73491",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73491.0,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix. Si BTC casse 73491.0 € → pression baisse ; plan entrée vente ETH/SOL selon place. Exp ~24 h (D-039). — remplacée D-040",
+      "expire": "2026-10-11T02:55:58+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73933",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 73933.0,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix. Si BTC casse 73933.0 € → rebond, revoir biais baisse. Exp ~24 h (D-039). — prix déjà au-dessus (D-040) ; remplacée",
+      "expire": "2026-10-11T02:55:58+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2219.6",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2219.6,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour (2213.005 €) / sous le prix. Si ETH casse 2219.6 € → continuer ventes ETH (D-039a). Exp ~24 h. — remplacée D-040",
+      "expire": "2026-10-11T02:55:58+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2229.5",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2229.5,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix. Si ETH casse 2229.5 € → revoir ventes ETH (D-024b/D-028a/D-039). Exp ~24 h. — prix déjà au-dessus (D-040) ; remplacée",
+      "expire": "2026-10-11T02:55:58+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.2",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.2,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour (96.905 €). Si SOL casse 97.2 € → D-031b/D-036a vers le visé. Exp ~24 h (D-039). — remplacée D-040 — trop loin (>1 % du prix 98,34) ; remplacée Z-SOL-98.04 (D-040)",
+      "expire": "2026-10-11T02:55:58+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.03",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.03,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix (haut du jour 97.745 €). Si SOL casse 98.03 € → rebond fort, revoir shorts SOL. Exp ~24 h (D-039). — touchée 07h59 (SOL 98,32 €) — D-040",
+      "expire": "2026-10-11T02:55:58+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73725",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73725.0,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix / avant le haut du jour. Si BTC casse 73725 € → revoir achats D-040 ; plan entrée achat BTC prudente à 73725 €, visé 75426 €, arrêt 72468 €. Exp ~24 h (D-040). ; remplacée à 09h05 (D-041)",
+      "expire": "2026-10-11T08:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74169",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74169.0,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix. Si BTC casse 74169 € → rebond continue ; renforcer / lancer D-040a. Exp ~24 h (D-040). ; remplacée à 09h05 (D-041)",
+      "expire": "2026-10-11T08:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2223.3",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2223.3,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix. Si ETH casse 2223,3 € → pression sur D-024b/D-028a vers le visé. Exp ~24 h (D-040). ; remplacée à 09h05 (D-041)",
+      "expire": "2026-10-11T08:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2236.7",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2236.7,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix. Si ETH casse 2236,7 € → rebond fort ; revoir ventes ETH D-024b/D-028a. Exp ~24 h (D-040). ; remplacée à 09h05 (D-041)",
+      "expire": "2026-10-11T08:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.64",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.64,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix. Si SOL casse 98,64 € → rebond continue ; plan entrée achat SOL D-040b, visé 100,55 €, arrêt 96,87 €. Exp ~24 h (D-040). ; remplacée à 09h05 (D-041)",
+      "expire": "2026-10-11T08:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.04",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 98.04,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix. Si SOL casse 98,04 € → revoir achat D-040b / D-036a sous pression. Exp ~24 h (D-040). ; remplacée à 09h05 (D-041)",
+      "expire": "2026-10-11T08:00:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73623",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73623.0,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix (D-041). Si BTC casse 73623 € → revoir achat D-040a / D-041b ; plan entrée idée à la baisse ou rebond — remplacée D-042",
+      "expire": "2026-10-11T09:05:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74177",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74177.0,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du haut du jour 73955 € (D-041). Si BTC casse 74177 € → rebond continue ; plan entrée achat — remplacée D-042",
+      "expire": "2026-10-11T09:05:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2218.9",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2218.9,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix (D-041). Si ETH casse 2218.9 € → ventes D-024b/D-028a vers le visé ; plan entrée idée à la baisse — remplacée D-042",
+      "expire": "2026-10-11T09:05:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2237.5",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2237.5,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du haut du jour 2230.8 € (D-041). Si ETH casse 2237.5 € → rebond fort ; revoir ventes ETH — remplacée D-042",
+      "expire": "2026-10-11T09:05:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-97.2",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.2,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas du jour 96.905 € (D-041). Si SOL casse 97.2 € → revoir achat D-041a ; plan entrée rebond — remplacée D-042",
+      "expire": "2026-10-11T09:05:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.66",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.66,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du haut du jour 98.365 € (D-041). Si SOL casse 98.66 € → rebond continue ; plan entrée achat D-041a/c — remplacée D-042",
+      "expire": "2026-10-11T09:05:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73789",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73789.0,
+      "bot": "predict",
+      "raison": "≈0,3 % avant le bas / sous le prix (D-042). Si BTC casse 73789.0 € → revoir achat D-040a / D-042b ; plan entrée rebond. Expire ~24 h. | remplacée D-043",
+      "expire": "2026-10-11T18:12:35+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74304",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74304.0,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix/haut (D-042). Si BTC casse 74304.0 € → rebond continue ; plan entrée achat D-042b. Expire ~24 h. | remplacée D-043",
+      "expire": "2026-10-11T18:12:35+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2233.0",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2233.0,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix (D-042). Si ETH casse 2233.0 € → revoir après fermeture ventes mortes ; plan entrée D-042c sur petit recul. Expire ~24 h. | remplacée D-043",
+      "expire": "2026-10-11T18:12:35+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2246.4",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2246.4,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du haut du jour (D-042). Si ETH casse 2246.4 € → continuation hausse ; plan achat D-042c. Expire ~24 h. | remplacée D-043",
+      "expire": "2026-10-11T18:12:35+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.17",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 98.17,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix (D-042). Si SOL casse 98.17 € → entrée de secours achat D-042a. Expire ~24 h. | touchée 07h32 ; désactivée (D-043)",
+      "expire": "2026-10-11T18:12:35+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.77",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.77,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du haut du jour (D-042). Si SOL casse 98.77 € → rebond continue ; plan achat D-042a/c. Expire ~24 h. | remplacée D-043",
+      "expire": "2026-10-11T18:12:35+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-73919",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73919.0,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix (D-043). Si BTC casse 73919 € → revoir D-040a / achat D-043c. Expire ~24 h. ; remplacée par D-044",
+      "expire": "2026-10-12T07:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74364",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74364.0,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix (D-043). Si BTC casse 74364 € → continuation hausse. Expire ~24 h. ; remplacée par D-044",
+      "expire": "2026-10-12T07:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2231.8",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2231.8,
+      "bot": "predict",
+      "raison": "≈0,3 % sous le prix (D-043). Si ETH casse 2231,8 € → entrée de secours achat D-043a. Expire ~24 h. ; remplacée par D-044",
+      "expire": "2026-10-12T07:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-ETH-2245.3",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2245.3,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix (D-043). Si ETH casse 2245,3 € → continuation. Expire ~24 h. ; remplacée par D-044",
+      "expire": "2026-10-12T07:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-SOL-98.15",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.15,
+      "bot": "predict",
+      "raison": "≈0,3 % au-dessus du prix (D-043). Si SOL casse 98,15 € → rebond, revoir vente. Expire ~24 h. ; remplacée par D-044",
+      "expire": "2026-10-12T07:35:00+02:00",
+      "actif": false
+    },
+    {
+      "id": "Z-BTC-74043",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 74043.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-044 passage 9h). Si BTC casse → revoir D-040a / achat D-044b. Expire ~24 h. — remplacée D-045",
+      "expire": "2026-10-12T09:04:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74489",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74489.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-044). Si BTC casse → continuation hausse. Expire ~24 h. — remplacée D-045",
+      "expire": "2026-10-12T09:04:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2231.1",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2231.1,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-044). Si ETH casse → revoir D-043a. Expire ~24 h. — remplacée D-045",
+      "expire": "2026-10-12T09:04:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2244.5",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2244.5,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-044). Si ETH casse → continuation. Expire ~24 h. — remplacée D-045",
+      "expire": "2026-10-12T09:04:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.79",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.79,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-044). Si SOL casse → revoir achat D-044a / plan d'entrée. Expire ~24 h. — touchée 11h01 (SOL 97,69 €) ; traitée D-045 ; désactivée",
+      "expire": "2026-10-12T09:04:00+02:00"
+    },
+    {
+      "id": "Z-SOL-98.37",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.37,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-044). Si SOL casse → continuation rebond. Expire ~24 h. — remplacée D-045",
+      "expire": "2026-10-12T09:04:00+02:00"
+    },
+    {
+      "id": "Z-BTC-73870",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73870.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-045). Si BTC casse → revoir D-040a / achat D-045b. Expire ~24 h. — remplacée D-046",
+      "expire": "2026-10-12T11:03:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74315",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74315.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-045) ; ~0,3 % avant haut jour 74266. Si BTC casse → continuation hausse. Expire ~24 h. — remplacée D-046",
+      "expire": "2026-10-12T11:03:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2239.2",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2239.2,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-045) ; ~0,3 % avant haut jour 2239,46. Si ETH casse → continuation. Expire ~24 h. — remplacée D-046",
+      "expire": "2026-10-12T11:03:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.46",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.46,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-045) ; plan d'entrée achat D-045a à 97,46 €, visé 99,71, arrêt 95,80. Expire ~24 h. — remplacée D-046",
+      "expire": "2026-10-12T11:03:00+02:00"
+    },
+    {
+      "id": "Z-SOL-98.05",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.05,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-045) ; près du haut jour 98,08. Si SOL casse → continuation rebond. Expire ~24 h. — remplacée D-046",
+      "expire": "2026-10-12T11:03:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74021",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 74021.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-046). Si BTC casse → revoir D-040a / achat D-046b. Expire ~24 h.",
+      "expire": "2026-10-12T14:18:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74467",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74467.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-046). Si BTC casse → continuation hausse / près visé D-040a. Expire ~24 h.",
+      "expire": "2026-10-12T14:18:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2231.2",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2231.2,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-046). Si ETH casse → revoir D-043a. Expire ~24 h.",
+      "expire": "2026-10-12T14:18:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2244.6",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2244.6,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-046). Si ETH casse → continuation / près visé D-043a. Expire ~24 h.",
+      "expire": "2026-10-12T14:18:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.71",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.71,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-046) ; plan d'entrée achat D-046a à 97,71 €, visé 99,96, arrêt 96,04. Expire ~24 h.",
+      "expire": "2026-10-12T14:18:00+02:00"
+    },
+    {
+      "id": "Z-SOL-98.29",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 98.29,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du prix (D-046) ; près du haut jour 98,08. Si SOL casse → continuation rebond. Expire ~24 h.",
+      "expire": "2026-10-12T14:18:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74587",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 74587.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du bas du jour 74 364 (D-047). Si BTC redescend → revoir D-040a ; plan : achat BTC 10 € à 74 587, arrêt 73 842, visé 76 079. Expire ~24 h. ; désactivée D-048 09:11",
+      "expire": "2026-10-13T07:33:00+02:00"
+    },
+    {
+      "id": "Z-BTC-75000",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 75000.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "Juste avant le haut du jour 75 128 (D-047). Si BTC casse → D-040a près du visé 75 426 ; plan : laisser courir. Expire ~24 h. ; désactivée D-048 09:11",
+      "expire": "2026-10-13T07:33:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2262",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2262.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du bas du jour 2 255 (D-047) ; plan : achat ETH à 2 262, visé 2 307,24, arrêt 2 216,76 (si D-047a pas ouvert). Expire ~24 h. ; désactivée D-048 09:11",
+      "expire": "2026-10-13T07:33:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2286.5",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2286.5,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le haut du jour 2 293 (D-047). Si ETH casse → continuation ; revoir D-047a. Expire ~24 h. ; désactivée D-048 09:11",
+      "expire": "2026-10-13T07:33:00+02:00"
+    },
+    {
+      "id": "Z-SOL-99.5",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 99.5,
+      "bot": "predict",
+      "actif": false,
+      "raison": "À 0,9 % sous le prix (D-047), au-dessus du bas du jour 98,62 ; plan : revoir ventes D-047b/c, ou achat SOL 10 € à 99,50, arrêt 98,51, visé 101,49. Expire ~24 h. ; désactivée D-048 09:11",
+      "expire": "2026-10-13T07:33:00+02:00"
+    },
+    {
+      "id": "Z-SOL-100.76",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 100.76,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le haut du jour 101,06 (D-047) ; plan : vente SOL à 100,76, arrêt 101,76, visé 98,75 (si D-047c pas ouvert). Expire ~24 h. ; désactivée D-048 09:11",
+      "expire": "2026-10-13T07:33:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74588",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 74588.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % au-dessus du bas du jour 74364 (D-048). Si BTC redescend → revoir D-040a ; plan : achat BTC 10 € à 74588. Expire ~24 h. ; désactivée D-049 14:45",
+      "expire": "2026-10-13T09:11:00+02:00"
+    },
+    {
+      "id": "Z-BTC-75157",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 75157.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "Avant le haut du jour 75177 (D-048). Si BTC casse → D-040a près du visé 75 426 ; plan : laisser courir. Expire ~24 h. ; désactivée D-049 14:45",
+      "expire": "2026-10-13T09:11:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2273.9",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2273.9,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,9 % sous le prix (D-048) ; plan : achat ETH à 2273.9 si place. Expire ~24 h. ; désactivée D-049 14:45",
+      "expire": "2026-10-13T09:11:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2296.1",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2296.1,
+      "bot": "predict",
+      "actif": false,
+      "raison": "Près du haut du jour 2296.62 (D-048) ; plan : vente ETH (D-048b) à 2296.1. Expire ~24 h. ; désactivée D-049 14:45",
+      "expire": "2026-10-13T09:11:00+02:00"
+    },
+    {
+      "id": "Z-SOL-99.67",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 99.67,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,9 % sous le prix (D-048) ; plan : achat SOL à 99.67, visé 102.59, arrêt 98.57 (D-048a). Expire ~24 h. ; désactivée D-049 14:45",
+      "expire": "2026-10-13T09:11:00+02:00"
+    },
+    {
+      "id": "Z-SOL-100.76",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 100.76,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le haut du jour 101.06 (D-048) ; plan : revoir D-047c. Expire ~24 h. ; désactivée D-049 14:45",
+      "expire": "2026-10-13T09:11:00+02:00"
+    },
+    {
+      "id": "Z-BTC-73799",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73799.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,3 % sous le prix (D-049). Si BTC casse le bas du jour 73970 → revoir D-040a ; plan : achat BTC 10 € à 73799, arrêt 73062, visé 75273.0. Expire ~24 h. — remplacée par D-050 (15h25)",
+      "expire": "2026-10-13T14:45:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74687",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74687.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "Avant le haut / à <1 % du prix (D-049). Si BTC remonte → D-040a vers visé 75426 ; plan : laisser courir / renforcer si place. Expire ~24 h. — remplacée par D-050 (15h25)",
+      "expire": "2026-10-13T14:45:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2244.6",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2244.6,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,9 % sous le prix (D-049) sous le bas du jour 2261.97 ; plan : achat ETH à 2244.6, arrêt 2199.8, visé 2289.4. Expire ~24 h. — remplacée par D-050 (15h25)",
+      "expire": "2026-10-13T14:45:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2285.4",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2285.4,
+      "bot": "predict",
+      "actif": false,
+      "raison": "À <1 % au-dessus du prix (D-049), avant le haut du jour 2299.85 ; plan : si D-049a ouverte laisser courir vers 2310.3. Expire ~24 h. — remplacée par D-050 (15h25)",
+      "expire": "2026-10-13T14:45:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.72",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.72,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈0,9 % sous le prix (D-049) ; plan : achat SOL à 97.72, arrêt 96.26, visé 99.91. Expire ~24 h. — remplacée par D-050 (15h25)",
+      "expire": "2026-10-13T14:45:00+02:00"
+    },
+    {
+      "id": "Z-SOL-99.5",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 99.5,
+      "bot": "predict",
+      "actif": false,
+      "raison": "À <1 % au-dessus du prix (D-049), avant le haut du jour 100.86 ; plan : si D-049b ouverte laisser courir vers 100.81. Expire ~24 h. — remplacée par D-050 (15h25)",
+      "expire": "2026-10-13T14:45:00+02:00"
+    },
+    {
+      "id": "Z-BTC-73451",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73451.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "≈−0,50 % sous le prix (D-050) : prévision BTC −0,5 % atteinte ; revoir D-040a (arrêt 72468) ; plan : achat BTC 10 € à 73450, arrêt 72716, visé 74919 si place. Expire ~24 h.",
+      "expire": "2026-10-13T15:25:00+02:00",
+      "desactive_par": "D-051"
+    },
+    {
+      "id": "Z-BTC-74188",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74188.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,50 % au-dessus du prix (D-050) : prévision BTC baisse fausse ; D-040a repasse au-dessus de l'entrée 73918 ; on laisse courir. Expire ~24 h.",
+      "expire": "2026-10-13T15:25:00+02:00",
+      "desactive_par": "D-051"
+    },
+    {
+      "id": "Z-ETH-2248.7",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2248.7,
+      "bot": "predict",
+      "actif": false,
+      "raison": "−0,50 % sous le prix (D-050) : prévision ETH −0,5 % atteinte ; revoir D-049a (arrêt 2219.7) ; pas de nouvel achat ETH tant que D-049a est ouverte. Expire ~24 h.",
+      "expire": "2026-10-13T15:25:00+02:00",
+      "desactive_par": "D-051"
+    },
+    {
+      "id": "Z-ETH-2271.4",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2271.4,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,50 % au-dessus du prix (D-050) : prévision ETH baisse fausse ; D-049a au-dessus de l'entrée 2265 ; on laisse courir vers 2310.3. Expire ~24 h.",
+      "expire": "2026-10-13T15:25:00+02:00",
+      "desactive_par": "D-051"
+    },
+    {
+      "id": "Z-SOL-97.75",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 97.75,
+      "bot": "predict",
+      "actif": false,
+      "raison": "−0,69 % sous le prix (D-050) : la baisse SOL continue ; si D-050a pas ouverte, vente SOL trop tard → j'entrerais en vente si SOL remonte à 98,43. Expire ~24 h.",
+      "expire": "2026-10-13T15:25:00+02:00",
+      "desactive_par": "D-051"
+    },
+    {
+      "id": "Z-SOL-99.15",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 99.15,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,73 % au-dessus du prix (D-050) : idée à la baisse SOL fausse ; plan : achat SOL 20 € à 99,15, arrêt 97,67, visé 101,13 si place. Expire ~24 h.",
+      "expire": "2026-10-13T15:25:00+02:00",
+      "desactive_par": "D-051"
+    },
+    {
+      "id": "Z-BTC-73560",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 73560.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "−0,40 % sous le prix, sous le bas du jour 73 681 (D-051) : la baisse BTC continue ; revoir D-040a (arrêt 72468) ; pas de nouvel achat BTC. Plan : rien à vendre en BTC, je regarde si l'idée D-040a tient. Expire ~24 h.",
+      "expire": "2026-10-13T20:45:00+02:00",
+      "desactive": "2026-10-13T07:27:00+02:00 (D-052)"
+    },
+    {
+      "id": "Z-BTC-74120",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74120.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,36 % au-dessus du prix, juste sous le haut des 2 h 74 138 (D-051) : D-040a repasse au-dessus de l'entrée 73918 ; on laisse courir vers 75426. Expire ~24 h.",
+      "expire": "2026-10-13T20:45:00+02:00",
+      "desactive": "2026-10-13T07:27:00+02:00 (D-052)"
+    },
+    {
+      "id": "Z-ETH-2242",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2242.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "−0,42 % sous le prix, sous le bas du jour 2 248,8 (D-051) : la baisse ETH continue ; si D-051b/c pas ouvertes, j'entrerais en vente ETH si ETH remonte à 2 251,5 (arrêt 2 274, visé 2 217,7). Expire ~24 h.",
+      "expire": "2026-10-13T20:45:00+02:00",
+      "desactive": "2026-10-13T07:27:00+02:00 (D-052)"
+    },
+    {
+      "id": "Z-ETH-2260.5",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2260.5,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,40 % au-dessus du prix, 0,2 % sous le haut des 2 h 2 264 (D-051) : idée à la baisse ETH qui faiblit ; revoir D-051b/c ; si pas ouvertes, vente ETH à 2 264 (arrêt 2 286, visé 2 230). Expire ~24 h.",
+      "expire": "2026-10-13T20:45:00+02:00",
+      "desactive": "2026-10-13T07:27:00+02:00 (D-052)"
+    },
+    {
+      "id": "Z-SOL-96.95",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 96.95,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,44 % au-dessus du prix, 0,4 % sous le haut des 2 h 97,32 (D-051) : idée à la baisse SOL qui faiblit ; revoir D-051a ; si pas ouverte, vente SOL à 97,30 (arrêt 98,75, visé 95,84). Expire ~24 h.",
+      "expire": "2026-10-13T20:45:00+02:00",
+      "desactive": "2026-10-13T07:27:00+02:00 (D-052)"
+    },
+    {
+      "id": "Z-BTC-75330",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 75330.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,60 % au-dessus du prix, juste sous le visé de D-040a 75 426 (D-052) : on laisse D-040a toucher son visé ; pas de 2e achat BTC. Expire ~24 h. — désactivée par D-053 (passage 9h)",
+      "expire": "2026-10-14T07:30:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74240",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 74240.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "−0,85 % sous le prix, juste au-dessus du bas des 2 h 74 115 (D-052) : la remontée de la nuit s'essouffle ; revoir D-040a (arrêt 72 468) ; pas de nouvel achat BTC. Expire ~24 h. — désactivée par D-053 (passage 9h)",
+      "expire": "2026-10-14T07:30:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2276",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2276.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,60 % au-dessus du prix, 0,3 % au-dessus du haut du jour 2 269 (D-052) : la remontée continue ; si D-052a pas ouverte, achat ETH à 2 272 (arrêt 2 238, visé 2 306). Expire ~24 h. — désactivée par D-053 (passage 9h)",
+      "expire": "2026-10-14T07:30:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2243",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2243.0,
+      "bot": "predict",
+      "actif": false,
+      "raison": "−0,86 % sous le prix (D-052) : la remontée casse ; revoir D-052a (arrêt 2 226,2) ; si pas ouverte, achat ETH à 2 245 (arrêt 2 211,4, visé 2 278,7). Expire ~24 h. — désactivée par D-053 (passage 9h)",
+      "expire": "2026-10-14T07:30:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.5",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 97.5,
+      "bot": "predict",
+      "actif": false,
+      "raison": "+0,60 % au-dessus du prix, 0,4 % au-dessus du haut du jour 97,12 (D-052) : la remontée continue ; si D-052c pas ouverte, achat SOL à 97,45 (arrêt 96,48, visé 99,40). Expire ~24 h. — désactivée par D-053 (passage 9h)",
+      "expire": "2026-10-14T07:30:00+02:00"
+    },
+    {
+      "id": "Z-SOL-96.1",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 96.1,
+      "bot": "predict",
+      "actif": false,
+      "raison": "−0,84 % sous le prix (D-052) : la remontée casse ; revoir D-052c (arrêt 95,84) ; si pas ouverte, achat SOL à 96,10 (arrêt 95,14, visé 98,02). Expire ~24 h. — désactivée par D-053 (passage 9h)",
+      "expire": "2026-10-14T07:30:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74950",
+      "paire": "BTC-EUR",
+      "sens": "au-dessus",
+      "prix": 74950.0,
+      "bot": "predict",
+      "actif": true,
+      "raison": "+0,22 % au-dessus du prix, juste sous le haut du jour 75 000 (D-053) : revoir D-040a (visé 75 426) ; si place, plan b achat BTC à 74 650 (arrêt 73 531, visé 76 330). Expire ~24 h.",
+      "expire": "2026-10-14T09:15:00+02:00"
+    },
+    {
+      "id": "Z-BTC-74480",
+      "paire": "BTC-EUR",
+      "sens": "sous",
+      "prix": 74480.0,
+      "bot": "predict",
+      "actif": true,
+      "raison": "−0,40 % sous le prix (D-053) : le repli du matin s'accélère ; revoir D-040a (arrêt 72 468) ; pas de nouvel achat BTC sans place. Expire ~24 h.",
+      "expire": "2026-10-14T09:15:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2270",
+      "paire": "ETH-EUR",
+      "sens": "au-dessus",
+      "prix": 2270.0,
+      "bot": "predict",
+      "actif": true,
+      "raison": "+0,39 % au-dessus du prix, près du haut du jour 2 269 (D-053) : la remontée reprend ; laisser D-052a (visé 2 294). Expire ~24 h.",
+      "expire": "2026-10-14T09:15:00+02:00"
+    },
+    {
+      "id": "Z-ETH-2252",
+      "paire": "ETH-EUR",
+      "sens": "sous",
+      "prix": 2252.0,
+      "bot": "predict",
+      "actif": true,
+      "raison": "−0,40 % sous le prix (D-053) : repli ; revoir D-052a (arrêt 2 226,2). Expire ~24 h.",
+      "expire": "2026-10-14T09:15:00+02:00"
+    },
+    {
+      "id": "Z-SOL-97.20",
+      "paire": "SOL-EUR",
+      "sens": "au-dessus",
+      "prix": 97.2,
+      "bot": "predict",
+      "actif": true,
+      "raison": "+0,48 % au-dessus du prix, près du haut du jour 97,195 (D-053) : laisser D-052c (visé 98,72) ; si place et D-052c fermée, plan c achat SOL. Expire ~24 h.",
+      "expire": "2026-10-14T09:15:00+02:00"
+    },
+    {
+      "id": "Z-SOL-96.35",
+      "paire": "SOL-EUR",
+      "sens": "sous",
+      "prix": 96.35,
+      "bot": "predict",
+      "actif": true,
+      "raison": "−0,40 % sous le prix (D-053) : plan d'entrée D-053a achat SOL 25 € à 96,50 (arrêt 95,06, visé 97,95) si place ; revoir aussi D-052c (arrêt 95,84). Expire ~24 h.",
+      "expire": "2026-10-14T09:15:00+02:00"
+    }
+  ]
+}

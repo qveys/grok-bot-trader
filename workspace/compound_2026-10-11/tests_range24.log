@@ -1,0 +1,20 @@
+== test_sell_rebuy
+OK  vt_tools presets: --costs uniswap / metamask-swap / --fee-pct + --fixed-fee-eur map to swap params
+OK  coin accounting on a random 2000-candle series: coins_end = start + sum(cycle gains); cycles never overlap; EUR consistent
+
+all 15 checks passed
+== test_fill
+OK  fill-rate 50: 45.8% of 24 orders filled (same orders as all filled)
+OK  cash = start + sum of trade results
+
+all 10 checks passed
+== test_notime
+OK  engine --no-time-exit --tp 0: replica = engine (19 trades), exits {'stop_loss': 18, 'end_of_backtest': 1}
+OK  engine --no-time-exit --trail 1.5 --tp 0 --trail-start 0.5: replica = engine (40 trades), exits {'stop_loss': 14, 'trailing_stop': 26}
+
+all 17 checks passed
+== test_trail
+OK  sell_rebuy trailing 1.5%: sell 100, low 99 -> safety lowered to 100.485, hit on candle 2
+OK  sell_rebuy trail 0 = fixed, identical
+
+all 13 checks passed

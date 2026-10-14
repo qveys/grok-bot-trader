@@ -1,0 +1,20 @@
+{
+  "kelly_fraction": 0.25,
+  "max_position_pct": 0.05,
+  "max_drawdown_pct": 0.08,
+  "max_daily_loss_pct": 0.15,
+  "max_concurrent": 15,
+  "max_exposure_pct": 0.05,
+  "pairs_whitelist": [
+    "BTC-EUR",
+    "ETH-EUR",
+    "SOL-EUR"
+  ],
+  "order_types": [
+    "limit"
+  ],
+  "post_only": true,
+  "leverage": false,
+  "market_orders": false,
+  "notes": "Official: grow capital + never bankrupt. Journal mandatory. No max trades/day. Limit post-only, no leverage. Live only: expectancy >= 3x cost (live_place). Paper: size<=5% bankroll, stop required, total exposure BTC+ETH+SOL <=5%, no 3x gate. Ideas: hausse (buy then sell) / baisse (sell held coins then rebuy). 8 Oct: BTC/ETH/SOL move together -> one risk; max_exposure_pct=0.05."
+}

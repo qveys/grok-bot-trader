@@ -1,0 +1,15 @@
+{
+  "id": "task-liquidation",
+  "agent_id": "liquidation_analyst",
+  "prompt_template": "Map liquidation levels, cascade risks, and microstructure conditions for {target}. Timeframe: {timeframe}.",
+  "depends_on": [],
+  "blocked_by": [],
+  "input_from": {},
+  "status": "failed",
+  "summary": null,
+  "artifacts": [],
+  "error": "LANGCHAIN_MODEL_NAME is not set",
+  "started_at": "2026-10-08T11:10:56.183138+00:00",
+  "completed_at": "2026-10-08T11:10:56.192831+00:00",
+  "worker_iterations": 0
+}

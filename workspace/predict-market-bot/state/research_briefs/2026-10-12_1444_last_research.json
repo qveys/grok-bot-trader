@@ -1,0 +1,112 @@
+{
+  "briefed_at": "2026-10-12T14:44:00+02:00",
+  "cycle": "Point du jour 14h44 (après créneau US 14h30 / avant fenêtre 15h–17h) — exécuté ~15h04 (routine un peu en retard)",
+  "jour_annonce": {
+    "special": false,
+    "detail": "Lundi 12 oct. = jour férié US (Columbus Day). Pas de chiffres BLS à 14h30 aujourd'hui. Prochaine grosse date : inflation US (CPI) mercredi 14 oct. à 14h30 CEST. Pas de séance extra proposée.",
+    "seance_extra_proposee": false
+  },
+  "live": "INTERDIT pour toutes les sortes (aucune n'a passé le test du passé). Toutes les idées = simulation seulement.",
+  "simus_ouvertes": {
+    "D-040a": "BTC idée à la hausse, 25 €, entrée 73 918 €, visé 75 426 €, arrêt 72 468 €, rappel 20h00 — couvre déjà l'idée BTC",
+    "D-049a": "ETH idée à la hausse, 25 €, entrée 2 265 €, visé 2 310,30 €, arrêt 2 219,70 €, rappel 20h00 — couvre déjà l'idée ETH",
+    "plafond": "50 / 50 € engagés ; place libre 0 € (SOL sans simu ouverte mais pas de place)"
+  },
+  "lecon_compound_cibles": {
+    "source": "Compound revue écart à la cible, 12 oct. ~08h00 (compound_2026-10-11/ecart_cible/summary.md)",
+    "faits": "Visé moyen 1,68 % ; meilleur mouvement moyen +0,47 % (29 % du chemin) ; médiane 10,7 h ouverte ; visé = 65 % de la plage du jour. Test passé : plus petit visé encore gagnant après frais = 1,5 % (seulement SOL rebond hausse 1,5/1,5) ; rien sous 1,5 % ; BTC et ETH hausse aucun jusqu'à 3 %. Pas de règle nouvelle.",
+    "application": "Visés ≥ 1,5 % ; ratios Risk (prudente ≥1, équilibrée ≥1,5, risquée ≥2) ; arrêts arrondis vers le prix d'entrée ; confiance faible sur BTC/ETH (session courte ~2 h)."
+  },
+  "prix": {
+    "source": "ticks Coinbase 30s (state/price_ticks/2026-10-12.jsonl) via read_price_tick.py",
+    "releve_at": "2026-10-12T15:04:23+02:00",
+    "age_approx": "~15 s au moment du brief",
+    "freshness": "ok",
+    "BTC-EUR": {
+      "prix": 73911,
+      "jour_min": 73869,
+      "jour_max": 75202,
+      "vs_ouverture_jour_pct": -1.24
+    },
+    "ETH-EUR": {
+      "prix": 2261,
+      "jour_min": 2261,
+      "jour_max": 2300,
+      "vs_ouverture_jour_pct": -0.87
+    },
+    "SOL-EUR": {
+      "prix": 98.63,
+      "jour_min": 98.49,
+      "jour_max": 100.85,
+      "vs_ouverture_jour_pct": -1.74
+    }
+  },
+  "ambiance": {
+    "fear_greed": 69,
+    "fear_greed_label": "Greed",
+    "fear_greed_avg_30j": 67.3,
+    "resume": "Humeur 69/100 (Greed), un peu au-dessus de la moyenne 30 j (67,3). Les 3 cryptos sont près du plus bas du jour après une nuit douce puis une baisse matinale."
+  },
+  "resume": {
+    "actu": "Pas d'effet chiffres US 14h30 (Columbus Day, calendrier BLS vide). Les fonds BTC/ETH ont encore perdu beaucoup d'argent la semaine dernière (~680 M$ BTC + ~540 M$ ETH, recoupé CoinDesk/Decrypt/CryptoBriefing) ; BTC, ETH et SOL ETF tous dans le rouge en octobre. Strategy a racheté 250 BTC (~21,5 M$), total 848 250 BTC (communiqué Strategy + The Block + CoinTelegraph/Decrypt). Les traders regardent déjà l'inflation US (CPI) du mercredi 14. Prix € près des plus bas du jour.",
+    "raisons_de_vendre": [
+      "Cassure claire sous les plus bas du jour (BTC < 73 869 €, ETH < 2 261 €, SOL < 98,49 €)",
+      "Nouvelles sorties des fonds BTC/ETH qui s'aggravent",
+      "Humeur qui retombe sous 55",
+      "Réaction négative si les anticipations d'inflation US se durcissent avant mercredi"
+    ],
+    "pour_equipe": "Live interdit. Simulation seulement. Plafond plein (D-040a BTC 25 € + D-049a ETH 25 €). Pas de nouvelle simu tant que place = 0 €. Predict décide à 14h55."
+  },
+  "idees": {
+    "BTC-EUR": {
+      "idee": "à la hausse",
+      "prix_actuel": 73911,
+      "prix_vise": 75020,
+      "prix_arret": 73172,
+      "heure_limite": "2026-10-12T17:00:00+02:00",
+      "confiance": "faible",
+      "confiance_pct": 52,
+      "raison": "près du plus bas du jour ; Strategy rachète ; sorties des fonds freinent ; D-040a déjà ouverte — pas de 2e achat",
+      "mode": "simulation",
+      "live_worthy": false,
+      "ratio_gain_perte": 1.5,
+      "niveau_ratio": "équilibrée"
+    },
+    "ETH-EUR": {
+      "idee": "à la hausse",
+      "prix_actuel": 2261,
+      "prix_vise": 2295,
+      "prix_arret": 2239,
+      "heure_limite": "2026-10-12T17:00:00+02:00",
+      "confiance": "faible",
+      "confiance_pct": 52,
+      "raison": "pile au plus bas du jour ; D-049a déjà ouverte sur le creux — pas de 2e achat ; fonds ETH encore en sorties",
+      "mode": "simulation",
+      "live_worthy": false,
+      "ratio_gain_perte": 1.5,
+      "niveau_ratio": "équilibrée"
+    },
+    "SOL-EUR": {
+      "idee": "à la hausse",
+      "prix_actuel": 98.63,
+      "prix_vise": 100.11,
+      "prix_arret": 97.16,
+      "heure_limite": "2026-10-12T17:00:00+02:00",
+      "confiance": "moyenne",
+      "confiance_pct": 55,
+      "raison": "rebond après le plus bas du jour ; seul cas du test Compound encore gagnant à 1,5 % ; pas de simu SOL ouverte mais plafond plein",
+      "mode": "simulation",
+      "live_worthy": false,
+      "ratio_gain_perte": 1.0,
+      "niveau_ratio": "prudente",
+      "note": "Compound : SOL rebond hausse 1,5/1,5 = plus petit visé qui passe après frais"
+    }
+  },
+  "lignes_chiffrees": [
+    "BTC : idée à la hausse — prix actuel 73 911 € — prix visé 75 020 € — prix d'arrêt 73 172 € — mouvement attendu avant 17h00 — confiance faible (près du plus bas du jour ; D-040a déjà ouverte)",
+    "ETH : idée à la hausse — prix actuel 2 261 € — prix visé 2 295 € — prix d'arrêt 2 239 € — mouvement attendu avant 17h00 — confiance faible (au plus bas du jour ; D-049a déjà ouverte)",
+    "SOL : idée à la hausse — prix actuel 98,63 € — prix visé 100,11 € — prix d'arrêt 97,16 € — mouvement attendu avant 17h00 — confiance moyenne (rebond après creux ; test Compound 1,5/1,5)"
+  ],
+  "certitude": "Élevée sur les faits (prix frais, Columbus Day/BLS, sorties fonds, achat Strategy, leçon Compound). Faible sur la direction des prochaines heures (plafond plein, session courte).",
+  "sources_note": "prix ticks Coinbase ; news.json CoinDesk/CoinTelegraph/Decrypt ; ETF outflows CoinDesk + Decrypt + CryptoBriefing/Farside ; Strategy 250 BTC communiqué officiel + The Block + CoinTelegraph/Decrypt ; calendrier BLS oct 2026 (Columbus Day 12, CPI 14) ; Fear&Greed alternative.me ; Compound ecart_cible summary 12 oct 08h00 ; aucun post X seul pris pour vrai ; pas d'IA payante"
+}

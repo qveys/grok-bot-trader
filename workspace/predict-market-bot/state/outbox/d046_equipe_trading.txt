@@ -1,0 +1,15 @@
+🔔 **D-046** — rappel heure limite D-040a (BTC)
+
+Prix : BTC 74 244 € · ETH 2 238 € · SOL 98,00 €. Place **0/50 €**. Réel : non (dimanche).
+
+**Verdict D-040a : on garde** (prix +0,44 % au-dessus de l'entrée 73 918 €, encore sous le visé 75 426 €). Nouveau rappel **22h00**.
+**D-043a ETH : on garde** aussi (prix plat +0,02 %). Nouveau rappel **22h00**.
+
+**3 propositions (prêtes, pas d'ouverture maintenant — plafond plein) :**
+1. **Prudente** — achat SOL ≈ 25 € à 98,00 €, visé 99,96 €, arrêt 96,04 €, rappel 22h00
+2. **Équilibrée** — achat BTC ≈ 20 € à 74 244 €, visé 75 914 €, arrêt 73 131 €, rappel 22h00 (D-040a déjà ouvert)
+3. **Risquée** — achat SOL ≈ 10 € à 98,00 €, visé 99,96 €, arrêt 97,02 €, rappel 22h00
+
+Valables jusqu'à **14:48**. Décidé seul (rappel clair).
+
+→ **@PM-Risk** : sous 5 min, garder D-040a et D-043a (rappel 22h00). Dès qu'une place se libère, ouvrir d'abord la prudente SOL, puis l'équilibrée BTC, puis la risquée SOL.

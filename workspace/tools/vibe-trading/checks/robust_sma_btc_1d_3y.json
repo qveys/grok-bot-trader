@@ -1,0 +1,453 @@
+{
+ "status": "ok",
+ "pair": "BTC-EUR",
+ "timeframe": "1D",
+ "strategy": "sma_cross",
+ "base_params": {
+  "fast": 20,
+  "slow": 50
+ },
+ "base_entries": {
+  "session": null,
+  "tz": null,
+  "weekdays_only": false,
+  "exit_hour": null,
+  "max_bars": null,
+  "stop_loss_pct": null,
+  "take_profit_pct": null
+ },
+ "period": [
+  "2023-10-08 00:00:00",
+  "2026-10-07 00:00:00"
+ ],
+ "costs": {
+  "profile": "revolutx",
+  "fee_per_side": 0.0009,
+  "slippage": 0.0005,
+  "round_trip_pct": 0.28
+ },
+ "base_result": {
+  "total_return_pct": 82.52,
+  "trades": 13,
+  "win_rate_pct": 46.2,
+  "profit_factor": 1.653,
+  "max_drawdown_pct": -37.52,
+  "sharpe": 0.755,
+  "fees_paid": 427.22,
+  "buy_hold_return_pct": 180.18
+ },
+ "engine_validation": {
+  "monte_carlo_permutation": {
+   "actual_sharpe": 3.8897,
+   "p_value_sharpe": 0.794,
+   "actual_max_dd": -0.2681,
+   "p_value_max_dd": 0.137
+  },
+  "bootstrap_sharpe_ci": {
+   "observed_sharpe": 0.7553,
+   "ci_lower": -0.3949,
+   "ci_upper": 1.7951,
+   "median_sharpe": 0.7428,
+   "prob_positive": 0.895
+  },
+  "walk_forward_windows": {
+   "consistency": {
+    "profitable_windows": 3,
+    "n_windows": 5,
+    "consistency_rate": 0.6,
+    "return_std": 0.389833,
+    "sharpe_std": 1.4498
+   },
+   "windows": [
+    {
+     "start": "2023-10-08",
+     "end": "2024-05-13",
+     "return": 0.90099,
+     "sharpe": 2.4461,
+     "max_dd": -0.152812,
+     "trades": 2
+    },
+    {
+     "start": "2024-05-14",
+     "end": "2024-12-18",
+     "return": 0.248549,
+     "sharpe": 1.1251,
+     "max_dd": -0.313316,
+     "trades": 3
+    },
+    {
+     "start": "2024-12-19",
+     "end": "2025-07-25",
+     "return": -0.026414,
+     "sharpe": -0.0517,
+     "max_dd": -0.130497,
+     "trades": 3
+    },
+    {
+     "start": "2025-07-26",
+     "end": "2026-03-01",
+     "return": -0.247382,
+     "sharpe": -1.9583,
+     "max_dd": -0.297292,
+     "trades": 2
+    },
+    {
+     "start": "2026-03-02",
+     "end": "2026-10-07",
+     "return": 0.076956,
+     "sharpe": 0.5905,
+     "max_dd": -0.158775,
+     "trades": 3
+    }
+   ]
+  }
+ },
+ "expectancy_bootstrap_per_trade": {
+  "mean_net_pct": 6.932,
+  "ci95": [
+   -4.895,
+   20.005
+  ],
+  "prob_mean_positive": 0.869
+ },
+ "grid": {
+  "params": {
+   "fast": [
+    10,
+    15,
+    20,
+    30
+   ],
+   "slow": [
+    40,
+    50,
+    80,
+    100
+   ]
+  },
+  "n_trials": 16,
+  "failed_runs": 0,
+  "results": [
+   {
+    "params": {
+     "fast": 15,
+     "slow": 40
+    },
+    "total_return_pct": 190.07,
+    "trades": 14,
+    "max_drawdown_pct": -31.31,
+    "sharpe_ann": 1.219
+   },
+   {
+    "params": {
+     "fast": 10,
+     "slow": 40
+    },
+    "total_return_pct": 186.5,
+    "trades": 16,
+    "max_drawdown_pct": -33.18,
+    "sharpe_ann": 1.227
+   },
+   {
+    "params": {
+     "fast": 30,
+     "slow": 80
+    },
+    "total_return_pct": 170.64,
+    "trades": 8,
+    "max_drawdown_pct": -41.82,
+    "sharpe_ann": 1.14
+   },
+   {
+    "params": {
+     "fast": 10,
+     "slow": 80
+    },
+    "total_return_pct": 164.59,
+    "trades": 11,
+    "max_drawdown_pct": -38.14,
+    "sharpe_ann": 1.133
+   },
+   {
+    "params": {
+     "fast": 10,
+     "slow": 100
+    },
+    "total_return_pct": 156.32,
+    "trades": 9,
+    "max_drawdown_pct": -37.11,
+    "sharpe_ann": 1.089
+   },
+   {
+    "params": {
+     "fast": 30,
+     "slow": 100
+    },
+    "total_return_pct": 150.8,
+    "trades": 8,
+    "max_drawdown_pct": -43.37,
+    "sharpe_ann": 1.086
+   },
+   {
+    "params": {
+     "fast": 20,
+     "slow": 80
+    },
+    "total_return_pct": 145.18,
+    "trades": 9,
+    "max_drawdown_pct": -41.33,
+    "sharpe_ann": 1.039
+   },
+   {
+    "params": {
+     "fast": 15,
+     "slow": 80
+    },
+    "total_return_pct": 133.44,
+    "trades": 9,
+    "max_drawdown_pct": -41.94,
+    "sharpe_ann": 0.995
+   },
+   {
+    "params": {
+     "fast": 20,
+     "slow": 100
+    },
+    "total_return_pct": 128.93,
+    "trades": 9,
+    "max_drawdown_pct": -38.81,
+    "sharpe_ann": 0.985
+   },
+   {
+    "params": {
+     "fast": 10,
+     "slow": 50
+    },
+    "total_return_pct": 121.48,
+    "trades": 16,
+    "max_drawdown_pct": -39.57,
+    "sharpe_ann": 0.963
+   },
+   {
+    "params": {
+     "fast": 15,
+     "slow": 100
+    },
+    "total_return_pct": 121.39,
+    "trades": 9,
+    "max_drawdown_pct": -41.5,
+    "sharpe_ann": 0.949
+   },
+   {
+    "params": {
+     "fast": 15,
+     "slow": 50
+    },
+    "total_return_pct": 105.16,
+    "trades": 15,
+    "max_drawdown_pct": -40.56,
+    "sharpe_ann": 0.868
+   },
+   {
+    "params": {
+     "fast": 20,
+     "slow": 40
+    },
+    "total_return_pct": 100.32,
+    "trades": 14,
+    "max_drawdown_pct": -34.85,
+    "sharpe_ann": 0.85
+   },
+   {
+    "params": {
+     "fast": 30,
+     "slow": 50
+    },
+    "total_return_pct": 99.75,
+    "trades": 14,
+    "max_drawdown_pct": -55.38,
+    "sharpe_ann": 0.824
+   },
+   {
+    "params": {
+     "fast": 20,
+     "slow": 50
+    },
+    "total_return_pct": 82.52,
+    "trades": 13,
+    "max_drawdown_pct": -37.52,
+    "sharpe_ann": 0.753
+   },
+   {
+    "params": {
+     "fast": 30,
+     "slow": 40
+    },
+    "total_return_pct": 48.14,
+    "trades": 20,
+    "max_drawdown_pct": -50.2,
+    "sharpe_ann": 0.552
+   }
+  ],
+  "share_of_variants_profitable": 1.0,
+  "share_beating_buy_hold": 0.125
+ },
+ "best_in_grid": {
+  "params": {
+   "fast": 10,
+   "slow": 40
+  },
+  "sharpe_ann": 1.227,
+  "psr_vs_0": 0.9851,
+  "deflated_sharpe": {
+   "dsr": 0.9453,
+   "expected_max_sharpe_by_luck_ann": 0.323,
+   "survives_95": false
+  }
+ },
+ "pbo_cscv": {
+  "pbo": 0.7979,
+  "n_splits": 16,
+  "n_combinations": 12870,
+  "oos_sharpe_of_is_winner_median_ann": 0.76,
+  "degradation_slope": -1.101
+ },
+ "walk_forward_optimisation": {
+  "folds": [
+   {
+    "test_from": "2024-04-07 00:00",
+    "test_to": "2024-10-06 00:00",
+    "chosen_params": {
+     "fast": 30,
+     "slow": 80
+    },
+    "oos_return_pct": -25.95
+   },
+   {
+    "test_from": "2024-10-07 00:00",
+    "test_to": "2025-04-07 00:00",
+    "chosen_params": {
+     "fast": 30,
+     "slow": 100
+    },
+    "oos_return_pct": 48.38
+   },
+   {
+    "test_from": "2025-04-08 00:00",
+    "test_to": "2025-10-06 00:00",
+    "chosen_params": {
+     "fast": 30,
+     "slow": 100
+    },
+    "oos_return_pct": 5.56
+   },
+   {
+    "test_from": "2025-10-07 00:00",
+    "test_to": "2026-04-07 00:00",
+    "chosen_params": {
+     "fast": 30,
+     "slow": 100
+    },
+    "oos_return_pct": -17.04
+   },
+   {
+    "test_from": "2026-04-08 00:00",
+    "test_to": "2026-10-07 00:00",
+    "chosen_params": {
+     "fast": 30,
+     "slow": 100
+    },
+    "oos_return_pct": -11.24
+   }
+  ],
+  "oos_total_return_pct": -14.59,
+  "oos_sharpe_ann": -0.096,
+  "same_period_buy_hold_pct": 16.82
+ },
+ "cpcv": {
+  "n_splits": 15,
+  "oos_sharpe_ann_median": 0.437,
+  "oos_sharpe_ann_min": -2.35,
+  "oos_sharpe_ann_max": 2.826,
+  "share_oos_sharpe_positive": 0.6
+ },
+ "base_run_dir": "/workspace/tools/vibe-trading/home/runs/20261008_130543_851445_BTC-EUR_1D_sma_cross_robust_base",
+ "verdict_equipe": {
+  "test_du_passe_reussi": "non",
+  "raisons": [
+   "trop peu de trades (13 < 20)",
+   "2e moitié pas gagnante (-13,55 %)"
+  ],
+  "par": "PM-Compound",
+  "regle": "gain après frais > 0 ; >= 20 trades ; 2 moitiés gagnantes ; pire baisse outil × 5 % < 8 % ; achat immédiat + frais > 0 (si testé)",
+  "resultat_juge": "moteur, tous les ordres remplis (artifacts/metrics.csv)",
+  "gain_pct": 82.522,
+  "trades": 13,
+  "moitie_1_pct": 111.211,
+  "moitie_2_pct": -13.555,
+  "moitie_1_trades": 6,
+  "moitie_2_trades": 7,
+  "coupure_moities": "2025-04-07 12:00 UTC",
+  "periode": [
+   "2023-10-08 00:00",
+   "2026-10-07 00:00"
+  ],
+  "jours_testes": 1095.0,
+  "methode_moities": "trades classés par heure d'entrée (vente pour sell_rebuy), gains nets composés",
+  "pire_baisse_outil_pct": -37.522,
+  "pire_baisse_capital_pct": -1.876,
+  "achat_immediat": {
+   "dossier": "20261008_130543_851445_BTC-EUR_1D_sma_cross_robust_base",
+   "total_pct": 82.52,
+   "trades": 13,
+   "note": "ce test est lui-même en achat immédiat + frais (moteur, tout rempli)"
+  },
+  "prudence": [],
+  "criteres": {
+   "gain_apres_frais": {
+    "ok": true,
+    "valeur_pct": 82.522,
+    "seuil": "> 0"
+   },
+   "assez_de_trades": {
+    "ok": false,
+    "valeur": 13,
+    "seuil": ">= 20"
+   },
+   "deux_moities_positives": {
+    "ok": false,
+    "moitie_1_pct": 111.211,
+    "moitie_2_pct": -13.555,
+    "jours_testes": 1095.0,
+    "jours_min": 360
+   },
+   "pire_baisse_capital_sous_8": {
+    "ok": true,
+    "pire_baisse_outil_pct": -37.522,
+    "pire_baisse_capital_pct": -1.876,
+    "seuil": "< 8 % (outil × 0.05)"
+   },
+   "achat_immediat_positif": {
+    "ok": true,
+    "valeur_pct": 82.52,
+    "note": "ce test est lui-même en achat immédiat + frais (moteur, tout rempli)"
+   }
+  },
+  "fichier_resultat": "artifacts/metrics.csv",
+  "version_regle": "regle-equipe-2026-10-09",
+  "dossier_base": "20261008_130543_851445_BTC-EUR_1D_sma_cross_robust_base",
+  "date_verdict": "2026-10-12T20:48:31+02:00",
+  "autorise_en_reel": {
+   "ok": false,
+   "valeur": "non",
+   "par": "PM-Risk",
+   "date": "2026-10-08 21:32",
+   "raison": "pas encore validé par Risk",
+   "pourquoi": "pas encore validé par Risk"
+  }
+ },
+ "moitie_1_pct": 111.211,
+ "moitie_2_pct": -13.555,
+ "pire_baisse_outil_pct": -37.522,
+ "pire_baisse_capital_pct": -1.876
+}

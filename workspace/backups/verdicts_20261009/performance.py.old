@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+"""Compute performance metrics from trades_log + predictions_log."""
+
+from __future__ import annotations
+
+import json
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+STATE = ROOT / "state"
+TRADES = STATE / "trades_log.jsonl"
+PREDS = STATE / "predictions_log.jsonl"
+OUT = STATE / "performance.json"
+LEDGER = STATE / "paper_ledger.json"
+
+
+def read_jsonl(path: Path) -> list:
+    if not path.exists() or path.stat().st_size == 0:
+        return []
+    rows = []
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    return rows
+
+
+def profit_factor(wins: list, losses: list) -> float | None:
+    gw = sum(wins)
+    gl = abs(sum(losses))
+    if gl == 0:
+        return None if gw == 0 else float("inf")
+    return gw / gl
+
+
+def max_drawdown_from_equity(equity_curve: list) -> float:
+    if not equity_curve:
+        return 0.0
+    peak = equity_curve[0]
+    max_dd = 0.0
+    for e in equity_curve:
+        peak = max(peak, e)
+        if peak > 0:
+            max_dd = max(max_dd, (peak - e) / peak)
+    return max_dd
+
+
+def brier_score(preds: list) -> float | None:
+    scored = []
+    for p in preds:
+        if "outcome" not in p or "p_model" not in p:
+            continue
+        y = 1.0 if p["outcome"] in (1, True, "yes", "YES", "win") else 0.0
+        scored.append((float(p["p_model"]) - y) ** 2)
+    if not scored:
+        return None
+    return sum(scored) / len(scored)
+
+
+def main() -> int:
+    trades = read_jsonl(TRADES)
+    preds = read_jsonl(PREDS)
+
+    pnls = []
+    for t in trades:
+        if "realized_pnl_eur" in t:
+            pnls.append(float(t["realized_pnl_eur"]))
+        elif t.get("status") == "resolved" and "pnl_eur" in t:
+            pnls.append(float(t["pnl_eur"]))
+
+    closed = [t for t in trades if t.get("status") in ("resolved", "closed", "settled")]
+    wins = [p for p in pnls if p > 0]
+    losses = [p for p in pnls if p < 0]
+    n_decided = len(wins) + len(losses)
+    win_rate = (len(wins) / n_decided) if n_decided else None
+    pf = profit_factor(wins, losses)
+
+    # Equity curve approximation from ledger + cumulative realized
+    equity_curve = []
+    try:
+        ledger = json.loads(LEDGER.read_text())
+        start = float(ledger.get("bankroll_eur", 500))
+    except (OSError, json.JSONDecodeError, ValueError):
+        start = 500.0
+    running = start
+    equity_curve.append(running)
+    for p in pnls:
+        running += p
+        equity_curve.append(running)
+
+    # Also respect ledger peak/drawdown if present
+    dd = max_drawdown_from_equity(equity_curve)
+    try:
+        ledger = json.loads(LEDGER.read_text())
+        peak = float(ledger.get("peak_equity_eur", ledger.get("equity_eur", start)))
+        eq = float(ledger.get("equity_eur", start))
+        if peak > 0:
+            dd = max(dd, (peak - eq) / peak)
+    except (OSError, json.JSONDecodeError, ValueError):
+        pass
+
+    brier = brier_score(preds)
+    total_pnl = sum(pnls) if pnls else float(
+        json.loads(LEDGER.read_text()).get("realized_pnl_eur", 0)
+        if LEDGER.exists()
+        else 0
+    )
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    perf = {
+        "win_rate": None if win_rate is None else round(win_rate, 6),
+        "profit_factor": None
+        if pf is None
+        else (None if pf == float("inf") else round(pf, 6)),
+        "profit_factor_infinite": pf == float("inf") if pf is not None else False,
+        "max_drawdown_pct": round(dd, 6),
+        "brier_score": None if brier is None else round(brier, 6),
+        "n_trades": len(trades),
+        "n_closed": len(closed),
+        "n_predictions": len(preds),
+        "total_realized_pnl_eur": round(total_pnl, 4),
+        "updated_at": now,
+    }
+    OUT.write_text(json.dumps(perf, indent=2) + "\n")
+
+    print("performance summary")
+    print(f"  n_trades={perf['n_trades']} n_closed={perf['n_closed']} n_preds={perf['n_predictions']}")
+    print(f"  win_rate={perf['win_rate']} profit_factor={perf['profit_factor']}")
+    print(f"  max_drawdown_pct={perf['max_drawdown_pct']} brier={perf['brier_score']}")
+    print(f"  total_realized_pnl_eur={perf['total_realized_pnl_eur']}")
+    print(f"  wrote {OUT}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,13 @@
+dec,pair,side,size_eur,entry,stop,target,group,retro,open_ts,close_ts,close_price,actual,pre_touch,cf_status,cf_level,cf_time,cf_delay_h,cf_result,cf_src
+D-021,SOL-EUR,baisse,14.7,98.0,99.47,96.53,1 arrêt,False,08/10 22h58,09/10 14h26,99.47,-0.2353,,,,,,,
+D-026,SOL-EUR,baisse,10.0,97.49,98.47,95.54,1 arrêt,False,09/10 15h43,09/10 16h22,98.50999999999999,-0.1147,,,,,,,
+D-024a,SOL-EUR,hausse,15.0,98.69,97.3,100.09,3 idée morte,False,09/10 15h08,09/10 15h43,97.49,-0.1969,non,tranché,arrêt,09/10 21h32,5.82,-0.2262,tick-bid
+D-023,BTC-EUR,hausse,24.98,74120.0,73379.0,75232.0,3 idée morte,False,09/10 14h30,09/10 17h09,73927.97,-0.0787,non,pas encore tranché,valeur actuelle @ 74124.68,11/10 07h42,,-0.0109,dernier tick
+D-031a,BTC-EUR,hausse,15.0,73981.11,73120.0,74843.0,3 idée morte,False,09/10 17h11,10/10 00h06,73586.385,-0.095,non,pas encore tranché,valeur actuelle @ 74124.68,11/10 07h42,,0.0141,dernier tick
+D-031b,SOL-EUR,baisse,10.0,97.93,98.87,96.32,3 idée morte,False,09/10 17h11,10/10 08h04,98.19,-0.0366,non,pas encore tranché,valeur actuelle @ 97.76,11/10 07h42,,0.0074,dernier tick
+D-036a,SOL-EUR,baisse,13.4,96.96,98.82,95.1,3 idée morte,False,10/10 00h06,10/10 08h04,98.19,-0.1835,non,tranché,arrêt,10/10 16h35,8.5,-0.2706,bougie5m-coinbase
+D-024b,ETH-EUR,baisse,10.0,2232.7,2255.0,2197.0,3 idée morte,False,09/10 15h08,10/10 18h14,2240.07,-0.043,non,pas encore tranché,valeur actuelle @ 2236.66,11/10 07h42,,-0.0277,dernier tick
+D-028a,ETH-EUR,baisse,15.0,2225.87,2270.0,2181.0,3 idée morte,False,09/10 16h24,10/10 18h14,2240.07,-0.1107,non,pas encore tranché,valeur actuelle @ 2236.66,11/10 07h42,,-0.0878,dernier tick
+D-042a,SOL-EUR,hausse,25.0,98.475,96.99,100.44,3 idée morte,False,10/10 18h14,11/10 07h37,97.75,-0.209,non,pas encore tranché,valeur actuelle @ 97.75,11/10 07h42,,-0.209,dernier tick
+D-020,SOL-EUR,baisse,12.49,100.695,101.2,100.2,2 cible,True,08/10 14h34,08/10 15h02,100.2,0.0501,,,,,,,
+D-019,ETH-EUR,baisse,12.44,2261.905,2273.22,2250.6,2 cible,True,08/10 14h34,08/10 15h39,2250.6,0.051,,,,,,,

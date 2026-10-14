@@ -1,0 +1,15 @@
+{
+  "idle": {
+    "nuits": {}
+  },
+  "heure_limite": {
+    "seeded": true,
+    "rung": {
+      "rx-paper-2026-10-08T205852Z-1e71faf5": {
+        "at": "2026-10-09T14:31:19.184644+02:00",
+        "result": "seed",
+        "decision_id": "D-021"
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+backtest.sh run --pair BTC-EUR --tf 1H --days 365 --end 2026-10-07 --strategy sell_rebuy --json --eur 25 --costs revolutx --fee-pct 0.14 --trail 1.5 --trail-start 0.5 --dip 0

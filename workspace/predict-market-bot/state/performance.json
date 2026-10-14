@@ -1,0 +1,1242 @@
+{
+  "win_rate": 0.3158,
+  "profit_factor": 0.4762,
+  "profit_factor_infinite": false,
+  "max_drawdown_pct": 0.004059,
+  "brier_score": null,
+  "n_trades": 22,
+  "n_closed": 22,
+  "n_open": 0,
+  "ordres_des_bots": "sans objet",
+  "ordres_remplis": "sans objet",
+  "n_predictions": 90,
+  "total_realized_pnl_eur": -1.273538,
+  "updated_at": "2026-10-13T10:37:27+02:00",
+  "updated_by": "PM-Compound (scripts/update_performance.py)",
+  "fuseau": "Europe/Brussels",
+  "notes_fr": [
+    "Les clés du haut (win_rate, n_closed, total_realized_pnl_eur…) = simulation seulement, essais « rétro » compris (comptés dans le capital du gardien, accord Quentin 8 oct).",
+    "Gain/perte = realized_pnl_eur écrit par le gardien (PM-Risk), frais déjà déduits.",
+    "max_drawdown_pct = plus grosse baisse du capital simulé après chaque trade fermé (fraction, 0,01 = 1 %).",
+    "Sens : « hausse » = achat puis vente plus haut ; « baisse » = vente de pièces déjà détenues puis rachat plus bas."
+  ],
+  "totaux": {
+    "simulation": {
+      "trades": 22,
+      "gagnants": 6,
+      "perdants": 13,
+      "net_eur": -1.273538,
+      "taux_reussite": 0.3158,
+      "rapport_gains_pertes": 0.4762,
+      "gain_moyen_eur": -0.067028,
+      "taille_totale_eur": 338.0067,
+      "par_sens": {
+        "hausse": {
+          "trades": 11,
+          "gagnants": 1,
+          "perdants": 7,
+          "net_eur": -1.220858,
+          "taux_reussite": 0.125,
+          "rapport_gains_pertes": 0.285,
+          "gain_moyen_eur": -0.152607,
+          "taille_totale_eur": 204.98
+        },
+        "baisse": {
+          "trades": 11,
+          "gagnants": 5,
+          "perdants": 6,
+          "net_eur": -0.05268,
+          "taux_reussite": 0.4545,
+          "rapport_gains_pertes": 0.9272,
+          "gain_moyen_eur": -0.004789,
+          "taille_totale_eur": 133.0267
+        }
+      },
+      "hors_retro": {
+        "trades": 20,
+        "gagnants": 4,
+        "perdants": 13,
+        "net_eur": -1.374662,
+        "taux_reussite": 0.2353,
+        "rapport_gains_pertes": 0.4346,
+        "gain_moyen_eur": -0.080862,
+        "taille_totale_eur": 313.08,
+        "par_sens": {
+          "hausse": {
+            "trades": 11,
+            "gagnants": 1,
+            "perdants": 7,
+            "net_eur": -1.220858,
+            "taux_reussite": 0.125,
+            "rapport_gains_pertes": 0.285,
+            "gain_moyen_eur": -0.152607,
+            "taille_totale_eur": 204.98
+          },
+          "baisse": {
+            "trades": 9,
+            "gagnants": 3,
+            "perdants": 6,
+            "net_eur": -0.153804,
+            "taux_reussite": 0.3333,
+            "rapport_gains_pertes": 0.7875,
+            "gain_moyen_eur": -0.017089,
+            "taille_totale_eur": 108.1
+          }
+        }
+      }
+    },
+    "live": {
+      "trades": 0,
+      "gagnants": 0,
+      "perdants": 0,
+      "net_eur": 0.0,
+      "taux_reussite": null,
+      "rapport_gains_pertes": null,
+      "gain_moyen_eur": null,
+      "taille_totale_eur": 0.0,
+      "par_sens": {
+        "hausse": {
+          "trades": 0,
+          "gagnants": 0,
+          "perdants": 0,
+          "net_eur": 0.0,
+          "taux_reussite": null,
+          "rapport_gains_pertes": null,
+          "gain_moyen_eur": null,
+          "taille_totale_eur": 0.0
+        },
+        "baisse": {
+          "trades": 0,
+          "gagnants": 0,
+          "perdants": 0,
+          "net_eur": 0.0,
+          "taux_reussite": null,
+          "rapport_gains_pertes": null,
+          "gain_moyen_eur": null,
+          "taille_totale_eur": 0.0
+        }
+      },
+      "ordres_live_journal": 0,
+      "note_fr": "Aucun trade réel du pipeline fermé (state/live_orders.jsonl absent ou sans résultat)."
+    }
+  },
+  "par_sens": {
+    "simulation": {
+      "hausse": {
+        "trades": 11,
+        "gagnants": 1,
+        "perdants": 7,
+        "net_eur": -1.220858,
+        "taux_reussite": 0.125,
+        "rapport_gains_pertes": 0.285,
+        "gain_moyen_eur": -0.152607,
+        "taille_totale_eur": 204.98
+      },
+      "baisse": {
+        "trades": 11,
+        "gagnants": 5,
+        "perdants": 6,
+        "net_eur": -0.05268,
+        "taux_reussite": 0.4545,
+        "rapport_gains_pertes": 0.9272,
+        "gain_moyen_eur": -0.004789,
+        "taille_totale_eur": 133.0267
+      }
+    },
+    "live": {
+      "hausse": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      },
+      "baisse": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      }
+    }
+  },
+  "par_sorte": {
+    "rebond": {
+      "nom": "Rebond (D-013)",
+      "essais_simulation": 0,
+      "essais_live": 0,
+      "objectif_essais": 20,
+      "reste": 20,
+      "ouverts": 0,
+      "decisions": [],
+      "simulation": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      },
+      "live": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      }
+    },
+    "cassure": {
+      "nom": "Cassure (D-014)",
+      "essais_simulation": 0,
+      "essais_live": 0,
+      "objectif_essais": 20,
+      "reste": 20,
+      "ouverts": 0,
+      "decisions": [],
+      "simulation": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      },
+      "live": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      }
+    },
+    "vendre_haut_racheter_bas": {
+      "nom": "Vendre haut / racheter plus bas (D-018)",
+      "essais_simulation": 0,
+      "essais_live": 0,
+      "objectif_essais": 20,
+      "reste": 20,
+      "ouverts": 0,
+      "decisions": [],
+      "simulation": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      },
+      "live": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      }
+    },
+    "baisse_sur_prevision": {
+      "nom": "Idée à la baisse sur prévision du jour (D-019, D-020, D-021…)",
+      "essais_simulation": 5,
+      "essais_live": 0,
+      "objectif_essais": 20,
+      "reste": 15,
+      "ouverts": 0,
+      "decisions": [
+        "D-019",
+        "D-020",
+        "D-021",
+        "D-023",
+        "D-026"
+      ],
+      "simulation": {
+        "trades": 5,
+        "gagnants": 2,
+        "perdants": 3,
+        "net_eur": -0.32759,
+        "taux_reussite": 0.4,
+        "rapport_gains_pertes": 0.2359,
+        "gain_moyen_eur": -0.065518,
+        "taille_totale_eur": 74.6067
+      },
+      "live": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      }
+    },
+    "hausse_sur_prevision": {
+      "nom": "Idée à la hausse sur prévision du jour",
+      "essais_simulation": 0,
+      "essais_live": 0,
+      "objectif_essais": 20,
+      "reste": 20,
+      "ouverts": 0,
+      "decisions": [],
+      "simulation": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      },
+      "live": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      }
+    },
+    "essai_stop": {
+      "nom": "Essai technique du stop (sans décision écrite)",
+      "essais_simulation": 1,
+      "essais_live": 0,
+      "objectif_essais": 20,
+      "reste": 19,
+      "ouverts": 0,
+      "decisions": [],
+      "simulation": {
+        "trades": 1,
+        "gagnants": 0,
+        "perdants": 1,
+        "net_eur": -0.8274,
+        "taux_reussite": 0.0,
+        "rapport_gains_pertes": 0.0,
+        "gain_moyen_eur": -0.8274,
+        "taille_totale_eur": 10.0
+      },
+      "live": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      }
+    },
+    "autre": {
+      "nom": "Autre / non classé",
+      "essais_simulation": 16,
+      "essais_live": 0,
+      "objectif_essais": 20,
+      "reste": 4,
+      "ouverts": 0,
+      "decisions": [
+        "D-024a",
+        "D-024b",
+        "D-028a",
+        "D-031a",
+        "D-031b",
+        "D-036a",
+        "D-040a",
+        "D-042a",
+        "D-043a",
+        "D-047a",
+        "D-047c",
+        "D-049a",
+        "D-051a",
+        "D-051c",
+        "D-052a",
+        "D-052c"
+      ],
+      "simulation": {
+        "trades": 16,
+        "gagnants": 4,
+        "perdants": 9,
+        "net_eur": -0.118548,
+        "taux_reussite": 0.3077,
+        "rapport_gains_pertes": 0.8991,
+        "gain_moyen_eur": -0.009119,
+        "taille_totale_eur": 253.4
+      },
+      "live": {
+        "trades": 0,
+        "gagnants": 0,
+        "perdants": 0,
+        "net_eur": 0.0,
+        "taux_reussite": null,
+        "rapport_gains_pertes": null,
+        "gain_moyen_eur": null,
+        "taille_totale_eur": 0.0
+      }
+    }
+  },
+  "capital_simule": {
+    "depart_eur": 500.0,
+    "depart_source": "guardian/state.json bankroll_eur",
+    "historique": [
+      {
+        "date": null,
+        "evenement": "départ (guardian/state.json bankroll_eur)",
+        "capital_eur": 500.0
+      },
+      {
+        "date": "2026-10-07T15:17:39+02:00",
+        "evenement": "fermeture rx-paper-2026-10-06T175711Z-d914a46e ETH-EUR",
+        "trade_id": "rx-paper-2026-10-06T175711Z-d914a46e",
+        "gain_eur": -0.8274,
+        "capital_eur": 499.1726
+      },
+      {
+        "date": "2026-10-08T15:02:23+02:00",
+        "evenement": "fermeture D-020 SOL-EUR",
+        "trade_id": "rx-paper-retro-D-020-sell",
+        "gain_eur": 0.050142,
+        "capital_eur": 499.222742
+      },
+      {
+        "date": "2026-10-08T15:39:23+02:00",
+        "evenement": "fermeture D-019 ETH-EUR",
+        "trade_id": "rx-paper-retro-D-019-sell",
+        "gain_eur": 0.050982,
+        "capital_eur": 499.273724
+      },
+      {
+        "date": "2026-10-09T14:26:52+02:00",
+        "evenement": "fermeture D-021 SOL-EUR",
+        "trade_id": "rx-paper-2026-10-08T205852Z-1e71faf5",
+        "gain_eur": -0.23531,
+        "capital_eur": 499.038414
+      },
+      {
+        "date": "2026-10-09T15:46:39+02:00",
+        "evenement": "fermeture D-024a SOL-EUR",
+        "trade_id": "rx-paper-2026-10-09T130833Z-aa77fd43",
+        "gain_eur": -0.196923,
+        "capital_eur": 498.841491
+      },
+      {
+        "date": "2026-10-09T16:22:12+02:00",
+        "evenement": "fermeture D-026 SOL-EUR",
+        "trade_id": "rx-paper-2026-10-09T134330Z-d3f5b95e",
+        "gain_eur": -0.114673,
+        "capital_eur": 498.726818
+      },
+      {
+        "date": "2026-10-09T17:09:28+02:00",
+        "evenement": "fermeture D-023 BTC-EUR",
+        "trade_id": "rx-paper-2026-10-09T123021Z-0f531d4f",
+        "gain_eur": -0.078731,
+        "capital_eur": 498.648087
+      },
+      {
+        "date": "2026-10-10T00:06:39+02:00",
+        "evenement": "fermeture D-031a BTC-EUR",
+        "trade_id": "rx-paper-2026-10-09T151109Z-ee1fbd85",
+        "gain_eur": -0.094992,
+        "capital_eur": 498.553095
+      },
+      {
+        "date": "2026-10-10T08:04:54+02:00",
+        "evenement": "fermeture D-031b SOL-EUR",
+        "trade_id": "rx-paper-2026-10-09T151109Z-aa309e18",
+        "gain_eur": -0.036563,
+        "capital_eur": 498.516532
+      },
+      {
+        "date": "2026-10-10T08:04:54+02:00",
+        "evenement": "fermeture D-036a SOL-EUR",
+        "trade_id": "rx-paper-2026-10-09T220647Z-ff0116e3",
+        "gain_eur": -0.183473,
+        "capital_eur": 498.333059
+      },
+      {
+        "date": "2026-10-10T18:14:33+02:00",
+        "evenement": "fermeture D-024b ETH-EUR",
+        "trade_id": "rx-paper-2026-10-09T130833Z-8d63c1ab",
+        "gain_eur": -0.043027,
+        "capital_eur": 498.290032
+      },
+      {
+        "date": "2026-10-10T18:14:33+02:00",
+        "evenement": "fermeture D-028a ETH-EUR",
+        "trade_id": "rx-paper-2026-10-09T142449Z-a11eb3ad",
+        "gain_eur": -0.110742,
+        "capital_eur": 498.17929
+      },
+      {
+        "date": "2026-10-11T07:37:23+02:00",
+        "evenement": "fermeture D-042a SOL-EUR",
+        "trade_id": "rx-paper-2026-10-10T161433Z-8987ec95",
+        "gain_eur": -0.208965,
+        "capital_eur": 497.970325
+      },
+      {
+        "date": "2026-10-12T07:30:34+02:00",
+        "evenement": "fermeture D-043a ETH-EUR",
+        "trade_id": "rx-paper-2026-10-11T053723Z-e33a1866",
+        "gain_eur": 0.48659,
+        "capital_eur": 498.456915
+      },
+      {
+        "date": "2026-10-12T14:42:32+02:00",
+        "evenement": "fermeture D-047c SOL-EUR",
+        "trade_id": "rx-paper-2026-10-12T053552Z-0dfa6c69",
+        "gain_eur": 0.194204,
+        "capital_eur": 498.651119
+      },
+      {
+        "date": "2026-10-12T14:47:09+02:00",
+        "evenement": "fermeture D-047a ETH-EUR",
+        "trade_id": "rx-paper-2026-10-12T053552Z-16722c7d",
+        "gain_eur": -0.102235,
+        "capital_eur": 498.548884
+      },
+      {
+        "date": "2026-10-12T20:48:02+02:00",
+        "evenement": "fermeture D-049a ETH-EUR",
+        "trade_id": "rx-paper-2026-10-12T124716Z-3cf7905b",
+        "gain_eur": -0.198202,
+        "capital_eur": 498.350682
+      },
+      {
+        "date": "2026-10-13T07:23:50+02:00",
+        "evenement": "fermeture D-051a SOL-EUR",
+        "trade_id": "rx-paper-2026-10-12T184805Z-72bcb36d",
+        "gain_eur": 0.280575,
+        "capital_eur": 498.631257
+      },
+      {
+        "date": "2026-10-13T07:23:50+02:00",
+        "evenement": "fermeture D-051c ETH-EUR",
+        "trade_id": "rx-paper-2026-10-12T184805Z-35368452",
+        "gain_eur": 0.095205,
+        "capital_eur": 498.726462
+      },
+      {
+        "date": "2026-10-13T10:36:57+02:00",
+        "evenement": "fermeture D-040a BTC-EUR",
+        "trade_id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+        "gain_eur": null,
+        "capital_eur": 498.726462
+      },
+      {
+        "date": "2026-10-13T10:36:57+02:00",
+        "evenement": "fermeture D-052a ETH-EUR",
+        "trade_id": "rx-paper-2026-10-13T052909Z-7311633d",
+        "gain_eur": null,
+        "capital_eur": 498.726462
+      },
+      {
+        "date": "2026-10-13T10:36:57+02:00",
+        "evenement": "fermeture D-052c SOL-EUR",
+        "trade_id": "rx-paper-2026-10-13T052909Z-a03d58a6",
+        "gain_eur": null,
+        "capital_eur": 498.726462
+      }
+    ],
+    "apres_dernier_trade_ferme_eur": 498.726462,
+    "actuel_eur": 499.030271,
+    "actuel_le": "2026-10-13T10:36:57+02:00",
+    "actuel_source": "guardian/state.json equity_eur",
+    "actuel_note_fr": "Valeur du gardien : départ + gains fermés + gain/perte latent des positions ouvertes (frais compris).",
+    "latent_ouvert_eur": 0.0,
+    "gain_total_gardien_eur": -0.9697,
+    "liquidites_eur": 499.030271,
+    "sommet_eur": 500.0,
+    "baisse_depuis_sommet": 0.001939,
+    "plus_grosse_baisse": 0.004059
+  },
+  "plafond_simulation": {
+    "actuel_eur": 50.0,
+    "depuis": "2026-10-09T14:03:00+02:00",
+    "historique": [
+      {
+        "depuis": "2026-10-08T00:00:00+02:00",
+        "plafond_eur": 25.0,
+        "source": "guardian/config.json max_exposure_pct 0.05 × bankroll 500 €"
+      },
+      {
+        "depuis": "2026-10-09T14:03:00+02:00",
+        "plafond_eur": 50.0,
+        "source": "consigne équipe 9 oct 14h03 (simulation : 50 € au total ouvert, avant 25 €)"
+      }
+    ],
+    "config_gardien": {
+      "max_exposure_pct": 0.05,
+      "max_position_pct": 0.05,
+      "bankroll_eur": 500.0,
+      "plafond_calcule_eur": 25.0
+    },
+    "note_fr": "guardian/config.json donne encore 25 € (max_exposure_pct 0.05) : à mettre à jour par PM-Risk."
+  },
+  "trades_fermes": [
+    {
+      "id": "rx-paper-2026-10-06T175711Z-d914a46e",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": null,
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "essai_stop",
+      "retro": false,
+      "ouvert_le": "2026-10-06T19:57:11+02:00",
+      "taille_eur": 10.0,
+      "prix_entree": 2500.0,
+      "ferme_le": "2026-10-07T15:17:39+02:00",
+      "prix_sortie": 2293.15,
+      "gain_eur": -0.8274,
+      "gain_pct": -8.274,
+      "frais_eur": null,
+      "frais_note": "frais non isolés (inclus dans le gain simulé)",
+      "raison_sortie": "stop_hit",
+      "rachat": null,
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-07",
+        "lien": "test stop (pas d’id D-xxx à l’achat — fill test du 6 oct)",
+        "pourquoi_vente": "stop de protection touché (chute avant Fed)",
+        "lecon": "un achat test à 2500 € sans décision écrite claire + marché qui baisse fort = perte attendue ; ne pas racheter juste après le stop"
+      }
+    },
+    {
+      "id": "rx-paper-retro-D-020-sell",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-020",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "baisse_sur_prevision",
+      "retro": true,
+      "ouvert_le": "2026-10-08T14:34:00+02:00",
+      "taille_eur": 12.4862,
+      "prix_entree": 100.695,
+      "ferme_le": "2026-10-08T15:02:23+02:00",
+      "prix_sortie": 100.2,
+      "gain_eur": 0.050142,
+      "gain_pct": 0.4016,
+      "frais_eur": 0.011238,
+      "frais_note": null,
+      "raison_sortie": "target_hit",
+      "rachat": "target",
+      "gagnant": true,
+      "journal": {
+        "date": "2026-10-08",
+        "lien": "D-020",
+        "pourquoi_vente": "idée à la baisse ; la cible de rachat (100,20 €) a été touchée avant le prix d'arrêt (101,20 €)",
+        "lecon": "D-019 et D-020 ouvertes en même temps partagent le plafond de 25 € ; un essai rétro compte à part dans le bilan pour ne pas gonfler les vrais résultats"
+      }
+    },
+    {
+      "id": "rx-paper-retro-D-019-sell",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-019",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "baisse_sur_prevision",
+      "retro": true,
+      "ouvert_le": "2026-10-08T14:34:00+02:00",
+      "taille_eur": 12.4405,
+      "prix_entree": 2261.905,
+      "ferme_le": "2026-10-08T15:39:23+02:00",
+      "prix_sortie": 2250.6,
+      "gain_eur": 0.050982,
+      "gain_pct": 0.4098,
+      "frais_eur": 0.011196,
+      "frais_note": null,
+      "raison_sortie": "target_hit",
+      "rachat": "target",
+      "gagnant": true,
+      "journal": {
+        "date": "2026-10-08",
+        "lien": "D-019",
+        "pourquoi_vente": "idée à la baisse ; la cible de rachat (2 250,60 €) a été touchée avant le prix d'arrêt (ETH monté à 2 271,3 €, à 2 € de l'arrêt)",
+        "lecon": "gain réel mais de justesse (arrêt presque touché) et calculé après coup, donc il ne prouve pas encore que l'idée marche"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-08T205852Z-1e71faf5",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-021",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "baisse_sur_prevision",
+      "retro": false,
+      "ouvert_le": "2026-10-08T22:58:52+02:00",
+      "taille_eur": 14.7,
+      "prix_entree": 98.0,
+      "ferme_le": "2026-10-09T14:26:52+02:00",
+      "prix_sortie": 99.47,
+      "gain_eur": -0.23531,
+      "gain_pct": -1.6007,
+      "frais_eur": 0.01481,
+      "frais_note": null,
+      "raison_sortie": "stop_hit",
+      "rachat": "time",
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-09",
+        "lien": "D-021",
+        "pourquoi_vente": "idée à la baisse ouverte la veille ; cible 96,53 € jamais touchée (creux ~96,93 €), prix contre nous près de l’arrêt 99,47 € (haut ~99,31 €) ; Predict a déclaré l’idée morte à 14h02 ; Risk a fermé pour libérer le plafond simu (heure limite 10h = rappel seulement)",
+        "lecon": "une idée de nuit sans cible touchée avant l’heure rappel, avec le prix déjà contre nous, vaut mieux être coupée tôt plutôt que de garder le plafond bloqué"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-09T130833Z-aa77fd43",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-024a",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-09T15:08:33+02:00",
+      "taille_eur": 15.0,
+      "prix_entree": 98.69,
+      "ferme_le": "2026-10-09T15:46:39+02:00",
+      "prix_sortie": 97.74,
+      "gain_eur": -0.196923,
+      "gain_pct": null,
+      "frais_eur": 0.007589,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": null,
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-09",
+        "lien": "D-024a",
+        "pourquoi_vente": "idée morte (Risk) — ni le prix visé 100,09 € ni l’arrêt 97,30 € n’ont été touchés (creux ticks ~97,49 €) ; SOL a cassé sous 97,90 € et Predict a basculé en idée à la baisse (D-025/D-026), plafond simu plein → fermeture pour libérer de la place",
+        "lecon": "à surveiller — couper une idée à la hausse « morte » avant l’arrêt fixe une petite perte et libère le plafond, mais ce n’est qu’un essai (pas une règle)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-09T134330Z-d3f5b95e",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-026",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "baisse_sur_prevision",
+      "retro": false,
+      "ouvert_le": "2026-10-09T15:43:30+02:00",
+      "taille_eur": 10.0,
+      "prix_entree": 97.49,
+      "ferme_le": "2026-10-09T16:22:12+02:00",
+      "prix_sortie": 98.50999999999999,
+      "gain_eur": -0.114673,
+      "gain_pct": -1.1467,
+      "frais_eur": 0.010052,
+      "frais_note": null,
+      "raison_sortie": "stop_hit",
+      "rachat": "safety",
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-09",
+        "lien": "D-026",
+        "pourquoi_vente": "arrêt 98,47 € touché (ticks mid 98,51 € à 16h21:59) ; cible de rachat 95,54 € jamais atteinte (creux pendant l’ouverture ~97,54 €) ; fermeture auto stop_hit / safety",
+        "lecon": "à surveiller — sur cet essai SOL a monté vers l’arrêt avant d’atteindre la cible ; 2e perte baisse SOL du jour (après D-021), pas encore assez d’essais pour une règle"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-09T123021Z-0f531d4f",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-023",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "baisse_sur_prevision",
+      "retro": false,
+      "ouvert_le": "2026-10-09T14:30:21+02:00",
+      "taille_eur": 24.98,
+      "prix_entree": 74120.0,
+      "ferme_le": "2026-10-09T17:09:28+02:00",
+      "prix_sortie": 73927.97,
+      "gain_eur": -0.078731,
+      "gain_pct": -0.3152,
+      "frais_eur": 0.012457,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": null,
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-09",
+        "lien": "D-023",
+        "pourquoi_vente": "idée morte (Predict après rappel 17h00) — prix un peu contre nous (≈ 74 082 € puis sortie 73 928 €) ; ni le prix visé 75 232 € ni l’arrêt 73 379 € n’ont été touchés (haut ticks ~74 349 €, creux ~73 663 €) ; Risk a fermé pour libérer ~25 € sous le plafond simu",
+        "lecon": "à surveiller — après l’heure rappel, une idée à la hausse encore loin de la cible et déjà un peu contre peut être coupée tôt pour libérer le plafond (2e essai hausse simu du jour après D-024a, pas une règle)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-09T151109Z-ee1fbd85",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-031a",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-09T17:11:09+02:00",
+      "taille_eur": 15.0,
+      "prix_entree": 73981.11,
+      "ferme_le": "2026-10-10T00:06:39+02:00",
+      "prix_sortie": 73586.385,
+      "gain_eur": -0.094992,
+      "gain_pct": -0.6333,
+      "frais_eur": 0.01496,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": null,
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-10",
+        "lien": "D-031a",
+        "pourquoi_vente": "idée morte — rappel 22h00 passé, prix contre nous (~73 475 € à 22h, sortie 73 586 €) ; ni le prix visé 74 843 € ni l’arrêt 73 120 € n’ont été touchés (haut ticks ~74 148 €, creux ~73 444 €) ; Predict a déclaré l’idée morte à ~00h04, Risk a fermé pour libérer ~15 €",
+        "lecon": "à surveiller — 3e perte « idée à la hausse » simu d’affilée (après D-024a et D-023) : après le rappel, loin de la cible et déjà contre, couper libère le plafond ; rien ne change (~3 essais hausse fermés)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-09T151109Z-aa309e18",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-031b",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-09T17:11:09+02:00",
+      "taille_eur": 10.0,
+      "prix_entree": 97.93,
+      "ferme_le": "2026-10-10T08:04:54+02:00",
+      "prix_sortie": 98.19,
+      "gain_eur": -0.036563,
+      "gain_pct": -0.3656,
+      "frais_eur": 0.010013,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": "safety",
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-10",
+        "lien": "D-031b",
+        "pourquoi_vente": "idée morte — rappel 22h00 passé ; SOL a cassé au-dessus de 98,03 € (~08h) avec le prix contre nous (sortie 98,19 € > entrée 97,93 €, vers l'arrêt 98,87 €) ; Predict a déclaré l'idée morte (D-040), Risk a fermé pour libérer ~10 €",
+        "lecon": "à surveiller — 3e perte « idée à la baisse » simu d'affilée (D-021, D-026, D-031b ; D-036a fermée au même instant → 4) : après le rappel, loin de la cible et déjà contre, couper avant l'arrêt limite la casse ; rien ne change (loin de ~20 essais)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-09T220647Z-ff0116e3",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-036a",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-10T00:06:47+02:00",
+      "taille_eur": 13.4,
+      "prix_entree": 96.96,
+      "ferme_le": "2026-10-10T08:04:54+02:00",
+      "prix_sortie": 98.19,
+      "gain_eur": -0.183473,
+      "gain_pct": -1.3692,
+      "frais_eur": 0.013485,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": "safety",
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-10",
+        "lien": "D-036a",
+        "pourquoi_vente": "idée morte — après la cassure SOL au-dessus de 98,03 € (D-040), prix contre nous (~98,19 € vs entrée 96,96 €, +1,27 %) ; ni le prix visé 95,10 € ni l’arrêt 98,82 € n’ont été touchés (creux ticks ~96,89 €, haut ~98,37 €) ; Predict a déclaré l’idée morte ~08h05, Risk a fermé pour libérer ~13 € (rappel 10h00 = rappel seulement)",
+        "lecon": "à surveiller — 4e perte « idée à la baisse » simu d’affilée (D-021, D-026, D-031b, D-036a) : vente juste après une baisse déjà faite, puis rebond contre nous ; rien ne change (loin de ~20 essais)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-09T130833Z-8d63c1ab",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-024b",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-09T15:08:33+02:00",
+      "taille_eur": 10.0,
+      "prix_entree": 2232.7,
+      "ferme_le": "2026-10-10T18:14:33+02:00",
+      "prix_sortie": 2240.07,
+      "gain_eur": -0.043027,
+      "gain_pct": -0.4303,
+      "frais_eur": 0.010017,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": "safety",
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-10",
+        "lien": "D-024b",
+        "pourquoi_vente": "idée morte — rappels passés ; ETH a remonté au-dessus de l'entrée (sortie 2 240,07 € > 2 232,70 €, +0,33 %) sans toucher le visé ni l'arrêt ; Predict (D-042) a déclaré l'idée morte ~18h12, Risk a fermé pour libérer ~10 € (D-028a fermée au même instant)",
+        "lecon": "à surveiller — 5e perte « idée à la baisse » simu d'affilée (D-021, D-026, D-031b, D-036a, D-024b) : après les rappels, loin de la cible et déjà contre, couper avant l'arrêt limite la casse ; rien ne change (loin de ~20 essais)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-09T142449Z-a11eb3ad",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-028a",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-09T16:24:49+02:00",
+      "taille_eur": 15.0,
+      "prix_entree": 2225.87,
+      "ferme_le": "2026-10-10T18:14:33+02:00",
+      "prix_sortie": 2240.07,
+      "gain_eur": -0.110742,
+      "gain_pct": -0.7383,
+      "frais_eur": 0.015048,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": "safety",
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-10",
+        "lien": "D-028a",
+        "pourquoi_vente": "idée morte — rappel 14h00 (prolongé après 22h00 du 9) passé ; ETH remonté contre nous (sortie 2 240,07 € > entrée 2 225,87 €, +0,64 %) ; Predict a déclaré l'idée morte (D-042), Risk a fermé avec D-024b pour libérer ~15 €",
+        "lecon": "à surveiller — rappel dépassé, prix remonté, cible et arrêt non touchés ; 5e/6e perte « idée à la baisse » simu d'affilée (D-021, D-026, D-031b, D-036a, D-028a ; D-024b au même instant) ; rien ne change (loin de ~20 essais)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-10T161433Z-8987ec95",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-042a",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-10T18:14:33+02:00",
+      "taille_eur": 25.0,
+      "prix_entree": 98.475,
+      "ferme_le": "2026-10-11T07:37:23+02:00",
+      "prix_sortie": 97.75,
+      "gain_eur": -0.208965,
+      "gain_pct": -0.8359,
+      "frais_eur": 0.024908,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": null,
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-11",
+        "lien": "D-042a",
+        "pourquoi_vente": "idée morte — rappel 22h00 passé ; SOL sous l'entrée (97,75 € vs 98,475 €, −0,74 %) après cassure zone 98,17 € ; cible et arrêt non touchés ; Predict (D-043) a déclaré l'idée morte ~07h35, Risk a fermé pour libérer ~25 €",
+        "lecon": "à surveiller — 4e perte « idée à la hausse » simu d'affilée (D-024a, D-023, D-031a, D-042a) : après le rappel, loin de la cible et déjà contre, couper avant l'arrêt limite la casse ; rien ne change (loin de ~20 essais)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-11T053723Z-e33a1866",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-043a",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-11T07:37:23+02:00",
+      "taille_eur": 25.0,
+      "prix_entree": 2237.49,
+      "ferme_le": "2026-10-12T07:30:34+02:00",
+      "prix_sortie": 2283.3,
+      "gain_eur": 0.48659,
+      "gain_pct": 1.9464,
+      "frais_eur": 0.025256,
+      "frais_note": null,
+      "raison_sortie": "target_hit",
+      "rachat": null,
+      "gagnant": true,
+      "journal": {
+        "date": "2026-10-12",
+        "lien": "D-043a",
+        "pourquoi_vente": "cible 2 283,30 € touchée (fermeture auto target_hit / rattrapage trou) ; arrêt 2 193,75 € jamais touché (creux ticks ~2 230,50 €)",
+        "lecon": "1er gain « idée à la hausse » simu depuis plusieurs essais — la cible +2 % a été touchée pendant la nuit (trou comblé) ; rien ne change (encore peu d’essais hausse)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-12T053552Z-0dfa6c69",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-047c",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-12T07:35:52+02:00",
+      "taille_eur": 10.0,
+      "prix_entree": 100.44,
+      "ferme_le": "2026-10-12T14:42:32+02:00",
+      "prix_sortie": 98.39,
+      "gain_eur": 0.194204,
+      "gain_pct": 1.942,
+      "frais_eur": 0.009898,
+      "frais_note": null,
+      "raison_sortie": "target_hit",
+      "rachat": "target",
+      "gagnant": true,
+      "journal": {
+        "date": "2026-10-12",
+        "lien": "D-047c",
+        "pourquoi_vente": "cible 98,39 € touchée (fermeture auto target_hit / rattrapage trou) ; arrêt 101,40 € jamais touché",
+        "lecon": "1er gain « idée à la baisse » simu après 6 pertes d’affilée (hors rétro) — la cible −2 % a été touchée via rattrapage ; rien ne change (loin de ~20 essais)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-12T053552Z-16722c7d",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-047a",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-12T07:35:52+02:00",
+      "taille_eur": 15.0,
+      "prix_entree": 2278.9,
+      "ferme_le": "2026-10-12T14:47:09+02:00",
+      "prix_sortie": 2265.64,
+      "gain_eur": -0.102235,
+      "gain_pct": -0.6816,
+      "frais_eur": 0.014956,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": null,
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-12",
+        "lien": "D-047a",
+        "pourquoi_vente": "idée morte — rappel 14h00 passé avec ETH sous l'entrée (2 265 € vs 2 278,90 €) ; Predict (D-049) l'a déclarée morte, Risk a fermé pour libérer la place",
+        "lecon": "ETH est monté vers 2 300 € le matin puis est retombé au plus bas du jour ; couper au rappel a limité la perte à 0,10 € ; rien ne change (7 essais hausse simu, loin de ~20)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-12T124716Z-3cf7905b",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-049a",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-12T14:47:16+02:00",
+      "taille_eur": 25.0,
+      "prix_entree": 2265.0,
+      "ferme_le": "2026-10-12T20:48:02+02:00",
+      "prix_sortie": 2249.3,
+      "gain_eur": -0.198202,
+      "gain_pct": -0.7928,
+      "frais_eur": 0.024913,
+      "frais_note": null,
+      "raison_sortie": "idee_morte",
+      "rachat": null,
+      "gagnant": false,
+      "journal": {
+        "date": "2026-10-12",
+        "lien": "D-049a",
+        "pourquoi_vente": "idée morte — rappel 20h00 passé avec ETH sous l'entrée (2 251,5 € vs 2 265 €, −0,6 %) ; Predict (D-051) l'a déclarée morte, Risk a fermé",
+        "lecon": "même pari ETH hausse que D-047a fermé juste avant (fermé puis racheté) — deux pertes de frais pour un seul sens ; rien ne change (8 essais hausse simu, loin de ~20)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-12T184805Z-72bcb36d",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-051a",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-12T20:48:05+02:00",
+      "taille_eur": 20.0,
+      "prix_entree": 96.53,
+      "ferme_le": "2026-10-13T07:23:50+02:00",
+      "prix_sortie": 95.08,
+      "gain_eur": 0.280575,
+      "gain_pct": 1.4029,
+      "frais_eur": 0.01985,
+      "frais_note": null,
+      "raison_sortie": "target_hit",
+      "rachat": "target",
+      "gagnant": true,
+      "journal": {
+        "date": "2026-10-13",
+        "lien": "D-051a",
+        "pourquoi_vente": "cible 95,08 € touchée (fermeture auto target_hit / rattrapage trou) ; arrêt 97,97 € jamais touché",
+        "lecon": "2e gain « idée à la baisse » simu à la cible après D-047c (suite aux 6 pertes) — la cible −1,5 % a tenu malgré l’entrée trop tôt ; rien ne change (~10 essais baisse hors rétro, loin de ~20)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-12T184805Z-35368452",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-051c",
+      "sens": "baisse",
+      "sens_fr": "idée à la baisse (vente puis rachat)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-12T20:48:05+02:00",
+      "taille_eur": 5.0,
+      "prix_entree": 2251.5,
+      "ferme_le": "2026-10-13T07:23:50+02:00",
+      "prix_sortie": 2206.4,
+      "gain_eur": 0.095205,
+      "gain_pct": 1.9041,
+      "frais_eur": 0.00495,
+      "frais_note": null,
+      "raison_sortie": "target_hit",
+      "rachat": "target",
+      "gagnant": true,
+      "journal": {
+        "date": "2026-10-13",
+        "lien": "D-051c",
+        "pourquoi_vente": "cible 2 206,40 € touchée la nuit (fermeture auto target_hit via rattrapage) ; arrêt 2 274,00 € jamais touché",
+        "lecon": "la baisse prévue par Predict est arrivée dans la nuit et la cible −2 % a été prise avant la remontée ; rien ne change (11 essais baisse simu avec D-051a fermé en même temps, loin de ~20) ; à noter : 10 h 25 sans relevé de prix (20h58–07h23)"
+      }
+    },
+    {
+      "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-040a",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-10T08:04:55+02:00",
+      "taille_eur": 25.0,
+      "prix_entree": 73917.97,
+      "ferme_le": "2026-10-13T10:36:57+02:00",
+      "prix_sortie": 74907.65,
+      "gain_eur": null,
+      "gain_pct": null,
+      "frais_eur": 0.025167,
+      "frais_note": null,
+      "raison_sortie": "arret_experience",
+      "rachat": null,
+      "gagnant": false,
+      "journal": null
+    },
+    {
+      "id": "rx-paper-2026-10-13T052909Z-7311633d",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-052a",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-13T07:29:09+02:00",
+      "taille_eur": 20.0,
+      "prix_entree": 2260.0,
+      "ferme_le": "2026-10-13T10:36:57+02:00",
+      "prix_sortie": 2261.94,
+      "gain_eur": null,
+      "gain_pct": null,
+      "frais_eur": 0.020009,
+      "frais_note": null,
+      "raison_sortie": "arret_experience",
+      "rachat": null,
+      "gagnant": false,
+      "journal": null
+    },
+    {
+      "id": "rx-paper-2026-10-13T052909Z-a03d58a6",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-052c",
+      "sens": "hausse",
+      "sens_fr": "idée à la hausse (achat puis vente)",
+      "sorte": "autre",
+      "retro": false,
+      "ouvert_le": "2026-10-13T07:29:09+02:00",
+      "taille_eur": 5.0,
+      "prix_entree": 96.8,
+      "ferme_le": "2026-10-13T10:36:57+02:00",
+      "prix_sortie": 96.84,
+      "gain_eur": null,
+      "gain_pct": null,
+      "frais_eur": 0.005001,
+      "frais_note": null,
+      "raison_sortie": "arret_experience",
+      "rachat": null,
+      "gagnant": false,
+      "journal": null
+    }
+  ],
+  "positions_ouvertes": [],
+  "rapprochement": {
+    "journal_manquants": [
+      {
+        "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+        "decision_id": "D-040a",
+        "pair": "BTC-EUR",
+        "ferme_le": "2026-10-13T10:36:57+02:00",
+        "gain_eur": null
+      },
+      {
+        "id": "rx-paper-2026-10-13T052909Z-7311633d",
+        "decision_id": "D-052a",
+        "pair": "ETH-EUR",
+        "ferme_le": "2026-10-13T10:36:57+02:00",
+        "gain_eur": null
+      },
+      {
+        "id": "rx-paper-2026-10-13T052909Z-a03d58a6",
+        "decision_id": "D-052c",
+        "pair": "SOL-EUR",
+        "ferme_le": "2026-10-13T10:36:57+02:00",
+        "gain_eur": null
+      }
+    ],
+    "journal_sans_trade_gardien": [],
+    "incoherences": [
+      "capital recalculé 498.7265 € (départ + gains fermés + latent ouvert) ≠ gardien equity_eur 499.030271"
+    ]
+  },
+  "exclus": [
+    "paper-20261006T163221Z-demo-selftest-1 : ligne de test marché de prédiction (demo-selftest), pas un trade crypto"
+  ],
+  "sources": {
+    "guardian_state": "guardian/state.json",
+    "guardian_config": "guardian/config.json",
+    "trades_log": "state/trades_log.jsonl",
+    "retro_sims": "state/retro_sims.jsonl",
+    "live_orders": "state/live_orders.jsonl",
+    "predictions_log": "state/predictions_log.jsonl",
+    "trading_journal": "knowledge/trading_journal.md",
+    "decision_log": "knowledge/decision_log.md"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "decision_id": "2026-09-19T00:00:39+00:00-scheduled",
+  "situation": "J+18 scheduled 00:00 UTC after daily metabolism (−0.40), live, score 79.52 EUR, cash 11.75 (~15%). Bags ETH 47.41 (+7.66%) and SOL 27.64 (+11.33%); crypto expo 86% vs 80% max. No HALTED, buys not frozen, open orders none. Cut 68 clear.",
+  "threats": [
+    "EUR reserve ~15% vs 20% target — metabolism still bites with thin cash",
+    "Crypto expo 86% still blocks buys (V6) until more EUR is seeded",
+    "Daily 0.50% metabolism continues toward the 100 EUR / J+90 palier"
+  ],
+  "options": [
+    {
+      "label": "hold",
+      "expected_gain_pct": 0,
+      "max_loss_pct": 0,
+      "rationale": "Avoids a fourth clip after three live SOL fills yesterday, but leaves expo at 86% and cash under the 20% reserve despite SOL +11.33% still clearing ≥+5% edge."
+    },
+    {
+      "label": "edge_micro_sol_maker",
+      "expected_gain_pct": 0.2,
+      "max_loss_pct": 0.5,
+      "rationale": "SOL +11.33% is clear edge to keep seeding EUR toward 20%. One intentional clip ≤ risque/trade (~3.97 EUR), limit post_only 0.05% above mid — not under-mid spam."
+    },
+    {
+      "label": "edge_micro_eth_maker",
+      "expected_gain_pct": 0.1,
+      "max_loss_pct": 0.5,
+      "rationale": "ETH also clears +5% (+7.66%), but SOL has the stronger edge (+11.33%) and was the leg that filled three times; prefer one SOL trim over switching bags."
+    }
+  ],
+  "decision": "edge_micro_sol_maker",
+  "why_better": "Guardian is live (three order_filled yesterday, not dry_run). SOL at +11.33% meets the ≥+5% clear-edge rule to keep seeding EUR — cash is 11.75 but reserve target is ~20% and expo is still 86%. One intentional ~3.97 EUR SOL sell at 0.05% above mid aims to rest post_only. Score 79.52 stays well above the 68 cut after metabolism; stops unchanged. Hold remains default after this unless another forced rule or edge.",
+  "orders": [
+    {
+      "pair": "SOL-EUR",
+      "side": "sell",
+      "type": "limit",
+      "price": 98.152,
+      "amount_eur": 3.97,
+      "stop_pct": -8.0
+    }
+  ]
+}

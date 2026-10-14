@@ -1,0 +1,52 @@
+{
+  "mode": "paper",
+  "kind": "watcher_down",
+  "pair": null,
+  "price": null,
+  "stop": null,
+  "position_id": null,
+  "message_fr": "Le surveillant ne donne plus signe de vie depuis 751 min, 2 trades simulés ouverts.",
+  "ts": "2026-10-11T07:32:26.853410+02:00",
+  "test": false,
+  "bot": "risk",
+  "heartbeat_age_s": 45063,
+  "heartbeat_pid": 2202025,
+  "pid_vivant": true,
+  "heartbeat_absent": false,
+  "positions": [
+    {
+      "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-040a",
+      "cycle_id": null
+    },
+    {
+      "id": "rx-paper-2026-10-10T161433Z-8987ec95",
+      "pair": "SOL-EUR",
+      "mode": "simulation",
+      "decision_id": "D-042a",
+      "cycle_id": null
+    }
+  ],
+  "position_ids": [
+    "rx-paper-2026-10-10T060455Z-b93c34c9",
+    "rx-paper-2026-10-10T161433Z-8987ec95"
+  ],
+  "cycle_ids": [],
+  "open_live": 0,
+  "open_paper": 2,
+  "envoi": "reel",
+  "repair": {
+    "action": "force_kill_relaunch",
+    "old_pid": 2202025,
+    "new_pid": 2225657,
+    "result": "ok",
+    "hb_age_after_s": 21,
+    "open_live": 0,
+    "open_paper": 2,
+    "gap_catchup": "BTC+SOL overnight no stop/target crossed",
+    "alerted_quentin": false,
+    "alerted_equipe": false
+  }
+}

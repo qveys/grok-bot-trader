@@ -1,0 +1,19 @@
+{
+  "_absent": {},
+  "watcher_down": {
+    "actif": false,
+    "depuis": null,
+    "last_ok": null,
+    "last_try": null,
+    "last_result": null,
+    "retabli": "2026-10-10T07:59:19.688461+02:00"
+  },
+  "revolut_down": {
+    "actif": false,
+    "depuis": null,
+    "last_ok": null,
+    "last_try": null,
+    "last_result": null,
+    "retabli": "2026-10-10T07:59:19.688461+02:00"
+  }
+}

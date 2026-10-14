@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-09",
+  "dry": {},
+  "real": {
+    "risk": {
+      "delivered": 1,
+      "keys": {
+        "revolut_down": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T13:59:59.289871+02:00",
+          "last_ok": "2026-10-09T13:59:59.289871+02:00",
+          "last_result": "delivered"
+        }
+      }
+    },
+    "predict": {
+      "delivered": 6,
+      "keys": {
+        "zone:Z-BTC-74000": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T14:00:29.352728+02:00",
+          "last_ok": "2026-10-09T14:00:29.352728+02:00",
+          "last_result": "delivered"
+        },
+        "zone:Z-SOL-97.9": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T15:36:29.601289+02:00",
+          "last_ok": "2026-10-09T15:36:29.601289+02:00",
+          "last_result": "delivered"
+        },
+        "zone:Z-BTC-73700": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T15:37:30.034854+02:00",
+          "last_ok": "2026-10-09T15:37:30.034854+02:00",
+          "last_result": "delivered"
+        },
+        "mouvement:D-024:20261009T1538": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T15:38:00.360399+02:00",
+          "last_ok": "2026-10-09T15:38:00.360399+02:00",
+          "last_result": "delivered"
+        },
+        "zone:Z-BTC-74166": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T16:19:34.958087+02:00",
+          "last_ok": "2026-10-09T16:19:34.958087+02:00",
+          "last_result": "delivered"
+        },
+        "mouvement:D-025:20261009T1620": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T16:20:35.453089+02:00",
+          "last_ok": "2026-10-09T16:20:35.453089+02:00",
+          "last_result": "delivered"
+        },
+        "zone:Z-SOL-98.60": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T16:30:06.444173+02:00",
+          "last_ok": "2026-10-09T16:30:06.444173+02:00",
+          "last_result": "delivered"
+        },
+        "zone:Z-ETH-2232": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T16:35:07.119034+02:00",
+          "last_ok": "2026-10-09T16:35:07.119034+02:00",
+          "last_result": "delivered"
+        },
+        "mouvement:D-029:20261009T1705": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T17:05:09.546461+02:00",
+          "last_ok": "2026-10-09T17:05:09.546461+02:00",
+          "last_result": "delivered"
+        }
+      }
+    },
+    "compound": {
+      "delivered": 4,
+      "keys": {
+        "trade:D-021": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T14:27:02.070166+02:00",
+          "last_ok": "2026-10-09T14:27:02.070166+02:00",
+          "last_result": "delivered"
+        },
+        "trade:D-024a": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T15:43:31.271626+02:00",
+          "last_ok": "2026-10-09T15:43:31.271626+02:00",
+          "last_result": "delivered"
+        },
+        "trade:D-026": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T16:22:35.529257+02:00",
+          "last_ok": "2026-10-09T16:22:35.529257+02:00",
+          "last_result": "delivered"
+        },
+        "trade:D-023": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T17:09:40.365790+02:00",
+          "last_ok": "2026-10-09T17:09:40.365790+02:00",
+          "last_result": "delivered"
+        }
+      }
+    }
+  }
+}

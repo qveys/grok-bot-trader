@@ -1,0 +1,38 @@
+{
+  "mode": "paper",
+  "kind": "watcher_down",
+  "pair": null,
+  "price": null,
+  "stop": null,
+  "position_id": null,
+  "message_fr": "Le surveillant est arrêté (processus 2392360 absent), 1 trade simulé ouvert.",
+  "ts": "2026-10-12T07:33:01.301777+02:00",
+  "test": false,
+  "bot": "risk",
+  "heartbeat_age_s": 50,
+  "heartbeat_pid": 2392360,
+  "pid_vivant": false,
+  "heartbeat_absent": false,
+  "positions": [
+    {
+      "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-040a",
+      "cycle_id": null
+    }
+  ],
+  "position_ids": [
+    "rx-paper-2026-10-10T060455Z-b93c34c9"
+  ],
+  "cycle_ids": [],
+  "open_live": 0,
+  "open_paper": 1,
+  "envoi": "reel",
+  "handled_at": "2026-10-12T07:33:56.937624+02:00",
+  "outcome": "repaired",
+  "new_pid": 2412556,
+  "alert_quentin": false,
+  "alert_equipe": false,
+  "note": "deduped duplicate watcher after overlapping relaunch"
+}

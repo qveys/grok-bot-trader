@@ -1,0 +1,6 @@
+{"type": "start", "iter": 1, "prompt": "Réponds en une phrase en français, sans utiliser d'outil : quelle est la différence entre un ordre limite et un ordre au marché ?", "ts": 1791458891.5730412}
+{"type": "message", "iter": 1, "role": "user", "content": "Réponds en une phrase en français, sans utiliser d'outil : quelle est la différence entre un ordre limite et un ordre au marché ?", "ts": 1791458891.5742571}
+{"type": "thinking", "iter": 1, "content": "Un ordre au marché privilégie l’exécution immédiate sans garantir le prix, tandis qu’un ordre limite fixe un prix maximal d’achat ou minimal de vente, mais peut ne pas être exécuté.", "ts": 1791458896.4484193}
+{"type": "answer", "iter": 1, "content": "Un ordre au marché privilégie l’exécution immédiate sans garantir le prix, tandis qu’un ordre limite fixe un prix maximal d’achat ou minimal de vente, mais peut ne pas être exécuté.", "ts": 1791458896.4508889}
+{"type": "message", "iter": 1, "role": "assistant", "content": "Un ordre au marché privilégie l’exécution immédiate sans garantir le prix, tandis qu’un ordre limite fixe un prix maximal d’achat ou minimal de vente, mais peut ne pas être exécuté.", "ts": 1791458896.4515817}
+{"type": "end", "iter": 1, "status": "success", "iterations": 1, "ts": 1791458896.4531393}

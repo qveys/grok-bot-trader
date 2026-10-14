@@ -1,0 +1,65 @@
+{
+  "kelly_fraction": 0.25,
+  "max_position_pct": 0.05,
+  "max_drawdown_pct": 0.08,
+  "max_daily_loss_pct": 0.15,
+  "max_concurrent": 15,
+  "max_exposure_pct": 0.05,
+  "pairs_whitelist": [
+    "BTC-EUR",
+    "ETH-EUR",
+    "SOL-EUR"
+  ],
+  "order_types": [
+    "limit"
+  ],
+  "post_only": true,
+  "leverage": false,
+  "market_orders": false,
+  "notes": "Official: grow capital + never bankrupt. Journal mandatory. No max trades/day. Limit post-only, no leverage. Live only: expectancy >= 3x cost (live_place). Paper: size<=5% bankroll, stop required, total exposure BTC+ETH+SOL <=5%, no 3x gate. Ideas: hausse (buy then sell) / baisse (sell held coins then rebuy). 8 Oct: BTC/ETH/SOL move together -> one risk; max_exposure_pct=0.05.",
+  "allow_live_auto_sell": true,
+  "allow_live_auto_sell_note": "8 oct, décision Quentin : sortie LIVE automatique sur stop (watch_stops → live_place.py --exit). Ne vend que la quantité de la position du pipeline, jamais les avoirs de Quentin. Entrées live inchangées (LIVE_ONCE, max 1/jour, espérance 3x).",
+  "live_exit": {
+    "first_margin_pct": 0.3,
+    "retry_margin_pct": 0.5,
+    "fill_wait_s": 60,
+    "poll_s": 5,
+    "max_attempts": 3,
+    "dust_eur": 0.5,
+    "quentin_holdings": {
+      "BTC": 6.6e-06,
+      "ETH": 0.0309,
+      "SOL": 0.342
+    },
+    "quentin_holdings_note": "Avoirs de Quentin hors bot (8 oct) — jamais vendus par la sortie auto; on prend aussi le max avec state/live_equity.json hors_bot.",
+    "pair_steps": {
+      "BTC-EUR": {
+        "base_step": 1e-08,
+        "quote_step": 0.01,
+        "min_quote": 0.1
+      },
+      "ETH-EUR": {
+        "base_step": 1e-08,
+        "quote_step": 0.01,
+        "min_quote": 0.1
+      },
+      "SOL-EUR": {
+        "base_step": 1e-06,
+        "quote_step": 0.001,
+        "min_quote": 0.1
+      }
+    }
+  },
+  "live_window": {
+    "start": "15:00",
+    "end": "17:00",
+    "force_close": "22:00",
+    "force_close_enabled": false,
+    "post_announcement_block_min": 15,
+    "announcement_times": [
+      "14:30",
+      "15:30"
+    ],
+    "note": "8 oct, validé Quentin : nouvelles entrées live seulement 15:00–17:00 (Bruxelles), pas dans les 15 min après une annonce (14:30 chiffres US, 15:30 ouverture US ; + state/annonces_du_jour.json). Séance en plus : state/LIVE_EXTRA_SESSION.json (feu vert Quentin). Simulation : à toute heure. Fermeture 22h RETIRÉE (décision Quentin 8 oct) — force_close_enabled=false ; le code reste, remettre true pour la réactiver. Battements : state/watch_stops_heartbeat.json + state/revolut_heartbeat.json."
+  }
+}

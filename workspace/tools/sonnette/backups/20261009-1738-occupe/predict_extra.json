@@ -1,0 +1,50 @@
+{
+  "idle": {
+    "nuits": {}
+  },
+  "heure_limite": {
+    "seeded": true,
+    "rung": {
+      "rx-paper-2026-10-08T205852Z-1e71faf5": {
+        "at": "2026-10-09T14:31:19.184644+02:00",
+        "result": "seed",
+        "decision_id": "D-021"
+      },
+      "rx-paper-2026-10-09T123021Z-0f531d4f": {
+        "at": "2026-10-09T17:09:40.365790+02:00",
+        "result": "deja_ferme",
+        "decision_id": "D-023"
+      }
+    }
+  },
+  "mouvement": {
+    "jour": {
+      "date": "2026-10-09",
+      "n": 3
+    },
+    "ref": {
+      "source": "décision",
+      "pose_a": "2026-10-09T17:10:40.849647+02:00",
+      "decision_id": "D-031",
+      "decision_ts": "2026-10-09T17:10:00+02:00",
+      "prix": {
+        "BTC-EUR": 73981.11,
+        "ETH-EUR": 2220.5,
+        "SOL-EUR": 97.93
+      },
+      "prix_ts": {
+        "BTC-EUR": "2026-10-09T17:10:29.597154+02:00",
+        "ETH-EUR": "2026-10-09T17:10:29.597154+02:00",
+        "SOL-EUR": "2026-10-09T17:10:29.597154+02:00"
+      },
+      "origine": {
+        "BTC-EUR": "prix à l'heure de la décision",
+        "ETH-EUR": "prix à l'heure de la décision",
+        "SOL-EUR": "prix à l'heure de la décision"
+      }
+    },
+    "attente": null,
+    "echec": null,
+    "dernier_reveil": "2026-10-09T17:05:09.546461+02:00"
+  }
+}

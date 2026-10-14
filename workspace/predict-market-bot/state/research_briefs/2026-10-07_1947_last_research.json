@@ -1,0 +1,18 @@
+{
+  "briefed_at": "2026-10-07T19:47:38+02:00",
+  "cycle": "Fed pre-minutes ~19h47",
+  "prix": "PAS FRAIS — Scan réseau KO depuis ~17h25; derniers connus BTC~74163 ETH~2288 SOL~104",
+  "fenetre": "minutes Fed ~20h CEST; bilan ~20h32",
+  "ambiance": "attente Fed; marché a déjà réduit le risque toute la journée; pétrole cher; ventes forcées ce matin; sorties ETF BTC",
+  "resume": {
+    "quoi": "Les notes de la réunion Fed de septembre sortent vers 20h. La Fed avait monté les taux. On lit surtout si beaucoup de membres veulent encore monter, ou s'ils préfèrent attendre (emplois faibles récemment).",
+    "si_dur": "dollar fort, crypto souvent en baisse",
+    "si_doux": "dollar plus faible, crypto peut remonter (rebond possible mais pas garanti)",
+    "si_mitige": "premier mouvement souvent trompeur; attendre un peu",
+    "btc": "derniers prix Scan ~74 163 €; plusieurs sources : marché prudent avant la Fed",
+    "eth": "toujours plus faible; ~2 288 € sous stop 2300; pas de rachat tant que pas de prix frais + pas de signal clair",
+    "sol": "suit le marché ~104 €",
+    "pour_predict": "sans prix frais = pas de trade. Après les minutes + prix Scan OK: simu large OK avec doute écrit; live seulement si gain ≥ 3× coûts + info solide (texte Fed croisé) + slot 1/jour encore libre"
+  },
+  "confidence": "élevée sur l'ambiance d'attente (plusieurs sources); prix EUR NON confirmés (Scan offline)"
+}

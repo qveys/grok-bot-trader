@@ -1,0 +1,75 @@
+{
+  "idle": {
+    "nuits": {}
+  },
+  "heure_limite": {
+    "seeded": true,
+    "rung": {
+      "rx-paper-2026-10-08T205852Z-1e71faf5": {
+        "at": "2026-10-09T14:31:19.184644+02:00",
+        "result": "seed",
+        "decision_id": "D-021"
+      },
+      "rx-paper-2026-10-09T123021Z-0f531d4f": {
+        "at": "2026-10-09T17:09:40.365790+02:00",
+        "result": "deja_ferme",
+        "decision_id": "D-023"
+      },
+      "rx-paper-2026-10-09T130833Z-8d63c1ab": {
+        "at": "2026-10-10T00:00:18.576364+02:00",
+        "result": "delivered",
+        "decision_id": "D-024b",
+        "essais": 1
+      },
+      "rx-paper-2026-10-09T142449Z-a11eb3ad": {
+        "at": "2026-10-10T00:00:18.576364+02:00",
+        "result": "delivered",
+        "decision_id": "D-028a",
+        "essais": 1
+      },
+      "rx-paper-2026-10-09T151109Z-ee1fbd85": {
+        "at": "2026-10-10T00:00:18.576364+02:00",
+        "result": "delivered",
+        "decision_id": "D-031a",
+        "essais": 1
+      },
+      "rx-paper-2026-10-09T151109Z-aa309e18": {
+        "at": "2026-10-10T00:00:18.576364+02:00",
+        "result": "delivered",
+        "decision_id": "D-031b",
+        "essais": 1
+      }
+    }
+  },
+  "mouvement": {
+    "jour": {
+      "date": "2026-10-10",
+      "n": 4
+    },
+    "ref": {
+      "source": "décision",
+      "pose_a": "2026-10-10T18:12:36.660327+02:00",
+      "decision_id": "D-042",
+      "decision_ts": "2026-10-10T18:12:00+02:00",
+      "prix": {
+        "BTC-EUR": 74104.37,
+        "ETH-EUR": 2240.34,
+        "SOL-EUR": 98.495
+      },
+      "prix_ts": {
+        "BTC-EUR": "2026-10-10T18:12:30.992697+02:00",
+        "ETH-EUR": "2026-10-10T18:12:30.992697+02:00",
+        "SOL-EUR": "2026-10-10T18:12:30.992697+02:00"
+      },
+      "origine": {
+        "BTC-EUR": "prix à l'heure de la décision",
+        "ETH-EUR": "prix à l'heure de la décision",
+        "SOL-EUR": "prix à l'heure de la décision"
+      }
+    },
+    "attente": null,
+    "echec": null,
+    "dernier_reveil": "2026-10-10T18:10:06.338855+02:00"
+  },
+  "occupe": null
+}

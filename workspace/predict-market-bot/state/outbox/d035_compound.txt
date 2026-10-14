@@ -1,0 +1,5 @@
+D-035 (21h37) mouvement SOL −0,51 % : 3 prévisions en attente (plafond plein).
+D-035a SOL DOWN entrée 97.24 visé 95.30 arrêt 99.18 horizon 10h00 10/10 seuil 2 %.
+D-035b ETH DOWN entrée 2213.91 visé 2164.10 arrêt 2247.12 horizon 10h00 10/10 seuil 2,25 %.
+D-035c SOL DOWN entrée 97.24 visé 95.30 arrêt 98.21 horizon 10h00 10/10 seuil 2 %.
+Ouverts inchangés D-024b/D-028a/D-031a/D-031b. Mode pas_de_trade.

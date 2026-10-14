@@ -1,0 +1,1 @@
+backtest.sh run --pair SOL-EUR --tf 1H --days 365 --end 2026-10-07 --strategy team_rebound --json --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --costs revolutx --fee 0.0005 --slippage 0 --no-time-exit --trail 1.0

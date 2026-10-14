@@ -1,0 +1,49 @@
+{
+  "ts": "2026-10-09T02:15:24.509025+02:00",
+  "eur_available": 165.71,
+  "eur_reserved": 0.0,
+  "bot_positions": {},
+  "bot_positions_value": 0.0,
+  "capital_reel": 165.71,
+  "hors_bot": {
+    "BTC": {
+      "qty": 6.56e-06,
+      "eur": 0.48,
+      "solde_total": 6.56e-06
+    },
+    "ETH": {
+      "qty": 0.03088757,
+      "eur": 68.25,
+      "solde_total": 0.03088757
+    },
+    "SOL": {
+      "qty": 0.341856,
+      "eur": 33.4,
+      "solde_total": 0.341856
+    }
+  },
+  "ref_jour": {
+    "date": "2026-10-09",
+    "valeur": 165.71
+  },
+  "plus_haut": null,
+  "perte_jour_pct": 0.0,
+  "baisse_depuis_plus_haut_pct": null,
+  "ajustements": [],
+  "stale": false,
+  "source": "revx account balances (lecture seule) + live_orders.jsonl + prix du collecteur",
+  "notes_fr": "Capital réel = EUR (dispo+réservé) + valeur du crypto acheté par le bot. Le crypto déjà détenu (hors_bot) est une photo prise au premier lancement ; les achats bot = solde actuel − hors_bot. Les dépôts/retraits EUR hors bot décalent la référence du jour et le plus-haut.",
+  "_track": {
+    "hors_bot_locked": true,
+    "hors_bot_depuis": "2026-10-08T16:01:48.815835+02:00",
+    "eur_prev": 165.71,
+    "last_ok_ts": "2026-10-09T02:15:24.509025+02:00",
+    "bot_orders_sig": "0:",
+    "bot_qty": {
+      "BTC": 0.0,
+      "ETH": 0.0,
+      "SOL": 0.0
+    },
+    "capital_prev": 165.71
+  }
+}

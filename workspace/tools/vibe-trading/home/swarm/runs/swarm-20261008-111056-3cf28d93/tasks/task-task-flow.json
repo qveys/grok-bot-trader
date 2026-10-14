@@ -1,0 +1,15 @@
+{
+  "id": "task-flow",
+  "agent_id": "flow_analyst",
+  "prompt_template": "Analyze stablecoin flows, on-chain positioning, and capital rotation signals for {target}. Timeframe: {timeframe}.",
+  "depends_on": [],
+  "blocked_by": [],
+  "input_from": {},
+  "status": "failed",
+  "summary": null,
+  "artifacts": [],
+  "error": "LANGCHAIN_MODEL_NAME is not set",
+  "started_at": "2026-10-08T11:10:56.183843+00:00",
+  "completed_at": "2026-10-08T11:10:56.193305+00:00",
+  "worker_iterations": 0
+}

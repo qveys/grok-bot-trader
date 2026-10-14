@@ -1,0 +1,5 @@
+# Kill switch for predict-market-bot
+# Copy or rename this file to STOP (touch STOP) to halt all trading.
+# Presence of STOP at kill_switch_path rejects every trade validation and
+# causes kill_check.py to exit 2.
+# Remove STOP only when you intentionally want trading allowed again.

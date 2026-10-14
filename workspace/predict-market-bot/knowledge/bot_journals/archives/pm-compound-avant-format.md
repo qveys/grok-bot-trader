@@ -1,0 +1,24 @@
+# Journal de bord — PM-Compound
+
+## 2026-10-07
+
+- Rôle : après chaque vente, écrire le journal (gain/perte + leçon) ; proposer une pause d’un type de trade seulement avec assez d’essais (~20) et un bilan négatif après coûts.
+- Règle motifs mise à jour : plus de « 3 = interdit » ; on ralentit avant ~20, on pause vraiment seulement si le bilan net est mauvais.
+- Vente reçue de Risk : ETH simulé fermé au stop (~2293 €, achat 2500 €) → perte ≈ **−0,83 €**. Journal de trade + leçon écrits. Pas de nouveau motif à interdire (1 seul essai de ce type).
+- Aucun live. Carnet de décisions = avant achat (Predict/Risk) ; mon journal = après vente seulement.
+
+- **~15h36** — Quentin : plus besoin de dire « passe en live ». Live = armement équipe (1 / jour). Plafonds figés : simu max ~25 € ; live mini 8 € ; MetaMask pause.
+
+- **~15h43** — Score Predictions : après chaque horizon (ou vente), je note gagné / perdu / annulé + taux de réussite dans `knowledge/predict_scorecard.md`. Predict doit mettre direction + horizon + seuil % dans chaque décision.
+- 2026-10-07 17:47 — Score 17h32 : rien de nouveau. D-007/D-008/D-009 (horizon 22h00) : aucun seuil touché sur les ticks 16h23–17h25 (BTC 74015–74387, ETH 2285,7–2295,0, SOL 103,31–103,87) → à scorer à 22h32. D-002 à D-006 sans prévision mesurable ni horizon clair → pas encore annulés. Pas de ticks 15h48–16h23 (début du fichier) + coupures réseau du collecteur vers 17h33 à surveiller.
+- 2026-10-07 22:40 — Score 22h32 : D-007 BTC annulé (+0,49 %, cible pas touchée), D-008 ETH **perdu** (+0,43 %, contre), D-009 SOL annulé (+0,04 %). Aucun seuil ±1,5 % touché (ticks + bougies 1 min Binance pour les trous 15h48–16h23 et 17h25–21h06). D-004–006 et D-010–012 annulés (pas mesurables). Totaux : 0 gagné · 1 perdu · 8 annulés · réussite 0 % (0/1). D-002/D-003 ouverts jusqu’au 9 oct. Leçon : ±1,5 % en 6 h trop large un soir calme → Predict peut viser un seuil plus petit ou un horizon plus long.
+
+## 2026-10-08
+- **~13h00** — Règle « test du passé » proposée par moi, validée par Risk (baisse mesurée sur notre capital avec vraies mises). Écrite dans les règles d'équipe.
+- 2026-10-08 17h25 : règles mises à jour (simulation ≠ live dès le 9/10 ; test du passé ne bloque que le live ; noms « idée à la hausse / à la baisse »). Routine du soir passée à 20h32 et adaptée.
+- 2026-10-08 18h10 : D-019 et D-020 (idée à la baisse, rétro) notées au journal des trades, +0,05 € chacune ; capital simulé 499,27 €. 2 essais « idée à la baisse » rétro.
+- **~21h28** — Bilan soir démarré (parties 1–2 + carnet). Capital simu officiel 499,27 €. Simu du jour : 2 rétro D-019/D-020 (+0,05 € chacune). Live : 0. Prévisions D-015/016/017 déjà scorées gagné (3/3). Fenêtre 15h–17h : pas de nouvelle simu ouverte en direct (seulement rétro). Créneau obligatoire simu 15h–17h = dès demain 9/10. Rebond/cassure bruts toujours en pause (rejeu ETH/SOL prévu ce soir par parent).
+- 2026-10-08 21h31 : bilan du soir. Predict 3/3 (D-015/016/017 gagnés, vérifiés relevé 30 s + bougies 1 min) → total 3 gagnés / 1 perdu / 8 annulés = 75 %. Essais simulés : idée à la baisse 2 (rétro, +0,10 €), idée à la hausse 1 (test 7 oct, −0,83 €) ; capital simulé 499,27 € ; live 0. Test du passé : D-013 (ETH, SOL), D-014 (ETH), D-018 (ETH, SOL, ETH Uniswap) → **ne passe pas** (une moitié d'année perdante pour chacun ; D-018 sous la règle 3×). L'outil ignore le filtre 200 h pour le rebond (recalcul : 3 trades ETH / 2 SOL par an). Pas d'IA payante utilisée.
+
+- **~21h40** — Bilan soir posté dans le groupe PM Compound. Tests du passé : D-013/D-014/D-018/rebond/cassure → tous **ne passe pas** (live interdit ; simu encore OK sauf rebond/cassure bruts en pause Risk). Filtre 200 h : OK pour cassure (`--trend 200`), **absent** pour rebond (`team_rebound`). Exception écrite dans les règles. @Orchestrator à aligner si besoin.
+- 2026-10-08 22h10 — **Test du passé : stop suiveur vs stop fixe** (décision Quentin 22h03). 1 an ETH/SOL/BTC, mêmes signaux, rebond + cassure + idée à la baisse (sell_rebuy, miroir), frais Revolut X 0 % / prix fixé non rempli (`--fill touch`) / achat immédiat 0,14 %. Suiveur 1,5 % (même distance), + 0,75 % et 2,25 %. Option ajoutée à l'outil : `--trail` (défaut inchangé). **Verdict : rebond/cassure → le stop fixe garde plus d'argent** (somme 6 cas, 0 % : +13,1 vs −1,8 ; achat immédiat : −31,6 vs −47,7), car avec l'objectif +1,5 % le suiveur coupe des trades gagnants. Le suiveur réduit la perte moyenne (≈ −1,3 % → −1,0 %) et souvent la pire baisse, mais pas la pire perte d'un trade (−1,5 %). Idée à la baisse : mélangé (ETH/SOL mieux, BTC moins bien ; pas les mêmes trades). 2e moitié d'année : fixe meilleur 7 fois sur 9. Piste : sans objectif +1,5 % (`--tp 0`) rebond/cassure bien meilleurs, mais surtout grâce à l'objectif retiré, pas au suiveur → à vérifier avec `robust`. Peu de trades (11–42). Pas de changement de règle proposé. Détails : `/workspace/compound_2026-10-08/trailing_stop/summary.md`.

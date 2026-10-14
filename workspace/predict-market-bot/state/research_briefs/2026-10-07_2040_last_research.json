@@ -1,0 +1,11 @@
+{
+  "briefed_at": "2026-10-07T20:40:43+02:00",
+  "cycle": "Fed bilan post-minutes ~20h40",
+  "prix": "PAS FRAIS (Scan offline depuis ~17h25)",
+  "resume": {
+    "fed": "La plupart des membres pensent qu’une nouvelle hausse des taux cette année est probable. Ils ont peur que l’inflation (pétrole, IA) s’étende. Plusieurs disent que les taux actuels freinent peu l’économie.",
+    "marche": "Actions et or ont peu bougé (déjà attendu). Bitcoin a un peu réagi puis calmé. Sans prix EUR frais chez nous, on ne juge pas le mouvement local.",
+    "pour_equipe": "Pas de trade ce soir sans prix Scan. D-010/011/012 déjà pas acheter."
+  },
+  "sources_note": "croisé Axios + BeInCrypto + calques pré-release; pas une seule source"
+}

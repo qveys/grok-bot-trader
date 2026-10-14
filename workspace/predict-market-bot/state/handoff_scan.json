@@ -1,0 +1,11 @@
+{
+  "ts": "2026-10-07T09:12:00+00:00",
+  "from": "PM-Scan (routine PM Scan paper)",
+  "mode": "paper",
+  "status": "echec_reseau",
+  "ranked": [],
+  "anomalies": [],
+  "ask": "Scan de 11h08 raté : pas d'accès internet, aucun prix lu. Le dernier bon relevé (10h34 : ETH 2337 €, -3,3 % ; SOL 105,9 €, -1,4 %) est gardé. Research et Predict : ne rien changer ce coup-ci. Risk : rien à simuler. Aucun ordre réel.",
+  "scan_file": "state/last_scan.json",
+  "failed_scan_file": "state/last_scan_failed.json"
+}

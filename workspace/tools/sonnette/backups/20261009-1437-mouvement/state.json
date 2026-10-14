@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-09",
+  "dry": {},
+  "real": {
+    "risk": {
+      "delivered": 1,
+      "keys": {
+        "revolut_down": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T13:59:59.289871+02:00",
+          "last_ok": "2026-10-09T13:59:59.289871+02:00",
+          "last_result": "delivered"
+        }
+      }
+    },
+    "predict": {
+      "delivered": 1,
+      "keys": {
+        "zone:Z-BTC-74000": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T14:00:29.352728+02:00",
+          "last_ok": "2026-10-09T14:00:29.352728+02:00",
+          "last_result": "delivered"
+        }
+      }
+    },
+    "compound": {
+      "delivered": 1,
+      "keys": {
+        "trade:D-021": {
+          "delivered": 1,
+          "attempts": 1,
+          "last_try": "2026-10-09T14:27:02.070166+02:00",
+          "last_ok": "2026-10-09T14:27:02.070166+02:00",
+          "last_result": "delivered"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "scanned_at": "2026-10-07T09:09:03.348090+00:00",
+  "venue": "revolut_x_paper",
+  "primary_venue": "revolut_x",
+  "mode": "paper",
+  "trading": false,
+  "note": "Public spot prices only; Revolut order/trading APIs not called.",
+  "pairs_whitelist": [
+    "ETH-EUR",
+    "SOL-EUR"
+  ],
+  "filters": {
+    "anomaly_price_move_pct": 10.0,
+    "anomaly_spread_pct": 0.5
+  },
+  "sources_used": [],
+  "fetch_errors": [
+    "ETH-EUR: binance: <urlopen error [Errno -3] Temporary failure in name resolution>",
+    "ETH-EUR: coinbase: <urlopen error [Errno -3] Temporary failure in name resolution>",
+    "ETH-EUR: kraken: <urlopen error [Errno -3] Temporary failure in name resolution>",
+    "SOL-EUR: binance: <urlopen error [Errno -3] Temporary failure in name resolution>",
+    "SOL-EUR: coinbase: <urlopen error [Errno -3] Temporary failure in name resolution>",
+    "SOL-EUR: kraken: <urlopen error [Errno -3] Temporary failure in name resolution>"
+  ],
+  "count": 0,
+  "anomalous_count": 0,
+  "markets": [],
+  "pairs": [],
+  "error": "all public sources failed"
+}

@@ -1,0 +1,60 @@
+{
+  "loop_seconds": 30,
+  "stale_seconds": 180,
+  "proxy": "http://127.0.0.1:8791",
+  "revx_enabled": true,
+  "revx_every_s": 300,
+  "predict": {
+    "window_start": "00:00",
+    "window_end": "24:00",
+    "days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "max_per_day": 6
+  },
+  "risk": {
+    "stop_hit_repeat_min": 10,
+    "stop_hit_max_per_day": 6,
+    "stop_near_pct": 1.0,
+    "daily_loss_levels": [
+      0.12,
+      0.15
+    ],
+    "drawdown_levels": [
+      0.06,
+      0.08
+    ],
+    "stale_ring_after_s": 600,
+    "stale_repeat_min": 30
+  },
+  "compound": {
+    "max_per_day": 5
+  },
+  "departs": {
+    "actif": true,
+    "mode": "observe",
+    "verif_toutes_s": 600,
+    "intervalle": "15m",
+    "fenetre_min": 60,
+    "mouvement_min_pct": 0.5,
+    "proche_extreme_24h_pct": 3.0,
+    "volume_ratio_min": 1.2,
+    "barres_meme_sens_min": 3,
+    "accumulation_volume_ratio_min": 1.5,
+    "accumulation_mouvement_max_pct": 0.3,
+    "volume_moyenne_barres": 20,
+    "anti_spam_heures": 2,
+    "horizons_h": [
+      1,
+      4,
+      24
+    ],
+    "reussite_min_pct": 1.0
+  }
+}

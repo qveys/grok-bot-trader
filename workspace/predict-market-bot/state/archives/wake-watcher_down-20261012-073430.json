@@ -1,0 +1,43 @@
+{
+  "mode": "paper",
+  "kind": "watcher_down",
+  "pair": null,
+  "price": null,
+  "stop": null,
+  "position_id": null,
+  "message_fr": "Le surveillant ne donne plus signe de vie depuis 695 min, 2 trades simulés ouverts.",
+  "ts": "2026-10-12T07:30:29.937403+02:00",
+  "test": false,
+  "bot": "risk",
+  "heartbeat_age_s": 41706,
+  "heartbeat_pid": 2392360,
+  "pid_vivant": true,
+  "heartbeat_absent": false,
+  "positions": [
+    {
+      "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-040a",
+      "cycle_id": null
+    },
+    {
+      "id": "rx-paper-2026-10-11T053723Z-e33a1866",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-043a",
+      "cycle_id": null
+    }
+  ],
+  "position_ids": [
+    "rx-paper-2026-10-10T060455Z-b93c34c9",
+    "rx-paper-2026-10-11T053723Z-e33a1866"
+  ],
+  "cycle_ids": [],
+  "open_live": 0,
+  "open_paper": 2,
+  "envoi": "reel",
+  "handled_at": "2026-10-12T07:34:30+02:00",
+  "outcome": "relance_ok_et_fermeture_papier",
+  "note": "Gel ~19h54–07h30; arrêt forcé pid 2392360 puis relance pid 2412556; rattrapage trou: D-043a ETH fermé target_hit +0,49 € (bougie 04h18); reste D-040a BTC; 0 live"
+}

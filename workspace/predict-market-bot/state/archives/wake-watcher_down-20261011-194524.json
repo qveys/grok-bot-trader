@@ -1,0 +1,43 @@
+{
+  "mode": "paper",
+  "kind": "watcher_down",
+  "pair": null,
+  "price": null,
+  "stop": null,
+  "position_id": null,
+  "message_fr": "Le surveillant ne donne plus signe de vie depuis 122 min, 2 trades simulés ouverts.",
+  "ts": "2026-10-11T19:45:24.578618+02:00",
+  "test": false,
+  "bot": "risk",
+  "heartbeat_age_s": 7364,
+  "heartbeat_pid": 2392360,
+  "pid_vivant": true,
+  "heartbeat_absent": false,
+  "positions": [
+    {
+      "id": "rx-paper-2026-10-10T060455Z-b93c34c9",
+      "pair": "BTC-EUR",
+      "mode": "simulation",
+      "decision_id": "D-040a",
+      "cycle_id": null
+    },
+    {
+      "id": "rx-paper-2026-10-11T053723Z-e33a1866",
+      "pair": "ETH-EUR",
+      "mode": "simulation",
+      "decision_id": "D-043a",
+      "cycle_id": null
+    }
+  ],
+  "position_ids": [
+    "rx-paper-2026-10-10T060455Z-b93c34c9",
+    "rx-paper-2026-10-11T053723Z-e33a1866"
+  ],
+  "cycle_ids": [],
+  "open_live": 0,
+  "open_paper": 2,
+  "envoi": "reel",
+  "handled_at": "2026-10-11T19:47:00+02:00",
+  "outcome": "deja_repare",
+  "note": "Gardien pid 2392360 actif, signal de vie avance; rattrapage trou 17h42-19h45 sans stop/objectif; 0 live"
+}

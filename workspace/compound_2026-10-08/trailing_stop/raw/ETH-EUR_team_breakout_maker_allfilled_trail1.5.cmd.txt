@@ -1,0 +1,1 @@
+backtest.sh run --pair ETH-EUR --tf 1H --days 365 --end 2026-10-07 --strategy team_breakout --json --session 15-17 --tz Europe/Brussels --weekdays --sl 1.5 --costs revolutx-maker --trail 1.5

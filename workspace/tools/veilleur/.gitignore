@@ -1,0 +1,8 @@
+secrets.env
+worker/.dev.vars
+state/
+logs/
+.wrangler-cache/
+worker/.wrangler/
+sonnette-cf/.dev.vars
+sonnette-cf/.wrangler/

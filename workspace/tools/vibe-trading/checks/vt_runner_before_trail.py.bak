@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+"""Run a Vibe-Trading backtest with a spot stop-loss / take-profit layer.
+
+Usage: vt_runner.py <run_dir>   (run_dir must be under $VIBE_TRADING_HOME/runs)
+
+This reuses the engine's own entrypoint (backtest.runner.main: config validation,
+AST check of signal_engine.py, data loading, metrics, artifacts) and only swaps the
+market engine for a CryptoEngine subclass that adds, for LONG positions:
+  - stop-loss  (config "spot_stop_loss",  fraction, e.g. 0.015) checked on the bar low
+  - take-profit (config "spot_take_profit", fraction) checked on the bar high
+  Fills: at the stop/TP level, or at the bar open if the bar gapped through it;
+  slippage is applied on top (conservative). If one bar touches both, the stop
+  is assumed first (conservative). After a stop/TP exit the symbol is locked: no
+  re-entry until the strategy's target goes back to 0 (= a fresh signal is needed).
+No LLM, no broker, no API key.
+"""
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+import backtest.runner as R
+from backtest.engines.crypto import CryptoEngine
+
+
+class SpotStopEngine(CryptoEngine):
+    def __init__(self, config: dict):
+        super().__init__(config)
+        self.sl = float(config.get("spot_stop_loss") or 0.0)
+        self.tp = float(config.get("spot_take_profit") or 0.0)
+        self._locked: set[str] = set()
+        self._tgt = None
+
+    def _execute_bars(self, dates, data_map, close_df, target_pos, codes, close_val_df=None):
+        self._tgt = target_pos
+        return super()._execute_bars(dates, data_map, close_df, target_pos, codes, close_val_df=close_val_df)
+
+    def before_rebalance_bar(self, timestamp, data_map, codes):
+        if self._locked and self._tgt is not None and timestamp in self._tgt.index:
+            for sym in list(self._locked):
+                if sym in self._tgt.columns:
+                    v = self._tgt.at[timestamp, sym]
+                    if not (v == v and v > 1e-9):  # NaN or <= 0 -> unlock
+                        self._locked.discard(sym)
+        return super().before_rebalance_bar(timestamp, data_map, codes)
+
+    def can_execute(self, symbol, direction, bar):
+        if direction > 0 and symbol in self._locked:
+            return False
+        return super().can_execute(symbol, direction, bar)
+
+    def on_bar(self, symbol, bar, timestamp):
+        super().on_bar(symbol, bar, timestamp)
+        pos = self.positions.get(symbol)
+        if pos is None or pos.direction <= 0 or (self.sl <= 0 and self.tp <= 0):
+            return
+        o, h, l = float(bar["open"]), float(bar["high"]), float(bar["low"])
+        entry_bar = pos.entry_time == timestamp
+        if self.sl > 0:
+            stop = pos.entry_price * (1.0 - self.sl)
+            if l <= stop:
+                px = stop if entry_bar else min(o, stop)
+                self._close_position(symbol, self.apply_slippage(px, -1), timestamp, "stop_loss")
+                self._locked.add(symbol)
+                return
+        if self.tp > 0:
+            tp = pos.entry_price * (1.0 + self.tp)
+            if h >= tp:
+                px = tp if entry_bar else max(o, tp)
+                self._close_position(symbol, self.apply_slippage(px, -1), timestamp, "take_profit")
+                self._locked.add(symbol)
+
+
+_orig_create = R._create_market_engine
+
+
+def _create(source, config, codes):
+    eng = _orig_create(source, config, codes)
+    if type(eng) is not CryptoEngine:
+        raise ValueError(f"vt_runner only supports crypto spot pairs (engine={type(eng).__name__})")
+    return SpotStopEngine(config)
+
+
+R._create_market_engine = _create
+
+if __name__ == "__main__":
+    R.main(Path(sys.argv[1]))
