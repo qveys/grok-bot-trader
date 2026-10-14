@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+export HTTPS_PROXY="${HTTPS_PROXY:-http://127.0.0.1:8791}"
+export HTTP_PROXY="${HTTP_PROXY:-http://127.0.0.1:8791}"
+export ALL_PROXY="${ALL_PROXY:-http://127.0.0.1:8791}"
+export NODE_OPTIONS="--require /home/box/.local/bin/revx-proxy-preload.cjs${NODE_OPTIONS:+ $NODE_OPTIONS}"
+exec /home/box/.local/bin/revx.real "$@"

@@ -1,0 +1,10 @@
+{
+  "name": "Ca$her",
+  "description": "Au démarrage et à chaque cycle, exécute source /workspace/bot/env, lis et applique /workspace/bot/INSTRUCTIONS.md. Les règles du jeu sont dans /workspace/bot/regles-jeu.md.",
+  "title": "crypto",
+  "avatarShape": "blob",
+  "avatarColor": "black",
+  "namedBy": "user",
+  "serverId": "1869797",
+  "harness": "temporal"
+}

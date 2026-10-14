@@ -1,0 +1,12 @@
+Python 3.13.5
+v20.19.2
+9.2.0
+--: line 1: revx: command not found
+Consider using a Node.js version manager such as https://volta.sh/ or https://github.com/nvm-sh/nvm.
+revx
+revx-proxy-preload.cjs
+revx.real
+gpg (GnuPG) 2.4.7
+Linux grok-bot-vm-417332531 6.12.94+ #1 SMP PREEMPT_DYNAMIC Tue Oct  6 06:02:30 UTC 2026 x86_64 GNU/Linux
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"

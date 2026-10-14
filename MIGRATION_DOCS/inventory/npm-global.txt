@@ -1,0 +1,3 @@
+/home/box/.local/lib
+└── @revolut/revolut-x-cli@1.0.50
+

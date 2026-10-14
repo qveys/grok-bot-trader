@@ -1,0 +1,14 @@
+PM-Compound | Score prévisions Predict | 8
+PM-Compound | Sonnette Compound (trade fermé) | 36
+PM-Compound | perf et verdicts | 2
+PM-Compound | test arret suiveur 2 | 2
+PM-Compound | test cible 1 pct | 2
+PM-Compound | test stop suiveur | 2
+pm-predict | Passage du matin 9h | 8
+pm-predict | Prédiction avant session | 5
+pm-predict | Sonnette Predict | 71
+pm-research | Bilan séance 17h42 | 8
+pm-research | Point du jour 14h44 | 4
+pm-risk | Risk dry-run + alertes | 4
+pm-risk | Sonnette stop (Risk) | 104
+pm-scan | PM Scan paper | 22

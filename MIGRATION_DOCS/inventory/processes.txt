@@ -1,0 +1,7 @@
+ 116565 Sat Oct 10 12:24:17 2026 bash -c supervise ()  {      while true; do         "$PY" -m guardian && rc=0 || rc=$?;         echo "$(date -u +%FT%TZ) guardian exited rc=$rc" >> "$LOGFILE";         case "$rc" in              0 | 42 | 43)                 break             ;;         esac;         sleep 30;     done;     rm -f "$PIDFILE" }; PY='/workspace/guardian/.venv/bin/python' LOGFILE='/workspace/guardian/data/guardian.out' PIDFILE='/workspace/guardian/data/supervisor.pid' supervise
+ 198370 Sat Oct 10 17:03:49 2026 /workspace/guardian/.venv/bin/python -m guardian
+ 413312 Sat Oct 10 23:45:53 2026 python3 /workspace/predict-market-bot/scripts/collect_price_ticks.py
+1577388 Mon Oct 12 12:35:40 2026 python3 -m http.server 8080 --bind 127.0.0.1 --directory /workspace/dashboard/site
+2218762 Tue Oct 13 02:26:00 2026 python3 /workspace/tools/veilleur/battement.py
+2381741 Tue Oct 13 04:08:13 2026 python3 /workspace/tools/sonnette/sonnette.py
+2421281 Tue Oct 13 04:53:22 2026 /usr/bin/python3 /workspace/predict-market-bot/guardian/scripts/watch_stops.py --interval 30

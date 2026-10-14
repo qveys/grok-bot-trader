@@ -1,0 +1,695 @@
+import { Command } from "commander";
+import { randomUUID } from "node:crypto";
+import chalk from "chalk";
+import {
+  type Order,
+  paginateWithDynamicWindows,
+  HISTORICAL_ORDERS_API_LIMIT,
+} from "@revolut/revolut-x-api";
+import { getClient } from "../util/client.js";
+import { handleError } from "../util/errors.js";
+import { parseTimestamp, parsePositiveInt } from "../util/parse.js";
+import {
+  isJsonOutput,
+  printJson,
+  printTable,
+  printKeyValue,
+  printSuccess,
+  formatLocalDateTime,
+  LOCAL_TIME_NOTE,
+  type ColumnDef,
+} from "../output/formatter.js";
+
+function formatPeriod(start?: number, end?: number): string {
+  if (start && end) {
+    return `Period: ${formatLocalDateTime(start)} to ${formatLocalDateTime(end)}`;
+  }
+  if (start) {
+    return `Period: Since ${formatLocalDateTime(start)}`;
+  }
+  if (end) {
+    return `Period: Up to ${formatLocalDateTime(end)}`;
+  }
+  return "Period: Default / Recent";
+}
+
+// --- MODIFIED: Added subtitle parameter to display the period ---
+function printSectionHeader(title: string, subtitle?: string): void {
+  console.log(chalk.cyan.bold(`\n❖ ${title}`));
+  if (subtitle) {
+    console.log(chalk.gray(`  ${subtitle}`));
+  }
+  console.log(chalk.dim("─".repeat(50)));
+}
+
+function pushTriggerRows(
+  rows: [string, string][],
+  label: string,
+  t: Order["conditional"],
+): void {
+  if (!t) return;
+  const dir = t.trigger_direction === "ge" ? "≥" : "≤";
+  rows.push([chalk.cyan.bold(`\n❖ ${label}`), ""]);
+  rows.push([
+    chalk.gray("  ↳ Trigger Price"),
+    `${t.trigger_price} (when price ${dir} ${t.trigger_price})`,
+  ]);
+  rows.push([chalk.gray("  ↳ Order Type"), t.type]);
+  rows.push([chalk.gray("  ↳ Time in Force"), t.time_in_force]);
+  if (t.limit_price) rows.push([chalk.gray("  ↳ Limit Price"), t.limit_price]);
+  if (t.execution_instructions.length)
+    rows.push([
+      chalk.gray("  ↳ Execution"),
+      t.execution_instructions.join(", "),
+    ]);
+}
+
+const COMMON_ORDER_COLUMNS: ColumnDef<Order>[] = [
+  { header: "ID", key: "id" },
+  { header: "Symbol", key: "symbol" },
+  {
+    header: "Side",
+    accessor: (o) =>
+      o.side.toUpperCase() === "BUY" ? chalk.green("BUY") : chalk.red("SELL"),
+  },
+  { header: "Type", key: "type" },
+  { header: "Qty", key: "quantity", align: "right" },
+  { header: "Filled Qty", key: "filled_quantity", align: "right" },
+  {
+    header: "Filled Amt",
+    accessor: (o) => o.filled_amount ?? chalk.dim("—"),
+    align: "right",
+  },
+  {
+    header: "Price",
+    accessor: (o) => o.price ?? chalk.dim("—"),
+    align: "right",
+  },
+  {
+    header: "Status",
+    accessor: (o) => {
+      switch (o.status?.toLowerCase()) {
+        case "filled":
+          return chalk.green(o.status);
+        case "cancelled":
+        case "rejected":
+          return chalk.red(o.status);
+        case "pending_new":
+        case "new":
+        case "partially_filled":
+          return chalk.yellow(o.status);
+        default:
+          return o.status;
+      }
+    },
+  },
+];
+
+const OPEN_ORDER_COLUMNS: ColumnDef<Order>[] = [
+  ...COMMON_ORDER_COLUMNS,
+  {
+    header: "Conditions",
+    accessor: (o) => {
+      const conds: string[] = [];
+      if (o.conditional?.trigger_price) {
+        const dir = o.conditional.trigger_direction === "ge" ? "≥" : "≤";
+        conds.push(`Trig ${dir}${o.conditional.trigger_price}`);
+      }
+      if (o.take_profit?.trigger_price)
+        conds.push(`TP ${o.take_profit.trigger_price}`);
+      if (o.stop_loss?.trigger_price)
+        conds.push(`SL ${o.stop_loss.trigger_price}`);
+      return conds.join(", ") || chalk.dim("—");
+    },
+  },
+  {
+    header: "Created",
+    accessor: (o) => formatLocalDateTime(o.created_date),
+  },
+];
+
+const HISTORY_ORDER_COLUMNS: ColumnDef<Order>[] = [
+  ...COMMON_ORDER_COLUMNS,
+  {
+    header: "Created",
+    accessor: (o) => formatLocalDateTime(o.created_date),
+  },
+];
+
+export function registerOrderCommand(program: Command): void {
+  const order = program
+    .command("order")
+    .description("Order management")
+    .configureOutput({
+      outputError: (str, write) => {
+        const cleanedMsg = str.replace(/^error:\s*/i, "").trim();
+        write(`${chalk.red.bold("✖ Error:")} ${chalk.white(cleanedMsg)}\n`);
+      },
+    })
+    .addHelpText(
+      "after",
+      `
+Examples:
+  $ revx order place BTC-USD buy --qty 0.001 --market         Place market buy (base qty)
+  $ revx order place BTC-USD buy --quote 100 --market         Place market buy (quote amount)
+  $ revx order place BTC-USD sell --qty 0.001 --limit 95000   Place limit sell
+  $ revx order open                                           List open/active orders
+  $ revx order history --symbols BTC-USD                      Order history for pair
+  $ revx order get <order-id>                                 Get order details
+  $ revx order cancel <order-id>                              Cancel an order
+  $ revx order cancel --all                                   Cancel all open orders
+  $ revx order replace <order-id> --price 96000               Replace order limit price
+  $ revx order replace <order-id> --qty 0.002                 Replace order qty (amount recalculated)
+  $ revx order replace <order-id> --quote 150                 Replace order quote amount
+  $ revx order replace <order-id> --allow-taker               Replace order to allow taker
+  $ revx order fills <order-id>                               Get order fills`,
+    );
+
+  order
+    .command("place <symbol> <side>")
+    .description(
+      "Place an order (e.g. revx order place BTC-USD buy --qty 0.001 --limit 95000)",
+    )
+    .option("--qty <amount>", "Quantity in base currency (e.g. 0.001 for BTC)")
+    .option("--quote <amount>", "Amount in quote currency (e.g. 100 for USD)")
+    .option("--limit <price>", "Limit order price (required unless --market)")
+    .option("--market", "Market order (required unless --limit)")
+    .option("--post-only", "Post-only execution instruction")
+    .option("--json", "Output as JSON")
+    .option("--output <format>", "Output format (table|json)", "table")
+    .action(
+      async (
+        symbol: string,
+        side: string,
+        opts: {
+          qty?: string;
+          quote?: string;
+          limit?: string;
+          market?: boolean;
+          postOnly?: boolean;
+          json?: boolean;
+          output?: string;
+        },
+      ) => {
+        try {
+          const client = getClient({ requireAuth: true });
+
+          if (!["buy", "sell"].includes(side.toLowerCase())) {
+            console.error(
+              `${chalk.red.bold("✖ Error:")} ${chalk.white("Side must be 'buy' or 'sell'.")}`,
+            );
+            process.exit(1);
+          }
+
+          if (!opts.qty && !opts.quote) {
+            console.error(
+              `${chalk.red.bold("✖ Error:")} ${chalk.white("Specify --qty <amount> or --quote <amount>.")}`,
+            );
+            process.exit(1);
+          }
+
+          if (opts.qty && opts.quote) {
+            console.error(
+              `${chalk.red.bold("✖ Error:")} ${chalk.white("Specify either --qty or --quote, not both.")}`,
+            );
+            process.exit(1);
+          }
+
+          const params: Parameters<typeof client.placeOrder>[0] = {
+            symbol: symbol.toUpperCase(),
+            side: side.toLowerCase() as "buy" | "sell",
+          };
+
+          const sizeField = opts.quote
+            ? { quoteSize: opts.quote }
+            : { baseSize: opts.qty! };
+
+          if (opts.market) {
+            params.market = sizeField;
+          } else if (opts.limit) {
+            params.limit = {
+              price: opts.limit,
+              ...sizeField,
+              ...(opts.postOnly
+                ? { executionInstructions: ["post_only"] }
+                : {}),
+            };
+          } else {
+            console.error(
+              `${chalk.red.bold("✖ Error:")} ${chalk.white("Specify --limit <price> or --market.")}`,
+            );
+            process.exit(1);
+          }
+
+          const result = await client.placeOrder(params);
+
+          if (isJsonOutput(opts)) {
+            printJson(result);
+          } else {
+            printSuccess(`✓ Order placed successfully.\n`);
+            printKeyValue([
+              ["Venue Order ID", chalk.white.bold(result.data.venue_order_id)],
+              ["Client Order ID", result.data.client_order_id],
+              ["State", chalk.yellow(result.data.state)],
+            ]);
+          }
+        } catch (err) {
+          handleError(err);
+        }
+      },
+    );
+
+  order
+    .command("open")
+    .alias("active")
+    .description("List open (active) orders")
+    .option(
+      "--symbols <pairs>",
+      "Filter by pairs (comma-separated, e.g. BTC-USD,ETH-USD)",
+    )
+    .option(
+      "--order-states <states>",
+      "Filter by states (comma-separated: pending_new,new,partially_filled)",
+    )
+    .option(
+      "--order-types <types>",
+      "Filter by types (comma-separated: limit,conditional,tpsl)",
+    )
+    .option("--side <side>", "Filter by side (buy|sell)")
+    .option("--limit <n>", "Max results")
+    .option("--json", "Output as JSON")
+    .option("--output <format>", "Output format (table|json)", "table")
+    .action(
+      async (opts: {
+        symbols?: string;
+        orderStates?: string;
+        orderTypes?: string;
+        side?: string;
+        limit?: string;
+        json?: boolean;
+        output?: string;
+      }) => {
+        try {
+          const client = getClient({ requireAuth: true });
+          const queryOpts: Parameters<typeof client.getActiveOrders>[0] = {};
+          if (opts.symbols)
+            queryOpts.symbols = opts.symbols
+              .split(",")
+              .map((s) => s.toUpperCase());
+          if (opts.orderStates)
+            queryOpts.orderStates = opts.orderStates.split(",") as NonNullable<
+              Parameters<typeof client.getActiveOrders>[0]
+            >["orderStates"];
+          if (opts.orderTypes)
+            queryOpts.orderTypes = opts.orderTypes.split(",") as NonNullable<
+              Parameters<typeof client.getActiveOrders>[0]
+            >["orderTypes"];
+          if (opts.side)
+            queryOpts.side = opts.side.toLowerCase() as "buy" | "sell";
+          if (opts.limit)
+            queryOpts.limit = parsePositiveInt(opts.limit, "limit");
+
+          const result = await client.getActiveOrders(queryOpts);
+
+          if (isJsonOutput(opts)) {
+            printJson(result);
+          } else {
+            printSectionHeader("Open Orders");
+            if (result.data.length === 0) {
+              console.log(chalk.gray("No open orders found.\n"));
+            } else {
+              console.log(chalk.dim(`  ${LOCAL_TIME_NOTE}`));
+              printTable(result.data, OPEN_ORDER_COLUMNS);
+            }
+          }
+        } catch (err) {
+          handleError(err);
+        }
+      },
+    );
+
+  order
+    .command("history")
+    .description("List historical orders")
+    .option(
+      "--symbols <pairs>",
+      "Filter by pairs (comma-separated, e.g. BTC-USD,ETH-USD)",
+    )
+    .option(
+      "--order-states <states>",
+      "Filter by states (comma-separated: filled,cancelled,rejected,replaced,partially_filled)",
+    )
+    .option(
+      "--order-types <types>",
+      "Filter by types (comma-separated: market,limit)",
+    )
+    .option(
+      "--start-date <date>",
+      "Start date in local time (ISO, epoch ms, or relative: 7d, 1w, today)",
+    )
+    .option(
+      "--end-date <date>",
+      "End date in local time (ISO, epoch ms, or relative: today, yesterday)",
+    )
+    .option("--limit <n>", "Max results")
+    .option("--json", "Output as JSON")
+    .option("--output <format>", "Output format (table|json)", "table")
+    .action(
+      async (opts: {
+        symbols?: string;
+        orderStates?: string;
+        orderTypes?: string;
+        startDate?: string;
+        endDate?: string;
+        limit?: string;
+        json?: boolean;
+        output?: string;
+      }) => {
+        try {
+          const client = getClient({ requireAuth: true });
+          const baseOpts: Parameters<typeof client.getHistoricalOrders>[0] = {};
+          if (opts.symbols)
+            baseOpts.symbols = opts.symbols
+              .split(",")
+              .map((s) => s.toUpperCase());
+          if (opts.orderStates)
+            baseOpts.orderStates = opts.orderStates.split(",") as NonNullable<
+              Parameters<typeof client.getHistoricalOrders>[0]
+            >["orderStates"];
+          if (opts.orderTypes)
+            baseOpts.orderTypes = opts.orderTypes.split(",") as NonNullable<
+              Parameters<typeof client.getHistoricalOrders>[0]
+            >["orderTypes"];
+          const userLimit = opts.limit
+            ? parsePositiveInt(opts.limit, "limit")
+            : undefined;
+
+          const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+          const endTimeMs = opts.endDate
+            ? parseTimestamp(opts.endDate)
+            : Date.now();
+          const startTimeMs = opts.startDate
+            ? parseTimestamp(opts.startDate)
+            : endTimeMs - THIRTY_DAYS_MS;
+
+          const allOrders = await paginateWithDynamicWindows<Order>({
+            fetchPage: (startDate, endDate, cursor, apiLimit) =>
+              client.getHistoricalOrders({
+                ...baseOpts,
+                startDate,
+                endDate,
+                cursor,
+                limit: apiLimit,
+              }),
+            startDate: startTimeMs,
+            endDate: endTimeMs,
+            apiLimit: HISTORICAL_ORDERS_API_LIMIT,
+            userLimit,
+          });
+
+          if (isJsonOutput(opts)) {
+            printJson({ data: allOrders });
+          } else {
+            const periodText = formatPeriod(
+              opts.startDate ? parseTimestamp(opts.startDate) : undefined,
+              opts.endDate ? parseTimestamp(opts.endDate) : undefined,
+            );
+            printSectionHeader("Order History", periodText);
+
+            if (allOrders.length === 0) {
+              console.log(chalk.gray("No order history found.\n"));
+            } else {
+              console.log(chalk.dim(`  ${LOCAL_TIME_NOTE}`));
+              printTable(allOrders, HISTORY_ORDER_COLUMNS);
+            }
+          }
+        } catch (err) {
+          handleError(err);
+        }
+      },
+    );
+
+  order
+    .command("get <order-id>")
+    .description("Get details of a specific order")
+    .option("--json", "Output as JSON")
+    .option("--output <format>", "Output format (table|json)", "table")
+    .action(
+      async (orderId: string, opts: { json?: boolean; output?: string }) => {
+        try {
+          const client = getClient({ requireAuth: true });
+          const result = await client.getOrder(orderId);
+
+          if (isJsonOutput(opts)) {
+            printJson(result);
+          } else {
+            const o = result.data;
+            printSectionHeader(`Order Details`);
+            console.log(chalk.dim(`  ${LOCAL_TIME_NOTE}`));
+
+            const rows: [string, string][] = [
+              ["ID", chalk.white.bold(o.id)],
+              ["Client Order ID", o.client_order_id],
+              ["Symbol", chalk.cyan(o.symbol)],
+              [
+                "Side",
+                o.side.toUpperCase() === "BUY"
+                  ? chalk.green("BUY")
+                  : chalk.red("SELL"),
+              ],
+              ["Type", o.type],
+              ["Quantity", o.quantity],
+              ...(o.amount ? [["Amount", o.amount] as [string, string]] : []),
+              ["Filled Qty", o.filled_quantity],
+              ...(o.filled_amount
+                ? [["Filled Amt", o.filled_amount] as [string, string]]
+                : []),
+              ["Remaining", o.leaves_quantity],
+              ["Price", o.price ?? chalk.dim("—")],
+              ...(o.average_fill_price
+                ? [["Avg Fill Price", o.average_fill_price] as [string, string]]
+                : []),
+              ...(o.total_fee
+                ? [
+                    [
+                      "Total Fee",
+                      `${o.total_fee}${o.fee_currency ? ` ${o.fee_currency}` : ""}`,
+                    ] as [string, string],
+                  ]
+                : []),
+              ["Status", o.status],
+              ...(o.reject_reason
+                ? [
+                    ["Reject Reason", chalk.red(o.reject_reason)] as [
+                      string,
+                      string,
+                    ],
+                  ]
+                : []),
+              ["Time in Force", o.time_in_force],
+              ...(o.execution_instructions.length
+                ? [
+                    ["Execution", o.execution_instructions.join(", ")] as [
+                      string,
+                      string,
+                    ],
+                  ]
+                : []),
+              ["Created", formatLocalDateTime(o.created_date)],
+              ["Updated", formatLocalDateTime(o.updated_date)],
+              ...(o.previous_order_id
+                ? [
+                    ["Previous Order ID", o.previous_order_id] as [
+                      string,
+                      string,
+                    ],
+                  ]
+                : []),
+            ];
+
+            pushTriggerRows(rows, "Trigger", o.conditional);
+            pushTriggerRows(rows, "Take Profit", o.take_profit);
+            pushTriggerRows(rows, "Stop Loss", o.stop_loss);
+
+            printKeyValue(rows);
+          }
+        } catch (err) {
+          handleError(err);
+        }
+      },
+    );
+
+  order
+    .command("cancel [order-id]")
+    .description("Cancel an order, or all open orders with --all")
+    .option("--all", "Cancel all open orders")
+    .action(async (orderId: string | undefined, opts: { all?: boolean }) => {
+      try {
+        if (!orderId && !opts.all) {
+          console.error(
+            `${chalk.red.bold("✖ Error:")} ${chalk.white("Specify an order ID or use --all to cancel all open orders.")}`,
+          );
+          process.exit(1);
+        }
+        if (orderId && opts.all) {
+          console.error(
+            `${chalk.red.bold("✖ Error:")} ${chalk.white("Specify either an order ID or --all, not both.")}`,
+          );
+          process.exit(1);
+        }
+        const client = getClient({ requireAuth: true });
+
+        if (opts.all) {
+          await client.cancelAllOrders();
+          printSuccess("✓ All open orders cancelled.");
+        } else {
+          await client.cancelOrder(orderId!);
+          printSuccess(`✓ Order ${chalk.cyan(orderId)} cancelled.`);
+        }
+      } catch (err) {
+        handleError(err);
+      }
+    });
+
+  order
+    .command("replace <order-id>")
+    .description(
+      "Replace (modify) an existing order. Provide at least one of --price, --qty, --quote, --post-only, --allow-taker.",
+    )
+    .option("--price <price>", "New limit price")
+    .option(
+      "--qty <amount>",
+      "New quantity in base currency (amount recalculated server-side)",
+    )
+    .option(
+      "--quote <amount>",
+      "New amount in quote currency (qty recalculated server-side)",
+    )
+    .option(
+      "--client-order-id <id>",
+      "Client order ID for the replacement (auto-generated if omitted)",
+    )
+    .option("--post-only", "Set execution_instructions to [post_only]")
+    .option(
+      "--allow-taker",
+      "Set execution_instructions to [allow_taker] explicitly",
+    )
+    .option("--json", "Output as JSON")
+    .option("--output <format>", "Output format (table|json)", "table")
+    .action(
+      async (
+        orderId: string,
+        opts: {
+          price?: string;
+          qty?: string;
+          quote?: string;
+          clientOrderId?: string;
+          postOnly?: boolean;
+          allowTaker?: boolean;
+          json?: boolean;
+          output?: string;
+        },
+      ) => {
+        try {
+          if (opts.qty && opts.quote) {
+            console.error(
+              `${chalk.red.bold("✖ Error:")} ${chalk.white("Specify either --qty or --quote, not both.")}`,
+            );
+            process.exit(1);
+          }
+
+          if (opts.postOnly && opts.allowTaker) {
+            console.error(
+              `${chalk.red.bold("✖ Error:")} ${chalk.white("Specify either --post-only or --allow-taker, not both.")}`,
+            );
+            process.exit(1);
+          }
+
+          if (
+            !opts.price &&
+            !opts.qty &&
+            !opts.quote &&
+            !opts.postOnly &&
+            !opts.allowTaker
+          ) {
+            console.error(
+              `${chalk.red.bold("✖ Error:")} ${chalk.white("Specify at least one of --price, --qty, --quote, --post-only, --allow-taker.")}`,
+            );
+            process.exit(1);
+          }
+
+          const client = getClient({ requireAuth: true });
+
+          const params: Parameters<typeof client.replaceOrder>[1] = {
+            clientOrderId: opts.clientOrderId ?? randomUUID(),
+          };
+          if (opts.price) params.price = opts.price;
+          if (opts.qty) params.baseSize = opts.qty;
+          if (opts.quote) params.quoteSize = opts.quote;
+          if (opts.postOnly) params.executionInstructions = ["post_only"];
+          else if (opts.allowTaker)
+            params.executionInstructions = ["allow_taker"];
+
+          const result = await client.replaceOrder(orderId, params);
+
+          if (isJsonOutput(opts)) {
+            printJson(result);
+          } else {
+            printSuccess(`✓ Order replaced successfully.\n`);
+            printKeyValue([
+              ["Venue Order ID", chalk.white.bold(result.data.venue_order_id)],
+              ["Client Order ID", result.data.client_order_id],
+              ["State", chalk.yellow(result.data.state)],
+            ]);
+          }
+        } catch (err) {
+          handleError(err);
+        }
+      },
+    );
+
+  order
+    .command("fills <order-id>")
+    .description("Get fills for an order")
+    .option("--json", "Output as JSON")
+    .option("--output <format>", "Output format (table|json)", "table")
+    .action(
+      async (orderId: string, opts: { json?: boolean; output?: string }) => {
+        try {
+          const client = getClient({ requireAuth: true });
+          const result = await client.getOrderFills(orderId);
+
+          if (isJsonOutput(opts)) {
+            printJson(result);
+          } else {
+            printSectionHeader(`Fills for Order: ${orderId}`);
+            if (result.data.length === 0) {
+              console.log(chalk.gray("No fills found for this order.\n"));
+            } else {
+              console.log(chalk.dim(`  ${LOCAL_TIME_NOTE}`));
+              printTable(result.data, [
+                { header: "Trade ID", key: "id" },
+                { header: "Symbol", key: "symbol" },
+                {
+                  header: "Side",
+                  accessor: (t) =>
+                    t.side.toUpperCase() === "BUY"
+                      ? chalk.green("BUY")
+                      : chalk.red("SELL"),
+                },
+                { header: "Price", key: "price", align: "right" },
+                { header: "Qty", key: "quantity", align: "right" },
+                { header: "Maker", key: "maker" },
+                {
+                  header: "Time",
+                  accessor: (t) => formatLocalDateTime(t.timestamp),
+                },
+              ]);
+            }
+          }
+        } catch (err) {
+          handleError(err);
+        }
+      },
+    );
+}
