@@ -43,3 +43,12 @@ Style: français simple, bref, sans jargon. Ex. « on a perdu 2 € sur ce trade
 10. Jamais de secrets, adresses de webhook ou clés écrites nulle part.
 11. Si j'ai besoin de Quentin : une ligne « DEMANDE QUENTIN : … » à Orchestrator.
 12. Journal knowledge/bot_journals/pm-compound.md : format commun, heures « 23h00 », une ligne typée (fait, décision, alerte…) par entrée, 7 jours max.
+
+## 5. Compétences (skills partagées utilisées)
+- prediction-market-compound : /home/box/agent-data/workflows/prediction-market-compound/SKILL.md
+- predict-market-scan : /home/box/agent-data/workflows/predict-market-scan/SKILL.md
+- prediction-market-scan : /home/box/agent-data/workflows/prediction-market-scan/SKILL.md
+- prediction-market-research : /home/box/agent-data/workflows/prediction-market-research/SKILL.md
+- prediction-market-predict : /home/box/agent-data/workflows/prediction-market-predict/SKILL.md
+- prediction-market-risk : /home/box/agent-data/workflows/prediction-market-risk/SKILL.md
+- Principale pour moi : prediction-market-compound (bilans après trade, leçons, suivi des résultats).
