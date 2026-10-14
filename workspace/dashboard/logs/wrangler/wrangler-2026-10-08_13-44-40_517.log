@@ -1,0 +1,48 @@
+
+--- 2026-10-08T13:44:40.764Z debug
+🪵  Writing logs to "/workspace/dashboard/logs/wrangler/wrangler-2026-10-08_13-44-40_517.log"
+---
+
+--- 2026-10-08T13:44:40.764Z warn
+▲ [WARNING] Proxy environment variables detected. We'll use your proxy for fetch requests.
+
+
+---
+
+--- 2026-10-08T13:44:40.793Z debug
+.env file not found at "/workspace/dashboard/cloudflare/.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-08T13:44:40.793Z debug
+.env file not found at "/workspace/dashboard/cloudflare/.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-08T13:44:40.898Z log
+
+ ⛅️ wrangler 4.148.0
+────────────────────
+---
+
+--- 2026-10-08T13:44:40.914Z debug
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"205eb6ad-299b-449e-91d6-8532383072a3","event":"wrangler command started","timestamp":1791467080914,"properties":{"amplitude_session_id":1791467080900,"amplitude_event_id":0,"wranglerVersion":"4.148.0","wranglerMajorVersion":4,"wranglerMinorVersion":148,"wranglerPatchVersion":0,"osPlatform":"Linux","osVersion":"#1 SMP PREEMPT_DYNAMIC Tue Oct  6 06:02:30 UTC 2026","nodeVersion":22,"isFirstUsage":true,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"argsUsed":[],"argsCombination":"","sanitizedCommand":"pages project list","sanitizedArgs":{},"currentAgentSkillsInstalled":null}}.
+---
+
+--- 2026-10-08T13:44:40.916Z debug
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/45be0d9d9ab486a652b81f7732f8f0d7/pages/projects
+---
+
+--- 2026-10-08T13:44:40.916Z debug
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+---
+
+--- 2026-10-08T13:44:40.917Z debug
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+---
+
+--- 2026-10-08T13:44:40.917Z debug
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+---
+
+--- 2026-10-08T13:44:40.917Z debug
+-- END CF API REQUEST
+---

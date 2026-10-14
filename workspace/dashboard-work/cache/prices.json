@@ -1,0 +1,2312 @@
+{
+ "prices": {
+  "AAVE-EUR": {
+   "mid": 148.926,
+   "change_24h_pct": -0.03,
+   "high_24h": 155.0,
+   "low_24h": 146.117
+  },
+  "AVAX-USDC": {
+   "mid": 10.283,
+   "change_24h_pct": 1.6,
+   "high_24h": 10.829,
+   "low_24h": 10.028
+  },
+  "APT-EUR": {
+   "mid": 0.7195,
+   "change_24h_pct": 8.0,
+   "high_24h": 0.755,
+   "low_24h": 0.65
+  },
+  "KSM-USD": {
+   "mid": 5.02,
+   "change_24h_pct": 8.15,
+   "high_24h": 5.119,
+   "low_24h": 4.506
+  },
+  "MAGIC-EUR": {
+   "mid": 0.1047,
+   "change_24h_pct": 77.8,
+   "high_24h": 0.1145,
+   "low_24h": 0.0583
+  },
+  "DIMO-USD": {
+   "mid": 0.03051,
+   "change_24h_pct": -0.29,
+   "high_24h": 0.0355,
+   "low_24h": 0.029477
+  },
+  "LAYER-USD": {
+   "mid": 0.07271,
+   "change_24h_pct": 2.36,
+   "high_24h": 0.07991,
+   "low_24h": 0.06885
+  },
+  "FET-USD": {
+   "mid": 0.2134,
+   "change_24h_pct": -2.02,
+   "high_24h": 0.2246,
+   "low_24h": 0.2103
+  },
+  "NOT-USD": {
+   "mid": 0.0004629,
+   "change_24h_pct": 6.64,
+   "high_24h": 0.000498,
+   "low_24h": 0.00042716
+  },
+  "DOGINME-USD": {
+   "mid": 7.12e-05,
+   "change_24h_pct": 4.3,
+   "high_24h": 7.29e-05,
+   "low_24h": 6.529e-05
+  },
+  "STRK-USD": {
+   "mid": 0.0694,
+   "change_24h_pct": 23.75,
+   "high_24h": 0.0767,
+   "low_24h": 0.0553
+  },
+  "NEIRO-USD": {
+   "mid": 8.316e-05,
+   "change_24h_pct": 2.52,
+   "high_24h": 9e-05,
+   "low_24h": 7.725e-05
+  },
+  "OSMO-USD": {
+   "mid": 0.0346,
+   "change_24h_pct": 5.45,
+   "high_24h": 0.0359,
+   "low_24h": 0.0329
+  },
+  "UMA-USD": {
+   "mid": 0.4133,
+   "change_24h_pct": 4.43,
+   "high_24h": 0.457,
+   "low_24h": 0.3753
+  },
+  "GMT-USD": {
+   "mid": 0.01099,
+   "change_24h_pct": 36.84,
+   "high_24h": 0.01399,
+   "low_24h": 0.00778
+  },
+  "LTC-EUR": {
+   "mid": 56.771,
+   "change_24h_pct": 0.75,
+   "high_24h": 57.56,
+   "low_24h": 56.126
+  },
+  "RENDER-EUR": {
+   "mid": 1.6616,
+   "change_24h_pct": 1.29,
+   "high_24h": 1.79,
+   "low_24h": 1.6203
+  },
+  "EGLD-USD": {
+   "mid": 3.958,
+   "change_24h_pct": -1.39,
+   "high_24h": 4.26,
+   "low_24h": 3.9
+  },
+  "XRP-USDC": {
+   "mid": 1.393,
+   "change_24h_pct": 0.67,
+   "high_24h": 1.4074,
+   "low_24h": 1.3763
+  },
+  "FIL-EUR": {
+   "mid": 0.9685,
+   "change_24h_pct": 1.45,
+   "high_24h": 0.98,
+   "low_24h": 0.88
+  },
+  "SWFTC-USD": {
+   "mid": 0.0029625,
+   "change_24h_pct": 0.62,
+   "high_24h": 0.0032173,
+   "low_24h": 0.0028111
+  },
+  "IOTX-USD": {
+   "mid": 0.001,
+   "change_24h_pct": null,
+   "high_24h": null,
+   "low_24h": null
+  },
+  "NEON-USD": {
+   "mid": 0.014842,
+   "change_24h_pct": -0.14,
+   "high_24h": 0.017963,
+   "low_24h": 0.01355
+  },
+  "AXS-USD": {
+   "mid": 1.185,
+   "change_24h_pct": 2.59,
+   "high_24h": 1.213,
+   "low_24h": 1.143
+  },
+  "ORCA-USD": {
+   "mid": 2.2421,
+   "change_24h_pct": -4.66,
+   "high_24h": 2.5,
+   "low_24h": 2.2268
+  },
+  "ANKR-USD": {
+   "mid": 0.00479,
+   "change_24h_pct": 4.05,
+   "high_24h": 0.004936,
+   "low_24h": 0.004459
+  },
+  "TAIKO-USD": {
+   "mid": 0.08525,
+   "change_24h_pct": 4.09,
+   "high_24h": 0.087,
+   "low_24h": 0.0802
+  },
+  "ZKC-USD": {
+   "mid": 0.04065,
+   "change_24h_pct": 6.02,
+   "high_24h": 0.04139,
+   "low_24h": 0.03792
+  },
+  "SEI-EUR": {
+   "mid": 0.0583,
+   "change_24h_pct": -1.18,
+   "high_24h": 0.0623,
+   "low_24h": 0.058
+  },
+  "RAY-USD": {
+   "mid": 2.30852,
+   "change_24h_pct": -1.3,
+   "high_24h": 2.52701,
+   "low_24h": 2.27315
+  },
+  "ALGO-USD": {
+   "mid": 0.112455,
+   "change_24h_pct": -5.07,
+   "high_24h": 0.121398,
+   "low_24h": 0.11
+  },
+  "IDOS-USD": {
+   "mid": 0.00828,
+   "change_24h_pct": 0.48,
+   "high_24h": 0.00855,
+   "low_24h": 0.00807
+  },
+  "INJ-USD": {
+   "mid": 6.904,
+   "change_24h_pct": 1.7,
+   "high_24h": 7.187,
+   "low_24h": 6.739
+  },
+  "STRK-EUR": {
+   "mid": 0.0619,
+   "change_24h_pct": 24.1,
+   "high_24h": 0.068,
+   "low_24h": 0.0491
+  },
+  "SPX-EUR": {
+   "mid": 0.3297,
+   "change_24h_pct": 1.07,
+   "high_24h": 0.339,
+   "low_24h": 0.3201
+  },
+  "XLM-USDC": {
+   "mid": 0.193349,
+   "change_24h_pct": 0.16,
+   "high_24h": 0.196247,
+   "low_24h": 0.190842
+  },
+  "TIA-USD": {
+   "mid": 0.4696,
+   "change_24h_pct": -8.63,
+   "high_24h": 0.5298,
+   "low_24h": 0.4625
+  },
+  "CHZ-EUR": {
+   "mid": 0.013674,
+   "change_24h_pct": 2.63,
+   "high_24h": 0.0141,
+   "low_24h": 0.0126
+  },
+  "SWELL-USD": {
+   "mid": 0.0007869,
+   "change_24h_pct": 1.76,
+   "high_24h": 0.0007979,
+   "low_24h": 0.000755
+  },
+  "ALGO-EUR": {
+   "mid": 0.100372,
+   "change_24h_pct": -4.56,
+   "high_24h": 0.1145,
+   "low_24h": 0.098069
+  },
+  "HFT-USD": {
+   "mid": 0.0067,
+   "change_24h_pct": 1.66,
+   "high_24h": 0.00735,
+   "low_24h": 0.00652
+  },
+  "COMP-USD": {
+   "mid": 24.234,
+   "change_24h_pct": 4.0,
+   "high_24h": 25.6,
+   "low_24h": 23.049
+  },
+  "PUMP-USD": {
+   "mid": 0.00542306,
+   "change_24h_pct": -3.73,
+   "high_24h": 0.0058389,
+   "low_24h": 0.00524864
+  },
+  "FAI-USD": {
+   "mid": 0.00240464,
+   "change_24h_pct": -4.51,
+   "high_24h": 0.00252653,
+   "low_24h": 0.00234864
+  },
+  "AVAX-USD": {
+   "mid": 10.268,
+   "change_24h_pct": 1.47,
+   "high_24h": 10.488,
+   "low_24h": 10.002
+  },
+  "HONEY-USD": {
+   "mid": 0.003089,
+   "change_24h_pct": 2.24,
+   "high_24h": 0.00369,
+   "low_24h": 0.002748
+  },
+  "JASMY-EUR": {
+   "mid": 0.0044643,
+   "change_24h_pct": 7.41,
+   "high_24h": 0.0047513,
+   "low_24h": 0.0041514
+  },
+  "SD-USD": {
+   "mid": 0.1223,
+   "change_24h_pct": 5.57,
+   "high_24h": 0.1294,
+   "low_24h": 0.115
+  },
+  "USDC-USD": {
+   "mid": 0.9999,
+   "change_24h_pct": 0.0,
+   "high_24h": 1.0005,
+   "low_24h": 0.9998
+  },
+  "BTC-USDC": {
+   "mid": 82542.29,
+   "change_24h_pct": 0.7,
+   "high_24h": 83530.49,
+   "low_24h": 81754.0
+  },
+  "BTC-EUR": {
+   "mid": 73634.21,
+   "change_24h_pct": 1.05,
+   "high_24h": 74410.84,
+   "low_24h": 72668.57
+  },
+  "KTA-USD": {
+   "mid": 0.06803,
+   "change_24h_pct": 3.74,
+   "high_24h": 0.069,
+   "low_24h": 0.06428
+  },
+  "ALCX-USD": {
+   "mid": 2.515,
+   "change_24h_pct": -0.04,
+   "high_24h": 2.562,
+   "low_24h": 2.509
+  },
+  "SPK-USD": {
+   "mid": 0.02157,
+   "change_24h_pct": -0.09,
+   "high_24h": 0.022155,
+   "low_24h": 0.020682
+  },
+  "WLFI-USD": {
+   "mid": 0.057,
+   "change_24h_pct": 4.44,
+   "high_24h": 0.05731,
+   "low_24h": 0.05324
+  },
+  "ZEN-USD": {
+   "mid": 6.348191,
+   "change_24h_pct": 1.51,
+   "high_24h": 6.518543,
+   "low_24h": 6.08761
+  },
+  "OP-USD": {
+   "mid": 0.1283,
+   "change_24h_pct": 6.46,
+   "high_24h": 0.1296,
+   "low_24h": 0.1182
+  },
+  "KAVA-USD": {
+   "mid": 0.0667,
+   "change_24h_pct": -2.88,
+   "high_24h": 0.072,
+   "low_24h": 0.06619
+  },
+  "B3-USD": {
+   "mid": 0.00070603,
+   "change_24h_pct": -0.92,
+   "high_24h": 0.000776,
+   "low_24h": 0.00068214
+  },
+  "TOKEN-USD": {
+   "mid": 0.00206,
+   "change_24h_pct": 2.99,
+   "high_24h": 0.0021,
+   "low_24h": 0.00199
+  },
+  "BIGTIME-USD": {
+   "mid": 0.00838,
+   "change_24h_pct": 3.03,
+   "high_24h": 0.008961,
+   "low_24h": 0.00778
+  },
+  "VVV-USD": {
+   "mid": 21.723,
+   "change_24h_pct": -5.11,
+   "high_24h": 23.292,
+   "low_24h": 21.57
+  },
+  "BERA-USD": {
+   "mid": 0.2124,
+   "change_24h_pct": 1.29,
+   "high_24h": 0.2155,
+   "low_24h": 0.2076
+  },
+  "SHPING-USD": {
+   "mid": 0.000627,
+   "change_24h_pct": 0.48,
+   "high_24h": 0.00063,
+   "low_24h": 0.0006
+  },
+  "PENDLE-USD": {
+   "mid": 2.1089,
+   "change_24h_pct": 2.1,
+   "high_24h": 2.19,
+   "low_24h": 2.0403
+  },
+  "MELANIA-USD": {
+   "mid": 0.0907,
+   "change_24h_pct": 0.89,
+   "high_24h": 0.0921,
+   "low_24h": 0.0856
+  },
+  "QI-USD": {
+   "mid": 0.002817,
+   "change_24h_pct": 7.44,
+   "high_24h": 0.002899,
+   "low_24h": 0.002629
+  },
+  "DRIFT-USD": {
+   "mid": 0.018285,
+   "change_24h_pct": -6.27,
+   "high_24h": 0.019959,
+   "low_24h": 0.017998
+  },
+  "SOL-EUR": {
+   "mid": 97.271,
+   "change_24h_pct": -1.11,
+   "high_24h": 99.8,
+   "low_24h": 96.748
+  },
+  "STX-EUR": {
+   "mid": 0.3443,
+   "change_24h_pct": 2.12,
+   "high_24h": 0.3586,
+   "low_24h": 0.3313
+  },
+  "POPCAT-USD": {
+   "mid": 0.0473,
+   "change_24h_pct": 2.59,
+   "high_24h": 0.0485,
+   "low_24h": 0.0452
+  },
+  "STX-USD": {
+   "mid": 0.3856,
+   "change_24h_pct": 2.18,
+   "high_24h": 0.4022,
+   "low_24h": 0.3705
+  },
+  "DOGS-USD": {
+   "mid": 4.35544e-05,
+   "change_24h_pct": 3.18,
+   "high_24h": 4.8e-05,
+   "low_24h": 4.061e-05
+  },
+  "PYTH-USD": {
+   "mid": 0.0801,
+   "change_24h_pct": -4.19,
+   "high_24h": 0.0874,
+   "low_24h": 0.079
+  },
+  "POND-USD": {
+   "mid": 0.001707,
+   "change_24h_pct": 6.04,
+   "high_24h": 0.001746,
+   "low_24h": 0.001622
+  },
+  "EDGE-USD": {
+   "mid": 0.115754,
+   "change_24h_pct": 4.71,
+   "high_24h": 0.124319,
+   "low_24h": 0.107926
+  },
+  "ZAMA-USD": {
+   "mid": 0.07632147,
+   "change_24h_pct": 3.14,
+   "high_24h": 0.07888805,
+   "low_24h": 0.072993
+  },
+  "OXT-USD": {
+   "mid": 0.010444,
+   "change_24h_pct": 2.47,
+   "high_24h": 0.010704,
+   "low_24h": 0.009783
+  },
+  "FET-EUR": {
+   "mid": 0.1906,
+   "change_24h_pct": -2.25,
+   "high_24h": 0.205,
+   "low_24h": 0.1881
+  },
+  "AERGO-USD": {
+   "mid": 0.00908,
+   "change_24h_pct": 1.78,
+   "high_24h": 0.00939,
+   "low_24h": 0.00896
+  },
+  "PRO-USD": {
+   "mid": 0.3456,
+   "change_24h_pct": 3.14,
+   "high_24h": 0.37,
+   "low_24h": 0.3372
+  },
+  "MSOL-USD": {
+   "mid": 153.241,
+   "change_24h_pct": -1.1,
+   "high_24h": 166.228,
+   "low_24h": 151.631
+  },
+  "A8-USD": {
+   "mid": 0.005109,
+   "change_24h_pct": -0.74,
+   "high_24h": 0.00534,
+   "low_24h": 0.005
+  },
+  "ENS-USD": {
+   "mid": 6.213,
+   "change_24h_pct": -0.29,
+   "high_24h": 6.423,
+   "low_24h": 5.75
+  },
+  "DOGE-USDC": {
+   "mid": 0.08533,
+   "change_24h_pct": 1.03,
+   "high_24h": 0.08566,
+   "low_24h": 0.08385
+  },
+  "RENDER-USD": {
+   "mid": 1.8613,
+   "change_24h_pct": 0.89,
+   "high_24h": 1.98,
+   "low_24h": 1.8212
+  },
+  "DASH-EUR": {
+   "mid": 45.411,
+   "change_24h_pct": 0.64,
+   "high_24h": 50.0,
+   "low_24h": 41.0
+  },
+  "XPL-USD": {
+   "mid": 0.08336646,
+   "change_24h_pct": -1.5,
+   "high_24h": 0.08616679,
+   "low_24h": 0.0825
+  },
+  "CVX-USD": {
+   "mid": 2.1044,
+   "change_24h_pct": 4.21,
+   "high_24h": 2.23,
+   "low_24h": 1.91
+  },
+  "DOT-USD": {
+   "mid": 1.2137,
+   "change_24h_pct": 10.85,
+   "high_24h": 1.2344,
+   "low_24h": 1.089
+  },
+  "ZRO-EUR": {
+   "mid": 1.7253,
+   "change_24h_pct": -4.25,
+   "high_24h": 1.98,
+   "low_24h": 1.6805
+  },
+  "VOXEL-USD": {
+   "mid": 0.00413,
+   "change_24h_pct": 1.74,
+   "high_24h": 0.00424,
+   "low_24h": 0.0039
+  },
+  "ALICE-USD": {
+   "mid": 0.1772,
+   "change_24h_pct": 5.92,
+   "high_24h": 0.1809,
+   "low_24h": 0.16
+  },
+  "TRUMP-EUR": {
+   "mid": 1.6758,
+   "change_24h_pct": 2.67,
+   "high_24h": 1.6773,
+   "low_24h": 1.62
+  },
+  "XAN-USD": {
+   "mid": 0.011104,
+   "change_24h_pct": 6.47,
+   "high_24h": 0.011531,
+   "low_24h": 0.010338
+  },
+  "CVC-USD": {
+   "mid": 0.025468,
+   "change_24h_pct": -2.28,
+   "high_24h": 0.026361,
+   "low_24h": 0.024306
+  },
+  "GODS-USD": {
+   "mid": 0.02302,
+   "change_24h_pct": 6.57,
+   "high_24h": 0.02635,
+   "low_24h": 0.02175
+  },
+  "CRO-USD": {
+   "mid": 0.060983,
+   "change_24h_pct": 1.03,
+   "high_24h": 0.062008,
+   "low_24h": 0.059774
+  },
+  "ROSE-USD": {
+   "mid": 0.00806,
+   "change_24h_pct": 6.35,
+   "high_24h": 0.00885,
+   "low_24h": 0.00748
+  },
+  "GRT-USD": {
+   "mid": 0.0269,
+   "change_24h_pct": 4.65,
+   "high_24h": 0.0289,
+   "low_24h": 0.0258
+  },
+  "ONDO-USD": {
+   "mid": 0.4771,
+   "change_24h_pct": -1.32,
+   "high_24h": 0.4952,
+   "low_24h": 0.462
+  },
+  "JASMY-USD": {
+   "mid": 0.005001,
+   "change_24h_pct": 7.44,
+   "high_24h": 0.0053814,
+   "low_24h": 0.0045076
+  },
+  "AMP-USD": {
+   "mid": 0.0006749,
+   "change_24h_pct": -2.33,
+   "high_24h": 0.00078,
+   "low_24h": 0.0006408
+  },
+  "SHIB-USDC": {
+   "mid": 5.4635e-06,
+   "change_24h_pct": 3.83,
+   "high_24h": 5.7e-06,
+   "low_24h": 5e-06
+  },
+  "XLM-EUR": {
+   "mid": 0.172927,
+   "change_24h_pct": 0.7,
+   "high_24h": 0.178461,
+   "low_24h": 0.170875
+  },
+  "SQD-USD": {
+   "mid": 0.025918,
+   "change_24h_pct": 2.39,
+   "high_24h": 0.027683,
+   "low_24h": 0.02505
+  },
+  "NCT-USD": {
+   "mid": 0.00936,
+   "change_24h_pct": 1.18,
+   "high_24h": 0.00976,
+   "low_24h": 0.0091
+  },
+  "LTC-USD": {
+   "mid": 63.59,
+   "change_24h_pct": 0.68,
+   "high_24h": 64.998,
+   "low_24h": 63.0
+  },
+  "AVT-USD": {
+   "mid": 0.2765,
+   "change_24h_pct": 2.17,
+   "high_24h": 0.278,
+   "low_24h": 0.2617
+  },
+  "FLOW-USD": {
+   "mid": 0.03092,
+   "change_24h_pct": 3.21,
+   "high_24h": 0.0313,
+   "low_24h": 0.02905
+  },
+  "BLZ-USD": {
+   "mid": 0.009896,
+   "change_24h_pct": 0.33,
+   "high_24h": 0.010325,
+   "low_24h": 0.0095
+  },
+  "AI-USD": {
+   "mid": 0.02009615,
+   "change_24h_pct": 2.83,
+   "high_24h": 0.020826,
+   "low_24h": 0.01938038
+  },
+  "MANA-USD": {
+   "mid": 0.094,
+   "change_24h_pct": 1.19,
+   "high_24h": 0.0967,
+   "low_24h": 0.089
+  },
+  "WLD-EUR": {
+   "mid": 0.4515,
+   "change_24h_pct": 4.55,
+   "high_24h": 0.47,
+   "low_24h": 0.427
+  },
+  "LA-USD": {
+   "mid": 0.06182,
+   "change_24h_pct": 0.36,
+   "high_24h": 0.06693,
+   "low_24h": 0.06005
+  },
+  "OP-EUR": {
+   "mid": 0.1145,
+   "change_24h_pct": 6.22,
+   "high_24h": 0.1152,
+   "low_24h": 0.1
+  },
+  "RPL-USD": {
+   "mid": 1.884,
+   "change_24h_pct": 7.59,
+   "high_24h": 1.891,
+   "low_24h": 1.7
+  },
+  "REQ-USD": {
+   "mid": 0.05441,
+   "change_24h_pct": 1.33,
+   "high_24h": 0.05742,
+   "low_24h": 0.051
+  },
+  "ONDO-EUR": {
+   "mid": 0.4258,
+   "change_24h_pct": -0.74,
+   "high_24h": 0.4456,
+   "low_24h": 0.4116
+  },
+  "MDT-USD": {
+   "mid": 0.00703,
+   "change_24h_pct": 2.76,
+   "high_24h": 0.00727,
+   "low_24h": 0.00675
+  },
+  "XRP-EUR": {
+   "mid": 1.2427,
+   "change_24h_pct": 0.97,
+   "high_24h": 1.269,
+   "low_24h": 1.2275
+  },
+  "VELO-USD": {
+   "mid": 0.034919,
+   "change_24h_pct": -1.54,
+   "high_24h": 0.0375,
+   "low_24h": 0.033138
+  },
+  "ETH-EUR": {
+   "mid": 2216.71,
+   "change_24h_pct": 0.56,
+   "high_24h": 2245.24,
+   "low_24h": 2200.0
+  },
+  "FORT-USD": {
+   "mid": 0.02027,
+   "change_24h_pct": 7.51,
+   "high_24h": 0.02328,
+   "low_24h": 0.01639
+  },
+  "QNT-USD": {
+   "mid": 247.3,
+   "change_24h_pct": 5.06,
+   "high_24h": 255.83,
+   "low_24h": 233.97
+  },
+  "CHZ-USD": {
+   "mid": 0.015317,
+   "change_24h_pct": 2.54,
+   "high_24h": 0.015446,
+   "low_24h": 0.01475
+  },
+  "PENGU-USD": {
+   "mid": 0.00813,
+   "change_24h_pct": 1.63,
+   "high_24h": 0.00831,
+   "low_24h": 0.00784
+  },
+  "CELO-USD": {
+   "mid": 0.09614,
+   "change_24h_pct": 5.28,
+   "high_24h": 0.1,
+   "low_24h": 0.09
+  },
+  "TIA-EUR": {
+   "mid": 0.4194,
+   "change_24h_pct": -8.48,
+   "high_24h": 0.4721,
+   "low_24h": 0.4117
+  },
+  "ZORA-USD": {
+   "mid": 0.007014,
+   "change_24h_pct": -2.46,
+   "high_24h": 0.007563,
+   "low_24h": 0.006727
+  },
+  "KRL-USD": {
+   "mid": 0.13898,
+   "change_24h_pct": 1.53,
+   "high_24h": 0.147426,
+   "low_24h": 0.126439
+  },
+  "TRU-USD": {
+   "mid": 0.000934,
+   "change_24h_pct": 1.1,
+   "high_24h": 0.001085,
+   "low_24h": 0.00091
+  },
+  "LPT-USD": {
+   "mid": 1.775,
+   "change_24h_pct": 1.88,
+   "high_24h": 1.848,
+   "low_24h": 1.67
+  },
+  "GFI-USD": {
+   "mid": 0.039415,
+   "change_24h_pct": 9.2,
+   "high_24h": 0.044127,
+   "low_24h": 0.035414
+  },
+  "TRAC-USD": {
+   "mid": 0.4024,
+   "change_24h_pct": -0.22,
+   "high_24h": 0.4197,
+   "low_24h": 0.3926
+  },
+  "ENA-USD": {
+   "mid": 0.214,
+   "change_24h_pct": 2.84,
+   "high_24h": 0.2208,
+   "low_24h": 0.2059
+  },
+  "IDEX-USD": {
+   "mid": 0.000567,
+   "change_24h_pct": -35.92,
+   "high_24h": 0.00102,
+   "low_24h": 0.000223
+  },
+  "XTZ-USD": {
+   "mid": 0.2921,
+   "change_24h_pct": 0.76,
+   "high_24h": 0.3004,
+   "low_24h": 0.287
+  },
+  "ICP-USD": {
+   "mid": 3.0246,
+   "change_24h_pct": 3.1,
+   "high_24h": 3.1436,
+   "low_24h": 2.9
+  },
+  "IMU-USD": {
+   "mid": 0.00187047,
+   "change_24h_pct": -1.48,
+   "high_24h": 0.00195,
+   "low_24h": 0.0018
+  },
+  "ZRO-USD": {
+   "mid": 1.9324,
+   "change_24h_pct": -4.31,
+   "high_24h": 2.1884,
+   "low_24h": 1.8814
+  },
+  "HBAR-USDC": {
+   "mid": 0.090921,
+   "change_24h_pct": 0.03,
+   "high_24h": 0.09421,
+   "low_24h": 0.089102
+  },
+  "AAVE-USD": {
+   "mid": 166.781,
+   "change_24h_pct": -0.21,
+   "high_24h": 171.98,
+   "low_24h": 164.452
+  },
+  "SHDW-USD": {
+   "mid": 0.029528,
+   "change_24h_pct": 0.74,
+   "high_24h": 0.031389,
+   "low_24h": 0.02848
+  },
+  "CRV-USD": {
+   "mid": 0.36045,
+   "change_24h_pct": 6.69,
+   "high_24h": 0.36461,
+   "low_24h": 0.33
+  },
+  "GIGA-USD": {
+   "mid": 0.002005,
+   "change_24h_pct": 1.87,
+   "high_24h": 0.0021,
+   "low_24h": 0.001889
+  },
+  "GTC-USD": {
+   "mid": 0.1966,
+   "change_24h_pct": -2.18,
+   "high_24h": 0.2231,
+   "low_24h": 0.1748
+  },
+  "AST-USD": {
+   "mid": 0.00594,
+   "change_24h_pct": -1.48,
+   "high_24h": 0.00605,
+   "low_24h": 0.00577
+  },
+  "JUP-USD": {
+   "mid": 0.3718,
+   "change_24h_pct": 9.6,
+   "high_24h": 0.3855,
+   "low_24h": 0.3352
+  },
+  "ALEPH-USD": {
+   "mid": 0.016108,
+   "change_24h_pct": 2.77,
+   "high_24h": 0.017092,
+   "low_24h": 0.015029
+  },
+  "BAND-USD": {
+   "mid": 0.2357,
+   "change_24h_pct": 2.19,
+   "high_24h": 0.245,
+   "low_24h": 0.2195
+  },
+  "ICP-EUR": {
+   "mid": 2.7005,
+   "change_24h_pct": 2.84,
+   "high_24h": 2.8436,
+   "low_24h": 2.5761
+  },
+  "BTRST-USD": {
+   "mid": 0.0554,
+   "change_24h_pct": -0.36,
+   "high_24h": 0.0586,
+   "low_24h": 0.0536
+  },
+  "KARRAT-USD": {
+   "mid": 0.002939,
+   "change_24h_pct": 1.46,
+   "high_24h": 0.003,
+   "low_24h": 0.002822
+  },
+  "ASM-USD": {
+   "mid": 0.005882,
+   "change_24h_pct": 0.0,
+   "high_24h": 0.006211,
+   "low_24h": 0.005601
+  },
+  "SOL-USDC": {
+   "mid": 109.056,
+   "change_24h_pct": -1.51,
+   "high_24h": 112.097,
+   "low_24h": 108.4
+  },
+  "STORJ-USD": {
+   "mid": 0.02911,
+   "change_24h_pct": 2.05,
+   "high_24h": 0.03115,
+   "low_24h": 0.0275
+  },
+  "MLN-USD": {
+   "mid": 1.406,
+   "change_24h_pct": 1.0,
+   "high_24h": 1.476,
+   "low_24h": 1.376
+  },
+  "SUPER-USD": {
+   "mid": 0.2207,
+   "change_24h_pct": -0.9,
+   "high_24h": 0.2384,
+   "low_24h": 0.2169
+  },
+  "BNB-USD": {
+   "mid": 741.347,
+   "change_24h_pct": 0.82,
+   "high_24h": 750.0,
+   "low_24h": 732.789
+  },
+  "DASH-USD": {
+   "mid": 50.864,
+   "change_24h_pct": -0.3,
+   "high_24h": 54.0,
+   "low_24h": 50.252
+  },
+  "HBAR-USD": {
+   "mid": 0.090883,
+   "change_24h_pct": -0.02,
+   "high_24h": 0.095,
+   "low_24h": 0.089291
+  },
+  "FIDA-USD": {
+   "mid": 0.020575,
+   "change_24h_pct": 2.73,
+   "high_24h": 0.022072,
+   "low_24h": 0.01838
+  },
+  "C98-USD": {
+   "mid": 0.0176,
+   "change_24h_pct": 17.88,
+   "high_24h": 0.0182,
+   "low_24h": 0.015
+  },
+  "OFC-USD": {
+   "mid": 0.007,
+   "change_24h_pct": 1.45,
+   "high_24h": 0.00738,
+   "low_24h": 0.00672
+  },
+  "STG-USD": {
+   "mid": 0.167312,
+   "change_24h_pct": -3.81,
+   "high_24h": 0.195,
+   "low_24h": 0.158414
+  },
+  "TRUMP-USDC": {
+   "mid": 1.8776,
+   "change_24h_pct": 2.7,
+   "high_24h": 1.9,
+   "low_24h": 1.75
+  },
+  "PROMPT-USD": {
+   "mid": 0.018755,
+   "change_24h_pct": 1.4,
+   "high_24h": 0.019495,
+   "low_24h": 0.018147
+  },
+  "PNG-USD": {
+   "mid": 0.0319,
+   "change_24h_pct": -1.53,
+   "high_24h": 0.0331,
+   "low_24h": 0.0308
+  },
+  "PROVE-USD": {
+   "mid": 0.19953,
+   "change_24h_pct": 1.46,
+   "high_24h": 0.20222,
+   "low_24h": 0.19085
+  },
+  "LINK-USD": {
+   "mid": 12.77,
+   "change_24h_pct": 0.28,
+   "high_24h": 12.976,
+   "low_24h": 12.683
+  },
+  "MAGIC-USD": {
+   "mid": 0.1173,
+   "change_24h_pct": 79.33,
+   "high_24h": 0.1279,
+   "low_24h": 0.064
+  },
+  "IO-USD": {
+   "mid": 0.1484835,
+   "change_24h_pct": 0.61,
+   "high_24h": 0.15772497,
+   "low_24h": 0.14407417
+  },
+  "1INCH-EUR": {
+   "mid": 0.08633,
+   "change_24h_pct": 1.9,
+   "high_24h": 0.09616,
+   "low_24h": 0.08369
+  },
+  "POWR-USD": {
+   "mid": 0.0612,
+   "change_24h_pct": 0.0,
+   "high_24h": 0.0629,
+   "low_24h": 0.0595
+  },
+  "GALA-USD": {
+   "mid": 0.002268,
+   "change_24h_pct": 3.32,
+   "high_24h": 0.002291,
+   "low_24h": 0.00217
+  },
+  "PENGU-EUR": {
+   "mid": 0.00725,
+   "change_24h_pct": 1.82,
+   "high_24h": 0.00789,
+   "low_24h": 0.00702
+  },
+  "POL-USD": {
+   "mid": 0.0996,
+   "change_24h_pct": 1.22,
+   "high_24h": 0.1014,
+   "low_24h": 0.0971
+  },
+  "NKN-USD": {
+   "mid": 0.006212,
+   "change_24h_pct": 0.51,
+   "high_24h": 0.006529,
+   "low_24h": 0.0059
+  },
+  "HOPR-USD": {
+   "mid": 0.01259,
+   "change_24h_pct": 3.09,
+   "high_24h": 0.0133,
+   "low_24h": 0.01189
+  },
+  "IMX-USD": {
+   "mid": 0.1949,
+   "change_24h_pct": 6.15,
+   "high_24h": 0.2,
+   "low_24h": 0.1806
+  },
+  "LINK-USDC": {
+   "mid": 12.779,
+   "change_24h_pct": 0.18,
+   "high_24h": 13.195,
+   "low_24h": 12.519
+  },
+  "EIGEN-USD": {
+   "mid": 0.2194,
+   "change_24h_pct": -2.35,
+   "high_24h": 0.2302,
+   "low_24h": 0.2151
+  },
+  "SKY-USD": {
+   "mid": 0.075949,
+   "change_24h_pct": -1.59,
+   "high_24h": 0.079,
+   "low_24h": 0.075054
+  },
+  "BICO-USD": {
+   "mid": 0.01929,
+   "change_24h_pct": -4.75,
+   "high_24h": 0.02049,
+   "low_24h": 0.019
+  },
+  "DOGE-EUR": {
+   "mid": 0.07613,
+   "change_24h_pct": 1.26,
+   "high_24h": 0.07625,
+   "low_24h": 0.07478
+  },
+  "DOGE-USD": {
+   "mid": 0.08526,
+   "change_24h_pct": 0.9,
+   "high_24h": 0.0855,
+   "low_24h": 0.0838
+  },
+  "AERO-USD": {
+   "mid": 0.8007,
+   "change_24h_pct": -1.8,
+   "high_24h": 0.8583,
+   "low_24h": 0.7888
+  },
+  "ARKM-USD": {
+   "mid": 0.1268,
+   "change_24h_pct": 3.61,
+   "high_24h": 0.133,
+   "low_24h": 0.119
+  },
+  "VET-USD": {
+   "mid": 0.0078,
+   "change_24h_pct": 3.57,
+   "high_24h": 0.008,
+   "low_24h": 0.00752
+  },
+  "ENA-EUR": {
+   "mid": 0.1911,
+   "change_24h_pct": 3.13,
+   "high_24h": 0.1966,
+   "low_24h": 0.1836
+  },
+  "RLS-USD": {
+   "mid": 0.002171,
+   "change_24h_pct": -0.09,
+   "high_24h": 0.002304,
+   "low_24h": 0.002096
+  },
+  "SUI-EUR": {
+   "mid": 0.9483,
+   "change_24h_pct": 1.39,
+   "high_24h": 0.9602,
+   "low_24h": 0.925
+  },
+  "ARB-USD": {
+   "mid": 0.1799,
+   "change_24h_pct": 3.74,
+   "high_24h": 0.1834,
+   "low_24h": 0.1718
+  },
+  "HYPE-EUR": {
+   "mid": 75.0511,
+   "change_24h_pct": -0.6,
+   "high_24h": 77.99,
+   "low_24h": 74.3197
+  },
+  "AVNT-EUR": {
+   "mid": 0.12152,
+   "change_24h_pct": 3.75,
+   "high_24h": 0.13018,
+   "low_24h": 0.11519
+  },
+  "ACS-USD": {
+   "mid": 0.00015707,
+   "change_24h_pct": 3.77,
+   "high_24h": 0.000171,
+   "low_24h": 0.00014818
+  },
+  "UNI-USD": {
+   "mid": 7.2516,
+   "change_24h_pct": -1.37,
+   "high_24h": 7.5593,
+   "low_24h": 7.0696
+  },
+  "PUNDIX-USD": {
+   "mid": 0.1117,
+   "change_24h_pct": 2.56,
+   "high_24h": 0.1127,
+   "low_24h": 0.109
+  },
+  "SHIB-EUR": {
+   "mid": 4.8743e-06,
+   "change_24h_pct": 3.21,
+   "high_24h": 4.912e-06,
+   "low_24h": 4.7142e-06
+  },
+  "AVAX-EUR": {
+   "mid": 9.168,
+   "change_24h_pct": 1.54,
+   "high_24h": 9.344,
+   "low_24h": 8.927
+  },
+  "TON-USD": {
+   "mid": 1.4511,
+   "change_24h_pct": 3.8,
+   "high_24h": 1.5259,
+   "low_24h": 1.3664
+  },
+  "RAD-USD": {
+   "mid": 0.3278,
+   "change_24h_pct": 14.39,
+   "high_24h": 0.4099,
+   "low_24h": 0.2843
+  },
+  "FARM-USD": {
+   "mid": 7.653,
+   "change_24h_pct": -2.57,
+   "high_24h": 8.01,
+   "low_24h": 7.468
+  },
+  "2Z-USD": {
+   "mid": 0.03594,
+   "change_24h_pct": -0.67,
+   "high_24h": 0.038,
+   "low_24h": 0.0351
+  },
+  "SUI-USD": {
+   "mid": 1.0619,
+   "change_24h_pct": 1.2,
+   "high_24h": 1.0804,
+   "low_24h": 1.0354
+  },
+  "PRCL-USD": {
+   "mid": 0.006045,
+   "change_24h_pct": -1.61,
+   "high_24h": 0.006178,
+   "low_24h": 0.005836
+  },
+  "LDO-USD": {
+   "mid": 0.4147,
+   "change_24h_pct": 1.37,
+   "high_24h": 0.4423,
+   "low_24h": 0.4041
+  },
+  "AWE-USD": {
+   "mid": 0.06332,
+   "change_24h_pct": 1.99,
+   "high_24h": 0.06375,
+   "low_24h": 0.06
+  },
+  "CELR-USD": {
+   "mid": 0.003043,
+   "change_24h_pct": 4.17,
+   "high_24h": 0.003147,
+   "low_24h": 0.002875
+  },
+  "LTC-USDC": {
+   "mid": 63.578,
+   "change_24h_pct": 0.46,
+   "high_24h": 68.805,
+   "low_24h": 62.643
+  },
+  "VTHO-USD": {
+   "mid": 0.000655,
+   "change_24h_pct": -1.79,
+   "high_24h": 0.000681,
+   "low_24h": 0.000648
+  },
+  "BONK-USDC": {
+   "mid": 3.3593e-06,
+   "change_24h_pct": 2.61,
+   "high_24h": 3.4076e-06,
+   "low_24h": 3.2433e-06
+  },
+  "BCH-USDC": {
+   "mid": 275.439,
+   "change_24h_pct": -2.74,
+   "high_24h": 285.558,
+   "low_24h": 270.0
+  },
+  "SUKU-USD": {
+   "mid": 0.00527,
+   "change_24h_pct": -0.94,
+   "high_24h": 0.0055,
+   "low_24h": 0.00512
+  },
+  "RSR-USD": {
+   "mid": 0.001561,
+   "change_24h_pct": 1.83,
+   "high_24h": 0.001587,
+   "low_24h": 0.001482
+  },
+  "IP-USD": {
+   "mid": 0.1945,
+   "change_24h_pct": -1.41,
+   "high_24h": 0.202,
+   "low_24h": 0.1871
+  },
+  "RARI-USD": {
+   "mid": 0.14298,
+   "change_24h_pct": -10.77,
+   "high_24h": 0.16874,
+   "low_24h": 0.12993
+  },
+  "SOMI-USD": {
+   "mid": 0.20133,
+   "change_24h_pct": -0.64,
+   "high_24h": 0.21664,
+   "low_24h": 0.20008
+  },
+  "MORPHO-USD": {
+   "mid": 2.3736,
+   "change_24h_pct": 0.08,
+   "high_24h": 2.4304,
+   "low_24h": 2.35
+  },
+  "PLUME-USD": {
+   "mid": 0.0179,
+   "change_24h_pct": 0.06,
+   "high_24h": 0.01868,
+   "low_24h": 0.017
+  },
+  "WOO-USD": {
+   "mid": 0.01255,
+   "change_24h_pct": 3.48,
+   "high_24h": 0.01267,
+   "low_24h": 0.01176
+  },
+  "WLD-USD": {
+   "mid": 0.5062,
+   "change_24h_pct": 5.14,
+   "high_24h": 0.508,
+   "low_24h": 0.4793
+  },
+  "OCEAN-USD": {
+   "mid": 0.14372,
+   "change_24h_pct": 1.4,
+   "high_24h": 0.15122,
+   "low_24h": 0.14
+  },
+  "BCH-USD": {
+   "mid": 275.191,
+   "change_24h_pct": -2.86,
+   "high_24h": 284.875,
+   "low_24h": 266.0
+  },
+  "TRUMP-USD": {
+   "mid": 1.8771,
+   "change_24h_pct": 2.58,
+   "high_24h": 1.93,
+   "low_24h": 1.8036
+  },
+  "SUI-USDC": {
+   "mid": 1.0629,
+   "change_24h_pct": 0.99,
+   "high_24h": 1.0839,
+   "low_24h": 1.039
+  },
+  "BNT-USD": {
+   "mid": 0.3215,
+   "change_24h_pct": 3.45,
+   "high_24h": 0.3484,
+   "low_24h": 0.29
+  },
+  "SNX-USD": {
+   "mid": 0.2384,
+   "change_24h_pct": 2.24,
+   "high_24h": 0.2407,
+   "low_24h": 0.223
+  },
+  "TNSR-USD": {
+   "mid": 0.03663,
+   "change_24h_pct": 3.11,
+   "high_24h": 0.03828,
+   "low_24h": 0.03518
+  },
+  "HYPE-USD": {
+   "mid": 84.1319,
+   "change_24h_pct": -0.53,
+   "high_24h": 86.6333,
+   "low_24h": 83.5
+  },
+  "PARTI-USD": {
+   "mid": 0.033414,
+   "change_24h_pct": -3.61,
+   "high_24h": 0.03569,
+   "low_24h": 0.032762
+  },
+  "TREE-USD": {
+   "mid": 0.04339,
+   "change_24h_pct": 2.93,
+   "high_24h": 0.04521,
+   "low_24h": 0.04198
+  },
+  "AIOZ-USD": {
+   "mid": 0.1162,
+   "change_24h_pct": 7.47,
+   "high_24h": 0.119,
+   "low_24h": 0.1063
+  },
+  "T-USD": {
+   "mid": 0.0052924,
+   "change_24h_pct": 3.08,
+   "high_24h": 0.0053339,
+   "low_24h": 0.0049676
+  },
+  "TRX-USDC": {
+   "mid": 0.33217,
+   "change_24h_pct": -0.21,
+   "high_24h": 0.3347,
+   "low_24h": 0.33128
+  },
+  "ACH-USD": {
+   "mid": 0.005631,
+   "change_24h_pct": 3.05,
+   "high_24h": 0.005759,
+   "low_24h": 0.005306
+  },
+  "DYDX-USD": {
+   "mid": 0.1374,
+   "change_24h_pct": 5.69,
+   "high_24h": 0.15,
+   "low_24h": 0.1299
+  },
+  "ATOM-USD": {
+   "mid": 2.0473,
+   "change_24h_pct": 16.25,
+   "high_24h": 2.0822,
+   "low_24h": 1.7554
+  },
+  "YFI-USD": {
+   "mid": 2367.99,
+   "change_24h_pct": 2.99,
+   "high_24h": 2380.58,
+   "low_24h": 2200.0
+  },
+  "MEW-USD": {
+   "mid": 0.000466,
+   "change_24h_pct": 0.0,
+   "high_24h": 0.00049,
+   "low_24h": 0.000448
+  },
+  "SAND-USD": {
+   "mid": 0.06756,
+   "change_24h_pct": 1.09,
+   "high_24h": 0.07384,
+   "low_24h": 0.06522
+  },
+  "BONK-USD": {
+   "mid": 3.3575e-06,
+   "change_24h_pct": 2.62,
+   "high_24h": 3.56e-06,
+   "low_24h": 3.213e-06
+  },
+  "XRP-USD": {
+   "mid": 1.3916,
+   "change_24h_pct": 0.8,
+   "high_24h": 1.4055,
+   "low_24h": 1.3732
+  },
+  "LINK-EUR": {
+   "mid": 11.4,
+   "change_24h_pct": 0.2,
+   "high_24h": 11.542,
+   "low_24h": 11.292
+  },
+  "BCH-EUR": {
+   "mid": 245.654,
+   "change_24h_pct": -2.91,
+   "high_24h": 253.891,
+   "low_24h": 238.0
+  },
+  "ADA-USDC": {
+   "mid": 0.24009,
+   "change_24h_pct": 2.21,
+   "high_24h": 0.252,
+   "low_24h": 0.23123
+  },
+  "GHST-USD": {
+   "mid": 0.0629,
+   "change_24h_pct": -0.63,
+   "high_24h": 0.0648,
+   "low_24h": 0.0599
+  },
+  "BLUR-USD": {
+   "mid": 0.01898,
+   "change_24h_pct": 3.24,
+   "high_24h": 0.0209,
+   "low_24h": 0.01814
+  },
+  "CLANKER-USD": {
+   "mid": 13.1874,
+   "change_24h_pct": 2.52,
+   "high_24h": 13.97,
+   "low_24h": 12.7479
+  },
+  "BAT-USD": {
+   "mid": 0.1326,
+   "change_24h_pct": 31.46,
+   "high_24h": 0.13907,
+   "low_24h": 0.09782
+  },
+  "NEAR-USD": {
+   "mid": 4.8115,
+   "change_24h_pct": 6.49,
+   "high_24h": 4.92,
+   "low_24h": 4.4305
+  },
+  "BNB-USDC": {
+   "mid": 742.038,
+   "change_24h_pct": 0.82,
+   "high_24h": 747.12,
+   "low_24h": 734.262
+  },
+  "ELA-USD": {
+   "mid": 0.34709,
+   "change_24h_pct": 1.15,
+   "high_24h": 0.3726,
+   "low_24h": 0.33754
+  },
+  "SPA-USD": {
+   "mid": 0.002689,
+   "change_24h_pct": -0.48,
+   "high_24h": 0.002799,
+   "low_24h": 0.002649
+  },
+  "LRC-USD": {
+   "mid": 0.01015,
+   "change_24h_pct": 5.38,
+   "high_24h": 0.01069,
+   "low_24h": 0.00924
+  },
+  "ZRX-USD": {
+   "mid": 0.12256,
+   "change_24h_pct": 5.77,
+   "high_24h": 0.12519,
+   "low_24h": 0.108
+  },
+  "ADA-EUR": {
+   "mid": 0.21436,
+   "change_24h_pct": 2.39,
+   "high_24h": 0.21545,
+   "low_24h": 0.20065
+  },
+  "RLC-USD": {
+   "mid": 1.0922,
+   "change_24h_pct": 28.11,
+   "high_24h": 1.481,
+   "low_24h": 0.8331
+  },
+  "W-USD": {
+   "mid": 0.016859,
+   "change_24h_pct": 11.34,
+   "high_24h": 0.018611,
+   "low_24h": 0.015083
+  },
+  "SPX-USD": {
+   "mid": 0.3694,
+   "change_24h_pct": 1.06,
+   "high_24h": 0.3778,
+   "low_24h": 0.3607
+  },
+  "ARB-EUR": {
+   "mid": 0.1606,
+   "change_24h_pct": 3.67,
+   "high_24h": 0.1662,
+   "low_24h": 0.153
+  },
+  "DIA-USD": {
+   "mid": 0.1801,
+   "change_24h_pct": 6.3,
+   "high_24h": 0.182,
+   "low_24h": 0.1672
+  },
+  "XDC-USD": {
+   "mid": 0.035323,
+   "change_24h_pct": 11.14,
+   "high_24h": 0.035887,
+   "low_24h": 0.031
+  },
+  "LCX-USD": {
+   "mid": 0.0599,
+   "change_24h_pct": -3.39,
+   "high_24h": 0.0676,
+   "low_24h": 0.0562
+  },
+  "ILV-USD": {
+   "mid": 4.007,
+   "change_24h_pct": 6.28,
+   "high_24h": 4.15,
+   "low_24h": 3.671
+  },
+  "PEPE-EUR": {
+   "mid": 3.5191e-06,
+   "change_24h_pct": 2.65,
+   "high_24h": 3.591e-06,
+   "low_24h": 3.3931e-06
+  },
+  "WIF-EUR": {
+   "mid": 0.1907,
+   "change_24h_pct": 2.47,
+   "high_24h": 0.1971,
+   "low_24h": 0.18
+  },
+  "BAL-USD": {
+   "mid": 0.1273,
+   "change_24h_pct": 0.08,
+   "high_24h": 0.1346,
+   "low_24h": 0.1225
+  },
+  "PNUT-USD": {
+   "mid": 0.04928,
+   "change_24h_pct": 1.88,
+   "high_24h": 0.053,
+   "low_24h": 0.045
+  },
+  "PEPE-USDC": {
+   "mid": 3.9421e-06,
+   "change_24h_pct": 3.18,
+   "high_24h": 3.96e-06,
+   "low_24h": 3.77e-06
+  },
+  "RSC-USD": {
+   "mid": 0.0532375,
+   "change_24h_pct": 1.02,
+   "high_24h": 0.058,
+   "low_24h": 0.0503905
+  },
+  "FLOKI-USD": {
+   "mid": 2.749e-05,
+   "change_24h_pct": 6.23,
+   "high_24h": 2.766e-05,
+   "low_24h": 2.597e-05
+  },
+  "XYO-USD": {
+   "mid": 0.003625,
+   "change_24h_pct": 0.83,
+   "high_24h": 0.0039159,
+   "low_24h": 0.0035548
+  },
+  "MNDE-USD": {
+   "mid": 0.025985,
+   "change_24h_pct": -1.97,
+   "high_24h": 0.0272,
+   "low_24h": 0.025337
+  },
+  "OGN-USD": {
+   "mid": 0.03792,
+   "change_24h_pct": -20.3,
+   "high_24h": 0.04915,
+   "low_24h": 0.03528
+  },
+  "MATH-USD": {
+   "mid": 0.0251,
+   "change_24h_pct": 1.61,
+   "high_24h": 0.0264,
+   "low_24h": 0.02412
+  },
+  "NMR-USD": {
+   "mid": 13.375,
+   "change_24h_pct": -4.94,
+   "high_24h": 15.5,
+   "low_24h": 13.209
+  },
+  "ADA-USD": {
+   "mid": 0.24004,
+   "change_24h_pct": 2.39,
+   "high_24h": 0.24183,
+   "low_24h": 0.23169
+  },
+  "GRASS-USD": {
+   "mid": 0.628398,
+   "change_24h_pct": 2.72,
+   "high_24h": 0.66949,
+   "low_24h": 0.603522
+  },
+  "POLS-USD": {
+   "mid": 0.0585,
+   "change_24h_pct": -0.17,
+   "high_24h": 0.0594,
+   "low_24h": 0.0572
+  },
+  "SYRUP-USD": {
+   "mid": 0.22623,
+   "change_24h_pct": -0.57,
+   "high_24h": 0.2382,
+   "low_24h": 0.22356
+  },
+  "METIS-USD": {
+   "mid": 3.305,
+   "change_24h_pct": 0.91,
+   "high_24h": 3.44,
+   "low_24h": 3.224
+  },
+  "INJ-EUR": {
+   "mid": 6.163,
+   "change_24h_pct": 1.87,
+   "high_24h": 6.47,
+   "low_24h": 6.0
+  },
+  "BONK-EUR": {
+   "mid": 2.998e-06,
+   "change_24h_pct": 2.71,
+   "high_24h": 3.136e-06,
+   "low_24h": 2.808e-06
+  },
+  "DEGEN-USD": {
+   "mid": 0.000995,
+   "change_24h_pct": 1.62,
+   "high_24h": 0.001014,
+   "low_24h": 0.000975
+  },
+  "BENJI-USD": {
+   "mid": 0.001274,
+   "change_24h_pct": 0.39,
+   "high_24h": 0.001369,
+   "low_24h": 0.001217
+  },
+  "WIF-USD": {
+   "mid": 0.2136,
+   "change_24h_pct": 2.64,
+   "high_24h": 0.2163,
+   "low_24h": 0.2011
+  },
+  "TON-USDC": {
+   "mid": 1.4514,
+   "change_24h_pct": 4.23,
+   "high_24h": 1.5503,
+   "low_24h": 1.3627
+  },
+  "ENA-USDC": {
+   "mid": 0.2145,
+   "change_24h_pct": 3.14,
+   "high_24h": 0.2256,
+   "low_24h": 0.2053
+  },
+  "MOODENG-USD": {
+   "mid": 0.041262,
+   "change_24h_pct": 0.88,
+   "high_24h": 0.043723,
+   "low_24h": 0.040194
+  },
+  "COW-USD": {
+   "mid": 0.1441,
+   "change_24h_pct": 2.34,
+   "high_24h": 0.1463,
+   "low_24h": 0.1321
+  },
+  "UNI-EUR": {
+   "mid": 6.4726,
+   "change_24h_pct": -1.39,
+   "high_24h": 6.9988,
+   "low_24h": 6.262
+  },
+  "FIL-USD": {
+   "mid": 1.0848,
+   "change_24h_pct": 0.96,
+   "high_24h": 1.0972,
+   "low_24h": 1.0379
+  },
+  "AGLD-USD": {
+   "mid": 0.1981,
+   "change_24h_pct": 2.61,
+   "high_24h": 0.209,
+   "low_24h": 0.1881
+  },
+  "TRX-EUR": {
+   "mid": 0.29609,
+   "change_24h_pct": -0.3,
+   "high_24h": 0.2972,
+   "low_24h": 0.29525
+  },
+  "PERP-USD": {
+   "mid": 0.0208,
+   "change_24h_pct": -2.34,
+   "high_24h": 0.0217,
+   "low_24h": 0.0207
+  },
+  "HNT-USD": {
+   "mid": 0.5037,
+   "change_24h_pct": -1.64,
+   "high_24h": 0.53,
+   "low_24h": 0.492
+  },
+  "TURBO-USD": {
+   "mid": 0.0009834,
+   "change_24h_pct": 5.31,
+   "high_24h": 0.001,
+   "low_24h": 0.0009148
+  },
+  "SXT-USD": {
+   "mid": 0.009199,
+   "change_24h_pct": 0.75,
+   "high_24h": 0.0094,
+   "low_24h": 0.00863
+  },
+  "DOT-EUR": {
+   "mid": 1.0834,
+   "change_24h_pct": 11.08,
+   "high_24h": 1.095,
+   "low_24h": 0.9701
+  },
+  "FLOKI-EUR": {
+   "mid": 2.455e-05,
+   "change_24h_pct": 6.29,
+   "high_24h": 2.5e-05,
+   "low_24h": 2.2e-05
+  },
+  "JTO-USD": {
+   "mid": 0.5092,
+   "change_24h_pct": -1.35,
+   "high_24h": 0.5374,
+   "low_24h": 0.4967
+  },
+  "ZKJ-USD": {
+   "mid": 0.00585,
+   "change_24h_pct": 2.98,
+   "high_24h": 0.006061,
+   "low_24h": 0.005603
+  },
+  "PENDLE-EUR": {
+   "mid": 1.8794,
+   "change_24h_pct": 1.79,
+   "high_24h": 2.01,
+   "low_24h": 1.81
+  },
+  "JUP-USDC": {
+   "mid": 0.3708,
+   "change_24h_pct": 9.07,
+   "high_24h": 0.3854,
+   "low_24h": 0.327
+  },
+  "AVNT-USD": {
+   "mid": 0.13596,
+   "change_24h_pct": 3.8,
+   "high_24h": 0.13788,
+   "low_24h": 0.12869
+  },
+  "L3-USD": {
+   "mid": 0.00277,
+   "change_24h_pct": 1.92,
+   "high_24h": 0.003299,
+   "low_24h": 0.0026
+  },
+  "DOLO-USD": {
+   "mid": 0.027885,
+   "change_24h_pct": 0.29,
+   "high_24h": 0.028049,
+   "low_24h": 0.026466
+  },
+  "GLM-USD": {
+   "mid": 0.1313,
+   "change_24h_pct": -0.23,
+   "high_24h": 0.1348,
+   "low_24h": 0.1243
+  },
+  "RARE-USD": {
+   "mid": 0.01655,
+   "change_24h_pct": 2.99,
+   "high_24h": 0.0174,
+   "low_24h": 0.01589
+  },
+  "FIDA-EUR": {
+   "mid": 0.018365,
+   "change_24h_pct": 2.05,
+   "high_24h": 0.018981,
+   "low_24h": 0.017
+  },
+  "ATOM-EUR": {
+   "mid": 1.8273,
+   "change_24h_pct": 16.38,
+   "high_24h": 1.8526,
+   "low_24h": 1.5608
+  },
+  "DOT-USDC": {
+   "mid": 1.2144,
+   "change_24h_pct": 9.97,
+   "high_24h": 1.23,
+   "low_24h": 1.0855
+  },
+  "SEI-USD": {
+   "mid": 0.0653,
+   "change_24h_pct": -1.8,
+   "high_24h": 0.0677,
+   "low_24h": 0.0649
+  },
+  "SPELL-USD": {
+   "mid": 9.324e-05,
+   "change_24h_pct": 1.51,
+   "high_24h": 9.43e-05,
+   "low_24h": 9e-05
+  },
+  "1INCH-USD": {
+   "mid": 0.09666,
+   "change_24h_pct": 0.84,
+   "high_24h": 0.09883,
+   "low_24h": 0.09222
+  },
+  "TRX-USD": {
+   "mid": 0.33185,
+   "change_24h_pct": -0.21,
+   "high_24h": 0.33314,
+   "low_24h": 0.33123
+  },
+  "MON-USD": {
+   "mid": 0.02417,
+   "change_24h_pct": 0.58,
+   "high_24h": 0.0255,
+   "low_24h": 0.02375
+  },
+  "MOG-USD": {
+   "mid": 1.096e-07,
+   "change_24h_pct": 0.74,
+   "high_24h": 1.139e-07,
+   "low_24h": 1.031e-07
+  },
+  "APT-USD": {
+   "mid": 0.8064,
+   "change_24h_pct": 8.52,
+   "high_24h": 0.8446,
+   "low_24h": 0.7317
+  },
+  "TOSHI-USD": {
+   "mid": 0.0001117,
+   "change_24h_pct": 0.09,
+   "high_24h": 0.00011343,
+   "low_24h": 0.00010952
+  },
+  "BNB-EUR": {
+   "mid": 662.175,
+   "change_24h_pct": 0.93,
+   "high_24h": 666.115,
+   "low_24h": 653.015
+  },
+  "NEAR-EUR": {
+   "mid": 4.2952,
+   "change_24h_pct": 6.57,
+   "high_24h": 4.4014,
+   "low_24h": 3.952
+  },
+  "PONKE-USD": {
+   "mid": 0.02115,
+   "change_24h_pct": -0.14,
+   "high_24h": 0.0222,
+   "low_24h": 0.021
+  },
+  "FLUID-USD": {
+   "mid": 2.076,
+   "change_24h_pct": 6.96,
+   "high_24h": 2.126,
+   "low_24h": 1.9223
+  },
+  "COOKIE-USD": {
+   "mid": 0.01158,
+   "change_24h_pct": 2.82,
+   "high_24h": 0.012369,
+   "low_24h": 0.011127
+  },
+  "WAL-USD": {
+   "mid": 0.03420887,
+   "change_24h_pct": 3.43,
+   "high_24h": 0.03556853,
+   "low_24h": 0.032
+  },
+  "GST-USD": {
+   "mid": 0.0010692,
+   "change_24h_pct": 1.92,
+   "high_24h": 0.0011112,
+   "low_24h": 0.0010012
+  },
+  "BEAM-USD": {
+   "mid": 0.00266342,
+   "change_24h_pct": 2.97,
+   "high_24h": 0.0028,
+   "low_24h": 0.00256861
+  },
+  "LRDS-USD": {
+   "mid": 0.015331,
+   "change_24h_pct": -0.13,
+   "high_24h": 0.016,
+   "low_24h": 0.014859
+  },
+  "LDO-EUR": {
+   "mid": 0.3701,
+   "change_24h_pct": 1.5,
+   "high_24h": 0.4099,
+   "low_24h": 0.36
+  },
+  "FLR-USD": {
+   "mid": 0.00703,
+   "change_24h_pct": 3.9,
+   "high_24h": 0.00738,
+   "low_24h": 0.006778
+  },
+  "COTI-USD": {
+   "mid": 0.012669,
+   "change_24h_pct": -0.78,
+   "high_24h": 0.013258,
+   "low_24h": 0.012645
+  },
+  "POL-EUR": {
+   "mid": 0.0889,
+   "change_24h_pct": 0.8,
+   "high_24h": 0.0908,
+   "low_24h": 0.0868
+  },
+  "USDC-EUR": {
+   "mid": 0.8919,
+   "change_24h_pct": -0.02,
+   "high_24h": 0.8927,
+   "low_24h": 0.8897
+  },
+  "ALEO-USD": {
+   "mid": 0.033132,
+   "change_24h_pct": 10.79,
+   "high_24h": 0.033467,
+   "low_24h": 0.029743
+  },
+  "KNC-USD": {
+   "mid": 0.13729,
+   "change_24h_pct": 3.72,
+   "high_24h": 0.13845,
+   "low_24h": 0.12737
+  },
+  "VVV-EUR": {
+   "mid": 19.321,
+   "change_24h_pct": -5.12,
+   "high_24h": 20.897,
+   "low_24h": 19.236
+  },
+  "ETH-USDC": {
+   "mid": 2485.63,
+   "change_24h_pct": 0.1,
+   "high_24h": 2518.65,
+   "low_24h": 2474.35
+  },
+  "ME-USD": {
+   "mid": 0.0716,
+   "change_24h_pct": 5.27,
+   "high_24h": 0.075,
+   "low_24h": 0.0661
+  },
+  "AUDIO-USD": {
+   "mid": 0.01652,
+   "change_24h_pct": -0.79,
+   "high_24h": 0.01845,
+   "low_24h": 0.01626
+  },
+  "ZK-USD": {
+   "mid": 0.013626,
+   "change_24h_pct": 19.53,
+   "high_24h": 0.014599,
+   "low_24h": 0.011268
+  },
+  "FORTH-USD": {
+   "mid": 0.2806,
+   "change_24h_pct": 7.49,
+   "high_24h": 0.295,
+   "low_24h": 0.2589
+  },
+  "LMWR-USD": {
+   "mid": 0.01011,
+   "change_24h_pct": -0.99,
+   "high_24h": 0.01031,
+   "low_24h": 0.00991
+  },
+  "ETC-USD": {
+   "mid": 8.325,
+   "change_24h_pct": 3.54,
+   "high_24h": 8.353,
+   "low_24h": 8.023
+  },
+  "AUCTION-USD": {
+   "mid": 3.753,
+   "change_24h_pct": 5.48,
+   "high_24h": 3.961,
+   "low_24h": 3.554
+  },
+  "AKT-USD": {
+   "mid": 0.716,
+   "change_24h_pct": -1.38,
+   "high_24h": 0.75,
+   "low_24h": 0.69
+  },
+  "API3-USD": {
+   "mid": 0.3145,
+   "change_24h_pct": 8.79,
+   "high_24h": 0.3443,
+   "low_24h": 0.2845
+  },
+  "APE-USD": {
+   "mid": 0.1502,
+   "change_24h_pct": 6.99,
+   "high_24h": 0.1508,
+   "low_24h": 0.1344
+  },
+  "SUSHI-USD": {
+   "mid": 0.2306,
+   "change_24h_pct": 2.3,
+   "high_24h": 0.2333,
+   "low_24h": 0.2186
+  },
+  "KAITO-USD": {
+   "mid": 0.3106,
+   "change_24h_pct": 1.27,
+   "high_24h": 0.32,
+   "low_24h": 0.3
+  },
+  "BTC-USD": {
+   "mid": 82466.74,
+   "change_24h_pct": 0.93,
+   "high_24h": 83426.71,
+   "low_24h": 81542.74
+  },
+  "BOBA-USD": {
+   "mid": 0.0206,
+   "change_24h_pct": 4.0,
+   "high_24h": 0.0215,
+   "low_24h": 0.0195
+  },
+  "ATH-USD": {
+   "mid": 0.006355,
+   "change_24h_pct": -0.61,
+   "high_24h": 0.00685,
+   "low_24h": 0.006255
+  },
+  "REZ-USD": {
+   "mid": 0.00382,
+   "change_24h_pct": 2.42,
+   "high_24h": 0.00389,
+   "low_24h": 0.00359
+  },
+  "SHIB-USD": {
+   "mid": 5.4595e-06,
+   "change_24h_pct": 2.61,
+   "high_24h": 5.4949e-06,
+   "low_24h": 5.2783e-06
+  },
+  "CTSI-USD": {
+   "mid": 0.03416,
+   "change_24h_pct": 1.15,
+   "high_24h": 0.04236,
+   "low_24h": 0.03254
+  },
+  "MINA-USD": {
+   "mid": 0.0793,
+   "change_24h_pct": 2.84,
+   "high_24h": 0.083,
+   "low_24h": 0.076
+  },
+  "ETH-USD": {
+   "mid": 2483.2,
+   "change_24h_pct": 0.41,
+   "high_24h": 2517.84,
+   "low_24h": 2469.3
+  },
+  "XCN-USD": {
+   "mid": 0.00422,
+   "change_24h_pct": 1.7,
+   "high_24h": 0.00433,
+   "low_24h": 0.00406
+  },
+  "ABT-USD": {
+   "mid": 0.302,
+   "change_24h_pct": -1.04,
+   "high_24h": 0.3112,
+   "low_24h": 0.295
+  },
+  "SOL-USD": {
+   "mid": 108.954,
+   "change_24h_pct": -1.21,
+   "high_24h": 111.964,
+   "low_24h": 108.392
+  },
+  "XLM-USD": {
+   "mid": 0.193699,
+   "change_24h_pct": 0.83,
+   "high_24h": 0.1959,
+   "low_24h": 0.191373
+  },
+  "SKL-USD": {
+   "mid": 0.005143,
+   "change_24h_pct": -1.89,
+   "high_24h": 0.006085,
+   "low_24h": 0.0048
+  },
+  "MASK-USD": {
+   "mid": 0.471,
+   "change_24h_pct": 5.39,
+   "high_24h": 0.486,
+   "low_24h": 0.425
+  },
+  "TRB-USD": {
+   "mid": 19.088,
+   "change_24h_pct": 3.63,
+   "high_24h": 19.577,
+   "low_24h": 18.25
+  },
+  "TON-EUR": {
+   "mid": 1.295,
+   "change_24h_pct": 4.88,
+   "high_24h": 1.352,
+   "low_24h": 1.2196
+  },
+  "AURORA-USD": {
+   "mid": 0.0562,
+   "change_24h_pct": -11.29,
+   "high_24h": 0.062819,
+   "low_24h": 0.054459
+  },
+  "PYR-USD": {
+   "mid": 0.0519,
+   "change_24h_pct": 2.99,
+   "high_24h": 0.0551,
+   "low_24h": 0.05
+  },
+  "ARPA-USD": {
+   "mid": 0.011408,
+   "change_24h_pct": 2.42,
+   "high_24h": 0.011493,
+   "low_24h": 0.010757
+  },
+  "SAFE-USD": {
+   "mid": 0.1078,
+   "change_24h_pct": -1.2,
+   "high_24h": 0.1104,
+   "low_24h": 0.098
+  },
+  "HIGH-USD": {
+   "mid": 0.0335,
+   "change_24h_pct": 1.21,
+   "high_24h": 0.0379,
+   "low_24h": 0.032
+  },
+  "EUL-USD": {
+   "mid": 1.3751,
+   "change_24h_pct": 8.09,
+   "high_24h": 1.54,
+   "low_24h": 1.2777
+  },
+  "HBAR-EUR": {
+   "mid": 0.081126,
+   "change_24h_pct": 0.4,
+   "high_24h": 0.082614,
+   "low_24h": 0.079795
+  },
+  "CRV-EUR": {
+   "mid": 0.32177,
+   "change_24h_pct": 6.49,
+   "high_24h": 0.34,
+   "low_24h": 0.29
+  },
+  "ETC-EUR": {
+   "mid": 7.432,
+   "change_24h_pct": 3.2,
+   "high_24h": 7.9,
+   "low_24h": 7.12
+  },
+  "SENT-USD": {
+   "mid": 0.02073,
+   "change_24h_pct": -17.21,
+   "high_24h": 0.02507,
+   "low_24h": 0.02065
+  },
+  "KERNEL-USD": {
+   "mid": 0.050135,
+   "change_24h_pct": 1.94,
+   "high_24h": 0.05115,
+   "low_24h": 0.048735
+  },
+  "PRIME-USD": {
+   "mid": 0.2289,
+   "change_24h_pct": 2.0,
+   "high_24h": 0.2358,
+   "low_24h": 0.223
+  },
+  "CC-USD": {
+   "mid": 0.1216,
+   "change_24h_pct": 3.31,
+   "high_24h": 0.13,
+   "low_24h": 0.1135
+  },
+  "PEPE-USD": {
+   "mid": 3.9408e-06,
+   "change_24h_pct": 2.58,
+   "high_24h": 3.9645e-06,
+   "low_24h": 3.8084e-06
+  },
+  "LQTY-USD": {
+   "mid": 0.2314,
+   "change_24h_pct": 3.05,
+   "high_24h": 0.2432,
+   "low_24h": 0.2174
+  },
+  "RED-USD": {
+   "mid": 0.1464,
+   "change_24h_pct": 2.01,
+   "high_24h": 0.1501,
+   "low_24h": 0.1413
+  }
+ },
+ "source": {
+  "name": "Revolut X (prix publics)",
+  "at": "2026-10-09T22:24:20.972000Z"
+ }
+}

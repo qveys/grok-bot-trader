@@ -1,0 +1,42 @@
+{
+ "assets": [
+  {
+   "currency": "EUR",
+   "qty": 165.71,
+   "available": 165.71,
+   "staked": null,
+   "reserved": 0.0
+  },
+  {
+   "currency": "BTC",
+   "qty": 6.56e-06,
+   "available": 6.56e-06,
+   "staked": null,
+   "reserved": 0.0
+  },
+  {
+   "currency": "SOL",
+   "qty": 0.341856,
+   "available": 0.241308,
+   "staked": 0.100548,
+   "reserved": 0.0
+  },
+  {
+   "currency": "USDC",
+   "qty": 0.029953,
+   "available": 0.029953,
+   "staked": null,
+   "reserved": 0.0
+  },
+  {
+   "currency": "ETH",
+   "qty": 0.03088757,
+   "available": 0.02085589,
+   "staked": 0.01003168,
+   "reserved": 0.0
+  }
+ ],
+ "fetched_at": "2026-10-09T00:17:59.476415Z",
+ "stale": false,
+ "source": "revx account balances --json (lecture seule)"
+}

@@ -1,0 +1,322 @@
+{
+ "at": "2026-10-14T16:33:57.133325Z",
+ "data": {
+  "data": [
+   {
+    "id": "6acf612c-c905-aad2-809d-316fa1d588d7",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000019",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791975724372,
+    "processed_date": 1791975724373
+   },
+   {
+    "id": "6acf0531-dd54-a710-81b7-73fc4f578b58",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000013",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791952177891,
+    "processed_date": 1791952177892
+   },
+   {
+    "id": "6acebd0d-47eb-af02-a91a-3a5ce8914a19",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000158",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791933709476,
+    "processed_date": 1791933709477
+   },
+   {
+    "id": "6acd911d-3781-a00a-a18c-40b8f4a12faa",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000013",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791856925612,
+    "processed_date": 1791856925613
+   },
+   {
+    "id": "6acd6f71-0175-a436-8e27-cdc8973a799a",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000267",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791848305109,
+    "processed_date": 1791848305110
+   },
+   {
+    "id": "6accc1db-02b9-a0b5-9db6-661d26b6fa4a",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000013",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791803867588,
+    "processed_date": 1791803867589
+   },
+   {
+    "id": "6acc8266-8de1-a9a1-a086-0f4749c29d44",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000013",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791787622907,
+    "processed_date": 1791787622908
+   },
+   {
+    "id": "6acc1c83-f0e8-a1dc-bfa5-86b935fa6b87",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000106",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791761539007,
+    "processed_date": 1791761539008
+   },
+   {
+    "id": "6acacb95-e2f7-adeb-a213-0df7f6b22bb5",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000037",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791675285614,
+    "processed_date": 1791675285614
+   },
+   {
+    "id": "6ac9791e-4f84-a908-887f-b5734a2105d2",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000013",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791588638663,
+    "processed_date": 1791588638664
+   },
+   {
+    "id": "6ac940c5-0b3e-af9e-b8ed-4e1115577221",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000017",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791574213669,
+    "processed_date": 1791574213670
+   },
+   {
+    "id": "6ac8f90c-8d56-a944-b87c-ae3c650b2332",
+    "status": "completed",
+    "type": "buy",
+    "source": {
+     "amount": "1.35",
+     "currency": "EUR",
+     "account": {
+      "type": "revolut"
+     }
+    },
+    "destination": {
+     "amount": "0.00001796",
+     "currency": "BTC",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791555852016,
+    "processed_date": 1791555852017
+   },
+   {
+    "id": "6ac84097-41f0-a583-b9ed-b96fabb68330",
+    "status": "completed",
+    "type": "buy",
+    "source": {
+     "amount": "0.50",
+     "currency": "EUR",
+     "account": {
+      "type": "revolut"
+     }
+    },
+    "destination": {
+     "amount": "0.00000679",
+     "currency": "BTC",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791508631285,
+    "processed_date": 1791508631286
+   },
+   {
+    "id": "6ac82313-46b1-a0f2-b805-2aab5804b66c",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000003",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791501075867,
+    "processed_date": 1791501075868
+   },
+   {
+    "id": "6ac77f7d-fcc0-aa18-871d-c35a4ee5a782",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000017",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791459197936,
+    "processed_date": 1791459197937
+   },
+   {
+    "id": "6ac6dc51-2fc7-aefd-a98e-5539d8b28225",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000003",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791417425270,
+    "processed_date": 1791417425271
+   },
+   {
+    "id": "6ac63a1c-9f70-a4d7-abe9-a14e67250c52",
+    "status": "completed",
+    "type": "receive",
+    "source": {
+     "amount": "150.00",
+     "currency": "EUR",
+     "account": {
+      "type": "revolut"
+     }
+    },
+    "destination": {
+     "amount": "150.00",
+     "currency": "EUR",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791375900807,
+    "processed_date": 1791375900808
+   },
+   {
+    "id": "6ac62485-bacf-ad8a-b803-9f01d4e8a5e2",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000020",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791370373130,
+    "processed_date": 1791370373131
+   },
+   {
+    "id": "6ac5b63a-fb4c-af71-be41-3e0aa1f84b64",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.000016",
+     "currency": "SOL",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791342138028,
+    "processed_date": 1791342138029
+   },
+   {
+    "id": "6ac58c41-3e7c-a8fe-8ac6-b5f38c0e6698",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000017",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791331393152,
+    "processed_date": 1791331393153
+   },
+   {
+    "id": "6ac4397a-2673-ade9-89ad-5926f2c6096f",
+    "status": "completed",
+    "type": "reward",
+    "destination": {
+     "amount": "0.00000288",
+     "currency": "ETH",
+     "account": {
+      "type": "revolut_x"
+     }
+    },
+    "created_date": 1791244666971,
+    "processed_date": 1791244666971
+   }
+  ]
+ }
+}

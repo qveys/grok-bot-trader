@@ -1,0 +1,1312 @@
+{
+ "generated_at": "2026-10-09T22:24:20.379816Z",
+ "title": "Équipe trading — Tableau de bord",
+ "mode": "paper",
+ "mode_fr": "Simulation",
+ "show_real": true,
+ "timezone": "Europe/Brussels",
+ "warnings": [],
+ "prices": {
+  "BTC-EUR": {
+   "mid": 73659.225,
+   "change_24h_pct": 1.06,
+   "high_24h": 74410.84,
+   "low_24h": 72668.57,
+   "tick_ts": "2026-10-09T22:23:59.725479Z",
+   "stale": false,
+   "from_ticks": true
+  },
+  "SOL-EUR": {
+   "mid": 97.335,
+   "change_24h_pct": -1.11,
+   "high_24h": 99.8,
+   "low_24h": 96.748,
+   "tick_ts": "2026-10-09T22:23:59.725479Z",
+   "stale": false,
+   "from_ticks": true
+  },
+  "ETH-EUR": {
+   "mid": 2217.715,
+   "change_24h_pct": 0.56,
+   "high_24h": 2245.24,
+   "low_24h": 2200.0,
+   "tick_ts": "2026-10-09T22:23:59.725479Z",
+   "stale": false,
+   "from_ticks": true
+  }
+ },
+ "price_source": {
+  "name": "Collecteur 30 s de l'équipe (repli : Revolut X)",
+  "at": "2026-10-09T22:23:59.725479Z",
+  "stale": false
+ },
+ "trades": [
+  {
+   "id": "6ac8f90c-8d56-a944-b87c-ae3c650b2332",
+   "mode": "reel",
+   "kind": "fill",
+   "pair": "BTC-EUR",
+   "venue": "revolut_x",
+   "side": "achat",
+   "time": "2026-10-09T14:24:12.016000Z",
+   "qty": 1.796e-05,
+   "eur": 1.35,
+   "price": null,
+   "origin": "app Revolut",
+   "decision_link": null,
+   "bot_reason": null,
+   "pnl_eur": null,
+   "status": "Rempli",
+   "source": "revx transaction list",
+   "bot_exit": false
+  },
+  {
+   "id": "6ac84097-41f0-a583-b9ed-b96fabb68330",
+   "mode": "reel",
+   "kind": "fill",
+   "pair": "BTC-EUR",
+   "venue": "revolut_x",
+   "side": "achat",
+   "time": "2026-10-09T01:17:11.285000Z",
+   "qty": 6.79e-06,
+   "eur": 0.5,
+   "price": null,
+   "origin": "app Revolut",
+   "decision_link": null,
+   "bot_reason": null,
+   "pnl_eur": null,
+   "status": "Rempli",
+   "source": "revx transaction list",
+   "bot_exit": false
+  },
+  {
+   "id": "paper-20261006T163221Z-demo-selftest-1",
+   "mode": "sim",
+   "kind": "autotest",
+   "pair": "demo-selftest-1 (test Polymarket)",
+   "buy_time": "2026-10-06T16:32:21Z",
+   "buy_price": 0.45,
+   "amount_eur": 10.0,
+   "qty": 22.222222,
+   "sell_time": null,
+   "sell_price": null,
+   "pnl_eur": null,
+   "pnl_pct": null,
+   "status": "Auto-test (pas compté)",
+   "reason": "Essai technique du programme, pas un vrai trade.",
+   "lesson": null
+  }
+ ],
+ "cycles": {
+  "list": [
+   {
+    "id": "rx-paper-2026-10-09T220647Z-ff0116e3",
+    "cycle_id": "rx-paper-2026-10-09T220647Z-ff0116e3",
+    "single": false,
+    "mode": "sim",
+    "pair": "SOL-EUR",
+    "coin": "SOL",
+    "idea_type": "baisse",
+    "decision_id": "D-036a",
+    "risk_level": "prudente",
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-09T220647Z-ff0116e3",
+      "side": "sell",
+      "time": "2026-10-09T22:06:47Z",
+      "price": 96.96,
+      "amount_eur": 13.4,
+      "qty": 0.13820132013201322,
+      "fee_eur": 0.0067,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     }
+    ],
+    "open": true,
+    "position_status": "open",
+    "target_price": 95.1,
+    "safety_price": 98.82,
+    "stop_price": 98.82,
+    "deadline": "2026-10-10T10:00:00+02:00",
+    "reason": null,
+    "latent_pnl_eur": -0.0585,
+    "latent_pnl_pct": -0.437,
+    "source_lines": [
+     "rx-paper-2026-10-09T220647Z-ff0116e3"
+    ],
+    "plan": {
+     "stop": 98.82,
+     "target": 95.1,
+     "safety": 98.82,
+     "deadline": "2026-10-10T10:00:00+02:00"
+    },
+    "close": null,
+    "decision": {
+     "ref": "D-036a",
+     "id": "D-036",
+     "found": true,
+     "letter": "a",
+     "niveau": "prudente",
+     "niveau_source": "decision",
+     "forecast": "SOL touche 95.10 € (−2,00 %) avant 98.98 € (+2,00 %), d’ici 10h00 CEST le 10/10. Confiance moyenne (~60 %).",
+     "predict_decision": "NE PAS SIMULER maintenant — plafond plein ; prêt : vente de 0.257626 SOL à 97.04 € (≈ 25 €), rachat visé 95.10 €, prix d’arrêt fixe 98.98 €",
+     "risk": [
+      {
+       "heure": "2026-10-10T00:06:40+02:00",
+       "texte": "vente SOL 13,40 € (0,1382 SOL, tout le SOL simulé disponible) à 96,96 €, visé 95,10, arrêt resserré à 98,82 (au lieu de 98,98) pour garder un gain au moins égal à la perte au prix réel ; rappel 10h00",
+       "decision": "D-036"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-09T151109Z-ee1fbd85",
+    "cycle_id": "rx-paper-2026-10-09T151109Z-ee1fbd85",
+    "single": false,
+    "mode": "sim",
+    "pair": "BTC-EUR",
+    "coin": "BTC",
+    "idea_type": "hausse",
+    "decision_id": "D-031a",
+    "risk_level": "prudente",
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-09T151109Z-ee1fbd85",
+      "side": "buy",
+      "time": "2026-10-09T15:11:09Z",
+      "price": 73981.11,
+      "amount_eur": 15.0,
+      "qty": 0.00020275445988847694,
+      "fee_eur": 0.0075,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     },
+     {
+      "id": "rx-paper-2026-10-09T220639Z-a3d0dbe0",
+      "side": "sell",
+      "time": "2026-10-09T22:06:39Z",
+      "price": 73586.385,
+      "amount_eur": 14.91996774582052,
+      "qty": 0.00020275445988847694,
+      "fee_eur": 0.00746,
+      "close_reason": "idee_morte",
+      "rebuy_reason": null,
+      "reason_fr": "idée abandonnée",
+      "realized_pnl_eur": -0.094992,
+      "realized_pnl_pct": -0.6333,
+      "realized_pnl_gross_eur": -0.080032,
+      "fees_eur": 0.01496,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": 73586.385
+     }
+    ],
+    "open": false,
+    "position_status": "closed",
+    "target_price": 74843.0,
+    "safety_price": null,
+    "stop_price": 73120.0,
+    "deadline": "2026-10-09T22:00:00+02:00",
+    "reason": "idée morte — rappel 22h00 passé, prix contre nous (~73 475 € à 22h, sortie 73 586 €) ; ni le prix visé 74 843 € ni l’arrêt 73 120 € n’ont été touchés (haut ticks ~74 148 €, creux ~73 444 €) ; Predict a déclaré l’idée morte à ~00h04, Risk a fermé pour libérer ~15 €",
+    "latent_pnl_eur": null,
+    "latent_pnl_pct": null,
+    "source_lines": [
+     "rx-paper-2026-10-09T151109Z-ee1fbd85",
+     "rx-paper-2026-10-09T220639Z-a3d0dbe0"
+    ],
+    "lesson": "à surveiller — 3e perte « idée à la hausse » simu d’affilée (après D-024a et D-023) : après le rappel, loin de la cible et déjà contre, couper libère le plafond ; ralentir un peu les achats hausse, pas encore une règle (~3 essais hausse fermés)",
+    "result_text": "perte ≈ −0,09 € (−0,63 %)",
+    "journal_kind": "essai",
+    "decision_link": "D-031a",
+    "plan": {
+     "stop": 73120.0,
+     "target": 74843.0,
+     "safety": null,
+     "deadline": "2026-10-09T22:00:00+02:00"
+    },
+    "close": {
+     "leg_id": "rx-paper-2026-10-09T220639Z-a3d0dbe0",
+     "reason_fr": "idée abandonnée",
+     "close_reason": "idee_morte",
+     "rebuy_reason": null,
+     "price": 73586.385,
+     "time": "2026-10-09T22:06:39Z",
+     "trigger_price": 73586.385,
+     "trigger_source": "trades_log"
+    },
+    "decision": {
+     "ref": "D-031a",
+     "id": "D-031",
+     "found": true,
+     "letter": "a",
+     "niveau": "prudente",
+     "niveau_source": "decision",
+     "forecast": "BTC touche 74 843 € (+1,2 %) avant 73 069 € (−1,2 %), d'ici 22h00 CEST.",
+     "predict_decision": "SIMULER — achat de 0,000203 BTC à 73 956 € (≈ 15 €), prix visé 74 843 €, prix d'arrêt fixe 73 069 €",
+     "risk": [
+      {
+       "heure": "2026-10-09 17h11",
+       "texte": "D-031a (prudente) achat BTC 15 € à 73 981,11 €, visé 74 843, arrêt resserré à 73 120 (au lieu de 73 069) pour garder un gain au moins égal à la perte au prix réel ; D-031b (équilibrée) vente SOL 10 € à 97,93 €, visé 96,32, arrêt 98,87. Rappel 22h. Place 50/50 €. Risquée non ouverte (plus de place).",
+       "decision": "D-031"
+      },
+      {
+       "heure": "2026-10-10T00:06:00+02:00",
+       "texte": "revue des ouverts : D-024b gardée ; D-031a fermée (idée morte) à 73 586,39 €, résultat −0,09 €",
+       "decision": "D-036"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-09T151109Z-aa309e18",
+    "cycle_id": "rx-paper-2026-10-09T151109Z-aa309e18",
+    "single": false,
+    "mode": "sim",
+    "pair": "SOL-EUR",
+    "coin": "SOL",
+    "idea_type": "baisse",
+    "decision_id": "D-031b",
+    "risk_level": "equilibree",
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-09T151109Z-aa309e18",
+      "side": "sell",
+      "time": "2026-10-09T15:11:09Z",
+      "price": 97.93,
+      "amount_eur": 10.0,
+      "qty": 0.10211375472276114,
+      "fee_eur": 0.005,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     }
+    ],
+    "open": true,
+    "position_status": "open",
+    "target_price": 96.32,
+    "safety_price": 98.87,
+    "stop_price": 98.87,
+    "deadline": "2026-10-09T22:00:00+02:00",
+    "reason": null,
+    "latent_pnl_eur": 0.0558,
+    "latent_pnl_pct": 0.558,
+    "source_lines": [
+     "rx-paper-2026-10-09T151109Z-aa309e18"
+    ],
+    "plan": {
+     "stop": 98.87,
+     "target": 96.32,
+     "safety": 98.87,
+     "deadline": "2026-10-09T22:00:00+02:00"
+    },
+    "close": null,
+    "decision": {
+     "ref": "D-031b",
+     "id": "D-031",
+     "found": true,
+     "letter": "b",
+     "niveau": "équilibrée",
+     "niveau_source": "decision",
+     "forecast": "SOL touche 96,32 € (−1,6 %) avant 98,87 € (+1,0 %), d'ici 22h00 CEST.",
+     "predict_decision": "SIMULER — vente de 0,102 SOL à 97,89 € (≈ 10 €), rachat visé 96,32 €, prix d'arrêt fixe 98,87 €",
+     "risk": [
+      {
+       "heure": "2026-10-09 17h11",
+       "texte": "D-031a (prudente) achat BTC 15 € à 73 981,11 €, visé 74 843, arrêt resserré à 73 120 (au lieu de 73 069) pour garder un gain au moins égal à la perte au prix réel ; D-031b (équilibrée) vente SOL 10 € à 97,93 €, visé 96,32, arrêt 98,87. Rappel 22h. Place 50/50 €. Risquée non ouverte (plus de place).",
+       "decision": "D-031"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-09T142449Z-a11eb3ad",
+    "cycle_id": "rx-paper-2026-10-09T142449Z-a11eb3ad",
+    "single": false,
+    "mode": "sim",
+    "pair": "ETH-EUR",
+    "coin": "ETH",
+    "idea_type": "baisse",
+    "decision_id": "D-028a",
+    "risk_level": "prudente",
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-09T142449Z-a11eb3ad",
+      "side": "sell",
+      "time": "2026-10-09T14:24:49Z",
+      "price": 2225.87,
+      "amount_eur": 15.0,
+      "qty": 0.006739,
+      "fee_eur": 0.0075,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     }
+    ],
+    "open": true,
+    "position_status": "open",
+    "target_price": 2181.0,
+    "safety_price": 2270.0,
+    "stop_price": 2270.0,
+    "deadline": "2026-10-09T22:00:00+02:00",
+    "reason": null,
+    "latent_pnl_eur": 0.0475,
+    "latent_pnl_pct": 0.316,
+    "source_lines": [
+     "rx-paper-2026-10-09T142449Z-a11eb3ad"
+    ],
+    "plan": {
+     "stop": 2270.0,
+     "target": 2181.0,
+     "safety": 2270.0,
+     "deadline": "2026-10-09T22:00:00+02:00"
+    },
+    "close": null,
+    "decision": {
+     "ref": "D-028a",
+     "id": "D-028",
+     "found": true,
+     "letter": "a",
+     "niveau": "prudente",
+     "niveau_source": "decision",
+     "forecast": "ETH touche 2,180.60 € (−2 %) avant 2,269.60 € (+2 %), d’ici 22h00 CEST. Confiance moyenne (~60 %).",
+     "predict_decision": "NE PAS SIMULER maintenant — place ≈ 5 € ; prêt : vente de 0.011235 ETH à 2,225.10 € (≈ 25 €), rachat visé 2,180.60 €, prix d’arrêt fixe 2,269.60 €",
+     "risk": [
+      {
+       "heure": "2026-10-09 16:25",
+       "texte": "D-026 fermé à l'arrêt (98,51 €, −0,11 €). D-028a prudente OUI réduite à 15 € (place libre) : vente ETH à 2 225,87 €, visé 2 181 €, arrêt 2 270 €, rappel 22h00. D-028b NON (pas de place). D-028c risquée NON : BTC déjà engagé par D-023 et plus de place après la prudente. Engagé ~50/50 €.",
+       "decision": "D-028"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-09T134330Z-d3f5b95e",
+    "cycle_id": "rx-paper-2026-10-09T134330Z-d3f5b95e",
+    "single": false,
+    "mode": "sim",
+    "pair": "SOL-EUR",
+    "coin": "SOL",
+    "idea_type": "baisse",
+    "decision_id": "D-026",
+    "risk_level": "risquee",
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-09T134330Z-d3f5b95e",
+      "side": "sell",
+      "time": "2026-10-09T13:43:30Z",
+      "price": 97.49,
+      "amount_eur": 10.0,
+      "qty": 0.10257,
+      "fee_eur": 0.005,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     },
+     {
+      "id": "rx-paper-2026-10-09T142212Z-f2c8054f",
+      "side": "buy",
+      "time": "2026-10-09T14:22:12Z",
+      "price": 98.50999999999999,
+      "amount_eur": 10.1041707,
+      "qty": 0.10257,
+      "fee_eur": 0.005052,
+      "close_reason": "stop_hit",
+      "rebuy_reason": "safety",
+      "reason_fr": "rachat de sécurité",
+      "realized_pnl_eur": -0.114673,
+      "realized_pnl_pct": -1.1468,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": 0.0,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": 98.50999999999999
+     }
+    ],
+    "open": false,
+    "position_status": "closed",
+    "target_price": 95.54,
+    "safety_price": 98.47,
+    "stop_price": 98.47,
+    "deadline": "2026-10-09T22:00:00+02:00",
+    "reason": null,
+    "latent_pnl_eur": null,
+    "latent_pnl_pct": null,
+    "source_lines": [
+     "rx-paper-2026-10-09T134330Z-d3f5b95e",
+     "rx-paper-2026-10-09T142212Z-f2c8054f"
+    ],
+    "plan": {
+     "stop": 98.47,
+     "target": 95.54,
+     "safety": 98.47,
+     "deadline": "2026-10-09T22:00:00+02:00"
+    },
+    "close": {
+     "leg_id": "rx-paper-2026-10-09T142212Z-f2c8054f",
+     "reason_fr": "rachat de sécurité",
+     "close_reason": "stop_hit",
+     "rebuy_reason": "safety",
+     "price": 98.50999999999999,
+     "time": "2026-10-09T14:22:12Z",
+     "trigger_price": 98.50999999999999,
+     "trigger_source": "trades_log"
+    },
+    "decision": {
+     "ref": "D-026",
+     "id": "D-026",
+     "found": true,
+     "letter": null,
+     "niveau": "risquée",
+     "niveau_source": "trades_log",
+     "forecast": null,
+     "predict_decision": null,
+     "risk": [
+      {
+       "heure": "2026-10-09 15:43",
+       "texte": "D-024a FERMÉ à la main (idée morte selon Predict, SOL sous l'entrée) : vente 0,15199 SOL à 97,49 €, perte −0,20 €. D-026 risquée OUI : vente 10 € SOL à 97,49 €, rachat visé 95,54 € (−2 %), arrêt 98,47 € (+1 %), rappel 22h00 ; prix ajustés au prix du moment pour garder gain = 2× la perte. D-023 gardé. Engagé 45,16 / 50 €.",
+       "decision": "D-027"
+      },
+      {
+       "heure": "2026-10-09 16:25",
+       "texte": "D-026 fermé à l'arrêt (98,51 €, −0,11 €). D-028a prudente OUI réduite à 15 € (place libre) : vente ETH à 2 225,87 €, visé 2 181 €, arrêt 2 270 €, rappel 22h00. D-028b NON (pas de place). D-028c risquée NON : BTC déjà engagé par D-023 et plus de place après la prudente. Engagé ~50/50 €.",
+       "decision": "D-028"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-09T130833Z-aa77fd43",
+    "cycle_id": "rx-paper-2026-10-09T130833Z-aa77fd43",
+    "single": false,
+    "mode": "sim",
+    "pair": "SOL-EUR",
+    "coin": "SOL",
+    "idea_type": "hausse",
+    "decision_id": "D-024a",
+    "risk_level": null,
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-09T130833Z-aa77fd43",
+      "side": "buy",
+      "time": "2026-10-09T13:08:33Z",
+      "price": 98.69,
+      "amount_eur": 15.0,
+      "qty": 0.15199,
+      "fee_eur": 0.0075,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     },
+     {
+      "id": "rx-paper-2026-10-09T134330Z-f81afbbf",
+      "side": "sell",
+      "time": "2026-10-09T13:43:30Z",
+      "price": 97.49,
+      "amount_eur": 14.817505099999998,
+      "qty": 0.15199,
+      "fee_eur": 0.007319,
+      "close_reason": "idee_morte",
+      "rebuy_reason": null,
+      "reason_fr": "idée abandonnée",
+      "realized_pnl_eur": -0.195003,
+      "realized_pnl_pct": -1.316,
+      "realized_pnl_gross_eur": -0.180275,
+      "fees_eur": 0.014728,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": 97.49
+     },
+     {
+      "id": "rx-paper-2026-10-09T134625Z-08368870",
+      "side": "sell",
+      "time": "2026-10-09T13:46:25Z",
+      "price": 97.74,
+      "amount_eur": 0.1807368974291185,
+      "qty": 0.0018491599900666924,
+      "fee_eur": 8.9e-05,
+      "close_reason": "idee_morte_reste",
+      "rebuy_reason": null,
+      "reason_fr": "idée abandonnée (le reste)",
+      "realized_pnl_eur": -0.00192,
+      "realized_pnl_pct": -1.0623,
+      "realized_pnl_gross_eur": -0.001741,
+      "fees_eur": 0.000179,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": 97.74
+     }
+    ],
+    "open": false,
+    "position_status": "closed",
+    "target_price": 100.09,
+    "safety_price": null,
+    "stop_price": 97.3,
+    "deadline": "2026-10-09T17:00:00+02:00",
+    "reason": "idée à la baisse ouverte la veille ; cible 96,53 € jamais touchée (creux ~96,93 €), prix contre nous près de l’arrêt 99,47 € (haut ~99,31 €) ; Predict a déclaré l’idée morte à 14h02 ; Risk a fermé pour libérer le plafond simu (heure limite 10h = rappel seulement)",
+    "latent_pnl_eur": null,
+    "latent_pnl_pct": null,
+    "source_lines": [
+     "rx-paper-2026-10-09T130833Z-aa77fd43",
+     "rx-paper-2026-10-09T134330Z-f81afbbf",
+     "rx-paper-2026-10-09T134625Z-08368870"
+    ],
+    "lesson": "une idée de nuit sans cible touchée avant l’heure rappel, avec le prix déjà contre nous, vaut mieux être coupée tôt plutôt que de garder le plafond bloqué",
+    "result_text": "perte ≈ −0,13 € (−0,89 %)",
+    "journal_kind": "essai",
+    "decision_link": "D-021",
+    "plan": {
+     "stop": 97.3,
+     "target": 100.09,
+     "safety": null,
+     "deadline": "2026-10-09T17:00:00+02:00"
+    },
+    "close": {
+     "leg_id": "rx-paper-2026-10-09T134625Z-08368870",
+     "reason_fr": "idée abandonnée (le reste)",
+     "close_reason": "idee_morte_reste",
+     "rebuy_reason": null,
+     "price": 97.74,
+     "time": "2026-10-09T13:46:25Z",
+     "trigger_price": 97.74,
+     "trigger_source": "trades_log"
+    },
+    "decision": {
+     "ref": "D-024a",
+     "id": "D-024",
+     "found": true,
+     "letter": "a",
+     "niveau": "prudente",
+     "niveau_source": "decision",
+     "forecast": "SOL touche 100,09 € (+1,42 %) avant 97,30 € (−1,41 %), d'ici 17h00 CEST. Confiance faible (~55 %).",
+     "predict_decision": "SIMULER — achat de 0,152 SOL à 98,69 € (≈ 15,00 €), prix visé 100,09 €, prix d'arrêt fixe 97,30 €",
+     "risk": [
+      {
+       "heure": "2026-10-09 15:43",
+       "texte": "D-024a FERMÉ à la main (idée morte selon Predict, SOL sous l'entrée) : vente 0,15199 SOL à 97,49 €, perte −0,20 €. D-026 risquée OUI : vente 10 € SOL à 97,49 €, rachat visé 95,54 € (−2 %), arrêt 98,47 € (+1 %), rappel 22h00 ; prix ajustés au prix du moment pour garder gain = 2× la perte. D-023 gardé. Engagé 45,16 / 50 €.",
+       "decision": "D-027"
+      },
+      {
+       "heure": "2026-10-09 15:50",
+       "texte": "Caisse simu corrigée de −0,18 € (les deux ventes de D-024a avaient crédité le coût au lieu du prix de vente) ; D-024a : perte −0,20 €. Rapprochement Revolut écrit (« sans objet » en simu) ; numéro de cycle sur chaque vente/rachat. Défaut de reste corrigé.",
+       "decision": "D-027"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-09T130833Z-8d63c1ab",
+    "cycle_id": "rx-paper-2026-10-09T130833Z-8d63c1ab",
+    "single": false,
+    "mode": "sim",
+    "pair": "ETH-EUR",
+    "coin": "ETH",
+    "idea_type": "baisse",
+    "decision_id": "D-024b",
+    "risk_level": null,
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-09T130833Z-8d63c1ab",
+      "side": "sell",
+      "time": "2026-10-09T13:08:33Z",
+      "price": 2232.7,
+      "amount_eur": 10.0,
+      "qty": 0.004479,
+      "fee_eur": 0.005,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     }
+    ],
+    "open": true,
+    "position_status": "open",
+    "target_price": 2197.0,
+    "safety_price": 2255.0,
+    "stop_price": 2255.0,
+    "deadline": "2026-10-09T17:00:00+02:00",
+    "reason": null,
+    "latent_pnl_eur": 0.0621,
+    "latent_pnl_pct": 0.621,
+    "source_lines": [
+     "rx-paper-2026-10-09T130833Z-8d63c1ab"
+    ],
+    "plan": {
+     "stop": 2255.0,
+     "target": 2197.0,
+     "safety": 2255.0,
+     "deadline": "2026-10-09T17:00:00+02:00"
+    },
+    "close": null,
+    "decision": {
+     "ref": "D-024b",
+     "id": "D-024",
+     "found": true,
+     "letter": "b",
+     "niveau": "équilibrée",
+     "niveau_source": "decision",
+     "forecast": "ETH touche 2 197 € (−1,60 %) avant 2 255 € (+1,00 %), d'ici 17h00 CEST. Confiance faible (~55 %).",
+     "predict_decision": "SIMULER — vente de 0,00448 ETH à 2 232,70 € (≈ 10,00 €), rachat visé 2 197 €, prix d'arrêt fixe 2 255 €",
+     "risk": [
+      {
+       "heure": "2026-10-10T00:06:00+02:00",
+       "texte": "revue des ouverts : D-024b gardée ; D-031a fermée (idée morte) à 73 586,39 €, résultat −0,09 €",
+       "decision": "D-036"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-09T123021Z-0f531d4f",
+    "cycle_id": "rx-paper-2026-10-09T123021Z-0f531d4f",
+    "single": false,
+    "mode": "sim",
+    "pair": "BTC-EUR",
+    "coin": "BTC",
+    "idea_type": "hausse",
+    "decision_id": "D-023",
+    "risk_level": null,
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-09T123021Z-0f531d4f",
+      "side": "buy",
+      "time": "2026-10-09T12:30:21Z",
+      "price": 74120.0,
+      "amount_eur": 24.98,
+      "qty": 0.000337,
+      "fee_eur": null,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     },
+     {
+      "id": "rx-paper-2026-10-09T150928Z-1fef882c",
+      "side": "sell",
+      "time": "2026-10-09T15:09:28Z",
+      "price": 73927.97,
+      "amount_eur": 24.913725890000002,
+      "qty": 0.000337,
+      "fee_eur": 0.012457,
+      "close_reason": "idee_morte",
+      "rebuy_reason": null,
+      "reason_fr": "idée abandonnée",
+      "realized_pnl_eur": -0.078731,
+      "realized_pnl_pct": -0.3152,
+      "realized_pnl_gross_eur": -0.066274,
+      "fees_eur": 0.012457,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": 73927.97
+     }
+    ],
+    "open": false,
+    "position_status": "closed",
+    "target_price": null,
+    "safety_price": null,
+    "stop_price": 73379.0,
+    "deadline": "2026-10-09T17:00:00+02:00",
+    "reason": "idée morte (Predict après rappel 17h00) — prix un peu contre nous (≈ 74 082 € puis sortie 73 928 €) ; ni le prix visé 75 232 € ni l’arrêt 73 379 € n’ont été touchés (haut ticks ~74 349 €, creux ~73 663 €) ; Risk a fermé pour libérer ~25 € sous le plafond simu",
+    "latent_pnl_eur": null,
+    "latent_pnl_pct": null,
+    "source_lines": [
+     "rx-paper-2026-10-09T123021Z-0f531d4f",
+     "rx-paper-2026-10-09T150928Z-1fef882c"
+    ],
+    "lesson": "à surveiller — après l’heure rappel, une idée à la hausse encore loin de la cible et déjà un peu contre peut être coupée tôt pour libérer le plafond (2e essai hausse simu du jour après D-024a, pas une règle)",
+    "result_text": "perte ≈ −0,08 € (−0,32 %)",
+    "journal_kind": "essai",
+    "decision_link": "D-023",
+    "plan": {
+     "stop": 73379.0,
+     "target": 75232.0,
+     "safety": null,
+     "deadline": "2026-10-09T17:00:00+02:00"
+    },
+    "close": {
+     "leg_id": "rx-paper-2026-10-09T150928Z-1fef882c",
+     "reason_fr": "idée abandonnée",
+     "close_reason": "idee_morte",
+     "rebuy_reason": null,
+     "price": 73927.97,
+     "time": "2026-10-09T15:09:28Z",
+     "trigger_price": 73927.97,
+     "trigger_source": "trades_log"
+    },
+    "decision": {
+     "ref": "D-023",
+     "id": "D-023",
+     "found": true,
+     "letter": null,
+     "niveau": null,
+     "niveau_source": null,
+     "forecast": "BTC touche 75 232 € (+1,5 %) avant 73 379 € (−1 %), d'ici aujourd'hui 17h00 CEST. Confiance faible (~55 %).",
+     "predict_decision": "SIMULER — achat de 0,000337 BTC à 74 120 € (≈ 24,98 €), prix visé 75 232 €, prix d'arrêt fixe 73 379 €",
+     "risk": [
+      {
+       "heure": "2026-10-09 14:30",
+       "texte": "D-023 VALIDÉ en simulation : achat 0,000337 BTC à 74 120 € (24,98 €), arrêt 73 379 €, visé 75 232 €, rappel 17h00. Contrôles : ≤25 €, arrêt présent, total 24,98/50 €, paire permise, id présent. Gardien lancé. Défaut repéré : le prix visé n'était pas enregistré pour les achats (hausse) ; correction en cours.",
+       "decision": "D-023"
+      },
+      {
+       "heure": "2026-10-09 14:34",
+       "texte": "Corrigé : le gardien vend désormais un achat (hausse) à son prix visé (le prix d'arrêt reste prioritaire) ; frais d'achat comptés. D-023 a son prix visé 75 232 €. Tests 204/204.",
+       "decision": "D-023"
+      },
+      {
+       "heure": "2026-10-09 15:43",
+       "texte": "D-024a FERMÉ à la main (idée morte selon Predict, SOL sous l'entrée) : vente 0,15199 SOL à 97,49 €, perte −0,20 €. D-026 risquée OUI : vente 10 € SOL à 97,49 €, rachat visé 95,54 € (−2 %), arrêt 98,47 € (+1 %), rappel 22h00 ; prix ajustés au prix du moment pour garder gain = 2× la perte. D-023 gardé. Engagé 45,16 / 50 €.",
+       "decision": "D-027"
+      },
+      {
+       "heure": "2026-10-09 16:25",
+       "texte": "D-026 fermé à l'arrêt (98,51 €, −0,11 €). D-028a prudente OUI réduite à 15 € (place libre) : vente ETH à 2 225,87 €, visé 2 181 €, arrêt 2 270 €, rappel 22h00. D-028b NON (pas de place). D-028c risquée NON : BTC déjà engagé par D-023 et plus de place après la prudente. Engagé ~50/50 €.",
+       "decision": "D-028"
+      },
+      {
+       "heure": "2026-10-09 17h10",
+       "texte": "D-023 BTC hausse fermée en simu (idée morte selon Predict, prix contre), vente 73 927,97 €, résultat −0,08 €. D-030 non ouverte : SOL déjà à 97,76 €, à ce prix la prudente gagne moins que ce qu'elle risque et l'arrêt de la risquée dépasse 1 % ; l'équilibrée dépassait déjà ses limites (arrêt 1,53 %, gain 1,47× la perte). 25 € libres.",
+       "decision": "D-030"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-08T205852Z-1e71faf5",
+    "cycle_id": "rx-paper-2026-10-08T205852Z-1e71faf5",
+    "single": false,
+    "mode": "sim",
+    "pair": "SOL-EUR",
+    "coin": "SOL",
+    "idea_type": "baisse",
+    "decision_id": "D-021",
+    "risk_level": null,
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-08T205852Z-1e71faf5",
+      "side": "sell",
+      "time": "2026-10-08T20:58:52Z",
+      "price": 98.0,
+      "amount_eur": 14.7,
+      "qty": 0.15,
+      "fee_eur": 0.00735,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     },
+     {
+      "id": "rx-paper-2026-10-09T122652Z-d34350c3",
+      "side": "buy",
+      "time": "2026-10-09T12:26:52Z",
+      "price": 98.77,
+      "amount_eur": 14.815499999999998,
+      "qty": 0.15,
+      "fee_eur": 0.007408,
+      "close_reason": "time_exit",
+      "rebuy_reason": "time",
+      "reason_fr": "heure limite atteinte",
+      "realized_pnl_eur": -0.130258,
+      "realized_pnl_pct": -0.8861,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": 0.0,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": 98.77
+     }
+    ],
+    "open": false,
+    "position_status": "closed",
+    "target_price": 96.53,
+    "safety_price": 99.47,
+    "stop_price": 99.47,
+    "deadline": "2026-10-09T10:00:00+02:00",
+    "reason": null,
+    "latent_pnl_eur": null,
+    "latent_pnl_pct": null,
+    "source_lines": [
+     "rx-paper-2026-10-08T205852Z-1e71faf5",
+     "rx-paper-2026-10-09T122652Z-d34350c3"
+    ],
+    "plan": {
+     "stop": 99.47,
+     "target": 96.53,
+     "safety": 99.47,
+     "deadline": "2026-10-09T10:00:00+02:00"
+    },
+    "close": {
+     "leg_id": "rx-paper-2026-10-09T122652Z-d34350c3",
+     "reason_fr": "heure limite atteinte",
+     "close_reason": "time_exit",
+     "rebuy_reason": "time",
+     "price": 98.77,
+     "time": "2026-10-09T12:26:52Z",
+     "trigger_price": 98.77,
+     "trigger_source": "trades_log"
+    },
+    "decision": {
+     "ref": "D-021",
+     "id": "D-021",
+     "found": true,
+     "letter": null,
+     "niveau": null,
+     "niveau_source": null,
+     "forecast": "SOL touche 96,53 € (−1,5 %) avant 99,47 € (+1,5 %), d'ici demain 10h00 CEST. Confiance faible (~55 %).",
+     "predict_decision": "SIMULER — vente de 0,15 SOL à 98,00 € (≈ 14,70 €), rachat visé 96,53 €, prix d'arrêt fixe 99,47 €",
+     "risk": [
+      {
+       "heure": "2026-10-08 22:59",
+       "texte": "D-021 VALIDÉ en simulation : SOL idée à la baisse, vente 0,15 SOL à 98,00 € (14,70 €), rachat visé 96,53 €, arrêt 99,47 €, heure limite 09/10 10h00. Contrôles : ≤25 €, arrêt présent, total ouvert 14,70/25 €, paire permise, id présent. Gardien lancé. Correction : le capital comptait la vente à découvert en double (capital affiché 528,67 € au lieu de 499,27 €) ; corrigé, sommet remis à 500 €.",
+       "decision": "D-021"
+      },
+      {
+       "heure": "2026-10-08 23:04",
+       "texte": "Heure limite = rappel seulement (décision Quentin) : le gardien ne ferme plus un trade à l'heure limite, en simu comme en live ; il écrit un rappel pour Predict. Seuls le prix d'arrêt et le prix visé ferment. Une heure limite passée ou illisible ne bloque plus un trade. D-021 : 10h00 demain devient un rappel. Gardien redémarré avec la nouvelle règle.",
+       "decision": "D-021"
+      },
+      {
+       "heure": "2026-10-09 14:26",
+       "texte": "D-021 FERMÉ à la main (simulation) : rachat 0,15 SOL à 98,77 €, perte −0,13 € (frais compris). Raison : idée déclarée morte par Predict à 14h02 (bonne nouvelle Solana contre nous), heure limite de 10h passée ; fermer libère le plafond pour l'achat BTC prévu. Plafond simu : 0 / 50 € engagés.",
+       "decision": "D-022"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-retro-D-019-sell",
+    "cycle_id": "rx-paper-retro-D-019-sell",
+    "single": false,
+    "mode": "sim",
+    "pair": "ETH-EUR",
+    "coin": "ETH",
+    "idea_type": "baisse",
+    "decision_id": "D-019",
+    "risk_level": null,
+    "legs": [
+     {
+      "id": "rx-paper-retro-D-019-sell",
+      "side": "sell",
+      "time": "2026-10-08T12:34:00Z",
+      "price": 2261.905,
+      "amount_eur": 12.440478,
+      "qty": 0.0055,
+      "fee_eur": 0.011196,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": "retro",
+      "trigger_price": null
+     },
+     {
+      "id": "rx-paper-retro-D-019-rebuy",
+      "side": "buy",
+      "time": "2026-10-08T13:39:23Z",
+      "price": 2250.6,
+      "amount_eur": 12.3783,
+      "qty": 0.0055,
+      "fee_eur": 0.0,
+      "close_reason": "target_hit",
+      "rebuy_reason": "target",
+      "reason_fr": "rachat au prix visé",
+      "realized_pnl_eur": 0.050982,
+      "realized_pnl_pct": 0.4098,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": 0.0,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": "retro",
+      "trigger_price": null
+     }
+    ],
+    "open": false,
+    "position_status": "closed",
+    "target_price": 2250.6,
+    "safety_price": 2273.22,
+    "stop_price": 2273.22,
+    "deadline": null,
+    "reason": null,
+    "latent_pnl_eur": null,
+    "latent_pnl_pct": null,
+    "source_lines": [
+     "rx-paper-retro-D-019-sell",
+     "rx-paper-retro-D-019-rebuy"
+    ],
+    "plan": {
+     "stop": 2273.22,
+     "target": 2250.6,
+     "safety": 2273.22,
+     "deadline": null
+    },
+    "close": {
+     "leg_id": "rx-paper-retro-D-019-rebuy",
+     "reason_fr": "rachat au prix visé",
+     "close_reason": "target_hit",
+     "rebuy_reason": "target",
+     "price": 2250.6,
+     "time": "2026-10-08T13:39:23Z",
+     "trigger_price": null,
+     "trigger_source": null
+    },
+    "decision": {
+     "ref": "D-019",
+     "id": "D-019",
+     "found": true,
+     "letter": null,
+     "niveau": null,
+     "niveau_source": null,
+     "forecast": null,
+     "predict_decision": "VENDRE (simulation rétro, comptée dans le capital simulé — accord Quentin)",
+     "risk": [
+      {
+       "heure": "17:30",
+       "texte": "D-019 et D-020 vérifiés sur les prix 30 s (rachat touché avant l'arrêt ; ETH est monté à 2271,3 €, à 2 € de l'arrêt). Enregistrés à part (étiquette « rétro », state/retro_sims.jsonl), hors capital simulé officiel. Réserve : ouverts en même temps = ~49 € > plafond 5 % (25 €). Avec les règles de demain, une seule des deux passerait (ou deux de ~12 €).",
+       "decision": "D-020"
+      },
+      {
+       "heure": "17:31",
+       "texte": "D-019 et D-020 réduits à ~12,5 € chacun (demande Predict, plafond 25 € partagé). D-019 +0.0510 €, D-020 +0.0501 €. Gain gardé en euros, mêmes pièces rachetées. Capital simulé 499.27 €.",
+       "decision": "D-020"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-retro-D-020-sell",
+    "cycle_id": "rx-paper-retro-D-020-sell",
+    "single": false,
+    "mode": "sim",
+    "pair": "SOL-EUR",
+    "coin": "SOL",
+    "idea_type": "baisse",
+    "decision_id": "D-020",
+    "risk_level": null,
+    "legs": [
+     {
+      "id": "rx-paper-retro-D-020-sell",
+      "side": "sell",
+      "time": "2026-10-08T12:34:00Z",
+      "price": 100.695,
+      "amount_eur": 12.48618,
+      "qty": 0.124,
+      "fee_eur": 0.011238,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": "retro",
+      "trigger_price": null
+     },
+     {
+      "id": "rx-paper-retro-D-020-rebuy",
+      "side": "buy",
+      "time": "2026-10-08T13:02:23Z",
+      "price": 100.2,
+      "amount_eur": 12.4248,
+      "qty": 0.124,
+      "fee_eur": 0.0,
+      "close_reason": "target_hit",
+      "rebuy_reason": "target",
+      "reason_fr": "rachat au prix visé",
+      "realized_pnl_eur": 0.050142,
+      "realized_pnl_pct": 0.4016,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": 0.0,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": "retro",
+      "trigger_price": null
+     }
+    ],
+    "open": false,
+    "position_status": "closed",
+    "target_price": 100.2,
+    "safety_price": 101.2,
+    "stop_price": 101.2,
+    "deadline": null,
+    "reason": null,
+    "latent_pnl_eur": null,
+    "latent_pnl_pct": null,
+    "source_lines": [
+     "rx-paper-retro-D-020-sell",
+     "rx-paper-retro-D-020-rebuy"
+    ],
+    "plan": {
+     "stop": 101.2,
+     "target": 100.2,
+     "safety": 101.2,
+     "deadline": null
+    },
+    "close": {
+     "leg_id": "rx-paper-retro-D-020-rebuy",
+     "reason_fr": "rachat au prix visé",
+     "close_reason": "target_hit",
+     "rebuy_reason": "target",
+     "price": 100.2,
+     "time": "2026-10-08T13:02:23Z",
+     "trigger_price": null,
+     "trigger_source": null
+    },
+    "decision": {
+     "ref": "D-020",
+     "id": "D-020",
+     "found": true,
+     "letter": null,
+     "niveau": null,
+     "niveau_source": null,
+     "forecast": null,
+     "predict_decision": "VENDRE (simulation rétro, comptée dans le capital simulé — accord Quentin)",
+     "risk": [
+      {
+       "heure": "17:30",
+       "texte": "D-019 et D-020 vérifiés sur les prix 30 s (rachat touché avant l'arrêt ; ETH est monté à 2271,3 €, à 2 € de l'arrêt). Enregistrés à part (étiquette « rétro », state/retro_sims.jsonl), hors capital simulé officiel. Réserve : ouverts en même temps = ~49 € > plafond 5 % (25 €). Avec les règles de demain, une seule des deux passerait (ou deux de ~12 €).",
+       "decision": "D-020"
+      },
+      {
+       "heure": "17:31",
+       "texte": "D-019 et D-020 réduits à ~12,5 € chacun (demande Predict, plafond 25 € partagé). D-019 +0.0510 €, D-020 +0.0501 €. Gain gardé en euros, mêmes pièces rachetées. Capital simulé 499.27 €.",
+       "decision": "D-020"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rx-paper-2026-10-06T175711Z-d914a46e",
+    "cycle_id": "rx-paper-2026-10-06T175711Z-d914a46e",
+    "single": false,
+    "mode": "sim",
+    "pair": "ETH-EUR",
+    "coin": "ETH",
+    "idea_type": "hausse",
+    "decision_id": null,
+    "risk_level": null,
+    "legs": [
+     {
+      "id": "rx-paper-2026-10-06T175711Z-d914a46e",
+      "side": "buy",
+      "time": "2026-10-06T17:57:11Z",
+      "price": 2500.0,
+      "amount_eur": 10.0,
+      "qty": 0.004,
+      "fee_eur": null,
+      "close_reason": null,
+      "rebuy_reason": null,
+      "reason_fr": null,
+      "realized_pnl_eur": null,
+      "realized_pnl_pct": null,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_filled",
+      "label": null,
+      "trigger_price": null
+     },
+     {
+      "id": "rx-paper-close-2026-10-07T131739Z-stop",
+      "side": "sell",
+      "time": "2026-10-07T13:17:39Z",
+      "price": 2293.15,
+      "amount_eur": 9.1726,
+      "qty": 0.004,
+      "fee_eur": null,
+      "close_reason": "stop_hit",
+      "rebuy_reason": null,
+      "reason_fr": "stop touché",
+      "realized_pnl_eur": -0.8274,
+      "realized_pnl_pct": -8.274,
+      "realized_pnl_gross_eur": null,
+      "fees_eur": null,
+      "coins_gained": null,
+      "coins_gained_pct": null,
+      "status": "paper_closed_stop",
+      "label": null,
+      "trigger_price": null
+     }
+    ],
+    "open": false,
+    "position_status": "closed",
+    "target_price": null,
+    "safety_price": null,
+    "stop_price": null,
+    "deadline": null,
+    "reason": "stop de protection touché (chute avant Fed)",
+    "latent_pnl_eur": null,
+    "latent_pnl_pct": null,
+    "source_lines": [
+     "rx-paper-2026-10-06T175711Z-d914a46e",
+     "rx-paper-close-2026-10-07T131739Z-stop"
+    ],
+    "lesson": "un achat test à 2500 € sans décision écrite claire + marché qui baisse fort = perte attendue ; ne pas racheter juste après le stop",
+    "result_text": "perte ≈ −0,83 € (−8,3 %)",
+    "journal_kind": "essai",
+    "decision_link": "test stop (pas d’id D-xxx à l’achat — fill test du 6 oct)",
+    "plan": {
+     "stop": 2300.0,
+     "target": null,
+     "safety": null,
+     "deadline": null
+    },
+    "close": {
+     "leg_id": "rx-paper-close-2026-10-07T131739Z-stop",
+     "reason_fr": "stop touché",
+     "close_reason": "stop_hit",
+     "rebuy_reason": null,
+     "price": 2293.15,
+     "time": "2026-10-07T13:17:39Z",
+     "trigger_price": null,
+     "trigger_source": null
+    },
+    "decision": null
+   }
+  ],
+  "used_ids": [
+   "rx-paper-2026-10-06T175711Z-d914a46e",
+   "rx-paper-2026-10-08T205852Z-1e71faf5",
+   "rx-paper-2026-10-09T122652Z-d34350c3",
+   "rx-paper-2026-10-09T123021Z-0f531d4f",
+   "rx-paper-2026-10-09T130833Z-8d63c1ab",
+   "rx-paper-2026-10-09T130833Z-aa77fd43",
+   "rx-paper-2026-10-09T134330Z-d3f5b95e",
+   "rx-paper-2026-10-09T134330Z-f81afbbf",
+   "rx-paper-2026-10-09T134625Z-08368870",
+   "rx-paper-2026-10-09T142212Z-f2c8054f",
+   "rx-paper-2026-10-09T142449Z-a11eb3ad",
+   "rx-paper-2026-10-09T150928Z-1fef882c",
+   "rx-paper-2026-10-09T151109Z-aa309e18",
+   "rx-paper-2026-10-09T151109Z-ee1fbd85",
+   "rx-paper-2026-10-09T220639Z-a3d0dbe0",
+   "rx-paper-2026-10-09T220647Z-ff0116e3",
+   "rx-paper-close-2026-10-07T131739Z-stop",
+   "rx-paper-retro-D-019-rebuy",
+   "rx-paper-retro-D-019-sell",
+   "rx-paper-retro-D-020-rebuy",
+   "rx-paper-retro-D-020-sell"
+  ],
+  "source": "state/trades_log.jsonl (paper_fill / watch_stops) : lignes regroupées par cycle_id seulement ; ouvert/fermé = guardian/state.json"
+ },
+ "real": {
+  "hidden": false,
+  "open_orders": [],
+  "bot_orders": [],
+  "project_start": "2026-10-05T22:00:00Z",
+  "history_sources": [
+   "revx order history --start-date 2026-10-06",
+   "revx order open",
+   "revx transaction list --start-date 2026-10-06",
+   "state/live_orders.jsonl (ordres des bots, live_place.py)"
+  ],
+  "history_stale": false,
+  "history_errors": [],
+  "metamask_trades": {
+   "tracked": false,
+   "text": "Suivi des trades MetaMask : pas encore (aucun journal d'échanges de l'équipe ; references/metamask.md = règles seulement, trading MetaMask en pause)."
+  },
+  "live_log_count": 0
+ }
+}

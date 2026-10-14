@@ -1,0 +1,45 @@
+{
+ "generated_at": "2026-10-09T22:18:41.356265Z",
+ "pairs": {
+  "BTC-EUR": {
+   "mid": 73634.92,
+   "bid": 73631.35,
+   "ask": 73638.49,
+   "ts": "2026-10-09T22:18:29.724140Z",
+   "age_s": 11.6,
+   "stale": false,
+   "tick_source": "coinbase",
+   "change_24h_pct": 0.93,
+   "change_source": "ticks",
+   "source": "collecteur 30 s"
+  },
+  "ETH-EUR": {
+   "mid": 2215.895,
+   "bid": 2215.8,
+   "ask": 2215.99,
+   "ts": "2026-10-09T22:18:29.724140Z",
+   "age_s": 11.6,
+   "stale": false,
+   "tick_source": "coinbase",
+   "change_24h_pct": 0.29,
+   "change_source": "ticks",
+   "source": "collecteur 30 s"
+  },
+  "SOL-EUR": {
+   "mid": 97.21,
+   "bid": 97.2,
+   "ask": 97.22,
+   "ts": "2026-10-09T22:18:29.724140Z",
+   "age_s": 11.6,
+   "stale": false,
+   "tick_source": "coinbase",
+   "change_24h_pct": -1.4,
+   "change_source": "ticks",
+   "source": "collecteur 30 s"
+  }
+ },
+ "last_tick_at": "2026-10-09T22:18:29.724140Z",
+ "stale": false,
+ "stale_after_s": 120,
+ "source": "state/price_ticks/*.jsonl (collecteur de l'équipe, toutes les 30 s)"
+}

@@ -1,0 +1,8 @@
+{
+ "provider": "d1",
+ "database_id": "47c59ccf-6194-4899-adda-12a43a9f30b9",
+ "name": "pm-pipeline-live",
+ "binding": "LIVE_DB",
+ "project": "pm-pipeline-tableau",
+ "min_interval_s": 0
+}

@@ -1,0 +1,10 @@
+
+--- 2026-10-08T13:44:59.453Z debug
+🪵  Writing logs to "/workspace/dashboard/logs/wrangler/wrangler-2026-10-08_13-44-59_209.log"
+---
+
+--- 2026-10-08T13:44:59.453Z warn
+▲ [WARNING] Proxy environment variables detected. We'll use your proxy for fetch requests.
+
+
+---

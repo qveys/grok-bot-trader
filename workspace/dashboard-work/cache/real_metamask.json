@@ -1,0 +1,8 @@
+{
+ "address": "0xb88D4A78e960F04E8c9a5da2B91Bf74c49c271e8",
+ "network": "Arbitrum One",
+ "eth": 0.039679317432796,
+ "fetched_at": "2026-10-09T00:17:59.476415Z",
+ "stale": false,
+ "source": "eth_getBalance via arb1.arbitrum.io (public)"
+}

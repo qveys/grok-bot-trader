@@ -1,0 +1,7 @@
+{
+ "provider": "kv",
+ "namespace_id": "2a89a131a1424d88a7c089d3fdfa1d87",
+ "binding": "LIVE",
+ "project": "pm-pipeline-tableau",
+ "min_interval_s": 120
+}

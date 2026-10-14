@@ -1,0 +1,132 @@
+
+--- 2026-10-08T21:10:53.226Z debug
+🪵  Writing logs to "/workspace/dashboard/logs/wrangler/wrangler-2026-10-08_21-10-52_968.log"
+---
+
+--- 2026-10-08T21:10:53.225Z warn
+▲ [WARNING] Proxy environment variables detected. We'll use your proxy for fetch requests.
+
+
+---
+
+--- 2026-10-08T21:10:53.255Z debug
+.env file not found at "/workspace/dashboard/.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-08T21:10:53.255Z debug
+.env file not found at "/workspace/dashboard/.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-08T21:10:53.265Z log
+
+ ⛅️ wrangler 4.148.0 (update available 4.149.0)
+───────────────────────────────────────────────
+---
+
+--- 2026-10-08T21:10:53.280Z debug
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"205eb6ad-299b-449e-91d6-8532383072a3","event":"wrangler command started","timestamp":1791493853280,"properties":{"amplitude_session_id":1791493853266,"amplitude_event_id":0,"wranglerVersion":"4.148.0","wranglerMajorVersion":4,"wranglerMinorVersion":148,"wranglerPatchVersion":0,"osPlatform":"Linux","osVersion":"#1 SMP PREEMPT_DYNAMIC Tue Oct  6 06:02:30 UTC 2026","nodeVersion":22,"isFirstUsage":true,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"argsUsed":["projectName"],"argsCombination":"projectName","sanitizedCommand":"pages deployment list","sanitizedArgs":{},"currentAgentSkillsInstalled":null}}.
+---
+
+--- 2026-10-08T21:10:53.282Z debug
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/45be0d9d9ab486a652b81f7732f8f0d7/pages/projects/pm-pipeline-tableau/deployments
+---
+
+--- 2026-10-08T21:10:53.282Z debug
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+---
+
+--- 2026-10-08T21:10:53.282Z debug
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+---
+
+--- 2026-10-08T21:10:53.282Z debug
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+---
+
+--- 2026-10-08T21:10:53.282Z debug
+-- END CF API REQUEST
+---
+
+--- 2026-10-08T21:10:54.626Z debug
+-- START CF API RESPONSE: OK 200
+---
+
+--- 2026-10-08T21:10:54.627Z debug
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+---
+
+--- 2026-10-08T21:10:54.627Z debug
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+---
+
+--- 2026-10-08T21:10:54.627Z debug
+-- END CF API RESPONSE
+---
+
+--- 2026-10-08T21:10:54.636Z debug
+Saving to cache: {"account_id":"45be0d9d9ab486a652b81f7732f8f0d7"}
+---
+
+--- 2026-10-08T21:10:54.695Z log
+┌──────────────────────────────────────┬─────────────┬────────┬────────┬────────────────────────────────────────────────┬────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Id                                   │ Environment │ Branch │ Source │ Deployment                                     │ Status         │ Build                                                                                                                            │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 3d1a320b-958e-44f9-ad58-fa9c6c021853 │ Production  │ main   │        │ https://3d1a320b.pm-pipeline-tableau.pages.dev │ Failure        │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/3d1a320b-958e-44f9-ad58-fa9c6c021853 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ c07d1838-5959-4bd1-b4ec-bb9385efe4ab │ Production  │ main   │        │ https://c07d1838.pm-pipeline-tableau.pages.dev │ 14 seconds ago │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/c07d1838-5959-4bd1-b4ec-bb9385efe4ab │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 6fc35a8c-23d5-4af8-a777-1b02f63102a5 │ Production  │ main   │        │ https://6fc35a8c.pm-pipeline-tableau.pages.dev │ 1 minute ago   │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/6fc35a8c-23d5-4af8-a777-1b02f63102a5 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 3de8e5ac-be49-414b-bdcf-31c7879900a7 │ Production  │ main   │        │ https://3de8e5ac.pm-pipeline-tableau.pages.dev │ 10 minutes ago │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/3de8e5ac-be49-414b-bdcf-31c7879900a7 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 987df6f8-6a8a-4a28-b016-7b53f2a80b6c │ Production  │ main   │        │ https://987df6f8.pm-pipeline-tableau.pages.dev │ 15 minutes ago │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/987df6f8-6a8a-4a28-b016-7b53f2a80b6c │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 406ec97a-590c-42d6-b1c8-987a6455ac01 │ Production  │ main   │        │ https://406ec97a.pm-pipeline-tableau.pages.dev │ 30 minutes ago │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/406ec97a-590c-42d6-b1c8-987a6455ac01 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 387943c4-18eb-495a-8905-27a084bced9e │ Production  │ main   │        │ https://387943c4.pm-pipeline-tableau.pages.dev │ 1 hour ago     │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/387943c4-18eb-495a-8905-27a084bced9e │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 24c6ffab-d1a1-43b9-a1a3-c53e2460ebf8 │ Production  │ main   │        │ https://24c6ffab.pm-pipeline-tableau.pages.dev │ 1 hour ago     │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/24c6ffab-d1a1-43b9-a1a3-c53e2460ebf8 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ b196253e-759d-449b-9760-b9f5e24f128d │ Production  │ main   │        │ https://b196253e.pm-pipeline-tableau.pages.dev │ 1 hour ago     │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/b196253e-759d-449b-9760-b9f5e24f128d │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 60e0d7e8-9873-4a1a-8ca9-aa489a9dc7a3 │ Production  │ main   │        │ https://60e0d7e8.pm-pipeline-tableau.pages.dev │ 1 hour ago     │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/60e0d7e8-9873-4a1a-8ca9-aa489a9dc7a3 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 8a8e481b-8b1d-4be1-920b-5bf206174ad4 │ Production  │ main   │        │ https://8a8e481b.pm-pipeline-tableau.pages.dev │ 1 hour ago     │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/8a8e481b-8b1d-4be1-920b-5bf206174ad4 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 8351ccce-a469-4b21-97b2-2f179852ae18 │ Production  │ main   │        │ https://8351ccce.pm-pipeline-tableau.pages.dev │ 1 hour ago     │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/8351ccce-a469-4b21-97b2-2f179852ae18 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 948e72f4-fe4a-4ba3-875f-13411f6a914a │ Production  │ main   │        │ https://948e72f4.pm-pipeline-tableau.pages.dev │ 2 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/948e72f4-fe4a-4ba3-875f-13411f6a914a │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 02986822-1489-4b17-a2a7-0bd03abf0d20 │ Production  │ main   │        │ https://02986822.pm-pipeline-tableau.pages.dev │ 2 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/02986822-1489-4b17-a2a7-0bd03abf0d20 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ fd46b2bd-0908-4abe-aded-6cf4a8afabf6 │ Production  │ main   │        │ https://fd46b2bd.pm-pipeline-tableau.pages.dev │ 2 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/fd46b2bd-0908-4abe-aded-6cf4a8afabf6 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 77b40043-aa26-426e-839a-dfaec3f4f763 │ Production  │ main   │        │ https://77b40043.pm-pipeline-tableau.pages.dev │ 2 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/77b40043-aa26-426e-839a-dfaec3f4f763 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 0f3b84d4-146a-499c-b188-29c2a494f058 │ Production  │ main   │        │ https://0f3b84d4.pm-pipeline-tableau.pages.dev │ 3 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/0f3b84d4-146a-499c-b188-29c2a494f058 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 55544040-b9e2-4b54-9cf5-fc9af59f0447 │ Production  │ main   │        │ https://55544040.pm-pipeline-tableau.pages.dev │ 3 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/55544040-b9e2-4b54-9cf5-fc9af59f0447 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ e934e9ca-9239-4b11-83cc-7bfc429f522e │ Production  │ main   │        │ https://e934e9ca.pm-pipeline-tableau.pages.dev │ 3 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/e934e9ca-9239-4b11-83cc-7bfc429f522e │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 3d3beef1-a61e-48d0-ad5b-7e100940aba1 │ Production  │ main   │        │ https://3d3beef1.pm-pipeline-tableau.pages.dev │ 3 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/3d3beef1-a61e-48d0-ad5b-7e100940aba1 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 5d09a3c1-83ba-4fa3-8146-bbd9831bc9b3 │ Production  │ main   │        │ https://5d09a3c1.pm-pipeline-tableau.pages.dev │ 4 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/5d09a3c1-83ba-4fa3-8146-bbd9831bc9b3 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 4fca5910-4a39-4a33-b4c6-fed69b1d54ea │ Production  │ main   │        │ https://4fca5910.pm-pipeline-tableau.pages.dev │ 4 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/4fca5910-4a39-4a33-b4c6-fed69b1d54ea │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ a029dd4b-4696-404e-917b-07820f771d80 │ Production  │ main   │        │ https://a029dd4b.pm-pipeline-tableau.pages.dev │ 4 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/a029dd4b-4696-404e-917b-07820f771d80 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 10bff924-f76e-4eca-8a30-540a593d9b85 │ Production  │ main   │        │ https://10bff924.pm-pipeline-tableau.pages.dev │ 4 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/10bff924-f76e-4eca-8a30-540a593d9b85 │
+├──────────────────────────────────────┼─────────────┼────────┼────────┼────────────────────────────────────────────────┼────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ f5191e05-bfb3-4d72-964a-3be3378663d4 │ Production  │ main   │        │ https://f5191e05.pm-pipeline-tableau.pages.dev │ 4 hours ago    │ https://dash.cloudflare.com/45be0d9d9ab486a652b81f7732f8f0d7/pages/view/pm-pipeline-tableau/f5191e05-bfb3-4d72-964a-3be3378663d4 │
+└──────────────────────────────────────┴─────────────┴────────┴────────┴────────────────────────────────────────────────┴────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+---
+
+--- 2026-10-08T21:10:54.697Z debug
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"205eb6ad-299b-449e-91d6-8532383072a3","event":"list pages deployments","timestamp":1791493854697,"properties":{"amplitude_session_id":1791493854696,"amplitude_event_id":0,"wranglerVersion":"4.148.0","wranglerMajorVersion":4,"wranglerMinorVersion":148,"wranglerPatchVersion":0,"osPlatform":"Linux","osVersion":"#1 SMP PREEMPT_DYNAMIC Tue Oct  6 06:02:30 UTC 2026","nodeVersion":22,"isFirstUsage":true,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"category":"Workers","os":"linux:x64","currentAgentSkillsInstalled":null}}.
+---
+
+--- 2026-10-08T21:10:54.697Z debug
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"205eb6ad-299b-449e-91d6-8532383072a3","event":"wrangler command completed","timestamp":1791493854697,"properties":{"amplitude_session_id":1791493853266,"amplitude_event_id":1,"wranglerVersion":"4.148.0","wranglerMajorVersion":4,"wranglerMinorVersion":148,"wranglerPatchVersion":0,"osPlatform":"Linux","osVersion":"#1 SMP PREEMPT_DYNAMIC Tue Oct  6 06:02:30 UTC 2026","nodeVersion":22,"isFirstUsage":true,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":null,"argsUsed":["projectName"],"argsCombination":"projectName","sanitizedCommand":"pages deployment list","sanitizedArgs":{},"durationMs":1441,"currentAgentSkillsInstalled":null}}.
+---

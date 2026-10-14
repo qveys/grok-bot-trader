@@ -1,0 +1,53 @@
+{
+ "fear_greed_now": {
+  "value": 62,
+  "classification": "Greed"
+ },
+ "history": {
+  "days": 30,
+  "avg": 67.3,
+  "min": 50,
+  "max": 78,
+  "days_extreme_fear_le25": 0,
+  "days_greed_ge55": 28,
+  "last_7": [
+   {
+    "date": "2026-10-14",
+    "value": 62,
+    "label": "Greed"
+   },
+   {
+    "date": "2026-10-13",
+    "value": 57,
+    "label": "Greed"
+   },
+   {
+    "date": "2026-10-12",
+    "value": 69,
+    "label": "Greed"
+   },
+   {
+    "date": "2026-10-11",
+    "value": 61,
+    "label": "Greed"
+   },
+   {
+    "date": "2026-10-10",
+    "value": 64,
+    "label": "Greed"
+   },
+   {
+    "date": "2026-10-09",
+    "value": 59,
+    "label": "Greed"
+   },
+   {
+    "date": "2026-10-08",
+    "value": 64,
+    "label": "Greed"
+   }
+  ]
+ },
+ "source": "alternative.me Fear & Greed (crypto-wide, mostly BTC-driven); daily value",
+ "fetched_at": "2026-10-14T16:28:40.497725Z"
+}

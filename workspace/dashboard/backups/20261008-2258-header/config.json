@@ -1,0 +1,14 @@
+{
+  "SHOW_REAL": true,
+  "SITE_TITLE": "PM Pipeline — Tableau de bord",
+  "BOT_DIR": "/workspace/predict-market-bot",
+  "VIBE_DIR": "/workspace/tools/vibe-trading",
+  "PROXY": "http://127.0.0.1:8791",
+  "METAMASK_ADDRESS": "0xb88D4A78e960F04E8c9a5da2B91Bf74c49c271e8",
+  "ARBITRUM_RPC": "https://arb1.arbitrum.io/rpc",
+  "REVX_BIN": "/home/box/.local/bin/revx",
+  "SENTIMENT_CACHE_MIN": 30,
+  "NEWS_CACHE_MIN": 5,
+  "_note": "SHOW_REAL=true affiche les soldes réels (Revolut X + MetaMask). Mettre false (ou env SHOW_REAL=false) avant toute publication en ligne.",
+  "PROJECT_START": "2026-10-06"
+}

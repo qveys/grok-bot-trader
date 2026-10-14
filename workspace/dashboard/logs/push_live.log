@@ -1,0 +1,972 @@
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1367, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1413, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1362, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1122, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1066, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/client.py", line 1508, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+                                          server_hostname=server_hostname)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/lib/python3.13/ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 67, in <module>
+    main()
+    ~~~~^^
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 56, in main
+    st, j = call("POST", f"/accounts/{ACC}/d1/database/{conf['database_id']}/query", {"sql": SQL, "params": [n, now, sha, body]}, timeout=40)
+            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/dashboard/cloudflare/d1/cf_api.py", line 12, in call
+    r = _OP.open(req, timeout=timeout)
+  File "/usr/lib/python3.13/urllib/request.py", line 489, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.13/urllib/request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/usr/lib/python3.13/urllib/request.py", line 466, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.13/urllib/request.py", line 1367, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/urllib/request.py", line 1322, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>
+2026-10-12T12:59:21+00:00 [d1] poussé: prices (écritures du jour: 235)
+2026-10-12T12:59:32+00:00 [d1] poussé: prices (écritures du jour: 236)
+2026-10-12T13:00:03+00:00 [d1] poussé: prices (écritures du jour: 237)
+2026-10-12T13:00:33+00:00 [d1] poussé: prices (écritures du jour: 238)
+2026-10-12T13:01:04+00:00 [d1] poussé: prices (écritures du jour: 239)
+2026-10-12T13:01:35+00:00 [d1] poussé: prices (écritures du jour: 240)
+2026-10-12T13:02:06+00:00 [d1] poussé: prices (écritures du jour: 241)
+2026-10-12T13:02:27+00:00 [d1] poussé: prices (écritures du jour: 242)
+2026-10-12T13:02:38+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 247)
+2026-10-12T13:03:01+00:00 [d1] poussé: prices (écritures du jour: 248)
+2026-10-12T13:03:32+00:00 [d1] poussé: prices (écritures du jour: 249)
+2026-10-12T13:04:03+00:00 [d1] poussé: prices (écritures du jour: 250)
+2026-10-12T13:04:34+00:00 [d1] poussé: prices (écritures du jour: 251)
+2026-10-12T13:05:05+00:00 [d1] poussé: prices (écritures du jour: 252)
+2026-10-12T13:05:36+00:00 [d1] poussé: prices (écritures du jour: 253)
+2026-10-12T13:06:07+00:00 [d1] poussé: prices (écritures du jour: 254)
+2026-10-12T13:06:28+00:00 [d1] poussé: prices (écritures du jour: 255)
+2026-10-12T13:06:59+00:00 [d1] poussé: prices (écritures du jour: 256)
+2026-10-12T13:07:29+00:00 [d1] poussé: prices (écritures du jour: 257)
+2026-10-12T13:07:40+00:00 [d1] poussé: prices (écritures du jour: 258)
+2026-10-12T13:07:51+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 263)
+2026-10-12T13:08:05+00:00 [d1] poussé: prices (écritures du jour: 264)
+2026-10-12T13:08:36+00:00 [d1] poussé: prices (écritures du jour: 265)
+2026-10-12T13:09:07+00:00 [d1] poussé: prices (écritures du jour: 266)
+2026-10-12T13:09:27+00:00 [d1] poussé: prices (écritures du jour: 267)
+2026-10-12T13:09:58+00:00 [d1] poussé: prices (écritures du jour: 268)
+2026-10-12T13:10:29+00:00 [d1] poussé: prices (écritures du jour: 269)
+2026-10-12T13:11:00+00:00 [d1] poussé: prices (écritures du jour: 270)
+2026-10-12T13:11:31+00:00 [d1] poussé: prices (écritures du jour: 271)
+2026-10-12T13:12:02+00:00 [d1] poussé: prices (écritures du jour: 272)
+2026-10-12T13:12:33+00:00 [d1] poussé: prices (écritures du jour: 273)
+2026-10-12T13:12:44+00:00 [d1] poussé: prices (écritures du jour: 274)
+2026-10-12T13:12:54+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 279)
+2026-10-12T13:13:08+00:00 [d1] poussé: prices (écritures du jour: 280)
+2026-10-12T13:13:29+00:00 [d1] poussé: prices (écritures du jour: 281)
+2026-10-12T13:14:00+00:00 [d1] poussé: prices (écritures du jour: 282)
+2026-10-12T13:14:31+00:00 [d1] poussé: prices (écritures du jour: 283)
+2026-10-12T13:15:02+00:00 [d1] poussé: prices (écritures du jour: 284)
+2026-10-12T13:15:33+00:00 [d1] poussé: prices (écritures du jour: 285)
+2026-10-12T13:16:04+00:00 [d1] poussé: prices (écritures du jour: 286)
+2026-10-12T13:16:35+00:00 [d1] poussé: prices (écritures du jour: 287)
+2026-10-12T13:18:58+00:00 [d1] poussé: prices (écritures du jour: 288)
+2026-10-12T13:19:29+00:00 [d1] poussé: prices (écritures du jour: 289)
+2026-10-12T13:19:40+00:00 [d1] poussé: prices (écritures du jour: 290)
+2026-10-12T13:19:51+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 295)
+2026-10-12T13:20:05+00:00 [d1] poussé: prices (écritures du jour: 296)
+2026-10-12T13:20:35+00:00 [d1] poussé: prices (écritures du jour: 297)
+2026-10-12T13:21:06+00:00 [d1] poussé: prices (écritures du jour: 298)
+2026-10-12T13:21:37+00:00 [d1] poussé: prices (écritures du jour: 299)
+2026-10-12T13:22:08+00:00 [d1] poussé: prices (écritures du jour: 300)
+2026-10-12T13:22:29+00:00 [d1] poussé: prices (écritures du jour: 301)
+2026-10-12T13:23:00+00:00 [d1] poussé: prices (écritures du jour: 302)
+2026-10-12T13:23:31+00:00 [d1] poussé: prices (écritures du jour: 303)
+2026-10-12T13:24:02+00:00 [d1] poussé: prices (écritures du jour: 304)
+2026-10-12T13:24:33+00:00 [d1] poussé: prices (écritures du jour: 305)
+2026-10-12T13:24:54+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 311)
+2026-10-12T13:25:08+00:00 [d1] poussé: prices (écritures du jour: 312)
+2026-10-12T13:25:29+00:00 [d1] poussé: prices (écritures du jour: 313)
+2026-10-12T13:26:00+00:00 [d1] poussé: prices (écritures du jour: 314)
+2026-10-12T13:26:31+00:00 [d1] poussé: prices (écritures du jour: 315)
+2026-10-12T13:27:02+00:00 [d1] poussé: prices (écritures du jour: 316)
+2026-10-12T13:27:33+00:00 [d1] poussé: prices (écritures du jour: 317)
+2026-10-12T13:28:03+00:00 [d1] poussé: prices (écritures du jour: 318)
+2026-10-12T13:28:34+00:00 [d1] poussé: prices (écritures du jour: 319)
+2026-10-12T13:29:05+00:00 [d1] poussé: prices (écritures du jour: 320)
+2026-10-12T13:29:36+00:00 [d1] poussé: prices (écritures du jour: 321)
+2026-10-12T13:29:57+00:00 [d1] poussé: prices (écritures du jour: 322)
+2026-10-12T13:30:08+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 328)
+2026-10-12T13:30:33+00:00 [d1] poussé: prices (écritures du jour: 329)
+2026-10-12T13:31:04+00:00 [d1] poussé: prices (écritures du jour: 330)
+2026-10-12T13:31:35+00:00 [d1] poussé: prices (écritures du jour: 331)
+2026-10-12T13:32:06+00:00 [d1] poussé: prices (écritures du jour: 332)
+2026-10-12T13:32:37+00:00 [d1] poussé: prices (écritures du jour: 333)
+2026-10-12T13:33:07+00:00 [d1] poussé: prices (écritures du jour: 334)
+2026-10-12T13:33:38+00:00 [d1] poussé: prices (écritures du jour: 335)
+2026-10-12T13:34:09+00:00 [d1] poussé: prices (écritures du jour: 336)
+2026-10-12T13:34:30+00:00 [d1] poussé: prices (écritures du jour: 337)
+2026-10-12T13:35:01+00:00 [d1] poussé: prices (écritures du jour: 338)
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/urllib/request.py", line 1319, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1367, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1413, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1362, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1122, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1066, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/client.py", line 1508, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+                                          server_hostname=server_hostname)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/lib/python3.13/ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 67, in <module>
+    main()
+    ~~~~^^
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 56, in main
+    st, j = call("POST", f"/accounts/{ACC}/d1/database/{conf['database_id']}/query", {"sql": SQL, "params": [n, now, sha, body]}, timeout=40)
+            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/dashboard/cloudflare/d1/cf_api.py", line 12, in call
+    r = _OP.open(req, timeout=timeout)
+  File "/usr/lib/python3.13/urllib/request.py", line 489, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.13/urllib/request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/usr/lib/python3.13/urllib/request.py", line 466, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.13/urllib/request.py", line 1367, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/urllib/request.py", line 1322, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>
+2026-10-12T13:35:34+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 344)
+2026-10-12T13:36:08+00:00 [d1] poussé: prices (écritures du jour: 345)
+2026-10-12T13:36:39+00:00 [d1] poussé: prices (écritures du jour: 346)
+2026-10-12T13:37:00+00:00 [d1] poussé: prices (écritures du jour: 347)
+2026-10-12T13:37:30+00:00 [d1] poussé: prices (écritures du jour: 348)
+2026-10-12T13:38:01+00:00 [d1] poussé: prices (écritures du jour: 349)
+2026-10-12T13:38:32+00:00 [d1] poussé: prices (écritures du jour: 350)
+2026-10-12T13:39:03+00:00 [d1] poussé: prices (écritures du jour: 351)
+2026-10-12T13:39:34+00:00 [d1] poussé: prices (écritures du jour: 352)
+2026-10-12T13:40:05+00:00 [d1] poussé: prices (écritures du jour: 353)
+2026-10-12T13:40:16+00:00 [d1] poussé: prices (écritures du jour: 354)
+2026-10-12T13:40:27+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 359)
+2026-10-12T13:40:40+00:00 [d1] poussé: prices (écritures du jour: 360)
+2026-10-12T13:41:01+00:00 [d1] poussé: prices (écritures du jour: 361)
+2026-10-12T13:41:32+00:00 [d1] poussé: prices (écritures du jour: 362)
+2026-10-12T13:42:03+00:00 [d1] poussé: prices (écritures du jour: 363)
+2026-10-12T13:42:34+00:00 [d1] poussé: prices (écritures du jour: 364)
+2026-10-12T13:43:05+00:00 [d1] poussé: prices (écritures du jour: 365)
+2026-10-12T14:03:56+00:00 [d1] poussé: prices (écritures du jour: 366)
+2026-10-12T14:04:27+00:00 [d1] poussé: prices (écritures du jour: 367)
+2026-10-12T14:04:58+00:00 [d1] poussé: prices (écritures du jour: 368)
+2026-10-12T14:05:08+00:00 [d1] poussé: prices (écritures du jour: 369)
+2026-10-12T14:05:19+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 374)
+2026-10-12T14:05:33+00:00 [d1] poussé: prices (écritures du jour: 375)
+2026-10-12T14:06:04+00:00 [d1] poussé: prices (écritures du jour: 376)
+2026-10-12T14:06:35+00:00 [d1] poussé: prices (écritures du jour: 377)
+2026-10-12T14:07:05+00:00 [d1] poussé: prices (écritures du jour: 378)
+2026-10-12T14:07:26+00:00 [d1] poussé: prices (écritures du jour: 379)
+2026-10-12T14:07:57+00:00 [d1] poussé: prices (écritures du jour: 380)
+2026-10-12T14:08:28+00:00 [d1] poussé: prices (écritures du jour: 381)
+2026-10-12T14:08:59+00:00 [d1] poussé: prices (écritures du jour: 382)
+2026-10-12T14:09:30+00:00 [d1] poussé: prices (écritures du jour: 383)
+2026-10-12T14:10:01+00:00 [d1] poussé: prices (écritures du jour: 384)
+2026-10-12T14:10:22+00:00 [d1] poussé: prices (écritures du jour: 385)
+2026-10-12T14:10:33+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 391)
+2026-10-12T14:10:57+00:00 [d1] poussé: prices (écritures du jour: 392)
+2026-10-12T14:11:28+00:00 [d1] poussé: prices (écritures du jour: 393)
+2026-10-12T14:11:59+00:00 [d1] poussé: prices (écritures du jour: 394)
+2026-10-12T14:12:30+00:00 [d1] poussé: prices (écritures du jour: 395)
+2026-10-12T14:13:01+00:00 [d1] poussé: prices (écritures du jour: 396)
+2026-10-12T14:13:32+00:00 [d1] poussé: prices (écritures du jour: 397)
+2026-10-12T14:14:03+00:00 [d1] poussé: prices (écritures du jour: 398)
+2026-10-12T14:14:33+00:00 [d1] poussé: prices (écritures du jour: 399)
+2026-10-12T14:15:04+00:00 [d1] poussé: prices (écritures du jour: 400)
+2026-10-12T14:15:35+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 406)
+2026-10-12T14:16:00+00:00 [d1] poussé: prices (écritures du jour: 407)
+2026-10-12T14:16:31+00:00 [d1] poussé: prices (écritures du jour: 408)
+2026-10-12T14:17:01+00:00 [d1] poussé: prices (écritures du jour: 409)
+2026-10-12T14:17:32+00:00 [d1] poussé: prices (écritures du jour: 410)
+2026-10-12T14:18:03+00:00 [d1] poussé: prices (écritures du jour: 411)
+2026-10-12T14:18:34+00:00 [d1] poussé: prices (écritures du jour: 412)
+2026-10-12T14:19:05+00:00 [d1] poussé: prices (écritures du jour: 413)
+2026-10-12T14:19:36+00:00 [d1] poussé: prices (écritures du jour: 414)
+2026-10-12T14:20:07+00:00 [d1] poussé: prices (écritures du jour: 415)
+2026-10-12T14:20:28+00:00 [d1] poussé: prices (écritures du jour: 416)
+2026-10-12T14:20:38+00:00 [d1] poussé: prices (écritures du jour: 417)
+2026-10-12T14:20:49+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 422)
+2026-10-12T14:21:02+00:00 [d1] poussé: prices (écritures du jour: 423)
+2026-10-12T14:21:33+00:00 [d1] poussé: prices (écritures du jour: 424)
+2026-10-12T14:22:04+00:00 [d1] poussé: prices (écritures du jour: 425)
+2026-10-12T14:22:35+00:00 [d1] poussé: prices (écritures du jour: 426)
+2026-10-12T14:23:06+00:00 [d1] poussé: prices (écritures du jour: 427)
+2026-10-12T14:23:37+00:00 [d1] poussé: prices (écritures du jour: 428)
+2026-10-12T14:23:57+00:00 [d1] poussé: prices (écritures du jour: 429)
+2026-10-12T14:24:28+00:00 [d1] poussé: prices (écritures du jour: 430)
+2026-10-12T14:24:59+00:00 [d1] poussé: prices (écritures du jour: 431)
+2026-10-12T14:25:30+00:00 [d1] poussé: prices (écritures du jour: 432)
+2026-10-12T14:25:51+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 438)
+2026-10-12T14:26:05+00:00 [d1] poussé: prices (écritures du jour: 439)
+2026-10-12T14:26:36+00:00 [d1] poussé: prices (écritures du jour: 440)
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/urllib/request.py", line 1319, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1367, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1413, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1362, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1122, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1066, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/client.py", line 1508, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+                                          server_hostname=server_hostname)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/lib/python3.13/ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 67, in <module>
+    main()
+    ~~~~^^
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 56, in main
+    st, j = call("POST", f"/accounts/{ACC}/d1/database/{conf['database_id']}/query", {"sql": SQL, "params": [n, now, sha, body]}, timeout=40)
+            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/dashboard/cloudflare/d1/cf_api.py", line 12, in call
+    r = _OP.open(req, timeout=timeout)
+  File "/usr/lib/python3.13/urllib/request.py", line 489, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.13/urllib/request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/usr/lib/python3.13/urllib/request.py", line 466, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.13/urllib/request.py", line 1367, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/urllib/request.py", line 1322, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>
+2026-10-12T14:27:27+00:00 [d1] poussé: prices (écritures du jour: 441)
+2026-10-12T14:27:38+00:00 [d1] poussé: prices (écritures du jour: 442)
+2026-10-12T14:27:59+00:00 [d1] poussé: prices (écritures du jour: 443)
+2026-10-12T14:28:29+00:00 [d1] poussé: prices (écritures du jour: 444)
+2026-10-12T14:38:49+00:00 [d1] poussé: prices (écritures du jour: 445)
+2026-10-12T14:39:20+00:00 [d1] poussé: prices (écritures du jour: 446)
+2026-10-12T14:39:51+00:00 [d1] poussé: prices (écritures du jour: 447)
+2026-10-12T14:40:22+00:00 [d1] poussé: prices (écritures du jour: 448)
+2026-10-12T14:40:42+00:00 [d1] poussé: prices (écritures du jour: 449)
+2026-10-12T14:40:53+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 455)
+2026-10-12T14:41:17+00:00 [d1] poussé: prices (écritures du jour: 456)
+2026-10-12T14:41:49+00:00 [d1] poussé: prices (écritures du jour: 457)
+2026-10-12T14:42:19+00:00 [d1] poussé: prices (écritures du jour: 458)
+2026-10-12T14:42:50+00:00 [d1] poussé: prices (écritures du jour: 459)
+2026-10-12T14:43:21+00:00 [d1] poussé: prices (écritures du jour: 460)
+2026-10-12T14:43:52+00:00 [d1] poussé: prices (écritures du jour: 461)
+2026-10-12T14:44:23+00:00 [d1] poussé: prices (écritures du jour: 462)
+2026-10-12T14:44:44+00:00 [d1] poussé: prices (écritures du jour: 463)
+2026-10-12T14:45:15+00:00 [d1] poussé: prices (écritures du jour: 464)
+2026-10-12T14:45:46+00:00 [d1] poussé: prices (écritures du jour: 465)
+2026-10-12T14:45:56+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 471)
+2026-10-12T14:46:21+00:00 [d1] poussé: prices (écritures du jour: 472)
+2026-10-12T14:46:51+00:00 [d1] poussé: prices (écritures du jour: 473)
+2026-10-12T14:47:22+00:00 [d1] poussé: prices (écritures du jour: 474)
+2026-10-12T14:47:53+00:00 [d1] poussé: prices (écritures du jour: 475)
+2026-10-12T14:48:14+00:00 [d1] poussé: prices (écritures du jour: 476)
+2026-10-12T14:48:45+00:00 [d1] poussé: prices (écritures du jour: 477)
+2026-10-12T14:49:16+00:00 [d1] poussé: prices (écritures du jour: 478)
+2026-10-12T14:49:47+00:00 [d1] poussé: prices (écritures du jour: 479)
+2026-10-12T14:50:18+00:00 [d1] poussé: prices (écritures du jour: 480)
+2026-10-12T14:50:48+00:00 [d1] poussé: prices (écritures du jour: 481)
+2026-10-12T14:50:59+00:00 [d1] poussé: prices (écritures du jour: 482)
+2026-10-12T14:51:10+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 487)
+2026-10-12T14:51:24+00:00 [d1] poussé: prices (écritures du jour: 488)
+2026-10-12T14:51:45+00:00 [d1] poussé: prices (écritures du jour: 489)
+2026-10-12T14:52:15+00:00 [d1] poussé: prices (écritures du jour: 490)
+2026-10-12T14:52:46+00:00 [d1] poussé: prices (écritures du jour: 491)
+2026-10-12T14:53:17+00:00 [d1] poussé: prices (écritures du jour: 492)
+2026-10-12T14:53:48+00:00 [d1] poussé: prices (écritures du jour: 493)
+2026-10-12T14:54:19+00:00 [d1] poussé: prices (écritures du jour: 494)
+2026-10-12T14:54:50+00:00 [d1] poussé: prices (écritures du jour: 495)
+2026-10-12T14:55:21+00:00 [d1] poussé: prices (écritures du jour: 496)
+2026-10-12T14:55:52+00:00 [d1] poussé: prices (écritures du jour: 497)
+2026-10-12T14:56:13+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 503)
+2026-10-12T14:56:27+00:00 [d1] poussé: prices (écritures du jour: 504)
+2026-10-12T14:56:48+00:00 [d1] poussé: prices (écritures du jour: 505)
+2026-10-12T14:57:19+00:00 [d1] poussé: prices (écritures du jour: 506)
+2026-10-12T14:57:50+00:00 [d1] poussé: prices (écritures du jour: 507)
+2026-10-12T14:58:20+00:00 [d1] poussé: prices (écritures du jour: 508)
+2026-10-12T14:58:51+00:00 [d1] poussé: prices (écritures du jour: 509)
+2026-10-12T14:59:22+00:00 [d1] poussé: prices (écritures du jour: 510)
+2026-10-12T15:05:42+00:00 [d1] poussé: prices (écritures du jour: 511)
+2026-10-12T15:06:13+00:00 [d1] poussé: prices (écritures du jour: 512)
+2026-10-12T15:06:44+00:00 [d1] poussé: prices (écritures du jour: 513)
+2026-10-12T15:07:15+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 519)
+2026-10-12T15:07:50+00:00 [d1] poussé: prices (écritures du jour: 520)
+2026-10-12T15:08:21+00:00 [d1] poussé: prices (écritures du jour: 521)
+2026-10-12T15:08:52+00:00 [d1] poussé: prices (écritures du jour: 522)
+2026-10-12T15:09:13+00:00 [d1] poussé: prices (écritures du jour: 523)
+2026-10-12T15:09:44+00:00 [d1] poussé: prices (écritures du jour: 524)
+2026-10-12T15:10:14+00:00 [d1] poussé: prices (écritures du jour: 525)
+2026-10-12T15:10:45+00:00 [d1] poussé: prices (écritures du jour: 526)
+2026-10-12T15:11:16+00:00 [d1] poussé: prices (écritures du jour: 527)
+2026-10-12T15:11:47+00:00 [d1] poussé: prices (écritures du jour: 528)
+2026-10-12T15:12:18+00:00 [d1] poussé: prices (écritures du jour: 529)
+2026-10-12T15:12:29+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 534)
+2026-10-12T15:12:43+00:00 [d1] poussé: prices (écritures du jour: 535)
+2026-10-12T15:13:13+00:00 [d1] poussé: prices (écritures du jour: 536)
+2026-10-12T15:13:45+00:00 [d1] poussé: prices (écritures du jour: 537)
+2026-10-12T15:14:16+00:00 [d1] poussé: prices (écritures du jour: 538)
+2026-10-12T15:14:47+00:00 [d1] poussé: prices (écritures du jour: 539)
+2026-10-12T15:15:18+00:00 [d1] poussé: prices (écritures du jour: 540)
+2026-10-12T15:15:49+00:00 [d1] poussé: prices (écritures du jour: 541)
+2026-10-12T15:16:20+00:00 [d1] poussé: prices (écritures du jour: 542)
+2026-10-12T15:16:51+00:00 [d1] poussé: prices (écritures du jour: 543)
+2026-10-12T15:17:22+00:00 [d1] poussé: prices (écritures du jour: 544)
+2026-10-12T15:17:33+00:00 [d1] poussé: prices (écritures du jour: 545)
+2026-10-12T15:17:43+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 551)
+2026-10-12T15:18:18+00:00 [d1] poussé: prices (écritures du jour: 552)
+2026-10-12T15:18:49+00:00 [d1] poussé: prices (écritures du jour: 553)
+2026-10-12T15:19:20+00:00 [d1] poussé: prices (écritures du jour: 554)
+2026-10-12T15:19:51+00:00 [d1] poussé: prices (écritures du jour: 555)
+2026-10-12T15:20:22+00:00 [d1] poussé: prices (écritures du jour: 556)
+2026-10-12T15:20:53+00:00 [d1] poussé: prices (écritures du jour: 557)
+2026-10-12T15:21:14+00:00 [d1] poussé: prices (écritures du jour: 558)
+2026-10-12T15:21:45+00:00 [d1] poussé: prices (écritures du jour: 559)
+2026-10-12T15:22:15+00:00 [d1] poussé: prices (écritures du jour: 560)
+2026-10-12T15:22:36+00:00 [d1] poussé: prices (écritures du jour: 561)
+2026-10-12T15:22:47+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 567)
+2026-10-12T15:23:21+00:00 [d1] poussé: prices (écritures du jour: 568)
+2026-10-12T15:23:52+00:00 [d1] poussé: prices (écritures du jour: 569)
+2026-10-12T15:24:23+00:00 [d1] poussé: prices (écritures du jour: 570)
+2026-10-12T15:24:44+00:00 [d1] poussé: prices (écritures du jour: 571)
+2026-10-12T15:25:15+00:00 [d1] poussé: prices (écritures du jour: 572)
+2026-10-12T15:25:46+00:00 [d1] poussé: prices (écritures du jour: 573)
+2026-10-12T15:26:17+00:00 [d1] poussé: prices (écritures du jour: 574)
+2026-10-12T15:26:48+00:00 [d1] poussé: prices (écritures du jour: 575)
+2026-10-12T15:27:19+00:00 [d1] poussé: prices (écritures du jour: 576)
+2026-10-12T15:27:50+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 582)
+2026-10-12T15:28:15+00:00 [d1] poussé: prices (écritures du jour: 583)
+2026-10-12T15:28:46+00:00 [d1] poussé: prices (écritures du jour: 584)
+2026-10-12T15:29:17+00:00 [d1] poussé: prices (écritures du jour: 585)
+2026-10-12T15:29:48+00:00 [d1] poussé: prices (écritures du jour: 586)
+2026-10-12T15:30:19+00:00 [d1] poussé: prices (écritures du jour: 587)
+2026-10-12T15:30:49+00:00 [d1] poussé: prices (écritures du jour: 588)
+2026-10-12T15:31:20+00:00 [d1] poussé: prices (écritures du jour: 589)
+2026-10-12T15:31:51+00:00 [d1] poussé: prices (écritures du jour: 590)
+2026-10-12T15:32:22+00:00 [d1] poussé: prices (écritures du jour: 591)
+2026-10-12T15:32:53+00:00 [d1] poussé: prices (écritures du jour: 592)
+2026-10-12T15:33:04+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 597)
+2026-10-12T15:33:18+00:00 [d1] poussé: prices (écritures du jour: 598)
+2026-10-12T15:33:48+00:00 [d1] poussé: prices (écritures du jour: 599)
+2026-10-12T15:34:19+00:00 [d1] poussé: prices (écritures du jour: 600)
+2026-10-12T15:34:50+00:00 [d1] poussé: prices (écritures du jour: 601)
+2026-10-12T15:35:21+00:00 [d1] poussé: prices (écritures du jour: 602)
+2026-10-12T15:35:52+00:00 [d1] poussé: prices (écritures du jour: 603)
+2026-10-12T15:36:23+00:00 [d1] poussé: prices (écritures du jour: 604)
+2026-10-12T15:36:54+00:00 [d1] poussé: prices (écritures du jour: 605)
+2026-10-12T15:37:15+00:00 [d1] poussé: prices (écritures du jour: 606)
+2026-10-12T15:37:46+00:00 [d1] poussé: prices (écritures du jour: 607)
+2026-10-12T15:38:07+00:00 [d1] poussé: prices (écritures du jour: 608)
+2026-10-12T15:38:18+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 614)
+2026-10-12T15:38:52+00:00 [d1] poussé: prices (écritures du jour: 615)
+2026-10-12T15:39:23+00:00 [d1] poussé: prices (écritures du jour: 616)
+2026-10-12T15:52:56+00:00 [d1] poussé: prices (écritures du jour: 617)
+2026-10-12T15:53:28+00:00 [d1] poussé: prices (écritures du jour: 618)
+2026-10-12T15:53:59+00:00 [d1] poussé: prices (écritures du jour: 619)
+2026-10-12T15:54:30+00:00 [d1] poussé: prices (écritures du jour: 620)
+2026-10-12T15:55:01+00:00 [d1] poussé: prices (écritures du jour: 621)
+2026-10-12T15:55:32+00:00 [d1] poussé: prices (écritures du jour: 622)
+2026-10-12T15:56:03+00:00 [d1] poussé: prices (écritures du jour: 623)
+2026-10-12T15:56:13+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 628)
+2026-10-12T15:56:27+00:00 [d1] poussé: prices (écritures du jour: 629)
+2026-10-12T15:56:58+00:00 [d1] poussé: prices (écritures du jour: 630)
+2026-10-12T15:57:29+00:00 [d1] poussé: prices (écritures du jour: 631)
+2026-10-12T15:58:00+00:00 [d1] poussé: prices (écritures du jour: 632)
+2026-10-12T15:58:31+00:00 [d1] poussé: prices (écritures du jour: 633)
+2026-10-12T15:59:01+00:00 [d1] poussé: prices (écritures du jour: 634)
+2026-10-12T15:59:32+00:00 [d1] poussé: prices (écritures du jour: 635)
+2026-10-12T16:00:03+00:00 [d1] poussé: prices (écritures du jour: 636)
+2026-10-12T16:00:35+00:00 [d1] poussé: prices (écritures du jour: 637)
+2026-10-12T16:01:06+00:00 [d1] poussé: prices (écritures du jour: 638)
+2026-10-12T16:01:17+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 644)
+2026-10-12T16:01:33+00:00 [d1] poussé: prices (écritures du jour: 645)
+2026-10-12T16:02:03+00:00 [d1] poussé: prices (écritures du jour: 646)
+2026-10-12T16:02:34+00:00 [d1] poussé: prices (écritures du jour: 647)
+2026-10-12T16:03:05+00:00 [d1] poussé: prices (écritures du jour: 648)
+2026-10-12T16:03:36+00:00 [d1] poussé: prices (écritures du jour: 649)
+2026-10-12T16:03:58+00:00 [d1] poussé: prices (écritures du jour: 650)
+2026-10-12T16:04:28+00:00 [d1] poussé: prices (écritures du jour: 651)
+2026-10-12T16:04:59+00:00 [d1] poussé: prices (écritures du jour: 652)
+2026-10-12T16:05:30+00:00 [d1] poussé: prices (écritures du jour: 653)
+2026-10-12T16:06:02+00:00 [d1] poussé: prices (écritures du jour: 654)
+2026-10-12T16:06:23+00:00 [d1] poussé: prices (écritures du jour: 655)
+2026-10-12T16:06:33+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 661)
+2026-10-12T16:06:58+00:00 [d1] poussé: prices (écritures du jour: 662)
+2026-10-12T16:07:29+00:00 [d1] poussé: prices (écritures du jour: 663)
+2026-10-12T16:07:59+00:00 [d1] poussé: prices (écritures du jour: 664)
+2026-10-12T16:08:30+00:00 [d1] poussé: prices (écritures du jour: 665)
+2026-10-12T16:09:01+00:00 [d1] poussé: prices (écritures du jour: 666)
+2026-10-12T16:09:32+00:00 [d1] poussé: prices (écritures du jour: 667)
+2026-10-12T16:10:03+00:00 [d1] poussé: prices (écritures du jour: 668)
+2026-10-12T16:10:34+00:00 [d1] poussé: prices (écritures du jour: 669)
+2026-10-12T16:11:05+00:00 [d1] poussé: prices (écritures du jour: 670)
+2026-10-12T16:11:36+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 676)
+2026-10-12T16:12:02+00:00 [d1] poussé: prices (écritures du jour: 677)
+2026-10-12T16:12:33+00:00 [d1] poussé: prices (écritures du jour: 678)
+2026-10-12T16:13:04+00:00 [d1] poussé: prices (écritures du jour: 679)
+2026-10-12T16:13:34+00:00 [d1] poussé: prices (écritures du jour: 680)
+2026-10-12T16:14:05+00:00 [d1] poussé: prices (écritures du jour: 681)
+2026-10-12T16:14:36+00:00 [d1] poussé: prices (écritures du jour: 682)
+2026-10-12T16:15:07+00:00 [d1] poussé: prices (écritures du jour: 683)
+2026-10-12T16:15:38+00:00 [d1] poussé: prices (écritures du jour: 684)
+2026-10-12T16:15:59+00:00 [d1] poussé: prices (écritures du jour: 685)
+2026-10-12T16:16:29+00:00 [d1] poussé: prices (écritures du jour: 686)
+2026-10-12T16:16:40+00:00 [d1] poussé: prices (écritures du jour: 687)
+2026-10-12T16:16:51+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 692)
+2026-10-12T16:17:05+00:00 [d1] poussé: prices (écritures du jour: 693)
+2026-10-12T16:17:35+00:00 [d1] poussé: prices (écritures du jour: 694)
+2026-10-12T16:18:06+00:00 [d1] poussé: prices (écritures du jour: 695)
+2026-10-12T16:18:37+00:00 [d1] poussé: prices (écritures du jour: 696)
+2026-10-12T16:19:08+00:00 [d1] poussé: prices (écritures du jour: 697)
+2026-10-12T16:19:29+00:00 [d1] poussé: prices (écritures du jour: 698)
+2026-10-12T16:20:00+00:00 [d1] poussé: prices (écritures du jour: 699)
+2026-10-12T16:20:31+00:00 [d1] poussé: prices (écritures du jour: 700)
+2026-10-12T16:21:01+00:00 [d1] poussé: prices (écritures du jour: 701)
+2026-10-12T16:21:32+00:00 [d1] poussé: prices (écritures du jour: 702)
+2026-10-12T16:21:53+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 708)
+2026-10-12T16:22:07+00:00 [d1] poussé: prices (écritures du jour: 709)
+2026-10-12T16:22:38+00:00 [d1] poussé: prices (écritures du jour: 710)
+2026-10-12T16:22:59+00:00 [d1] poussé: prices (écritures du jour: 711)
+2026-10-12T16:23:30+00:00 [d1] poussé: prices (écritures du jour: 712)
+2026-10-12T16:24:01+00:00 [d1] poussé: prices (écritures du jour: 713)
+2026-10-12T16:24:32+00:00 [d1] poussé: prices (écritures du jour: 714)
+2026-10-12T16:25:02+00:00 [d1] poussé: prices (écritures du jour: 715)
+2026-10-12T16:25:33+00:00 [d1] poussé: prices (écritures du jour: 716)
+2026-10-12T16:26:04+00:00 [d1] poussé: prices (écritures du jour: 717)
+2026-10-12T16:26:35+00:00 [d1] poussé: prices (écritures du jour: 718)
+2026-10-12T16:26:56+00:00 [d1] poussé: prices (écritures du jour: 719)
+2026-10-12T16:27:07+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 725)
+2026-10-12T16:27:31+00:00 [d1] poussé: prices (écritures du jour: 726)
+2026-10-12T16:28:02+00:00 [d1] poussé: prices (écritures du jour: 727)
+2026-10-12T16:28:33+00:00 [d1] poussé: prices (écritures du jour: 728)
+2026-10-12T16:29:04+00:00 [d1] poussé: prices (écritures du jour: 729)
+2026-10-12T16:29:35+00:00 [d1] poussé: prices (écritures du jour: 730)
+2026-10-12T16:30:05+00:00 [d1] poussé: prices (écritures du jour: 731)
+2026-10-12T16:30:36+00:00 [d1] poussé: prices (écritures du jour: 732)
+2026-10-12T16:31:07+00:00 [d1] poussé: prices (écritures du jour: 733)
+2026-10-12T16:31:38+00:00 [d1] poussé: prices (écritures du jour: 734)
+2026-10-12T16:31:59+00:00 [d1] poussé: prices (écritures du jour: 735)
+2026-10-12T16:32:30+00:00 [d1] poussé: prices (écritures du jour: 736)
+2026-10-12T16:32:41+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 742)
+2026-10-12T16:33:05+00:00 [d1] poussé: prices (écritures du jour: 743)
+2026-10-12T16:33:36+00:00 [d1] poussé: prices (écritures du jour: 744)
+2026-10-12T16:34:07+00:00 [d1] poussé: prices (écritures du jour: 745)
+2026-10-12T16:34:38+00:00 [d1] poussé: prices (écritures du jour: 746)
+2026-10-12T16:35:09+00:00 [d1] poussé: prices (écritures du jour: 747)
+2026-10-12T16:35:30+00:00 [d1] poussé: prices (écritures du jour: 748)
+2026-10-12T16:36:01+00:00 [d1] poussé: prices (écritures du jour: 749)
+2026-10-12T16:36:32+00:00 [d1] poussé: prices (écritures du jour: 750)
+2026-10-12T16:37:03+00:00 [d1] poussé: prices (écritures du jour: 751)
+2026-10-12T16:37:34+00:00 [d1] poussé: prices (écritures du jour: 752)
+2026-10-12T16:37:44+00:00 [d1] poussé: prices (écritures du jour: 753)
+2026-10-12T16:37:55+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 758)
+2026-10-12T16:38:09+00:00 [d1] poussé: prices (écritures du jour: 759)
+2026-10-12T16:38:30+00:00 [d1] poussé: prices (écritures du jour: 760)
+2026-10-12T16:39:01+00:00 [d1] poussé: prices (écritures du jour: 761)
+2026-10-12T16:39:32+00:00 [d1] poussé: prices (écritures du jour: 762)
+2026-10-12T16:40:03+00:00 [d1] poussé: prices (écritures du jour: 763)
+2026-10-12T16:40:34+00:00 [d1] poussé: prices (écritures du jour: 764)
+2026-10-12T16:41:04+00:00 [d1] poussé: prices (écritures du jour: 765)
+2026-10-12T16:41:35+00:00 [d1] poussé: prices (écritures du jour: 766)
+2026-10-12T16:42:06+00:00 [d1] poussé: prices (écritures du jour: 767)
+2026-10-12T16:42:37+00:00 [d1] poussé: prices (écritures du jour: 768)
+2026-10-12T16:42:58+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 774)
+2026-10-12T16:43:12+00:00 [d1] poussé: prices (écritures du jour: 775)
+2026-10-12T16:43:33+00:00 [d1] poussé: prices (écritures du jour: 776)
+2026-10-12T16:44:03+00:00 [d1] poussé: prices (écritures du jour: 777)
+2026-10-12T16:44:34+00:00 [d1] poussé: prices (écritures du jour: 778)
+2026-10-12T16:45:05+00:00 [d1] poussé: prices (écritures du jour: 779)
+2026-10-12T16:45:36+00:00 [d1] poussé: prices (écritures du jour: 780)
+2026-10-12T16:46:07+00:00 [d1] poussé: prices (écritures du jour: 781)
+2026-10-12T16:46:38+00:00 [d1] poussé: prices (écritures du jour: 782)
+2026-10-12T16:47:09+00:00 [d1] poussé: prices (écritures du jour: 783)
+2026-10-12T16:47:40+00:00 [d1] poussé: prices (écritures du jour: 784)
+2026-10-12T16:48:00+00:00 [d1] poussé: prices (écritures du jour: 785)
+2026-10-12T16:48:11+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 791)
+2026-10-12T16:48:35+00:00 [d1] poussé: prices (écritures du jour: 792)
+2026-10-12T16:49:06+00:00 [d1] poussé: prices (écritures du jour: 793)
+2026-10-12T16:49:37+00:00 [d1] poussé: prices (écritures du jour: 794)
+2026-10-12T16:50:08+00:00 [d1] poussé: prices (écritures du jour: 795)
+2026-10-12T16:50:39+00:00 [d1] poussé: prices (écritures du jour: 796)
+2026-10-12T16:51:10+00:00 [d1] poussé: prices (écritures du jour: 797)
+2026-10-12T16:51:41+00:00 [d1] poussé: prices (écritures du jour: 798)
+2026-10-12T16:52:02+00:00 [d1] poussé: prices (écritures du jour: 799)
+2026-10-12T16:52:33+00:00 [d1] poussé: prices (écritures du jour: 800)
+2026-10-12T16:53:04+00:00 [d1] poussé: prices (écritures du jour: 801)
+2026-10-12T16:53:14+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 807)
+2026-10-12T16:53:39+00:00 [d1] poussé: prices (écritures du jour: 808)
+2026-10-12T16:54:09+00:00 [d1] poussé: prices (écritures du jour: 809)
+2026-10-12T16:54:40+00:00 [d1] poussé: prices (écritures du jour: 810)
+2026-10-12T16:55:11+00:00 [d1] poussé: prices (écritures du jour: 811)
+2026-10-12T16:55:32+00:00 [d1] poussé: prices (écritures du jour: 812)
+2026-10-12T16:56:03+00:00 [d1] poussé: prices (écritures du jour: 813)
+2026-10-12T16:56:34+00:00 [d1] poussé: prices (écritures du jour: 814)
+2026-10-12T16:57:05+00:00 [d1] poussé: prices (écritures du jour: 815)
+2026-10-12T16:57:36+00:00 [d1] poussé: prices (écritures du jour: 816)
+2026-10-12T16:58:06+00:00 [d1] poussé: prices (écritures du jour: 817)
+2026-10-12T16:58:17+00:00 [d1] poussé: prices (écritures du jour: 818)
+2026-10-12T16:58:28+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 823)
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/urllib/request.py", line 1319, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1367, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1413, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1362, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1122, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1066, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/client.py", line 1508, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+                                          server_hostname=server_hostname)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/lib/python3.13/ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 67, in <module>
+    main()
+    ~~~~^^
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 56, in main
+    st, j = call("POST", f"/accounts/{ACC}/d1/database/{conf['database_id']}/query", {"sql": SQL, "params": [n, now, sha, body]}, timeout=40)
+            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/dashboard/cloudflare/d1/cf_api.py", line 12, in call
+    r = _OP.open(req, timeout=timeout)
+  File "/usr/lib/python3.13/urllib/request.py", line 489, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.13/urllib/request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/usr/lib/python3.13/urllib/request.py", line 466, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.13/urllib/request.py", line 1367, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/urllib/request.py", line 1322, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1029)>
+2026-10-12T16:59:02+00:00 [d1] poussé: prices (écritures du jour: 824)
+2026-10-12T16:59:33+00:00 [d1] poussé: prices (écritures du jour: 825)
+2026-10-12T17:00:04+00:00 [d1] poussé: prices (écritures du jour: 826)
+2026-10-12T17:00:35+00:00 [d1] poussé: prices (écritures du jour: 827)
+2026-10-12T17:01:06+00:00 [d1] poussé: prices (écritures du jour: 828)
+2026-10-12T17:01:36+00:00 [d1] poussé: prices (écritures du jour: 829)
+2026-10-12T17:02:07+00:00 [d1] poussé: prices (écritures du jour: 830)
+2026-10-12T17:02:38+00:00 [d1] poussé: prices (écritures du jour: 831)
+2026-10-12T17:03:09+00:00 [d1] poussé: prices (écritures du jour: 832)
+2026-10-12T17:03:30+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 838)
+2026-10-12T17:03:44+00:00 [d1] poussé: prices (écritures du jour: 839)
+2026-10-12T17:04:05+00:00 [d1] poussé: prices (écritures du jour: 840)
+2026-10-12T17:04:36+00:00 [d1] poussé: prices (écritures du jour: 841)
+2026-10-12T17:05:07+00:00 [d1] poussé: prices (écritures du jour: 842)
+2026-10-12T17:05:38+00:00 [d1] poussé: prices (écritures du jour: 843)
+2026-10-12T17:06:09+00:00 [d1] poussé: prices (écritures du jour: 844)
+2026-10-12T17:06:39+00:00 [d1] poussé: prices (écritures du jour: 845)
+2026-10-12T17:07:10+00:00 [d1] poussé: prices (écritures du jour: 846)
+2026-10-12T17:07:41+00:00 [d1] poussé: prices (écritures du jour: 847)
+2026-10-12T17:08:12+00:00 [d1] poussé: prices (écritures du jour: 848)
+2026-10-12T17:08:33+00:00 [d1] poussé: prices (écritures du jour: 849)
+2026-10-12T17:08:44+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 854)
+2026-10-12T17:09:08+00:00 [d1] poussé: prices (écritures du jour: 855)
+2026-10-12T17:09:39+00:00 [d1] poussé: prices (écritures du jour: 856)
+2026-10-12T17:10:10+00:00 [d1] poussé: prices (écritures du jour: 857)
+2026-10-12T17:10:41+00:00 [d1] poussé: prices (écritures du jour: 858)
+2026-10-12T17:11:11+00:00 [d1] poussé: prices (écritures du jour: 859)
+2026-10-12T17:11:42+00:00 [d1] poussé: prices (écritures du jour: 860)
+2026-10-12T17:12:03+00:00 [d1] poussé: prices (écritures du jour: 861)
+2026-10-12T17:12:34+00:00 [d1] poussé: prices (écritures du jour: 862)
+2026-10-12T17:13:05+00:00 [d1] poussé: prices (écritures du jour: 863)
+2026-10-12T17:13:36+00:00 [d1] poussé: prices (écritures du jour: 864)
+2026-10-12T17:13:47+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 870)
+2026-10-12T17:14:11+00:00 [d1] poussé: prices (écritures du jour: 871)
+2026-10-12T17:14:42+00:00 [d1] poussé: prices (écritures du jour: 872)
+2026-10-12T17:15:12+00:00 [d1] poussé: prices (écritures du jour: 873)
+2026-10-12T17:15:33+00:00 [d1] poussé: prices (écritures du jour: 874)
+2026-10-12T17:16:04+00:00 [d1] poussé: prices (écritures du jour: 875)
+2026-10-12T17:16:35+00:00 [d1] poussé: prices (écritures du jour: 876)
+2026-10-12T17:17:06+00:00 [d1] poussé: prices (écritures du jour: 877)
+2026-10-12T17:17:37+00:00 [d1] poussé: prices (écritures du jour: 878)
+2026-10-12T18:43:56+00:00 [d1] poussé: prices (écritures du jour: 879)
+2026-10-12T18:44:28+00:00 [d1] poussé: prices (écritures du jour: 880)
+2026-10-12T18:44:38+00:00 [d1] poussé: prices (écritures du jour: 881)
+2026-10-12T18:44:49+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 887)
+2026-10-12T18:45:23+00:00 [d1] poussé: prices (écritures du jour: 888)
+2026-10-12T18:45:54+00:00 [d1] poussé: prices (écritures du jour: 889)
+2026-10-12T18:46:25+00:00 [d1] poussé: prices (écritures du jour: 890)
+2026-10-12T18:46:56+00:00 [d1] poussé: prices (écritures du jour: 891)
+2026-10-12T18:47:27+00:00 [d1] poussé: prices (écritures du jour: 892)
+2026-10-12T18:47:58+00:00 [d1] poussé: prices (écritures du jour: 893)
+2026-10-12T18:48:28+00:00 [d1] poussé: prices (écritures du jour: 894)
+2026-10-12T18:48:49+00:00 [d1] poussé: prices (écritures du jour: 895)
+2026-10-12T18:49:20+00:00 [d1] poussé: prices (écritures du jour: 896)
+2026-10-12T18:49:51+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 902)
+2026-10-12T18:50:26+00:00 [d1] poussé: prices (écritures du jour: 903)
+2026-10-12T18:50:57+00:00 [d1] poussé: prices (écritures du jour: 904)
+2026-10-12T18:51:28+00:00 [d1] poussé: prices (écritures du jour: 905)
+2026-10-12T18:51:59+00:00 [d1] poussé: prices (écritures du jour: 906)
+2026-10-12T18:52:20+00:00 [d1] poussé: prices (écritures du jour: 907)
+2026-10-12T18:52:51+00:00 [d1] poussé: prices (écritures du jour: 908)
+2026-10-12T18:53:22+00:00 [d1] poussé: prices (écritures du jour: 909)
+2026-10-12T18:53:53+00:00 [d1] poussé: prices (écritures du jour: 910)
+2026-10-12T18:54:24+00:00 [d1] poussé: prices (écritures du jour: 911)
+2026-10-12T18:54:54+00:00 [d1] poussé: prices (écritures du jour: 912)
+2026-10-12T18:55:05+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 917)
+2026-10-12T18:55:29+00:00 [d1] poussé: prices (écritures du jour: 918)
+2026-10-12T18:55:50+00:00 [d1] poussé: prices (écritures du jour: 919)
+2026-10-12T18:56:21+00:00 [d1] poussé: prices (écritures du jour: 920)
+2026-10-12T18:56:52+00:00 [d1] poussé: prices (écritures du jour: 921)
+2026-10-12T18:57:23+00:00 [d1] poussé: prices (écritures du jour: 922)
+2026-10-12T18:57:53+00:00 [d1] poussé: prices (écritures du jour: 923)
+2026-10-12T18:58:24+00:00 [d1] poussé: prices (écritures du jour: 924)
+2026-10-13T05:23:33+00:00 [d1] poussé: prices (écritures du jour: 1)
+2026-10-13T05:23:55+00:00 [d1] poussé: prices (écritures du jour: 2)
+2026-10-13T05:24:26+00:00 [d1] poussé: prices (écritures du jour: 3)
+2026-10-13T05:24:36+00:00 [d1] poussé: prices (écritures du jour: 4)
+2026-10-13T05:24:47+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 9)
+2026-10-13T05:25:01+00:00 [d1] poussé: prices (écritures du jour: 10)
+2026-10-13T05:25:21+00:00 [d1] poussé: prices (écritures du jour: 11)
+2026-10-13T05:25:52+00:00 [d1] poussé: prices (écritures du jour: 12)
+2026-10-13T05:26:23+00:00 [d1] poussé: prices (écritures du jour: 13)
+2026-10-13T05:26:54+00:00 [d1] poussé: prices (écritures du jour: 14)
+2026-10-13T05:27:25+00:00 [d1] poussé: prices (écritures du jour: 15)
+2026-10-13T05:27:56+00:00 [d1] poussé: prices (écritures du jour: 16)
+2026-10-13T05:28:26+00:00 [d1] poussé: prices (écritures du jour: 17)
+2026-10-13T05:28:57+00:00 [d1] poussé: prices (écritures du jour: 18)
+2026-10-13T05:29:28+00:00 [d1] poussé: prices (écritures du jour: 19)
+2026-10-13T05:29:49+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 25)
+2026-10-13T05:30:03+00:00 [d1] poussé: prices (écritures du jour: 26)
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/urllib/request.py", line 1319, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1367, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1413, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1362, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1122, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/lib/python3.13/http/client.py", line 1066, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/client.py", line 1501, in connect
+    super().connect()
+    ~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/client.py", line 1042, in connect
+    self._tunnel()
+    ~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/client.py", line 1000, in _tunnel
+    (version, code, message) = response._read_status()
+                               ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/http/client.py", line 297, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+TimeoutError: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 67, in <module>
+    main()
+    ~~~~^^
+  File "/workspace/dashboard/cloudflare/d1/push_live.py", line 56, in main
+    st, j = call("POST", f"/accounts/{ACC}/d1/database/{conf['database_id']}/query", {"sql": SQL, "params": [n, now, sha, body]}, timeout=40)
+            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/dashboard/cloudflare/d1/cf_api.py", line 12, in call
+    r = _OP.open(req, timeout=timeout)
+  File "/usr/lib/python3.13/urllib/request.py", line 489, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.13/urllib/request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/usr/lib/python3.13/urllib/request.py", line 466, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.13/urllib/request.py", line 1367, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/urllib/request.py", line 1322, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error timed out>
+2026-10-13T05:31:14+00:00 [d1] poussé: prices (écritures du jour: 27)
+2026-10-13T05:31:25+00:00 [d1] poussé: prices (écritures du jour: 28)
+2026-10-13T05:31:56+00:00 [d1] poussé: prices (écritures du jour: 29)
+2026-10-13T05:32:26+00:00 [d1] poussé: prices (écritures du jour: 30)
+2026-10-13T05:32:57+00:00 [d1] poussé: prices (écritures du jour: 31)
+2026-10-13T05:50:09+00:00 [d1] poussé: prices (écritures du jour: 32)
+2026-10-13T05:50:20+00:00 [d1] poussé: prices (écritures du jour: 33)
+2026-10-13T05:50:50+00:00 [d1] poussé: prices (écritures du jour: 34)
+2026-10-13T05:51:11+00:00 [d1] poussé: prices (écritures du jour: 35)
+2026-10-13T05:51:22+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 41)
+2026-10-13T05:51:46+00:00 [d1] poussé: prices (écritures du jour: 42)
+2026-10-13T05:52:17+00:00 [d1] poussé: prices (écritures du jour: 43)
+2026-10-13T05:52:48+00:00 [d1] poussé: prices (écritures du jour: 44)
+2026-10-13T05:53:18+00:00 [d1] poussé: prices (écritures du jour: 45)
+2026-10-13T05:53:49+00:00 [d1] poussé: prices (écritures du jour: 46)
+2026-10-13T05:54:20+00:00 [d1] poussé: prices (écritures du jour: 47)
+2026-10-13T05:54:51+00:00 [d1] poussé: prices (écritures du jour: 48)
+2026-10-13T07:10:54+00:00 [d1] poussé: prices (écritures du jour: 49)
+2026-10-13T07:11:25+00:00 [d1] poussé: prices (écritures du jour: 50)
+2026-10-13T07:11:46+00:00 [d1] poussé: prices (écritures du jour: 51)
+2026-10-13T07:11:57+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 57)
+2026-10-13T07:12:31+00:00 [d1] poussé: prices (écritures du jour: 58)
+2026-10-13T07:13:02+00:00 [d1] poussé: prices (écritures du jour: 59)
+2026-10-13T07:13:33+00:00 [d1] poussé: prices (écritures du jour: 60)
+2026-10-13T07:14:04+00:00 [d1] poussé: prices (écritures du jour: 61)
+2026-10-13T07:14:24+00:00 [d1] poussé: prices (écritures du jour: 62)
+2026-10-13T07:14:55+00:00 [d1] poussé: prices (écritures du jour: 63)
+2026-10-13T07:15:26+00:00 [d1] poussé: prices (écritures du jour: 64)
+2026-10-13T07:15:57+00:00 [d1] poussé: prices (écritures du jour: 65)
+2026-10-13T07:16:28+00:00 [d1] poussé: prices (écritures du jour: 66)
+2026-10-13T07:16:59+00:00 [d1] poussé: prices (écritures du jour: 67)
+2026-10-13T07:17:09+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 72)
+2026-10-13T07:17:34+00:00 [d1] poussé: prices (écritures du jour: 73)
+2026-10-13T07:17:55+00:00 [d1] poussé: prices (écritures du jour: 74)
+2026-10-13T07:18:26+00:00 [d1] poussé: prices (écritures du jour: 75)
+2026-10-13T07:18:57+00:00 [d1] poussé: prices (écritures du jour: 76)
+2026-10-13T07:19:28+00:00 [d1] poussé: prices (écritures du jour: 77)
+2026-10-13T07:19:59+00:00 [d1] poussé: prices (écritures du jour: 78)
+2026-10-13T07:20:30+00:00 [d1] poussé: prices (écritures du jour: 79)
+2026-10-13T07:21:00+00:00 [d1] poussé: prices (écritures du jour: 80)
+2026-10-13T08:08:06+00:00 [d1] poussé: prices (écritures du jour: 81)
+2026-10-13T08:08:17+00:00 [d1] poussé: prices (écritures du jour: 82)
+2026-10-13T08:08:27+00:00 [d1] poussé: prices (écritures du jour: 83)
+2026-10-13T08:08:38+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 88)
+2026-10-13T08:08:52+00:00 [d1] poussé: prices (écritures du jour: 89)
+2026-10-13T08:09:12+00:00 [d1] poussé: prices (écritures du jour: 90)
+2026-10-13T08:09:43+00:00 [d1] poussé: prices (écritures du jour: 91)
+2026-10-13T08:10:14+00:00 [d1] poussé: prices (écritures du jour: 92)
+2026-10-13T08:10:45+00:00 [d1] poussé: prices (écritures du jour: 93)
+2026-10-13T08:11:16+00:00 [d1] poussé: prices (écritures du jour: 94)
+2026-10-13T08:11:47+00:00 [d1] poussé: prices (écritures du jour: 95)
+2026-10-13T08:12:17+00:00 [d1] poussé: prices (écritures du jour: 96)
+2026-10-13T08:12:48+00:00 [d1] poussé: prices (écritures du jour: 97)
+2026-10-13T08:13:19+00:00 [d1] poussé: prices (écritures du jour: 98)
+2026-10-13T08:13:30+00:00 [d1] poussé: prices (écritures du jour: 99)
+2026-10-13T08:13:40+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 105)
+2026-10-13T08:14:15+00:00 [d1] poussé: prices (écritures du jour: 106)
+2026-10-13T08:14:46+00:00 [d1] poussé: prices (écritures du jour: 107)
+2026-10-13T08:15:17+00:00 [d1] poussé: prices (écritures du jour: 108)
+2026-10-13T08:15:48+00:00 [d1] poussé: prices (écritures du jour: 109)
+2026-10-13T08:16:18+00:00 [d1] poussé: prices (écritures du jour: 110)
+2026-10-13T08:16:49+00:00 [d1] poussé: prices (écritures du jour: 111)
+2026-10-13T08:17:10+00:00 [d1] poussé: prices (écritures du jour: 112)
+2026-10-13T08:19:53+00:00 [d1] poussé: prices (écritures du jour: 113)
+2026-10-13T08:20:24+00:00 [d1] poussé: prices (écritures du jour: 114)
+2026-10-13T08:20:34+00:00 [d1] poussé: prices (écritures du jour: 115)
+2026-10-13T08:20:45+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 120)
+2026-10-13T08:20:59+00:00 [d1] poussé: prices (écritures du jour: 121)
+2026-10-13T08:21:29+00:00 [d1] poussé: prices (écritures du jour: 122)
+2026-10-13T08:22:00+00:00 [d1] poussé: prices (écritures du jour: 123)
+2026-10-13T08:22:31+00:00 [d1] poussé: prices (écritures du jour: 124)
+2026-10-13T08:23:02+00:00 [d1] poussé: prices (écritures du jour: 125)
+2026-10-13T08:23:23+00:00 [d1] poussé: prices (écritures du jour: 126)
+2026-10-13T08:23:54+00:00 [d1] poussé: prices (écritures du jour: 127)
+2026-10-13T08:24:24+00:00 [d1] poussé: prices (écritures du jour: 128)
+2026-10-13T08:34:48+00:00 [d1] poussé: prices (écritures du jour: 129)
+2026-10-13T08:35:19+00:00 [d1] poussé: prices (écritures du jour: 130)
+2026-10-13T08:35:30+00:00 [d1] poussé: prices (écritures du jour: 131)
+2026-10-13T08:35:41+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 136)
+2026-10-13T08:35:55+00:00 [d1] poussé: prices (écritures du jour: 137)
+2026-10-13T08:36:26+00:00 [d1] poussé: prices (écritures du jour: 138)
+2026-10-13T08:36:56+00:00 [d1] poussé: prices (écritures du jour: 139)
+2026-10-13T08:37:27+00:00 [d1] poussé: prices (écritures du jour: 140)
+2026-10-13T08:37:58+00:00 [d1] poussé: prices (écritures du jour: 141)
+2026-10-13T08:38:19+00:00 [d1] poussé: prices (écritures du jour: 142)
+2026-10-13T08:38:50+00:00 [d1] poussé: prices (écritures du jour: 143)
+2026-10-13T08:39:20+00:00 [d1] poussé: prices (écritures du jour: 144)
+2026-10-13T08:39:51+00:00 [d1] poussé: prices (écritures du jour: 145)
+2026-10-13T08:40:22+00:00 [d1] poussé: prices (écritures du jour: 146)
+2026-10-13T08:40:43+00:00 [d1] poussé: prices (écritures du jour: 147)
+2026-10-13T08:40:53+00:00 [d1] poussé: prices (écritures du jour: 148)
+2026-10-13T08:41:24+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 154)
+2026-10-13T08:41:49+00:00 [d1] poussé: prices (écritures du jour: 155)
+2026-10-13T08:42:20+00:00 [d1] poussé: prices (écritures du jour: 156)
+2026-10-13T08:42:51+00:00 [d1] poussé: prices (écritures du jour: 157)
+2026-10-13T08:43:22+00:00 [d1] poussé: prices (écritures du jour: 158)
+2026-10-13T08:43:53+00:00 [d1] poussé: prices (écritures du jour: 159)
+2026-10-13T08:44:24+00:00 [d1] poussé: prices (écritures du jour: 160)
+2026-10-14T16:27:24+00:00 [d1] poussé: prices (écritures du jour: 1)
+2026-10-14T16:27:56+00:00 [d1] poussé: prices (écritures du jour: 2)
+2026-10-14T16:28:27+00:00 [d1] poussé: prices (écritures du jour: 3)
+2026-10-14T16:28:47+00:00 [d1] poussé: prices (écritures du jour: 4)
+2026-10-14T16:28:58+00:00 [d1] poussé: prices,summary,trades,performance,research,news (écritures du jour: 10)
+2026-10-14T16:29:33+00:00 [d1] poussé: prices (écritures du jour: 11)
+2026-10-14T16:30:04+00:00 [d1] poussé: prices (écritures du jour: 12)
+2026-10-14T16:30:24+00:00 [d1] poussé: prices (écritures du jour: 13)
+2026-10-14T16:30:55+00:00 [d1] poussé: prices (écritures du jour: 14)
+2026-10-14T16:31:26+00:00 [d1] poussé: prices (écritures du jour: 15)
+2026-10-14T16:31:57+00:00 [d1] poussé: prices (écritures du jour: 16)
+2026-10-14T16:32:28+00:00 [d1] poussé: prices (écritures du jour: 17)
+2026-10-14T16:32:59+00:00 [d1] poussé: prices (écritures du jour: 18)
+2026-10-14T16:33:30+00:00 [d1] poussé: prices (écritures du jour: 19)
+2026-10-14T16:34:01+00:00 [d1] poussé: prices (écritures du jour: 20)
+2026-10-14T16:34:12+00:00 [d1] poussé: summary,trades,performance,research,news (écritures du jour: 25)
+2026-10-14T16:34:26+00:00 [d1] poussé: prices (écritures du jour: 26)
+2026-10-14T16:34:57+00:00 [d1] poussé: prices (écritures du jour: 27)
+2026-10-14T16:35:28+00:00 [d1] poussé: prices (écritures du jour: 28)
+2026-10-14T16:35:59+00:00 [d1] poussé: prices (écritures du jour: 29)
+2026-10-14T16:36:30+00:00 [d1] poussé: prices (écritures du jour: 30)
+2026-10-14T16:37:01+00:00 [d1] poussé: prices (écritures du jour: 31)
+2026-10-14T16:37:32+00:00 [d1] poussé: prices (écritures du jour: 32)
+2026-10-14T16:38:03+00:00 [d1] poussé: prices (écritures du jour: 33)
